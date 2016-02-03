@@ -10,10 +10,6 @@ public class Data {
 
 	private LineDataSeq data;
 
-	public Data() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public LineDataSeq getData() {
 		return this.data;
 	}
