@@ -1192,7 +1192,8 @@ public class Chart {
 		}
 		this.title = t;
 		if (this.title == null) {
-			this.title = new Title("");
+			this.title = new Title();
+			this.title.setText("");
 		}
 		this.plottersCount = 1;
 	}

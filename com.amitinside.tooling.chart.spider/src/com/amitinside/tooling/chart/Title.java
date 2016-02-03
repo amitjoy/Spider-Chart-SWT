@@ -26,6 +26,9 @@ public class Title extends ChartComponent {
 	public ChartFont font = GraphicsProvider.getFont("Arial", ChartFont.PLAIN, 14);
 	private String text;
 
+	public Title() {
+	}
+
 	public void draw(final ChartGraphics g) {
 		g.setColor(this.color);
 		g.setFont(this.font);

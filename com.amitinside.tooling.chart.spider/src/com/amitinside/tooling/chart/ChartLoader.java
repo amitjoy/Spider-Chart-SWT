@@ -16,7 +16,6 @@
 package com.amitinside.tooling.chart;
 
 import java.applet.Applet;
-import java.awt.Frame;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -895,10 +894,7 @@ public class ChartLoader {
 		return v;
 	}
 
-	private String getParsedValue(String s) {
-		if (s.indexOf("JDBC:") == 0) {
-			s = this.repSQLParameters(s);
-		}
+	private String getParsedValue(final String s) {
 		return s;
 	}
 
@@ -1169,36 +1165,6 @@ public class ChartLoader {
 		while (p >= 0) {
 			s = s.substring(0, p) + sub2 + s.substring(p + sub1.length(), s.length());
 			p = s.indexOf(sub1);
-		}
-		return s;
-	}
-
-	private String repSQLParameters(String s) {
-		int p1 = s.indexOf("[%");
-		if (p1 == -1) {
-			return s;
-		}
-		int p2 = s.indexOf("]", p1);
-		while ((p1 >= 0) && (p2 >= 0) && (p2 > p1)) {
-			final String param = s.substring(p1 + 2, p2);
-
-			String value = this.getSQLParameterValue(param);
-			if ((value == null) && this.promptForParameters) {
-				ParamInput pi = new ParamInput((Frame) this.parentComponent, param);
-				pi.show();
-				if (!pi.cancelled) {
-					value = pi.result;
-				}
-				pi = null;
-			}
-			if (value != null) {
-				s = s.substring(0, p1) + value + s.substring(p2 + 1, s.length());
-			}
-			p1 = s.indexOf("[%", p2 + 1);
-			if (p1 == -1) {
-				return s;
-			}
-			p2 = s.indexOf("]", p1);
 		}
 		return s;
 	}
