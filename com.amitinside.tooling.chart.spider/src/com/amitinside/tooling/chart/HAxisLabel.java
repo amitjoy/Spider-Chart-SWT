@@ -20,6 +20,7 @@ import com.amitinside.tooling.chart.gc.ChartFont;
 import com.amitinside.tooling.chart.gc.ChartGraphics;
 
 public class HAxisLabel extends AxisLabel {
+
 	public HAxisLabel(final String t, final ChartColor c, final ChartFont f) {
 		super(t, c, f);
 	}

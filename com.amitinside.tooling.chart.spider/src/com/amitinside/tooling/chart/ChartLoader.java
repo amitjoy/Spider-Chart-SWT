@@ -235,10 +235,6 @@ public class ChartLoader {
 
 		final Legend clegend = new Legend();
 
-		this.getStringParam("JDBC_DATABASE", "");
-		this.getStringParam("JDBC_DRIVER", "");
-		this.getStringParam("JDBC_USER", "");
-		this.getStringParam("JDBC_PASSWORD", "");
 		LineDataSeq.startingXValue = this.getIntParam("LINECHART_START_VALUE_X", new Integer(0)).intValue();
 
 		this.ptitle = this.getStringParam("TITLECHART", "");
@@ -246,7 +242,8 @@ public class ChartLoader {
 			this.ptitle = this.getStringParam("TITLE", "");
 		}
 		if (this.ptitle.compareTo("") != 0) {
-			cTitle = new Title(this.ptitle);
+			cTitle = new Title();
+			cTitle.setText(this.ptitle);
 
 			this.ptitleFont = this.getStringParam("TITLE_FONT", "");
 			font = convertFont(this.ptitleFont);

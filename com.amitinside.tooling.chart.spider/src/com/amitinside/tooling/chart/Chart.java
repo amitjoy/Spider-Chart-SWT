@@ -30,6 +30,7 @@ import com.amitinside.tooling.chart.gc.GraphicsProvider;
 import com.amitinside.tooling.chart.gc.Polygon;
 
 public class Chart {
+
 	private class Updater implements Runnable {
 		public Chart chart = null;
 

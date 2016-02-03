@@ -16,6 +16,7 @@
 package com.amitinside.tooling.chart.gc;
 
 public abstract class ChartColor {
+
 	public static String ALICEBLUE = "ALICEBLUE";
 	public static String ANTIQUEWHITE = "ANTIQUEWHITE";
 	public static String AQUA = "AQUA";

@@ -44,9 +44,7 @@ public class Sample {
 						new LineStyle(1, GraphicsProvider.getColor(ChartColor.GREEN), LineStyle.LINE_NORMAL));
 			});
 
-			settingsBuilder.title("Sales (thousands $)", titleBuilder -> {
-				// Any further changes
-			});
+			settingsBuilder.title(titleBuilder -> titleBuilder.setText("Sales (thousands $)"));
 
 			settingsBuilder.plotter(plotterBuilder -> {
 				final double[] fMaxs = { 6, 6, 6, 6, 6 };

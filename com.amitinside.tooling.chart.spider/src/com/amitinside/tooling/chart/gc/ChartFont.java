@@ -16,8 +16,10 @@
 package com.amitinside.tooling.chart.gc;
 
 public abstract class ChartFont {
+
 	public static int BOLD = 1;
 	public static int BOLD_ITALIC = 3;
 	public static int ITALIC = 2;
 	public static int PLAIN = 0;
+
 }

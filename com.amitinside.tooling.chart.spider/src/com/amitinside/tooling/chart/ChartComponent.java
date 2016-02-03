@@ -16,9 +16,11 @@
 package com.amitinside.tooling.chart;
 
 public class ChartComponent {
+
 	protected Chart chart;
 	public int height;
 	public int width;
 	public int x;
 	public int y;
+
 }

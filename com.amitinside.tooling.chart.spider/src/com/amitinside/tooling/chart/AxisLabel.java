@@ -21,6 +21,7 @@ import com.amitinside.tooling.chart.gc.ChartGraphics;
 import com.amitinside.tooling.chart.gc.GraphicsProvider;
 
 public class AxisLabel extends ChartComponent {
+
 	public ChartColor color;
 	public ChartFont font = GraphicsProvider.getFont("Arial", ChartFont.PLAIN, 14);
 	public String title;

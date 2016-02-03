@@ -21,6 +21,7 @@ import com.amitinside.tooling.chart.gc.ChartImage;
 import com.amitinside.tooling.chart.gc.GraphicsProvider;
 
 public class FillStyle {
+
 	public static int GRADIENT_HORIZONTAL = 1;
 	public static int GRADIENT_VERTICAL = 2;
 	public static int NO_GRADIENT = 0;

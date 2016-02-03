@@ -25,6 +25,7 @@ import com.amitinside.tooling.chart.tags.TagObject;
 import com.amitinside.tooling.chart.tags.TagParser;
 
 public class ChartLabel implements IFloatingObject {
+
 	protected static int ALIGN_CENTER = 1;
 	protected static int ALIGN_LEFT = 0;
 	protected static int ALIGN_RIGHT = 2;

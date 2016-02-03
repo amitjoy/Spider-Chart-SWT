@@ -136,7 +136,7 @@ public class DataSeq {
 
 	public void replaceYValueAt(final int index, final double newValue) {
 		if (index < this.yData.size()) {
-			final Vector tmp = new Vector();
+			final Vector<Double> tmp = new Vector<>();
 			for (int i = 0; i < this.yData.size(); i++) {
 				if (index == i) {
 					tmp.addElement(new Double(newValue));

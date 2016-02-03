@@ -24,11 +24,7 @@ public class Title extends ChartComponent {
 
 	public ChartColor color = GraphicsProvider.getColor(ChartColor.BLACK);
 	public ChartFont font = GraphicsProvider.getFont("Arial", ChartFont.PLAIN, 14);
-	public String text;
-
-	public Title(final String t) {
-		this.text = t;
-	}
+	private String text;
 
 	public void draw(final ChartGraphics g) {
 		g.setColor(this.color);
@@ -63,5 +59,9 @@ public class Title extends ChartComponent {
 				g.drawString(txt[i], this.x + toCenterX, this.y + toCenterY + (g.getFontHeight() * (i + 1)));
 			}
 		}
+	}
+
+	public void setText(final String text) {
+		this.text = text;
 	}
 }

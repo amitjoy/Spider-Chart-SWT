@@ -49,8 +49,8 @@ public class ChartConfigurationBuilder {
 		plotterBuilder.accept(this.plotter);
 	}
 
-	public void title(final String titleText, final Consumer<Title> titleBuilder) {
-		this.title = new Title(titleText);
+	public void title(final Consumer<Title> titleBuilder) {
+		this.title = new Title();
 		titleBuilder.accept(this.title);
 	}
 

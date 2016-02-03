@@ -18,6 +18,7 @@ package com.amitinside.tooling.chart;
 import com.amitinside.tooling.chart.gc.ChartGraphics;
 
 public class AxisTargetZone {
+
 	protected static int DISABLED = -1;
 
 	public static AxisTargetZone createFromString(final String s) {
