@@ -16,9 +16,9 @@
 package com.amitinside.tooling.chart.example;
 
 import static com.amitinside.tooling.chart.LineStyle.LINE_NORMAL;
+import static com.amitinside.tooling.chart.gc.SWTGraphicsSupplier.getColor;
 import static com.amitinside.tooling.chart.gc.SpiderChartColor.BLUE;
 import static com.amitinside.tooling.chart.gc.SpiderChartColor.GREEN;
-import static com.amitinside.tooling.chart.gc.SWTGraphicsSupplier.getColor;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
@@ -28,37 +28,37 @@ import com.amitinside.tooling.chart.LineStyle;
 import com.amitinside.tooling.chart.api.ISpiderChartDrawable;
 import com.amitinside.tooling.chart.builder.SpiderChartBuilder;
 
-public class Sample {
+public final class Sample {
 
 	private static void buildSpiderChart(final Shell shell) {
 
 		final ISpiderChartDrawable iphoneData = new IPhone();
 		final ISpiderChartDrawable nexusData = new Nexus();
 
-		SpiderChartBuilder.config(shell, settingsBuilder -> {
+		SpiderChartBuilder.config(shell, settings -> {
 
-			settingsBuilder.title(titleBuilder -> titleBuilder.setText("Mobile Phone Comparison"));
+			settings.title(title -> title.setText("Mobile Phone Comparison"));
 
-			settingsBuilder.legend(legendBuilder -> {
-				legendBuilder.addItem("iPhone 6", new LineStyle(1, getColor(BLUE), LINE_NORMAL));
-				legendBuilder.addItem("Nexus 6", new LineStyle(1, getColor(GREEN), LINE_NORMAL));
+			settings.legend(legend -> {
+				legend.addItem("iPhone 6", new LineStyle(1, getColor(BLUE), LINE_NORMAL));
+				legend.addItem("Nexus 6", new LineStyle(1, getColor(GREEN), LINE_NORMAL));
 			});
 
-			settingsBuilder.plotter(plotterBuilder -> {
-				final double[] maxScale = { 5, 5, 5, 5, 5 };
-				final double[] minScale = { 0, 0, 0, 0, 0 };
+			settings.plotter(plotter -> {
+				final double[] maxScales = { 5, 5, 5, 5, 5 };
+				final double[] minScales = { 0, 0, 0, 0, 0 };
 				final String[] axes = { "Battery", "Camera", "Display", "Memory", "Brand" };
 
-				plotterBuilder.factorMaxs = maxScale;
-				plotterBuilder.factorMins = minScale;
-				plotterBuilder.factorNames = axes;
+				plotter.factorMaxs = maxScales;
+				plotter.factorMins = minScales;
+				plotter.factorNames = axes;
 			});
 
-		}).viewer(chartBuilder -> {
-			chartBuilder.data(firstData -> {
+		}).viewer(chart -> {
+			chart.data(firstData -> {
 				firstData.inject(iphoneData);
 			});
-			chartBuilder.data(secondData -> {
+			chart.data(secondData -> {
 				secondData.inject(nexusData);
 			});
 		});
