@@ -193,7 +193,7 @@ public class Chart {
 		this.plottersCount += 1;
 	}
 
-	public void addSerie(final DataSeq s) {
+	public void addSeq(final DataSeq s) {
 		this.plotters[0].addSerie(s);
 	}
 

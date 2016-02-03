@@ -10,6 +10,14 @@ public class Data {
 
 	private LineDataSeq data;
 
+	public Data() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public LineDataSeq getData() {
+		return this.data;
+	}
+
 	public void setData(final double[] dataValues, final String color) {
 		this.data = new LineDataSeq(dataValues,
 				new LineStyle(2, GraphicsProvider.getColor(color), LineStyle.LINE_NORMAL));
