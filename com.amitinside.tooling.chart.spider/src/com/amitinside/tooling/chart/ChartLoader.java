@@ -15,13 +15,6 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart;
 
-import java.applet.Applet;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -31,6 +24,7 @@ import com.amitinside.tooling.chart.gc.ChartImage;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
 public class ChartLoader {
+
 	protected static boolean convertBooleanParam(final String s, final boolean def) {
 		try {
 			if (s.compareTo("") == 0) {
@@ -136,7 +130,6 @@ public class ChartLoader {
 	}
 
 	private ChartColor c;
-	private Applet chartApplet;
 	private String dataFile = "";
 	public String fileEncoding = "";
 	public Chart gChart = null;
@@ -164,9 +157,6 @@ public class ChartLoader {
 	String ptitle;
 	String ptitleColor;
 	String ptitleFont;
-	private int SQLparamCount = 0;
-	private final String[] SQLparams = new String[10];
-	private final String[] SQLparamsV = new String[10];
 	String Xlabel;
 	String XlabelColor;
 	String XlabelFont;
@@ -186,11 +176,6 @@ public class ChartLoader {
 		this.loadedParametersCount = 0;
 	}
 
-	public ChartLoader(final Applet ap) {
-		this.chartApplet = ap;
-		this.loadedParametersCount = 0;
-	}
-
 	public Chart build(final boolean clear, final boolean reReadFile) {
 		return this.build(null, clear, reReadFile);
 	}
@@ -198,16 +183,6 @@ public class ChartLoader {
 	public Chart build(final Chart currentChart, final boolean clear, final boolean reReadFile) {
 		if (clear) {
 			this.loadedParametersCount = 0;
-		}
-		if (reReadFile) {
-			String pFile = this.dataFile;
-			if (this.chartApplet != null) {
-				this.dataFile = this.getStringParam("DATAFILE", "");
-				pFile = this.dataFile;
-			}
-			if (pFile.length() > 0) {
-				this.loadFromFile(pFile, false);
-			}
 		}
 		if (this.getStringParam("PAINT_DIRECT", "").compareTo("NO") == 0) {
 			this.paintDirect = false;
@@ -672,16 +647,6 @@ public class ChartLoader {
 		if (this.getStringParam("DOUBLE_BUFFERING", "").toUpperCase().compareTo("NO") == 0) {
 			chart.doubleBuffering = false;
 		}
-		if (this.chartApplet == null) {
-			this.paintDirect = true;
-		}
-		if (this.paintDirect) {
-			if (this.chartApplet != null) {
-				chart.setHeight(this.chartApplet.getSize().height);
-				chart.setWidth(this.chartApplet.getSize().width);
-				this.chartApplet.paint(this.chartApplet.getGraphics());
-			}
-		}
 		chart.virtualWidth = (int) this.getDoubleParam("CHART_WIDTH", new Double(0.0D)).doubleValue();
 		chart.virtualHeight = (int) this.getDoubleParam("CHART_HEIGHT", new Double(0.0D)).doubleValue();
 
@@ -692,17 +657,6 @@ public class ChartLoader {
 		}
 		chart.msecs = this.getIntParam("REALTIME_MSECS", new Integer(2000)).intValue();
 		chart.reloadFrom = this.getParameter("REALTIME_DATAFILE", "");
-		if (this.chartApplet == null) {
-			int w = 500;
-			int h = 500;
-			try {
-				w = new Integer(this.getStringParam("WIDTH", "500")).intValue();
-				h = new Integer(this.getStringParam("HEIGHT", "500")).intValue();
-			} catch (final Exception err) {
-			}
-			chart.setWidth(w);
-			chart.setHeight(h);
-		}
 		chart.loader = this;
 
 		return chart;
@@ -881,9 +835,6 @@ public class ChartLoader {
 				return this.getParsedValue(v);
 			}
 		}
-		if (this.chartApplet != null) {
-			v = this.chartApplet.getParameter(key);
-		}
 		if (v == null) {
 			return def;
 		}
@@ -895,15 +846,6 @@ public class ChartLoader {
 
 	private String getParsedValue(final String s) {
 		return s;
-	}
-
-	private String getSQLParameterValue(final String param) {
-		for (int i = 0; i < this.SQLparamCount; i++) {
-			if (this.SQLparams[i].compareTo(param) == 0) {
-				return this.SQLparamsV[i];
-			}
-		}
-		return null;
 	}
 
 	private String getStringParam(final String Param, final String def) {
@@ -1052,112 +994,6 @@ public class ChartLoader {
 		return axis;
 	}
 
-	private void loadDataFromFile(String sFile, final String userpsw) {
-		String fileData = "";
-		String param = "";
-		String value = "";
-		try {
-			BufferedReader in = null;
-			if ((this.chartApplet != null) && (sFile.indexOf(":/") == -1)) {
-				sFile = this.chartApplet.getCodeBase() + sFile;
-			}
-			in = null;
-			if (sFile.indexOf("file://") == 0) {
-				if (this.fileEncoding.length() > 0) {
-					in = new BufferedReader(new InputStreamReader(
-							new FileInputStream(sFile.substring(7, sFile.length())), this.fileEncoding));
-				} else {
-					in = new BufferedReader(
-							new InputStreamReader(new FileInputStream(sFile.substring(7, sFile.length()))));
-				}
-			} else {
-				URL u = null;
-				try {
-					u = this.getClass().getClassLoader().getResource(sFile);
-				} catch (final Exception ignore) {
-				}
-				try {
-					if (u == null) {
-						u = ClassLoader.getSystemResource(sFile);
-					}
-				} catch (final Exception ignore) {
-				}
-				if (u == null) {
-					u = new URL(sFile);
-				}
-				final URLConnection uc = u.openConnection();
-				if (userpsw.length() > 0) {
-					uc.setRequestProperty("Authorization", "Basic " + userpsw);
-				}
-				final InputStream content = uc.getInputStream();
-				if (this.fileEncoding.length() > 0) {
-					in = new BufferedReader(new InputStreamReader(content, this.fileEncoding));
-				} else {
-					in = new BufferedReader(new InputStreamReader(content));
-				}
-			}
-			String inputLine = "";
-			while ((inputLine = in.readLine()) != null) {
-				fileData = fileData + inputLine + '\r' + '\n';
-			}
-			in.close();
-		} catch (final Exception e) {
-			e.getMessage();
-			System.out.println("Could not open file: " + sFile + " " + e);
-		}
-		String line = "";
-		while (fileData.length() > 0) {
-			int p = fileData.indexOf("\r\n");
-			final int p2 = fileData.indexOf("\n");
-			if ((p <= p2) && (p >= 0)) {
-				line = fileData.substring(0, p);
-				fileData = fileData.substring(p + 2, fileData.length());
-			}
-			if ((p > p2) && (p2 >= 0)) {
-				line = fileData.substring(0, p2);
-				fileData = fileData.substring(p2 + 1, fileData.length());
-			}
-			if ((p2 == -1) && (p == -1)) {
-				line = fileData;
-				fileData = "";
-			}
-			p = line.indexOf("=");
-			if (p > -1) {
-				param = line.substring(0, p);
-				value = line.substring(p + 1, line.length());
-
-				param = param.toUpperCase();
-
-				boolean alreadyFound = false;
-				for (int h = 0; h < this.loadedParametersCount; h++) {
-					if (this.loadedParameters[h].compareTo(param) == 0) {
-						this.loadedValues[h] = value;
-						alreadyFound = true;
-					}
-				}
-				if (!alreadyFound) {
-					this.loadedParameters[this.loadedParametersCount] = param;
-					this.loadedValues[this.loadedParametersCount] = value;
-					this.loadedParametersCount += 1;
-				}
-			}
-		}
-	}
-
-	public void loadFromFile(final String psFile, final boolean Clear) {
-		if (Clear) {
-			this.loadedParametersCount = 0;
-		}
-		this.loadDataFromFile(psFile, "");
-	}
-
-	public void loadFromFile(final String psFile, final boolean Clear, final String userpsw) {
-		if (Clear) {
-			this.loadedParametersCount = 0;
-		}
-		this.loadDataFromFile(psFile, userpsw);
-	}
-
 	private String replaceStr(String s, final String sub1, final String sub2) {
 		int p = s.indexOf(sub1);
 		while (p >= 0) {
@@ -1198,15 +1034,4 @@ public class ChartLoader {
 		}
 	}
 
-	public void setSQLParameter(final String param, final String value) {
-		for (int i = 0; i < this.SQLparamCount; i++) {
-			if (this.SQLparams[i].compareTo(param) == 0) {
-				this.SQLparamsV[i] = value;
-				return;
-			}
-		}
-		this.SQLparams[this.SQLparamCount] = param;
-		this.SQLparamsV[this.SQLparamCount] = value;
-		this.SQLparamCount += 1;
-	}
 }

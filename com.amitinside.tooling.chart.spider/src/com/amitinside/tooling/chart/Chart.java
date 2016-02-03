@@ -56,9 +56,6 @@ public class Chart {
 				}
 				try {
 					Chart.this.triggerEvent(0);
-					if (Chart.this.reloadFrom.length() > 0) {
-						Chart.this.loader.loadFromFile(Chart.this.reloadFrom, false);
-					}
 					if (Chart.this.autoRebuild) {
 						Chart.this.loader.build(Chart.this, false, false);
 					}
