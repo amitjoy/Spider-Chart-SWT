@@ -15,7 +15,9 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.example;
 
-import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 
 import com.amitinside.tooling.chart.FillStyle;
 import com.amitinside.tooling.chart.LineStyle;
@@ -26,8 +28,11 @@ import com.amitinside.tooling.chart.gc.GraphicsProvider;
 
 public class Sample {
 
-	public void main(final String[] args, final Composite parent) {
-		ChartBuilder.config(parent, settingsBuilder -> {
+	public static void main(final String[] args) {
+		final Display display = new Display();
+		final Shell shell = new Shell(display, SWT.DIALOG_TRIM);
+
+		ChartBuilder.config(shell, settingsBuilder -> {
 
 			settingsBuilder.legend(legendBuilder -> {
 				legendBuilder.background = new FillStyle(GraphicsProvider.getColor(ChartColor.WHITE));
@@ -74,6 +79,14 @@ public class Sample {
 			});
 		});
 
+		shell.open();
+
+		while (!shell.isDisposed()) {
+			if (!display.readAndDispatch()) {
+				display.sleep();
+			}
+		}
+		display.dispose();
 	}
 
 }
