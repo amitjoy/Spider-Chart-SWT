@@ -21,8 +21,9 @@ import java.util.Locale;
 import java.util.Vector;
 
 public class DataSeq {
+
 	public String[] dataLabels;
-	public Vector hotAreas = new Vector(0, 5);
+	public Vector<Object> hotAreas = new Vector<>(0, 5);
 	public String[] htmlLinks = new String[0];
 	public String labelTemplate = "";
 	public String name = "";
@@ -32,8 +33,8 @@ public class DataSeq {
 	public boolean secondYAxis = false;
 	public String[] tips = new String[0];
 	public String valueFormat = "######.##";
-	Vector xData = new Vector(0, 5);
-	Vector yData = new Vector(0, 5);
+	Vector<Double> xData = new Vector<>(0, 5);
+	Vector<Double> yData = new Vector<>(0, 5);
 
 	public DataSeq() {
 	}
@@ -81,8 +82,8 @@ public class DataSeq {
 	}
 
 	public void addData(final Object x, final Object y) {
-		this.xData.addElement(x);
-		this.yData.addElement(y);
+		this.xData.addElement((Double) x);
+		this.yData.addElement((Double) y);
 	}
 
 	protected String doubleToString(final Double d) {
@@ -116,7 +117,7 @@ public class DataSeq {
 
 	public void replaceXValueAt(final int index, final double newValue) {
 		if (index < this.xData.size()) {
-			final Vector tmp = new Vector();
+			final Vector<Double> tmp = new Vector<>();
 			for (int i = 0; i < this.xData.size(); i++) {
 				if (index == i) {
 					tmp.addElement(new Double(newValue));
