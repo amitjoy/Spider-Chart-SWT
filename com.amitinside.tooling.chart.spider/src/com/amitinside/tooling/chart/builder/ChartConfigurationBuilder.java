@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.amitinside.tooling.chart.builder.model;
+package com.amitinside.tooling.chart.builder;
+
+import java.util.function.Consumer;
 
 import com.amitinside.tooling.chart.Legend;
 import com.amitinside.tooling.chart.SpiderPlotter;
@@ -37,19 +39,19 @@ public class ChartConfigurationBuilder {
 		return this.title;
 	}
 
-	public ChartConfigurationBuilder setLegend(final Legend legend) {
-		this.legend = legend;
-		return this;
+	public void legend(final Consumer<Legend> legendBuilder) {
+		this.legend = new Legend();
+		legendBuilder.accept(this.legend);
 	}
 
-	public ChartConfigurationBuilder setPlotter(final SpiderPlotter plotter) {
-		this.plotter = plotter;
-		return this;
+	public void plotter(final Consumer<SpiderPlotter> plotterBuilder) {
+		this.plotter = new SpiderPlotter();
+		plotterBuilder.accept(this.plotter);
 	}
 
-	public ChartConfigurationBuilder setTitle(final Title title) {
-		this.title = title;
-		return this;
+	public void title(final String titleText, final Consumer<Title> titleBuilder) {
+		this.title = new Title(titleText);
+		titleBuilder.accept(this.title);
 	}
 
 }

@@ -23,7 +23,6 @@ import org.eclipse.swt.widgets.Composite;
 
 import com.amitinside.tooling.chart.Chart;
 import com.amitinside.tooling.chart.FillStyle;
-import com.amitinside.tooling.chart.builder.model.ChartConfigurationBuilder;
 import com.amitinside.tooling.chart.gc.ChartColor;
 import com.amitinside.tooling.chart.gc.GraphicsProvider;
 import com.amitinside.tooling.chart.gc.swt.SwtGraphicsProvider;
