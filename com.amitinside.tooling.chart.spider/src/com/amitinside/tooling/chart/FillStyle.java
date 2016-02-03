@@ -18,7 +18,7 @@ package com.amitinside.tooling.chart;
 import com.amitinside.tooling.chart.gc.ChartColor;
 import com.amitinside.tooling.chart.gc.ChartGraphics;
 import com.amitinside.tooling.chart.gc.ChartImage;
-import com.amitinside.tooling.chart.gc.GraphicsProvider;
+import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
 public class FillStyle {
 
@@ -27,11 +27,7 @@ public class FillStyle {
 	public static int NO_GRADIENT = 0;
 
 	public static FillStyle createFromString(final String f) {
-		if ((f.toUpperCase().indexOf(".JPEG") > 0) || (f.toUpperCase().indexOf(".JPG") > 0)
-				|| (f.toUpperCase().indexOf(".PNG") > 0) || (f.toUpperCase().indexOf(".GIF") > 0)) {
-			final ChartImage image = GraphicsProvider.getImageFromFile(f);
-			return new FillStyle(image);
-		}
+
 		int p = f.indexOf(";");
 		String separator = ";";
 		if (p == -1) {
@@ -41,7 +37,7 @@ public class FillStyle {
 		if (p > -1) {
 			final String[] items = ChartLoader.convertList(f, separator);
 
-			final FillStyle fillFrom = new FillStyle(GraphicsProvider.getColor(ChartColor.BLACK));
+			final FillStyle fillFrom = new FillStyle(SWTGraphicsSupplier.getColor(ChartColor.BLACK));
 
 			fillFrom.colorFrom = ChartLoader.convertColor(items[0]);
 			fillFrom.color = fillFrom.colorFrom;
@@ -76,8 +72,8 @@ public class FillStyle {
 
 	public float alphaValue = 1.0F;
 	ChartColor color;
-	public ChartColor colorFrom = GraphicsProvider.getColor(ChartColor.RED);
-	public ChartColor colorUntil = GraphicsProvider.getColor(ChartColor.WHITE);
+	public ChartColor colorFrom = SWTGraphicsSupplier.getColor(ChartColor.RED);
+	public ChartColor colorUntil = SWTGraphicsSupplier.getColor(ChartColor.WHITE);
 	private Object composite = null;
 	public Object fillPatern = null;
 	public boolean gradientCyclic = false;
@@ -97,7 +93,7 @@ public class FillStyle {
 
 	public FillStyle(final ChartImage i) {
 		this.textureImage = i;
-		this.color = GraphicsProvider.getColor(ChartColor.WHITE);
+		this.color = SWTGraphicsSupplier.getColor(ChartColor.WHITE);
 	}
 
 	protected void draw(final ChartGraphics g, int x1, int y1, int x2, int y2) {

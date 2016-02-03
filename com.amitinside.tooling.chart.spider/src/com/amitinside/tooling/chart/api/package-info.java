@@ -13,27 +13,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.amitinside.tooling.chart.gc.swt;
-
-import org.eclipse.swt.graphics.Device;
-import org.eclipse.swt.widgets.Display;
-
-public class SwtGraphicsProvider {
-
-	private static Device display = null;
-
-	public static Device getDefaultDisplay() {
-		if (display == null) {
-			display = new Display();
-		}
-		return display;
-	}
-
-	public static void setDefaultDisplay(final Display d) {
-		display = d;
-	}
-
-	public static void startUIThread(final Runnable r) {
-		((Display) getDefaultDisplay()).syncExec(r);
-	}
-}
+package com.amitinside.tooling.chart.api;

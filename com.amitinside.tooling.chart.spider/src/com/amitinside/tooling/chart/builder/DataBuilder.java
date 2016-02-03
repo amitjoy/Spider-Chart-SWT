@@ -15,7 +15,10 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.builder;
 
+import static java.util.Objects.requireNonNull;
+
 import com.amitinside.tooling.chart.Chart;
+import com.amitinside.tooling.chart.api.ISpiderDrawable;
 import com.amitinside.tooling.chart.builder.model.Data;
 
 public class DataBuilder {
@@ -24,16 +27,21 @@ public class DataBuilder {
 	private final Data data;
 
 	public DataBuilder(final Chart chart) {
+		requireNonNull(chart);
+
 		this.data = new Data();
 		this.chart = chart;
 	}
 
-	public void done() {
+	private void done() {
 		this.chart.addSeq(this.data.getData());
 	}
 
-	public void inject(final double[] data, final String color) {
-		this.data.setData(data, color);
+	public void inject(final ISpiderDrawable drawableData) {
+		requireNonNull(drawableData);
+
+		this.data.setData(drawableData.values(), drawableData.areaColor());
+		this.done();
 	}
 
 }

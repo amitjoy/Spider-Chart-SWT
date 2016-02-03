@@ -26,7 +26,7 @@ import java.util.Vector;
 import com.amitinside.tooling.chart.gc.ChartColor;
 import com.amitinside.tooling.chart.gc.ChartFont;
 import com.amitinside.tooling.chart.gc.ChartGraphics;
-import com.amitinside.tooling.chart.gc.GraphicsProvider;
+import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
 public class Axis extends ChartComponent {
 	public static final int CEROAXIS_LINE = 0;
@@ -81,12 +81,12 @@ public class Axis extends ChartComponent {
 	public int bigTickPixels = 9;
 	public boolean bigTicksGrid = false;
 	public int ceroAxis = 0;
-	public LineStyle ceroAxisStyle = new LineStyle(0.2F, GraphicsProvider.getColor(ChartColor.DARKGRAY), 1);
+	public LineStyle ceroAxisStyle = new LineStyle(0.2F, SWTGraphicsSupplier.getColor(ChartColor.DARKGRAY), 1);
 	public String dateLabelFormat = "dd-MMM-yyyy";
 	public String dateStep = "d";
 	public boolean dateStepPerUnit = false;
-	public ChartColor DescColor = GraphicsProvider.getColor(ChartColor.BLACK);
-	public ChartFont DescFont = GraphicsProvider.getFont("Arial", ChartFont.PLAIN, 10);
+	public ChartColor DescColor = SWTGraphicsSupplier.getColor(ChartColor.BLACK);
+	public ChartFont DescFont = SWTGraphicsSupplier.getFont("Arial", ChartFont.PLAIN, 10);
 	public FillStyle gridFillStyle = null;
 	public LineStyle gridStyle = null;
 	public Date initialDate = null;
@@ -109,7 +109,7 @@ public class Axis extends ChartComponent {
 	public double scaleTickInterval = 1.0D;
 	public boolean stackAdditionalAxis = false;
 	public boolean startWithBigTick = false;
-	public LineStyle style = new LineStyle(2.0F, GraphicsProvider.getColor(ChartColor.BLACK), 1);
+	public LineStyle style = new LineStyle(2.0F, SWTGraphicsSupplier.getColor(ChartColor.BLACK), 1);
 	protected Vector targetZones = new Vector();
 	public boolean tickAtBase = false;
 	public int tickLabelLength = 1000;
@@ -135,7 +135,7 @@ public class Axis extends ChartComponent {
 		this.additionalAxis.addElement(axis);
 	}
 
-	public void addTargetZone(final AxisTargetZone zone) {
+	public void addTargetZone(final AxisZone zone) {
 		if (zone != null) {
 			this.targetZones.addElement(zone);
 		}
@@ -781,17 +781,17 @@ public class Axis extends ChartComponent {
 		return this.additionalAxis.size();
 	}
 
-	public AxisTargetZone[] getTargetZones() {
-		final AxisTargetZone[] a = new AxisTargetZone[this.targetZones.size()];
+	public AxisZone[] getTargetZones() {
+		final AxisZone[] a = new AxisZone[this.targetZones.size()];
 		for (int i = 0; i < a.length; i++) {
-			a[i] = (AxisTargetZone) this.targetZones.elementAt(i);
+			a[i] = (AxisZone) this.targetZones.elementAt(i);
 		}
 		return a;
 	}
 
 	protected void paintTargetZones(final ChartGraphics g, final Axis peerAxis, final int position) {
 		for (int i = 0; i < this.targetZones.size(); i++) {
-			final AxisTargetZone z = (AxisTargetZone) this.targetZones.elementAt(i);
+			final AxisZone z = (AxisZone) this.targetZones.elementAt(i);
 			z.chart = this.chart;
 			z.paint(g, this, peerAxis, position);
 		}

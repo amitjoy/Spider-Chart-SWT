@@ -15,6 +15,8 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.builder;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.function.Consumer;
 
 import org.eclipse.swt.SWT;
@@ -24,7 +26,7 @@ import org.eclipse.swt.widgets.Composite;
 import com.amitinside.tooling.chart.Chart;
 import com.amitinside.tooling.chart.FillStyle;
 import com.amitinside.tooling.chart.gc.ChartColor;
-import com.amitinside.tooling.chart.gc.GraphicsProvider;
+import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.swt.SwtGraphicsProvider;
 import com.amitinside.tooling.chart.swt.ChartViewer;
 
@@ -44,12 +46,14 @@ public class ChartBuilder {
 	private final ChartViewer chartViewer;
 
 	public ChartBuilder(final Composite parent) {
+		requireNonNull(parent);
+
 		SwtGraphicsProvider.setDefaultDisplay(parent.getShell().getDisplay());
 		this.chartViewer = new ChartViewer(parent, SWT.NONE);
 		this.prepareChartViewer(parent);
 	}
 
-	public void chart(final Consumer<DataBuilder> dataBuilderConsumer) {
+	public void data(final Consumer<DataBuilder> dataBuilderConsumer) {
 		final DataBuilder dataBuilder = new DataBuilder(this.chart);
 		dataBuilderConsumer.accept(dataBuilder);
 		this.chartViewer.setChart(this.chart);
@@ -58,13 +62,13 @@ public class ChartBuilder {
 	private void prepareChartViewer(final Composite parent) {
 		this.chartViewer.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true, true));
 		this.chartViewer.setBounds(parent.getShell().getClientArea().x, parent.getShell().getClientArea().y,
-				parent.getShell().getClientArea().width, parent.getShell().getClientArea().height - 20);
-		this.chartViewer.changePointer = true;
+				parent.getShell().getClientArea().width, parent.getShell().getClientArea().height - 10);
 		this.chartViewer.changePointer = true;
 		this.chartViewer.allowZoom = true;
-		this.chart = new Chart(chartConfiguration.getTitle(), chartConfiguration.getPlotter(), null, null);
-		this.chart.back = new FillStyle(GraphicsProvider.getColor(ChartColor.INDIANRED));
-		this.chart.back.gradientType = FillStyle.GRADIENT_HORIZONTAL;
+
+		this.chart = new Chart(chartConfiguration.getTitle(), chartConfiguration.getPlotter());
+		this.chart.back = new FillStyle(SWTGraphicsSupplier.getColor(ChartColor.YELLOW));
+		this.chart.back.gradientType = FillStyle.GRADIENT_VERTICAL;
 		this.chart.legend = chartConfiguration.getLegend();
 	}
 

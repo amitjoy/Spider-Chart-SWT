@@ -20,9 +20,10 @@ import org.eclipse.swt.graphics.Font;
 import com.amitinside.tooling.chart.gc.ChartFont;
 
 public class ChartSwtFont extends ChartFont {
+
 	private String fontName = "";
-	private int fontStyle = ChartFont.PLAIN;
 	private int fontSize = 10;
+	private int fontStyle = ChartFont.PLAIN;
 
 	public ChartSwtFont(final Object f) {
 		this.fontName = ((Font) f).getFontData()[0].getName();
@@ -57,7 +58,6 @@ public class ChartSwtFont extends ChartFont {
 		if (this.fontStyle == ChartFont.BOLD_ITALIC) {
 			s = 3;
 		}
-		return new Font(SwtGraphicsProvider.getDefaultDisplay(), this.fontName,
-				this.fontSize, s);
+		return new Font(SwtGraphicsProvider.getDefaultDisplay(), this.fontName, this.fontSize, s);
 	}
 }

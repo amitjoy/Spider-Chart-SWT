@@ -17,7 +17,7 @@ package com.amitinside.tooling.chart;
 
 import com.amitinside.tooling.chart.gc.ChartGraphics;
 
-public interface ChartListener {
+public interface IChartListener {
 
 	public static final int EVENT_AFTER_UPDATE = 1;
 	public static final int EVENT_BEFORE_UPDATE = 0;

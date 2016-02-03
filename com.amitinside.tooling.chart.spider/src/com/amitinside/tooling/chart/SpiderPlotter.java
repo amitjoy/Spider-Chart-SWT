@@ -20,22 +20,22 @@ import java.text.DecimalFormat;
 import com.amitinside.tooling.chart.gc.ChartColor;
 import com.amitinside.tooling.chart.gc.ChartFont;
 import com.amitinside.tooling.chart.gc.ChartGraphics;
-import com.amitinside.tooling.chart.gc.GraphicsProvider;
+import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.Polygon;
 
 public class SpiderPlotter extends Plotter {
 
 	public FillStyle backStyle;
-	LineStyle border = new LineStyle(0.2F, GraphicsProvider.getColor(ChartColor.BLACK), 1);
+	LineStyle border = new LineStyle(0.2F, SWTGraphicsSupplier.getColor(ChartColor.BLACK), 1);
 	public boolean drawCircle = false;
-	public ChartColor factorColor = GraphicsProvider.getColor(ChartColor.BLACK);
+	public ChartColor factorColor = SWTGraphicsSupplier.getColor(ChartColor.BLACK);
 	public ChartColor[] factorColors;
-	public ChartFont factorFont = GraphicsProvider.getFont("Arial", ChartFont.PLAIN, 10);
+	public ChartFont factorFont = SWTGraphicsSupplier.getFont("Arial", ChartFont.PLAIN, 10);
 	public double[] factorMaxs;
 	public double[] factorMins;
 	public String[] factorNames;
 	public ChartFont gridFont;
-	public ChartColor gridFontColor = GraphicsProvider.getColor(ChartColor.BLACK);
+	public ChartColor gridFontColor = SWTGraphicsSupplier.getColor(ChartColor.BLACK);
 	public LineStyle gridStyle;
 	public ChartColor[] pointColors = null;
 	public double[] pointColorScale = null;

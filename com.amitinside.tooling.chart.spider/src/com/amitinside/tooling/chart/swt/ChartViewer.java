@@ -29,27 +29,10 @@ import com.amitinside.tooling.chart.Chart;
 import com.amitinside.tooling.chart.ChartAdapter;
 
 public class ChartViewer extends Composite {
-	ChartCanvas canvas = null;
-	Slider hSlider = null;
-	Slider vSlider = null;
-	private final int scrollBarWidth = 18;
-	private int lastWidth = 0;
-	private int lastHeight = 0;
-	private int lastZoom = 0;
-	private int originalHeight = -1;
-	private int originalWidth = -1;
+
 	public boolean allowZoom = true;
-	public int maxZoom = 200;
-	public int minZoom = 50;
-	public int currentZoom = 100;
-	public int zoomIncrement = 25;
+	ChartCanvas canvas = null;
 	public boolean changePointer = true;
-	private Cursor defaultCursor = null;
-	private Cursor pointCursor = null;
-	private Button plusZoom;
-	private Button minusZoom;
-	private Label zoom;
-	private Composite zoomPanel;
 	ChartAdapter chartAdapter = new ChartAdapter() {
 		@Override
 		public void chartEvent(final Chart c, final int type) {
@@ -57,11 +40,28 @@ public class ChartViewer extends Composite {
 				ChartViewer.this.canvas.setCursor(ChartViewer.this.pointCursor);
 			}
 			if (type == 3) {
-				ChartViewer.this.canvas
-						.setCursor(ChartViewer.this.defaultCursor);
+				ChartViewer.this.canvas.setCursor(ChartViewer.this.defaultCursor);
 			}
 		}
 	};
+	public int currentZoom = 100;
+	private Cursor defaultCursor = null;
+	Slider hSlider = null;
+	private int lastHeight = 0;
+	private int lastWidth = 0;
+	private int lastZoom = 0;
+	public int maxZoom = 200;
+	private Button minusZoom;
+	public int minZoom = 50;
+	private int originalHeight = -1;
+	private int originalWidth = -1;
+	private Button plusZoom;
+	private Cursor pointCursor = null;
+	private final int scrollBarWidth = 18;
+	Slider vSlider = null;
+	private Label zoom;
+	public int zoomIncrement = 25;
+	private Composite zoomPanel;
 
 	public ChartViewer(final Composite parent, final int style) {
 		super(parent, style);
@@ -136,7 +136,7 @@ public class ChartViewer extends Composite {
 				ChartViewer.this.vSliderScroll();
 			}
 		});
-		addControlListener(new ControlListener() {
+		this.addControlListener(new ControlListener() {
 			@Override
 			public void controlMoved(final ControlEvent e) {
 			}
@@ -158,10 +158,10 @@ public class ChartViewer extends Composite {
 	@Override
 	public void dispose() {
 		super.dispose();
-		if (this.pointCursor != null && !this.pointCursor.isDisposed()) {
+		if ((this.pointCursor != null) && !this.pointCursor.isDisposed()) {
 			this.pointCursor.dispose();
 		}
-		if (this.defaultCursor != null && !this.defaultCursor.isDisposed()) {
+		if ((this.defaultCursor != null) && !this.defaultCursor.isDisposed()) {
 			this.defaultCursor.dispose();
 		}
 	}
@@ -173,12 +173,10 @@ public class ChartViewer extends Composite {
 	private void hSliderScroll() {
 		int newBase = 0;
 		final int newValue = this.hSlider.getSelection();
-		if (newValue + this.canvas.getChart().getWidth() < this.canvas
-				.getChart().virtualWidth) {
+		if ((newValue + this.canvas.getChart().getWidth()) < this.canvas.getChart().virtualWidth) {
 			newBase = newValue;
 		} else {
-			newBase = this.canvas.getChart().virtualWidth
-					- this.canvas.getChart().getWidth();
+			newBase = this.canvas.getChart().virtualWidth - this.canvas.getChart().getWidth();
 		}
 		if (newBase < 0) {
 			newBase = 0;
@@ -188,12 +186,12 @@ public class ChartViewer extends Composite {
 	}
 
 	private void minusZoom() {
-		if (this.currentZoom - this.zoomIncrement > this.minZoom) {
+		if ((this.currentZoom - this.zoomIncrement) > this.minZoom) {
 			this.currentZoom -= this.zoomIncrement;
 		} else {
 			this.currentZoom = this.minZoom;
 		}
-		zoomUpdated();
+		this.zoomUpdated();
 	}
 
 	private void placeControls() {
@@ -207,13 +205,11 @@ public class ChartViewer extends Composite {
 		if (this.canvas.getChart().virtualHeight > 0) {
 			vSliderWidth = this.scrollBarWidth;
 		}
-		this.canvas.setSize(getSize().x - vSliderWidth, getSize().y
-				- hSliderHeight);
+		this.canvas.setSize(this.getSize().x - vSliderWidth, this.getSize().y - hSliderHeight);
 
 		this.canvas.setLocation(0, 0);
 		if (this.allowZoom
-				&& (this.canvas.getChart().virtualHeight > 0 || this.canvas
-						.getChart().virtualWidth > 0)) {
+				&& ((this.canvas.getChart().virtualHeight > 0) || (this.canvas.getChart().virtualWidth > 0))) {
 			this.zoomPanel.setVisible(true);
 			this.zoomPanel.setLocation(0, this.canvas.getSize().y);
 		} else {
@@ -221,12 +217,10 @@ public class ChartViewer extends Composite {
 		}
 		if (this.canvas.getChart().virtualWidth > 0) {
 			if (this.allowZoom) {
-				this.hSlider.setLocation(this.zoomPanel.getSize().x,
-						this.canvas.getSize().y);
-				this.hSlider.setSize(getSize().x - vSliderWidth
-						- this.zoomPanel.getSize().x, hSliderHeight);
+				this.hSlider.setLocation(this.zoomPanel.getSize().x, this.canvas.getSize().y);
+				this.hSlider.setSize(this.getSize().x - vSliderWidth - this.zoomPanel.getSize().x, hSliderHeight);
 			} else {
-				this.hSlider.setSize(getSize().x - vSliderWidth, hSliderHeight);
+				this.hSlider.setSize(this.getSize().x - vSliderWidth, hSliderHeight);
 				this.hSlider.setLocation(0, this.canvas.getSize().y);
 			}
 			this.hSlider.setVisible(true);
@@ -235,7 +229,7 @@ public class ChartViewer extends Composite {
 			this.hSlider.setVisible(false);
 		}
 		if (this.canvas.getChart().virtualHeight > 0) {
-			this.vSlider.setSize(vSliderWidth, getSize().y - hSliderHeight);
+			this.vSlider.setSize(vSliderWidth, this.getSize().y - hSliderHeight);
 			this.vSlider.setLocation(this.canvas.getSize().x, 0);
 			this.vSlider.setVisible(true);
 			this.canvas.getChart().withScroll = true;
@@ -245,12 +239,12 @@ public class ChartViewer extends Composite {
 	}
 
 	private void plusZoom() {
-		if (this.currentZoom + this.zoomIncrement < this.maxZoom) {
+		if ((this.currentZoom + this.zoomIncrement) < this.maxZoom) {
 			this.currentZoom += this.zoomIncrement;
 		} else {
 			this.currentZoom = this.maxZoom;
 		}
-		zoomUpdated();
+		this.zoomUpdated();
 	}
 
 	public void redrawChart() {
@@ -272,10 +266,10 @@ public class ChartViewer extends Composite {
 		this.originalHeight = this.canvas.getChart().virtualHeight;
 		this.originalWidth = this.canvas.getChart().virtualWidth;
 
-		resetChart();
-		placeControls();
-		updateScrollBarsConfiguration();
-		updateSize();
+		this.resetChart();
+		this.placeControls();
+		this.updateScrollBarsConfiguration();
+		this.updateSize();
 		if (this.changePointer) {
 			this.canvas.getChart().addChartListener(this.chartAdapter);
 		}
@@ -286,20 +280,15 @@ public class ChartViewer extends Composite {
 			final int w = this.canvas.getChart().getWidth();
 			this.hSlider.setMinimum(0);
 			this.hSlider.setMaximum(this.canvas.getChart().virtualWidth);
-			this.hSlider
-					.setIncrement((int) (this.canvas.getChart().getWidth() * 0.2D));
-			this.hSlider.setPageIncrement((int) (this.canvas.getChart()
-					.getWidth() * 0.75D));
-			if (this.canvas.getChart().offsetX > this.canvas.getChart().virtualWidth
-					- w) {
-				this.canvas.getChart().offsetX = this.canvas.getChart().virtualWidth
-						- w;
+			this.hSlider.setIncrement((int) (this.canvas.getChart().getWidth() * 0.2D));
+			this.hSlider.setPageIncrement((int) (this.canvas.getChart().getWidth() * 0.75D));
+			if (this.canvas.getChart().offsetX > (this.canvas.getChart().virtualWidth - w)) {
+				this.canvas.getChart().offsetX = this.canvas.getChart().virtualWidth - w;
 			}
 			if (this.canvas.getChart().offsetX < 0) {
 				this.canvas.getChart().offsetX = 0;
 			}
-			if (this.canvas.getChart().offsetX > this.canvas.getChart().virtualWidth
-					- w) {
+			if (this.canvas.getChart().offsetX > (this.canvas.getChart().virtualWidth - w)) {
 				this.canvas.getChart().offsetX = 0;
 			}
 			this.hSlider.setThumb(w);
@@ -310,20 +299,15 @@ public class ChartViewer extends Composite {
 			this.vSlider.setMinimum(0);
 			this.vSlider.setMaximum(this.canvas.getChart().virtualHeight);
 
-			this.vSlider
-					.setIncrement((int) (this.canvas.getChart().getHeight() * 0.2D));
-			this.vSlider.setPageIncrement((int) (this.canvas.getChart()
-					.getHeight() * 0.75D));
-			if (this.canvas.getChart().offsetY > this.canvas.getChart().virtualHeight
-					- h) {
-				this.canvas.getChart().offsetY = this.canvas.getChart().virtualHeight
-						- h;
+			this.vSlider.setIncrement((int) (this.canvas.getChart().getHeight() * 0.2D));
+			this.vSlider.setPageIncrement((int) (this.canvas.getChart().getHeight() * 0.75D));
+			if (this.canvas.getChart().offsetY > (this.canvas.getChart().virtualHeight - h)) {
+				this.canvas.getChart().offsetY = this.canvas.getChart().virtualHeight - h;
 			}
 			if (this.canvas.getChart().offsetY < 0) {
 				this.canvas.getChart().offsetY = 0;
 			}
-			if (this.canvas.getChart().offsetY > this.canvas.getChart().virtualHeight
-					- h) {
+			if (this.canvas.getChart().offsetY > (this.canvas.getChart().virtualHeight - h)) {
 				this.canvas.getChart().offsetY = 0;
 			}
 			this.vSlider.setThumb(h);
@@ -333,32 +317,30 @@ public class ChartViewer extends Composite {
 
 	private void updateSize() {
 		this.canvas.getChart().repaintAll = true;
-		if (this.lastWidth != getSize().x || this.lastHeight != getSize().y
-				|| this.lastZoom != this.currentZoom) {
-			this.canvas.getChart().setSize(getSize().x, getSize().y);
-			this.lastWidth = getSize().x;
-			this.lastHeight = getSize().y;
+		if ((this.lastWidth != this.getSize().x) || (this.lastHeight != this.getSize().y)
+				|| (this.lastZoom != this.currentZoom)) {
+			this.canvas.getChart().setSize(this.getSize().x, this.getSize().y);
+			this.lastWidth = this.getSize().x;
+			this.lastHeight = this.getSize().y;
 			this.lastZoom = this.currentZoom;
 			if (this.canvas.getChart().withScroll) {
 				if (this.allowZoom) {
 					if (this.originalHeight > 0) {
-						this.canvas.getChart().virtualHeight = this.originalHeight
-								* this.currentZoom / 100;
+						this.canvas.getChart().virtualHeight = (this.originalHeight * this.currentZoom) / 100;
 					} else {
 						this.canvas.getChart().virtualHeight = 0;
 					}
 					if (this.originalWidth > 0) {
-						this.canvas.getChart().virtualWidth = this.originalWidth
-								* this.currentZoom / 100;
+						this.canvas.getChart().virtualWidth = (this.originalWidth * this.currentZoom) / 100;
 					} else {
 						this.canvas.getChart().virtualWidth = 0;
 					}
 				}
-				int w = 1 + getSize().x;
+				int w = 1 + this.getSize().x;
 				if (this.originalHeight > 0) {
 					w -= this.vSlider.getSize().x;
 				}
-				int h = 1 + getSize().y;
+				int h = 1 + this.getSize().y;
 				if (this.originalWidth > 0) {
 					h -= this.hSlider.getSize().y;
 				}
@@ -372,12 +354,10 @@ public class ChartViewer extends Composite {
 	private void vSliderScroll() {
 		int newBase = 0;
 		final int newValue = this.vSlider.getSelection();
-		if (newValue + this.canvas.getChart().getHeight() < this.canvas
-				.getChart().virtualHeight) {
+		if ((newValue + this.canvas.getChart().getHeight()) < this.canvas.getChart().virtualHeight) {
 			newBase = newValue;
 		} else {
-			newBase = this.canvas.getChart().virtualHeight
-					- this.canvas.getChart().getHeight();
+			newBase = this.canvas.getChart().virtualHeight - this.canvas.getChart().getHeight();
 		}
 		if (newBase < 0) {
 			newBase = 0;
@@ -389,8 +369,8 @@ public class ChartViewer extends Composite {
 	private void zoomUpdated() {
 		this.zoom.setText("" + this.currentZoom + " %");
 
-		updateSize();
-		updateScrollBarsConfiguration();
+		this.updateSize();
+		this.updateScrollBarsConfiguration();
 		this.canvas.redraw();
 	}
 }

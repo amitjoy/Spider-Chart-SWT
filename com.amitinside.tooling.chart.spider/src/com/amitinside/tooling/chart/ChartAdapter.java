@@ -17,7 +17,7 @@ package com.amitinside.tooling.chart;
 
 import com.amitinside.tooling.chart.gc.ChartGraphics;
 
-public class ChartAdapter implements ChartListener {
+public class ChartAdapter implements IChartListener {
 
 	@Override
 	public void chartEvent(final Chart c, final int type) {

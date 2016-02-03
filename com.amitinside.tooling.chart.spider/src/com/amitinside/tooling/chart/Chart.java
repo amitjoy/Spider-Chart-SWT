@@ -26,8 +26,8 @@ import com.amitinside.tooling.chart.gc.ChartColor;
 import com.amitinside.tooling.chart.gc.ChartFont;
 import com.amitinside.tooling.chart.gc.ChartGraphics;
 import com.amitinside.tooling.chart.gc.ChartImage;
-import com.amitinside.tooling.chart.gc.GraphicsProvider;
 import com.amitinside.tooling.chart.gc.Polygon;
+import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
 public class Chart {
 
@@ -130,7 +130,6 @@ public class Chart {
 	protected Vector notes = new Vector();
 	public int offsetX = 0;
 	public int offsetY = 0;
-	public String onClickJSFunction = "OnClickRChart";
 	private int originalVirtualHeight = -1;
 	private int originalVirtualWidth = -1;
 	public Plotter[] plotters = new Plotter[10];
@@ -148,9 +147,9 @@ public class Chart {
 	public boolean showTips = false;
 	private boolean stopped = false;
 	protected Vector targetZones = new Vector();
-	ChartColor tipColor = GraphicsProvider.getColor(ChartColor.YELLOW);
-	ChartFont tipFont = GraphicsProvider.getFont("Serif", ChartFont.PLAIN, 10);
-	ChartColor tipFontColor = GraphicsProvider.getColor(ChartColor.BLACK);
+	ChartColor tipColor = SWTGraphicsSupplier.getColor(ChartColor.YELLOW);
+	ChartFont tipFont = SWTGraphicsSupplier.getFont("Serif", ChartFont.PLAIN, 10);
+	ChartColor tipFontColor = SWTGraphicsSupplier.getColor(ChartColor.BLACK);
 	public Title title;
 	public double topMargin = 0.125D;
 	public int virtualHeight = 0;
@@ -170,11 +169,15 @@ public class Chart {
 	protected Chart() {
 	}
 
+	public Chart(final Title t, final Plotter p) {
+		this.resetChart(t, p, null, null);
+	}
+
 	public Chart(final Title t, final Plotter p, final Axis X, final Axis Y) {
 		this.resetChart(t, p, X, Y);
 	}
 
-	public void addChartListener(final ChartListener cl) {
+	public void addChartListener(final IChartListener cl) {
 		this.chartListeners.addElement(cl);
 	}
 
@@ -772,23 +775,23 @@ public class Chart {
 
 		System.currentTimeMillis();
 		if ((this.plotters[0] == null) || (this.plottersCount <= 0)) {
-			pg.setColor(GraphicsProvider.getColor(ChartColor.RED));
+			pg.setColor(SWTGraphicsSupplier.getColor(ChartColor.RED));
 			pg.drawString("Error: No plotters/series have been defined", 30, 30);
 			return;
 		}
 		for (int j = 0; j < this.plottersCount; j++) {
 			if ((this.plotters[j].getNeedsAxis() > 0) && (this.XAxis == null)) {
-				pg.setColor(GraphicsProvider.getColor(ChartColor.RED));
+				pg.setColor(SWTGraphicsSupplier.getColor(ChartColor.RED));
 				pg.drawString("Error: No X axis have been defined", 30, 30);
 				return;
 			}
 			if ((this.plotters[j].getNeedsAxis() > 1) && (this.YAxis == null)) {
-				pg.setColor(GraphicsProvider.getColor(ChartColor.RED));
+				pg.setColor(SWTGraphicsSupplier.getColor(ChartColor.RED));
 				pg.drawString("Error: No Y axis have been defined", 30, 30);
 				return;
 			}
 			if ((this.plottersCount > 1) && !this.plotters[j].getCombinable()) {
-				pg.setColor(GraphicsProvider.getColor(ChartColor.RED));
+				pg.setColor(SWTGraphicsSupplier.getColor(ChartColor.RED));
 				pg.drawString("Error: These plotters cannot be combined", 30, 30);
 				return;
 			}
@@ -825,7 +828,7 @@ public class Chart {
 				if (this.finalImage != null) {
 					this.finalImage.dispose();
 				}
-				this.finalImage = GraphicsProvider.createImage(this.getWidth(), this.getHeight());
+				this.finalImage = SWTGraphicsSupplier.createImage(this.getWidth(), this.getHeight());
 			}
 		} catch (final Exception e) {
 		}
@@ -839,14 +842,14 @@ public class Chart {
 				if (this.chartImage != null) {
 					this.chartImage.dispose();
 				}
-				this.chartImage = GraphicsProvider.createImage(this.virtualWidth, this.virtualHeight);
+				this.chartImage = SWTGraphicsSupplier.createImage(this.virtualWidth, this.virtualHeight);
 			}
 			gScroll = this.chartImage.getGraphics();
 			if (this.repaintAll || (this.backTmpImage == null)) {
 				if (this.backTmpImage != null) {
 					this.backTmpImage.dispose();
 				}
-				this.backTmpImage = GraphicsProvider.createImage(this.virtualWidth, this.virtualHeight);
+				this.backTmpImage = SWTGraphicsSupplier.createImage(this.virtualWidth, this.virtualHeight);
 			}
 			gBack = this.backTmpImage.getGraphics();
 		}
@@ -1001,7 +1004,7 @@ public class Chart {
 		}
 		if (this.chartListeners != null) {
 			for (int i = 0; i < this.chartListeners.size(); i++) {
-				((ChartListener) this.chartListeners.elementAt(i)).paintUserExit(this, g);
+				((IChartListener) this.chartListeners.elementAt(i)).paintUserExit(this, g);
 			}
 		}
 		if (this.XAxis != null) {
@@ -1049,7 +1052,7 @@ public class Chart {
 	}
 
 	protected void paintTargetZones(final ChartGraphics g, final boolean back) {
-		g.setFont(GraphicsProvider.getFont("Arial", ChartFont.BOLD, 10));
+		g.setFont(SWTGraphicsSupplier.getFont("Arial", ChartFont.BOLD, 10));
 		for (int i = 0; i < this.targetZones.size(); i++) {
 			final TargetZone z = (TargetZone) this.targetZones.elementAt(i);
 			z.chart = this;
@@ -1139,7 +1142,7 @@ public class Chart {
 		this.chartListeners.removeAllElements();
 	}
 
-	public void removeChartListener(final ChartListener cl) {
+	public void removeChartListener(final IChartListener cl) {
 		this.chartListeners.removeElement(cl);
 	}
 
@@ -1208,7 +1211,7 @@ public class Chart {
 	}
 
 	public void saveToFile(final OutputStream os, final String psFormat) throws Exception {
-		final ChartImage image = GraphicsProvider.createImage(this.width, this.height);
+		final ChartImage image = SWTGraphicsSupplier.createImage(this.width, this.height);
 		ChartGraphics g = null;
 		try {
 			g = image.getGraphics();
@@ -1348,7 +1351,7 @@ public class Chart {
 
 	private void triggerEvent(final int event) {
 		for (int i = 0; i < this.chartListeners.size(); i++) {
-			((ChartListener) this.chartListeners.elementAt(i)).chartEvent(this, event);
+			((IChartListener) this.chartListeners.elementAt(i)).chartEvent(this, event);
 		}
 	}
 }

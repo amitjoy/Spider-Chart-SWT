@@ -13,27 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.amitinside.tooling.chart.gc.swt;
+package com.amitinside.tooling.chart.example;
 
-import org.eclipse.swt.graphics.Device;
-import org.eclipse.swt.widgets.Display;
+import com.amitinside.tooling.chart.api.ISpiderDrawable;
+import com.amitinside.tooling.chart.gc.ChartColor;
 
-public class SwtGraphicsProvider {
+public class Nexus implements ISpiderDrawable {
 
-	private static Device display = null;
-
-	public static Device getDefaultDisplay() {
-		if (display == null) {
-			display = new Display();
-		}
-		return display;
+	@Override
+	public String areaColor() {
+		return ChartColor.GREEN;
 	}
 
-	public static void setDefaultDisplay(final Display d) {
-		display = d;
+	@Override
+	public double[] values() {
+		final double[] data = { 2, 3, 4, 4.2, 3 };
+		return data;
 	}
 
-	public static void startUIThread(final Runnable r) {
-		((Display) getDefaultDisplay()).syncExec(r);
-	}
 }

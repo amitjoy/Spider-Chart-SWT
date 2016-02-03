@@ -18,12 +18,12 @@ package com.amitinside.tooling.chart;
 import com.amitinside.tooling.chart.gc.ChartColor;
 import com.amitinside.tooling.chart.gc.ChartFont;
 import com.amitinside.tooling.chart.gc.ChartGraphics;
-import com.amitinside.tooling.chart.gc.GraphicsProvider;
+import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
 public class Title extends ChartComponent {
 
-	public ChartColor color = GraphicsProvider.getColor(ChartColor.BLACK);
-	public ChartFont font = GraphicsProvider.getFont("Arial", ChartFont.PLAIN, 14);
+	public ChartColor color = SWTGraphicsSupplier.getColor(ChartColor.BLACK);
+	public ChartFont font = SWTGraphicsSupplier.getFont("Arial", ChartFont.PLAIN, 14);
 	private String text;
 
 	public Title() {

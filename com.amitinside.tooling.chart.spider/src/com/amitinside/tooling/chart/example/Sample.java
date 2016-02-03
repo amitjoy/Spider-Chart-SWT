@@ -15,67 +15,61 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.example;
 
+import static com.amitinside.tooling.chart.LineStyle.LINE_NORMAL;
+import static com.amitinside.tooling.chart.gc.ChartColor.BLUE;
+import static com.amitinside.tooling.chart.gc.ChartColor.GREEN;
+import static com.amitinside.tooling.chart.gc.SWTGraphicsSupplier.getColor;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
-import com.amitinside.tooling.chart.FillStyle;
 import com.amitinside.tooling.chart.LineStyle;
+import com.amitinside.tooling.chart.api.ISpiderDrawable;
 import com.amitinside.tooling.chart.builder.ChartBuilder;
-import com.amitinside.tooling.chart.gc.ChartColor;
-import com.amitinside.tooling.chart.gc.ChartFont;
-import com.amitinside.tooling.chart.gc.GraphicsProvider;
 
 public class Sample {
+
+	private static void buildSpiderChart(final Shell shell) {
+
+		final ISpiderDrawable iphoneData = new IPhone();
+		final ISpiderDrawable nexusData = new Nexus();
+
+		ChartBuilder.config(shell, settingsBuilder -> {
+
+			settingsBuilder.title(titleBuilder -> titleBuilder.setText("Mobile Phone Comparison"));
+
+			settingsBuilder.legend(legendBuilder -> {
+				legendBuilder.addItem("iPhone 6", new LineStyle(1, getColor(BLUE), LINE_NORMAL));
+				legendBuilder.addItem("Nexus 6", new LineStyle(1, getColor(GREEN), LINE_NORMAL));
+			});
+
+			settingsBuilder.plotter(plotterBuilder -> {
+				final double[] maxScale = { 5, 5, 5, 5, 5 };
+				final double[] minScale = { 0, 0, 0, 0, 0 };
+				final String[] axes = { "Battery", "Camera", "Display", "Memory", "Brand" };
+
+				plotterBuilder.factorMaxs = maxScale;
+				plotterBuilder.factorMins = minScale;
+				plotterBuilder.factorNames = axes;
+			});
+
+		}).viewer(chartBuilder -> {
+			chartBuilder.data(firstData -> {
+				firstData.inject(iphoneData);
+			});
+			chartBuilder.data(secondData -> {
+				secondData.inject(nexusData);
+			});
+		});
+	}
 
 	public static void main(final String[] args) {
 		final Display display = new Display();
 		final Shell shell = new Shell(display, SWT.DIALOG_TRIM);
+		shell.setSize(800, 750);
 
-		ChartBuilder.config(shell, settingsBuilder -> {
-
-			settingsBuilder.legend(legendBuilder -> {
-				legendBuilder.background = new FillStyle(GraphicsProvider.getColor(ChartColor.WHITE));
-				legendBuilder.border = new LineStyle(1, GraphicsProvider.getColor(ChartColor.BLACK),
-						LineStyle.LINE_NORMAL);
-				legendBuilder.addItem("iPhone 6",
-						new LineStyle(1, GraphicsProvider.getColor(ChartColor.BLUE), LineStyle.LINE_NORMAL));
-				legendBuilder.addItem("Nexus 6",
-						new LineStyle(1, GraphicsProvider.getColor(ChartColor.GREEN), LineStyle.LINE_NORMAL));
-			});
-
-			settingsBuilder.title(titleBuilder -> titleBuilder.setText("Mobile Phone Comparison"));
-
-			settingsBuilder.plotter(plotterBuilder -> {
-				final double[] fMaxs = { 5, 5, 5, 5, 5 };
-				final double[] fMins = { 0, 0, 0, 0, 0 };
-				final String[] factors = { "Battery", "Camera", "Display", "Memory", "Brand", "Processor" };
-
-				plotterBuilder.factorMaxs = fMaxs;
-				plotterBuilder.factorMins = fMins;
-				plotterBuilder.factorNames = factors;
-				plotterBuilder.backStyle = new FillStyle(GraphicsProvider.getColor(ChartColor.YELLOW));
-				plotterBuilder.radiusModifier = 0.8;
-
-				plotterBuilder.gridStyle = new LineStyle(1, GraphicsProvider.getColor(ChartColor.BLACK),
-						LineStyle.LINE_DASHED);
-				plotterBuilder.gridFont = GraphicsProvider.getFont("Arial", ChartFont.PLAIN, 10);
-			});
-
-		}).viewer(chartBuilder -> {
-			chartBuilder.chart(dataBuilder1 -> {
-				// First Data
-				final double[] data1 = { 1, 2, 3, 4, 5 };
-				dataBuilder1.inject(data1, "BLUE");
-				dataBuilder1.done();
-			});
-			chartBuilder.chart(dataBuilder2 -> {
-				// Second Data
-				final double[] data2 = { 2, 3, 4, 4.2, 3 };
-				dataBuilder2.inject(data2, "GREEN");
-				dataBuilder2.done();
-			});
-		});
+		buildSpiderChart(shell);
 
 		shell.open();
 

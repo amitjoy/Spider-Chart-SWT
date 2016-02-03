@@ -22,14 +22,14 @@ import com.amitinside.tooling.chart.gc.ChartColor;
 import com.amitinside.tooling.chart.gc.ChartFont;
 import com.amitinside.tooling.chart.gc.ChartGraphics;
 import com.amitinside.tooling.chart.gc.ChartImage;
-import com.amitinside.tooling.chart.gc.GraphicsProvider;
+import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
 public class Legend extends ChartComponent {
 
 	public FillStyle background;
 	public LineStyle border;
-	public ChartColor color = GraphicsProvider.getColor(ChartColor.BLACK);
-	public ChartFont font = GraphicsProvider.getFont("Arial", ChartFont.PLAIN, 10);
+	public ChartColor color = SWTGraphicsSupplier.getColor(ChartColor.BLACK);
+	public ChartFont font = SWTGraphicsSupplier.getFont("Arial", ChartFont.PLAIN, 10);
 	Vector items = new Vector(10, 10);
 	public String legendLabel = "";
 	public int legendMargin = 8;

@@ -17,11 +17,11 @@ package com.amitinside.tooling.chart;
 
 import com.amitinside.tooling.chart.gc.ChartGraphics;
 
-public class AxisTargetZone {
+public class AxisZone {
 
 	protected static int DISABLED = -1;
 
-	public static AxisTargetZone createFromString(final String s) {
+	public static AxisZone createFromString(final String s) {
 		if (s.length() == 0) {
 			return null;
 		}
@@ -51,7 +51,7 @@ public class AxisTargetZone {
 			e.printStackTrace();
 			return null;
 		}
-		final AxisTargetZone zone = new AxisTargetZone(start, end, uStart, uEnd);
+		final AxisZone zone = new AxisZone(start, end, uStart, uEnd);
 		if (items.length > 2) {
 			zone.style = ChartLoader.convertLineStyle(items[2]);
 		}
@@ -74,7 +74,7 @@ public class AxisTargetZone {
 
 	public int unitStart = 0;
 
-	public AxisTargetZone(final double start, final double end, final int uStart, final int uEnd) {
+	public AxisZone(final double start, final double end, final int uStart, final int uEnd) {
 		this.unitStart = uStart;
 		this.unitEnd = uEnd;
 		this.positionStart = start;

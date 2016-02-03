@@ -19,7 +19,7 @@ import com.amitinside.tooling.chart.gc.ChartColor;
 import com.amitinside.tooling.chart.gc.ChartFont;
 import com.amitinside.tooling.chart.gc.ChartGraphics;
 import com.amitinside.tooling.chart.gc.ChartImage;
-import com.amitinside.tooling.chart.gc.GraphicsProvider;
+import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.Polygon;
 import com.amitinside.tooling.chart.tags.TagObject;
 import com.amitinside.tooling.chart.tags.TagParser;
@@ -380,7 +380,7 @@ public class ChartLabel implements IFloatingObject {
 					}
 				}
 				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_IMAGE)) {
-					final ChartImage image = GraphicsProvider.getImage(object.getAttribute(TagObject.ATT_VALUE));
+					final ChartImage image = SWTGraphicsSupplier.getImage(object.getAttribute(TagObject.ATT_VALUE));
 					this.lineWidths[this.lineCount] += image.getWidth();
 				}
 			}
@@ -425,8 +425,8 @@ public class ChartLabel implements IFloatingObject {
 			}
 		}
 		if (this.rotation != 0) {
-			final ChartColor transparentColor = GraphicsProvider.getColor(1, 1, 1);
-			rotatedImage = GraphicsProvider.createTransparentImage(this.requiredWidth, this.requiredHeight,
+			final ChartColor transparentColor = SWTGraphicsSupplier.getColor(1, 1, 1);
+			rotatedImage = SWTGraphicsSupplier.createTransparentImage(this.requiredWidth, this.requiredHeight,
 					transparentColor);
 			g = rotatedImage.getGraphics();
 			g.setFont(g2.getFont());
@@ -503,7 +503,7 @@ public class ChartLabel implements IFloatingObject {
 					}
 				}
 				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_IMAGE)) {
-					final ChartImage image = GraphicsProvider.getImage(object.getAttribute(TagObject.ATT_VALUE));
+					final ChartImage image = SWTGraphicsSupplier.getImage(object.getAttribute(TagObject.ATT_VALUE));
 					g.drawImage(image, x, y);
 					x += image.getWidth();
 				}

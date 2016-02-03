@@ -21,34 +21,24 @@ import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.events.PaintEvent;
-import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 
 import com.amitinside.tooling.chart.Chart;
-import com.amitinside.tooling.chart.ChartListener;
+import com.amitinside.tooling.chart.IChartListener;
 import com.amitinside.tooling.chart.gc.ChartGraphics;
-import com.amitinside.tooling.chart.gc.GraphicsProvider;
+import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
-public class ChartCanvas extends Canvas implements ChartListener {
+public class ChartCanvas extends Canvas implements IChartListener {
+
 	private Chart chart = null;
 
 	public ChartCanvas(final Composite parent, final int style) {
 		super(parent, style | 0x40000);
 
-		addPaintListener(new PaintListener() {
-			@Override
-			public void paintControl(final PaintEvent e) {
-				ChartCanvas.this.paintChart(e);
-			}
-		});
-		final MouseMoveListener mouseMove = new MouseMoveListener() {
-			@Override
-			public void mouseMove(final MouseEvent e) {
-				ChartCanvas.this.mouseMoved(e);
-			}
-		};
-		addMouseMoveListener(mouseMove);
+		this.addPaintListener(e -> ChartCanvas.this.paintChart(e));
+		final MouseMoveListener mouseMove = e -> ChartCanvas.this.mouseMoved(e);
+		this.addMouseMoveListener(mouseMove);
 
 		final MouseAdapter mouseAdapter = new MouseAdapter() {
 			@Override
@@ -56,9 +46,9 @@ public class ChartCanvas extends Canvas implements ChartListener {
 				ChartCanvas.this.mouseClick();
 			}
 		};
-		addMouseListener(mouseAdapter);
+		this.addMouseListener(mouseAdapter);
 
-		addControlListener(new ControlListener() {
+		this.addControlListener(new ControlListener() {
 			@Override
 			public void controlMoved(final ControlEvent e) {
 			}
@@ -73,15 +63,12 @@ public class ChartCanvas extends Canvas implements ChartListener {
 	@Override
 	public void chartEvent(final Chart c, final int type) {
 		if (type == 4) {
-			redraw();
+			this.redraw();
 		}
 		if (type == 1) {
-			GraphicsProvider.startUIThread(new Runnable() {
-				@Override
-				public void run() {
-					if (!ChartCanvas.this.isDisposed()) {
-						ChartCanvas.this.redraw();
-					}
+			SWTGraphicsSupplier.startUIThread(() -> {
+				if (!ChartCanvas.this.isDisposed()) {
+					ChartCanvas.this.redraw();
 				}
 			});
 		}
@@ -105,8 +92,8 @@ public class ChartCanvas extends Canvas implements ChartListener {
 
 	protected void paintChart(final PaintEvent e) {
 		try {
-			resizeChart();
-			final ChartGraphics g = GraphicsProvider.getGraphics(e.gc);
+			this.resizeChart();
+			final ChartGraphics g = SWTGraphicsSupplier.getGraphics(e.gc);
 			this.chart.paint(g);
 			g.dispose();
 		} catch (final Exception err) {
@@ -119,8 +106,8 @@ public class ChartCanvas extends Canvas implements ChartListener {
 	}
 
 	protected void resizeChart() {
-		this.chart.setWidth(getSize().x + 1);
-		this.chart.setHeight(getSize().y + 1);
+		this.chart.setWidth(this.getSize().x + 1);
+		this.chart.setHeight(this.getSize().y + 1);
 	}
 
 	public void setChart(final Chart c) {

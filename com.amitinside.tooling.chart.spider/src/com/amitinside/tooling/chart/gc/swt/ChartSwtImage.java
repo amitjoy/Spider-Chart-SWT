@@ -32,6 +32,7 @@ import com.amitinside.tooling.chart.gc.ChartGraphics;
 import com.amitinside.tooling.chart.gc.ChartImage;
 
 public class ChartSwtImage extends ChartImage {
+
 	private Image image = null;
 	private ChartColor transparentColor = null;
 
@@ -42,14 +43,12 @@ public class ChartSwtImage extends ChartImage {
 	public ChartSwtImage(final int w, final int h, final ChartColor transparent) {
 		this.transparentColor = transparent;
 		final Color trans = ((ChartSwtColor) transparent).getColor();
-		final Image tmpImage = new Image(
-				SwtGraphicsProvider.getDefaultDisplay(), w, h);
+		final Image tmpImage = new Image(SwtGraphicsProvider.getDefaultDisplay(), w, h);
 		final ImageData imageData = tmpImage.getImageData();
 		tmpImage.dispose();
 		imageData.transparentPixel = imageData.palette.getPixel(trans.getRGB());
 
-		this.image = new Image(SwtGraphicsProvider.getDefaultDisplay(),
-				imageData);
+		this.image = new Image(SwtGraphicsProvider.getDefaultDisplay(), imageData);
 
 		final GC g = new GC(this.image);
 		g.setForeground(trans);
@@ -63,20 +62,16 @@ public class ChartSwtImage extends ChartImage {
 	public ChartSwtImage(final Object o) {
 		try {
 			if (o instanceof String) {
-				final InputStream is = ChartSwtImage.class.getClassLoader()
-						.getResourceAsStream((String) o);
+				final InputStream is = ChartSwtImage.class.getClassLoader().getResourceAsStream((String) o);
 				if (is != null) {
-					this.image = new Image(
-							SwtGraphicsProvider.getDefaultDisplay(), is);
+					this.image = new Image(SwtGraphicsProvider.getDefaultDisplay(), is);
 					return;
 				}
-				this.image = new Image(SwtGraphicsProvider.getDefaultDisplay(),
-						(String) o);
+				this.image = new Image(SwtGraphicsProvider.getDefaultDisplay(), (String) o);
 			} else if (o instanceof Image) {
 				this.image = (Image) o;
 			} else if (o instanceof InputStream) {
-				this.image = new Image(SwtGraphicsProvider.getDefaultDisplay(),
-						(InputStream) o);
+				this.image = new Image(SwtGraphicsProvider.getDefaultDisplay(), (InputStream) o);
 			} else {
 				throw new Exception("Class not supported");
 			}
@@ -85,16 +80,17 @@ public class ChartSwtImage extends ChartImage {
 		}
 	}
 
+	@Override
 	public void dispose() {
-		if (this.image != null && !this.image.isDisposed()) {
+		if ((this.image != null) && !this.image.isDisposed()) {
 			this.image.dispose();
 		}
 		this.image = null;
 	}
 
 	protected ChartSwtImage forRotation() {
-		final int h = getHeight();
-		final int w = getWidth();
+		final int h = this.getHeight();
+		final int w = this.getWidth();
 
 		ChartSwtImage dest = null;
 		if (w > h) {
@@ -111,12 +107,14 @@ public class ChartSwtImage extends ChartImage {
 		return dest;
 	}
 
+	@Override
 	public ChartGraphics getGraphics() {
 		final ChartSwtGraphics g = new ChartSwtGraphics(new GC(this.image));
 		g.srcImage = this.image;
 		return g;
 	}
 
+	@Override
 	public int getHeight() {
 		if (this.image == null) {
 			return 0;
@@ -136,6 +134,7 @@ public class ChartSwtImage extends ChartImage {
 		return new Integer((rgb.red << 16) + (rgb.green >> 8) + rgb.blue);
 	}
 
+	@Override
 	public int getWidth() {
 		if (this.image == null) {
 			return 0;
@@ -143,6 +142,7 @@ public class ChartSwtImage extends ChartImage {
 		return this.image.getBounds().width;
 	}
 
+	@Override
 	public boolean saveToStream(final String sFormat, final OutputStream os) {
 		try {
 			final ImageLoader encoder = new ImageLoader();
@@ -157,8 +157,8 @@ public class ChartSwtImage extends ChartImage {
 				final ImageData imageData = this.image.getImageData();
 				for (int i = 0; i < this.image.getBounds().width; i++) {
 					for (int j = 0; j < this.image.getBounds().height; j++) {
-						final RGB rgb = getRGBFromImage(imageData, i, j);
-						final Integer iRGB = getRGBInt(rgb);
+						final RGB rgb = this.getRGBFromImage(imageData, i, j);
+						final Integer iRGB = this.getRGBInt(rgb);
 						if (!colors.containsKey(iRGB)) {
 							colors.put(iRGB, rgb);
 							rgbs[count++] = rgb;
@@ -171,11 +171,9 @@ public class ChartSwtImage extends ChartImage {
 				for (int i = count; i < 256; i++) {
 					rgbs[count++] = new RGB(count - 1, count - 1, count - 1);
 				}
-				final ImageData image2Data = new ImageData(
-						this.image.getBounds().width,
-						this.image.getBounds().height, 8, new PaletteData(rgbs));
-				final Image image2 = new Image(
-						SwtGraphicsProvider.getDefaultDisplay(), image2Data);
+				final ImageData image2Data = new ImageData(this.image.getBounds().width, this.image.getBounds().height,
+						8, new PaletteData(rgbs));
+				final Image image2 = new Image(SwtGraphicsProvider.getDefaultDisplay(), image2Data);
 
 				final GC g2 = new GC(image2);
 				g2.drawImage(this.image, 0, 0);

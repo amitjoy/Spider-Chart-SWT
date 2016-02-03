@@ -18,6 +18,7 @@ package com.amitinside.tooling.chart.tags;
 import java.util.Vector;
 
 public class TagParser {
+
 	static final int T_BACKSPACE = 5;
 	static final int T_CR = 4;
 	static final int T_END = 6;

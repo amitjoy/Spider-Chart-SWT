@@ -18,7 +18,7 @@ package com.amitinside.tooling.chart;
 import com.amitinside.tooling.chart.gc.ChartColor;
 import com.amitinside.tooling.chart.gc.ChartFont;
 import com.amitinside.tooling.chart.gc.ChartImage;
-import com.amitinside.tooling.chart.gc.GraphicsProvider;
+import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
 public class LineDataSeq extends DataSeq {
 
@@ -27,9 +27,9 @@ public class LineDataSeq extends DataSeq {
 	public FillStyle fillStyle = null;
 	public ChartImage icon = null;
 	public int lineType = 0;
-	public ChartColor pointColor = GraphicsProvider.getColor(ChartColor.BLACK);
+	public ChartColor pointColor = SWTGraphicsSupplier.getColor(ChartColor.BLACK);
 	public LineStyle style = null;
-	public ChartColor valueColor = GraphicsProvider.getColor(ChartColor.BLACK);
+	public ChartColor valueColor = SWTGraphicsSupplier.getColor(ChartColor.BLACK);
 	public ChartFont valueFont = null;
 	public LineStyle vstyle = null;
 

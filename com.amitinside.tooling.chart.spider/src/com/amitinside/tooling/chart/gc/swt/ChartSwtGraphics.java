@@ -27,7 +27,7 @@ import com.amitinside.tooling.chart.gc.ChartColor;
 import com.amitinside.tooling.chart.gc.ChartFont;
 import com.amitinside.tooling.chart.gc.ChartGraphics;
 import com.amitinside.tooling.chart.gc.ChartImage;
-import com.amitinside.tooling.chart.gc.GraphicsProvider;
+import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
 public class ChartSwtGraphics extends ChartGraphics {
 	private GC graphics;
@@ -184,7 +184,7 @@ public class ChartSwtGraphics extends ChartGraphics {
 		c.dispose();
 		f.dispose();
 
-		final ChartImage tmpChartImage = GraphicsProvider.getImage(tmpImage);
+		final ChartImage tmpChartImage = SWTGraphicsSupplier.getImage(tmpImage);
 		paintRotatedImage(tmpChartImage, angle, x - (w - h) / 2, y + 4,
 				ChartGraphics.ROTATE_CENTER);
 

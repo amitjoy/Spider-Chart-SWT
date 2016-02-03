@@ -28,7 +28,7 @@ import java.util.Date;
 import com.amitinside.tooling.chart.gc.ChartColor;
 import com.amitinside.tooling.chart.gc.ChartFont;
 import com.amitinside.tooling.chart.gc.ChartImage;
-import com.amitinside.tooling.chart.gc.GraphicsProvider;
+import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
 public class ChartLoader {
 	protected static boolean convertBooleanParam(final String s, final boolean def) {
@@ -67,7 +67,7 @@ public class ChartLoader {
 	}
 
 	public static ChartColor convertColor(final String s) {
-		return GraphicsProvider.getColor(s);
+		return SWTGraphicsSupplier.getColor(s);
 	}
 
 	protected static FillStyle convertFillStyle(final String f) {
@@ -90,7 +90,7 @@ public class ChartLoader {
 			s = ChartFont.ITALIC;
 		}
 		try {
-			return GraphicsProvider.getFont(items[0], s, new Integer(items[2]).intValue());
+			return SWTGraphicsSupplier.getFont(items[0], s, new Integer(items[2]).intValue());
 		} catch (final Exception e) {
 			System.out.println("Error converting font " + f + " " + e.getMessage());
 		}
@@ -259,13 +259,13 @@ public class ChartLoader {
 			this.XlabelFont = this.getStringParam("XLABEL_FONT", "");
 			font = convertFont(this.XlabelFont);
 			if (font == null) {
-				font = GraphicsProvider.getFont("Arial", ChartFont.BOLD, 12);
+				font = SWTGraphicsSupplier.getFont("Arial", ChartFont.BOLD, 12);
 			}
 			this.XlabelColor = this.getStringParam("XLABEL_COLOR", "");
 			if (this.XlabelColor != null) {
 				this.c = convertColor(this.XlabelColor);
 			} else {
-				this.c = GraphicsProvider.getColor(ChartColor.BLACK);
+				this.c = SWTGraphicsSupplier.getColor(ChartColor.BLACK);
 			}
 			cXLabel = new HAxisLabel(this.Xlabel, this.c, font);
 			cXLabel.vertical = this.getBooleanParam("XLABEL_VERTICAL", false);
@@ -275,13 +275,13 @@ public class ChartLoader {
 			this.YlabelFont = this.getStringParam("YLABEL_FONT", "");
 			font = convertFont(this.YlabelFont);
 			if (font == null) {
-				font = GraphicsProvider.getFont("Arial", ChartFont.BOLD, 12);
+				font = SWTGraphicsSupplier.getFont("Arial", ChartFont.BOLD, 12);
 			}
 			this.YlabelColor = this.getStringParam("YLABEL_COLOR", "");
 			if (this.YlabelColor != null) {
 				this.c = convertColor(this.YlabelColor);
 			} else {
-				this.c = GraphicsProvider.getColor(ChartColor.BLACK);
+				this.c = SWTGraphicsSupplier.getColor(ChartColor.BLACK);
 			}
 			cYLabel = new VAxisLabel(this.Ylabel, this.c, font);
 			cYLabel.vertical = this.getBooleanParam("YLABEL_VERTICAL", false);
@@ -291,13 +291,13 @@ public class ChartLoader {
 			this.Y2labelFont = this.getStringParam("Y2LABEL_FONT", "");
 			font = convertFont(this.Y2labelFont);
 			if (font == null) {
-				font = GraphicsProvider.getFont("Arial", ChartFont.BOLD, 12);
+				font = SWTGraphicsSupplier.getFont("Arial", ChartFont.BOLD, 12);
 			}
 			this.Y2labelColor = this.getStringParam("Y2LABEL_COLOR", "");
 			if (this.Y2labelColor != null) {
 				this.c = convertColor(this.Y2labelColor);
 			} else {
-				this.c = GraphicsProvider.getColor(ChartColor.BLACK);
+				this.c = SWTGraphicsSupplier.getColor(ChartColor.BLACK);
 			}
 			cY2Label = new VAxisLabel(this.Y2label, this.c, font);
 			cY2Label.vertical = this.getBooleanParam("Y2LABEL_VERTICAL", false);
@@ -369,7 +369,7 @@ public class ChartLoader {
 				}
 				lstyle = convertLineStyle(this.getStringParam("SERIE_STYLE_" + i, ""));
 				if (lstyle == null) {
-					lstyle = new LineStyle(0.2F, GraphicsProvider.getColor(ChartColor.BLACK), 1);
+					lstyle = new LineStyle(0.2F, SWTGraphicsSupplier.getColor(ChartColor.BLACK), 1);
 				}
 				final LineStyle vstyle = convertLineStyle(this.getStringParam("SERIE_V_STYLE_" + i, ""));
 				if (!this.getBooleanParam("SERIE_DRAW_LINE_" + i, true)) {
@@ -427,7 +427,7 @@ public class ChartLoader {
 				ChartImage im2 = null;
 				final String pointImageStr = this.getStringParam("SERIE_POINT_IMAGE_" + i, "");
 				if (pointImageStr.compareTo("") != 0) {
-					im2 = GraphicsProvider.getImage(pointImageStr);
+					im2 = SWTGraphicsSupplier.getImage(pointImageStr);
 					((LineDataSeq) this.pSeries[i]).icon = im2;
 				}
 				if (!this.pSeriesNames[i].startsWith("HIDDEN")) {
@@ -453,7 +453,7 @@ public class ChartLoader {
 				}
 				lstyle = convertLineStyle(this.getStringParam("SERIE_STYLE_" + i, ""));
 				if (lstyle == null) {
-					lstyle = new LineStyle(0.2F, GraphicsProvider.getColor(ChartColor.BLACK), 1);
+					lstyle = new LineStyle(0.2F, SWTGraphicsSupplier.getColor(ChartColor.BLACK), 1);
 				}
 				this.pSeries[i] = null;
 				this.pSeries[i] = new LineDataSeq(this.convertDoubleList(this.pSeriesData[i]), lstyle);
@@ -581,7 +581,6 @@ public class ChartLoader {
 		chart.showTips = this.getBooleanParam("CHART_SHOW_TIPS", false);
 		chart.showPosition = this.getBooleanParam("CHART_SHOW_POSITION", false);
 		chart.activateSelection = this.getBooleanParam("CHART_POINT_SELECTION", false);
-		chart.onClickJSFunction = this.getStringParam("CHART_ON_CLICK_FUNCTION", chart.onClickJSFunction);
 		if (chart.showTips) {
 			chart.activateSelection = true;
 		}
@@ -663,7 +662,7 @@ public class ChartLoader {
 		if (backImageStr.compareTo("") != 0) {
 			ChartImage im2 = null;
 
-			im2 = GraphicsProvider.getImage(backImageStr);
+			im2 = SWTGraphicsSupplier.getImage(backImageStr);
 			chart.backImage = im2;
 		}
 		chart.repaintAll = true;
@@ -996,8 +995,7 @@ public class ChartLoader {
 
 		int zoneNr = 1;
 		while (this.getParameter(name + "AXIS_TARGET_ZONE_" + zoneNr, "").length() > 0) {
-			axis.addTargetZone(
-					AxisTargetZone.createFromString(this.getParameter(name + "AXIS_TARGET_ZONE_" + zoneNr, "")));
+			axis.addTargetZone(AxisZone.createFromString(this.getParameter(name + "AXIS_TARGET_ZONE_" + zoneNr, "")));
 			zoneNr++;
 		}
 	}

@@ -21,10 +21,9 @@ import com.amitinside.tooling.chart.gc.swt.ChartSwtGraphics;
 import com.amitinside.tooling.chart.gc.swt.ChartSwtImage;
 import com.amitinside.tooling.chart.gc.swt.SwtGraphicsProvider;
 
-public class GraphicsProvider {
+public interface SWTGraphicsSupplier {
 
 	public static int DEFAULT_MODE = 1;
-	private static int mode = DEFAULT_MODE;
 
 	public static ChartImage createImage(final int w, final int h) {
 		return new ChartSwtImage(w, h);
@@ -77,11 +76,7 @@ public class GraphicsProvider {
 	}
 
 	public static int getMode() {
-		return mode;
-	}
-
-	public static void setMode(final int m) {
-		mode = m;
+		return DEFAULT_MODE;
 	}
 
 	public static void startUIThread(final Runnable r) {
