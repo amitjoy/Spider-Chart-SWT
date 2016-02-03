@@ -23,33 +23,33 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 
-import com.amitinside.tooling.chart.Chart;
+import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.FillStyle;
-import com.amitinside.tooling.chart.gc.ChartColor;
+import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.swt.SwtGraphicsProvider;
-import com.amitinside.tooling.chart.swt.ChartViewer;
+import com.amitinside.tooling.chart.swt.SpiderChartViewer;
 
-public class ChartBuilder {
+public class SpiderChartBuilder {
 
-	private static ChartConfigurationBuilder chartConfiguration;
-	private static ChartBuilder chartViewerBuilder;
+	private static SpiderChartConfigurationBuilder chartConfiguration;
+	private static SpiderChartBuilder chartViewerBuilder;
 
-	public static ChartBuilder config(final Composite parent, final Consumer<ChartConfigurationBuilder> settings) {
-		chartConfiguration = new ChartConfigurationBuilder();
+	public static SpiderChartBuilder config(final Composite parent, final Consumer<SpiderChartConfigurationBuilder> settings) {
+		chartConfiguration = new SpiderChartConfigurationBuilder();
 		settings.accept(chartConfiguration);
-		chartViewerBuilder = new ChartBuilder(parent);
+		chartViewerBuilder = new SpiderChartBuilder(parent);
 		return chartViewerBuilder;
 	}
 
-	private Chart chart;
-	private final ChartViewer chartViewer;
+	private SpiderChart chart;
+	private final SpiderChartViewer chartViewer;
 
-	public ChartBuilder(final Composite parent) {
+	public SpiderChartBuilder(final Composite parent) {
 		requireNonNull(parent);
 
 		SwtGraphicsProvider.setDefaultDisplay(parent.getShell().getDisplay());
-		this.chartViewer = new ChartViewer(parent, SWT.NONE);
+		this.chartViewer = new SpiderChartViewer(parent, SWT.NONE);
 		this.prepareChartViewer(parent);
 	}
 
@@ -66,13 +66,13 @@ public class ChartBuilder {
 		this.chartViewer.changePointer = true;
 		this.chartViewer.allowZoom = true;
 
-		this.chart = new Chart(chartConfiguration.getTitle(), chartConfiguration.getPlotter());
-		this.chart.back = new FillStyle(SWTGraphicsSupplier.getColor(ChartColor.YELLOW));
+		this.chart = new SpiderChart(chartConfiguration.getTitle(), chartConfiguration.getPlotter());
+		this.chart.back = new FillStyle(SWTGraphicsSupplier.getColor(SpiderChartColor.YELLOW));
 		this.chart.back.gradientType = FillStyle.GRADIENT_VERTICAL;
 		this.chart.legend = chartConfiguration.getLegend();
 	}
 
-	public ChartViewer viewer(final Consumer<ChartBuilder> chartBuilderConsumer) {
+	public SpiderChartViewer viewer(final Consumer<SpiderChartBuilder> chartBuilderConsumer) {
 		chartBuilderConsumer.accept(chartViewerBuilder);
 		return chartViewerBuilder.chartViewer;
 	}

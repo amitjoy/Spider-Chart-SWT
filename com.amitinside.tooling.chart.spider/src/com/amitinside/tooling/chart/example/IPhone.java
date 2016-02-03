@@ -15,14 +15,14 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.example;
 
-import com.amitinside.tooling.chart.api.ISpiderDrawable;
-import com.amitinside.tooling.chart.gc.ChartColor;
+import com.amitinside.tooling.chart.api.ISpiderChartDrawable;
+import com.amitinside.tooling.chart.gc.SpiderChartColor;
 
-public class IPhone implements ISpiderDrawable {
+public class IPhone implements ISpiderChartDrawable {
 
 	@Override
 	public String areaColor() {
-		return ChartColor.BLUE;
+		return SpiderChartColor.BLUE;
 	}
 
 	@Override

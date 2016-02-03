@@ -15,19 +15,12 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart;
 
-import com.amitinside.tooling.chart.gc.ChartGraphics;
+public class SpiderChartComponent {
 
-public interface IChartListener {
+	protected SpiderChart chart;
+	public int height;
+	public int width;
+	public int x;
+	public int y;
 
-	public static final int EVENT_AFTER_UPDATE = 1;
-	public static final int EVENT_BEFORE_UPDATE = 0;
-	public static final int EVENT_CHART_CLICKED = 6;
-	public static final int EVENT_ENTER_POINT = 2;
-	public static final int EVENT_LEAVE_POINT = 3;
-	public static final int EVENT_POINT_CLICKED = 5;
-	public static final int EVENT_TIP_UPDATE = 4;
-
-	public abstract void chartEvent(Chart paramChart, int paramInt);
-
-	public abstract void paintUserExit(Chart paramChart, ChartGraphics paramChartGraphics);
 }

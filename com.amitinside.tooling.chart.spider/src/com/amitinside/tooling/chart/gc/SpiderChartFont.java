@@ -15,7 +15,7 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.gc;
 
-public abstract class ChartFont {
+public abstract class SpiderChartFont {
 
 	public static int BOLD = 1;
 	public static int BOLD_ITALIC = 3;

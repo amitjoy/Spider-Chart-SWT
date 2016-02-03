@@ -15,16 +15,16 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart;
 
-import com.amitinside.tooling.chart.gc.ChartColor;
-import com.amitinside.tooling.chart.gc.ChartFont;
-import com.amitinside.tooling.chart.gc.ChartGraphics;
-import com.amitinside.tooling.chart.gc.ChartImage;
+import com.amitinside.tooling.chart.gc.SpiderChartColor;
+import com.amitinside.tooling.chart.gc.SpiderChartFont;
+import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
+import com.amitinside.tooling.chart.gc.SpiderChartImage;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.Polygon;
 import com.amitinside.tooling.chart.tags.TagObject;
 import com.amitinside.tooling.chart.tags.TagParser;
 
-public class ChartLabel implements IFloatingObject {
+public class SpiderChartLabel implements IFloatingObject {
 
 	protected static int ALIGN_CENTER = 1;
 	protected static int ALIGN_LEFT = 0;
@@ -38,7 +38,7 @@ public class ChartLabel implements IFloatingObject {
 	protected FillStyle background = null;
 	protected LineStyle border = null;
 	protected int borderShape = BORDER_RECT;
-	protected Chart chart = null;
+	protected SpiderChart chart = null;
 	protected Polygon clickableArea = null;
 	protected String clickInfo = "";
 	protected boolean ignorePosition = false;
@@ -55,11 +55,11 @@ public class ChartLabel implements IFloatingObject {
 	int requiredHeight = 0;
 	int requiredWidth = 0;
 	protected int rotation = 0;
-	protected int rotationAlign = ChartGraphics.ROTATE_CENTER;
+	protected int rotationAlign = SpiderChartGraphics.ROTATE_CENTER;
 	private String sFormat = "";
 	protected String tip = "";
 
-	public ChartLabel(String pformat, final String pvalue, final boolean pvertical, final boolean pCenter) {
+	public SpiderChartLabel(String pformat, final String pvalue, final boolean pvertical, final boolean pCenter) {
 		if (pformat.length() == 0) {
 			pformat = pvalue;
 		}
@@ -174,7 +174,7 @@ public class ChartLabel implements IFloatingObject {
 		return this.positionY;
 	}
 
-	public void initialize(final ChartGraphics g, final Chart c) {
+	public void initialize(final SpiderChartGraphics g, final SpiderChart c) {
 		this.chart = c;
 		final TagParser tagParser = new TagParser();
 		this.objects = tagParser.parseTags(this.sFormat);
@@ -182,7 +182,7 @@ public class ChartLabel implements IFloatingObject {
 		this.preProcessTags(g);
 	}
 
-	public void paint(final ChartGraphics g, final int x, final int y, final int width, final int height) {
+	public void paint(final SpiderChartGraphics g, final int x, final int y, final int width, final int height) {
 		this.preProcessPositionTags(g, x, y, width, height);
 		if (this.chart != null) {
 			this.chart.placeFloatingObject(this);
@@ -202,7 +202,7 @@ public class ChartLabel implements IFloatingObject {
 		return 0;
 	}
 
-	protected void preProcessPositionTags(final ChartGraphics g, final int x, final int y, final int width,
+	protected void preProcessPositionTags(final SpiderChartGraphics g, final int x, final int y, final int width,
 			final int height) {
 		this.positionX = x;
 		this.positionY = y;
@@ -215,7 +215,7 @@ public class ChartLabel implements IFloatingObject {
 						this.ignorePosition = true;
 					}
 					if (!this.ignorePosition) {
-						String[] items = ChartLoader.convertList(object.getAttribute(TagObject.ATT_VALUE), ",");
+						String[] items = SpiderChartLoader.convertList(object.getAttribute(TagObject.ATT_VALUE), ",");
 						if (items == null) {
 							items = new String[0];
 						}
@@ -228,9 +228,9 @@ public class ChartLabel implements IFloatingObject {
 					}
 				}
 				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_ANCHOR) && !this.ignorePosition) {
-					this.lineToAnchor = ChartLoader.convertLineStyle(object.getAttribute("LINE"));
+					this.lineToAnchor = SpiderChartLoader.convertLineStyle(object.getAttribute("LINE"));
 
-					String[] items = ChartLoader.convertList(object.getAttribute(TagObject.ATT_VALUE), ",");
+					String[] items = SpiderChartLoader.convertList(object.getAttribute(TagObject.ATT_VALUE), ",");
 					if (items == null) {
 						items = new String[0];
 					}
@@ -244,7 +244,7 @@ public class ChartLabel implements IFloatingObject {
 					}
 				}
 				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_SIZE) && !this.ignorePosition) {
-					String[] items = ChartLoader.convertList(object.getAttribute(TagObject.ATT_VALUE), ",");
+					String[] items = SpiderChartLoader.convertList(object.getAttribute(TagObject.ATT_VALUE), ",");
 					if (items == null) {
 						items = new String[0];
 					}
@@ -280,8 +280,8 @@ public class ChartLabel implements IFloatingObject {
 		}
 	}
 
-	protected void preProcessTags(final ChartGraphics g) {
-		final ChartFont tmpFont = g.getFont();
+	protected void preProcessTags(final SpiderChartGraphics g) {
+		final SpiderChartFont tmpFont = g.getFont();
 		this.positionX = 0;
 		this.positionY = 0;
 		this.requiredWidth = 1;
@@ -309,10 +309,10 @@ public class ChartLabel implements IFloatingObject {
 					}
 				}
 				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_BACKGROUND)) {
-					this.background = ChartLoader.convertFillStyle(object.getAttribute(TagObject.ATT_VALUE));
+					this.background = SpiderChartLoader.convertFillStyle(object.getAttribute(TagObject.ATT_VALUE));
 				}
 				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_BORDER)) {
-					this.border = ChartLoader.convertLineStyle(object.getAttribute(TagObject.ATT_VALUE));
+					this.border = SpiderChartLoader.convertLineStyle(object.getAttribute(TagObject.ATT_VALUE));
 					if (object.compareAtt("SHAPE", "ROUNDRECT")) {
 						this.borderShape = BORDER_ROUNDRECT;
 					}
@@ -327,7 +327,7 @@ public class ChartLabel implements IFloatingObject {
 						this.rotation = 0;
 					}
 					if (object.compareAtt("CENTER", "LEFTTOP")) {
-						this.rotationAlign = ChartGraphics.ROTATE_LEFTTOP;
+						this.rotationAlign = SpiderChartGraphics.ROTATE_LEFTTOP;
 					}
 				}
 				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_CLICKINFO)) {
@@ -341,7 +341,7 @@ public class ChartLabel implements IFloatingObject {
 					this.ignorePosition = true;
 				}
 				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_SIZE) && !this.ignorePosition) {
-					String[] items = ChartLoader.convertList(object.getAttribute(TagObject.ATT_VALUE), ",");
+					String[] items = SpiderChartLoader.convertList(object.getAttribute(TagObject.ATT_VALUE), ",");
 					if (items == null) {
 						items = new String[0];
 					}
@@ -359,7 +359,7 @@ public class ChartLabel implements IFloatingObject {
 					}
 				}
 				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_MARGIN)) {
-					String[] items = ChartLoader.convertList(object.getAttribute(TagObject.ATT_VALUE), ",");
+					String[] items = SpiderChartLoader.convertList(object.getAttribute(TagObject.ATT_VALUE), ",");
 					if (items == null) {
 						items = new String[0];
 					}
@@ -371,7 +371,7 @@ public class ChartLabel implements IFloatingObject {
 					}
 				}
 				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_FONT)) {
-					final ChartFont font = ChartLoader.convertFont(object.getAttribute(TagObject.ATT_VALUE));
+					final SpiderChartFont font = SpiderChartLoader.convertFont(object.getAttribute(TagObject.ATT_VALUE));
 					if (font != null) {
 						g.setFont(font);
 						if (g.getFontHeight() > this.lineHeights[this.lineCount]) {
@@ -380,7 +380,7 @@ public class ChartLabel implements IFloatingObject {
 					}
 				}
 				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_IMAGE)) {
-					final ChartImage image = SWTGraphicsSupplier.getImage(object.getAttribute(TagObject.ATT_VALUE));
+					final SpiderChartImage image = SWTGraphicsSupplier.getImage(object.getAttribute(TagObject.ATT_VALUE));
 					this.lineWidths[this.lineCount] += image.getWidth();
 				}
 			}
@@ -403,9 +403,9 @@ public class ChartLabel implements IFloatingObject {
 		g.setFont(tmpFont);
 	}
 
-	protected void render(final ChartGraphics g2) {
-		ChartGraphics g = g2;
-		ChartImage rotatedImage = null;
+	protected void render(final SpiderChartGraphics g2) {
+		SpiderChartGraphics g = g2;
+		SpiderChartImage rotatedImage = null;
 		final int tmpPositionX = this.positionX;
 		final int tmpPositionY = this.positionY;
 		if ((this.lineToAnchor != null) && (this.rotation == 0)) {
@@ -425,7 +425,7 @@ public class ChartLabel implements IFloatingObject {
 			}
 		}
 		if (this.rotation != 0) {
-			final ChartColor transparentColor = SWTGraphicsSupplier.getColor(1, 1, 1);
+			final SpiderChartColor transparentColor = SWTGraphicsSupplier.getColor(1, 1, 1);
 			rotatedImage = SWTGraphicsSupplier.createTransparentImage(this.requiredWidth, this.requiredHeight,
 					transparentColor);
 			g = rotatedImage.getGraphics();
@@ -439,7 +439,7 @@ public class ChartLabel implements IFloatingObject {
 		int y = this.positionY + this.marginY;
 		int lineStart = 0;
 		if (this.background != null) {
-			final ChartColor c = g.getColor();
+			final SpiderChartColor c = g.getColor();
 			if (this.borderShape == BORDER_RECT) {
 				this.background.draw(g, this.positionX, this.positionY, (this.positionX + this.requiredWidth) - 1,
 						(this.positionY + this.requiredHeight) - 1);
@@ -491,19 +491,19 @@ public class ChartLabel implements IFloatingObject {
 			}
 			if (object.compareAtt(TagObject.ATT_TYPE, TagObject.TAG_OBJECT)) {
 				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_FONT)) {
-					final ChartFont font = ChartLoader.convertFont(object.getAttribute(TagObject.ATT_VALUE));
+					final SpiderChartFont font = SpiderChartLoader.convertFont(object.getAttribute(TagObject.ATT_VALUE));
 					if (font != null) {
 						g.setFont(font);
 					}
 				}
 				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_COLOR)) {
-					final ChartColor c = ChartLoader.convertColor(object.getAttribute(TagObject.ATT_VALUE));
+					final SpiderChartColor c = SpiderChartLoader.convertColor(object.getAttribute(TagObject.ATT_VALUE));
 					if (c != null) {
 						g.setColor(c);
 					}
 				}
 				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_IMAGE)) {
-					final ChartImage image = SWTGraphicsSupplier.getImage(object.getAttribute(TagObject.ATT_VALUE));
+					final SpiderChartImage image = SWTGraphicsSupplier.getImage(object.getAttribute(TagObject.ATT_VALUE));
 					g.drawImage(image, x, y);
 					x += image.getWidth();
 				}

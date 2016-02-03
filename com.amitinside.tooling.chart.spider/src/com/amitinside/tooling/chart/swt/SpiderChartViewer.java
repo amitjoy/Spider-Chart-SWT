@@ -25,22 +25,22 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Slider;
 
-import com.amitinside.tooling.chart.Chart;
-import com.amitinside.tooling.chart.ChartAdapter;
+import com.amitinside.tooling.chart.SpiderChart;
+import com.amitinside.tooling.chart.SpiderChartAdapter;
 
-public class ChartViewer extends Composite {
+public class SpiderChartViewer extends Composite {
 
 	public boolean allowZoom = true;
-	ChartCanvas canvas = null;
+	SpiderChartCanvas canvas = null;
 	public boolean changePointer = true;
-	ChartAdapter chartAdapter = new ChartAdapter() {
+	SpiderChartAdapter chartAdapter = new SpiderChartAdapter() {
 		@Override
-		public void chartEvent(final Chart c, final int type) {
+		public void chartEvent(final SpiderChart c, final int type) {
 			if (type == 2) {
-				ChartViewer.this.canvas.setCursor(ChartViewer.this.pointCursor);
+				SpiderChartViewer.this.canvas.setCursor(SpiderChartViewer.this.pointCursor);
 			}
 			if (type == 3) {
-				ChartViewer.this.canvas.setCursor(ChartViewer.this.defaultCursor);
+				SpiderChartViewer.this.canvas.setCursor(SpiderChartViewer.this.defaultCursor);
 			}
 		}
 	};
@@ -63,10 +63,10 @@ public class ChartViewer extends Composite {
 	public int zoomIncrement = 25;
 	private Composite zoomPanel;
 
-	public ChartViewer(final Composite parent, final int style) {
+	public SpiderChartViewer(final Composite parent, final int style) {
 		super(parent, style);
 
-		this.canvas = new ChartCanvas(this, 0);
+		this.canvas = new SpiderChartCanvas(this, 0);
 		this.hSlider = new Slider(this, 256);
 		this.vSlider = new Slider(this, 512);
 		this.canvas.setFocus();
@@ -97,7 +97,7 @@ public class ChartViewer extends Composite {
 
 			@Override
 			public void widgetSelected(final SelectionEvent e) {
-				ChartViewer.this.minusZoom();
+				SpiderChartViewer.this.minusZoom();
 			}
 		});
 		this.plusZoom.addSelectionListener(new SelectionListener() {
@@ -107,7 +107,7 @@ public class ChartViewer extends Composite {
 
 			@Override
 			public void widgetSelected(final SelectionEvent e) {
-				ChartViewer.this.plusZoom();
+				SpiderChartViewer.this.plusZoom();
 			}
 		});
 		this.hSlider.addSelectionListener(new SelectionListener() {
@@ -117,10 +117,10 @@ public class ChartViewer extends Composite {
 
 			@Override
 			public void widgetSelected(final SelectionEvent e) {
-				if (ChartViewer.this.canvas.getChart() == null) {
+				if (SpiderChartViewer.this.canvas.getChart() == null) {
 					return;
 				}
-				ChartViewer.this.hSliderScroll();
+				SpiderChartViewer.this.hSliderScroll();
 			}
 		});
 		this.vSlider.addSelectionListener(new SelectionListener() {
@@ -130,10 +130,10 @@ public class ChartViewer extends Composite {
 
 			@Override
 			public void widgetSelected(final SelectionEvent e) {
-				if (ChartViewer.this.canvas.getChart() == null) {
+				if (SpiderChartViewer.this.canvas.getChart() == null) {
 					return;
 				}
-				ChartViewer.this.vSliderScroll();
+				SpiderChartViewer.this.vSliderScroll();
 			}
 		});
 		this.addControlListener(new ControlListener() {
@@ -143,12 +143,12 @@ public class ChartViewer extends Composite {
 
 			@Override
 			public void controlResized(final ControlEvent e) {
-				if (ChartViewer.this.canvas.getChart() == null) {
+				if (SpiderChartViewer.this.canvas.getChart() == null) {
 					return;
 				}
-				ChartViewer.this.placeControls();
-				ChartViewer.this.updateScrollBarsConfiguration();
-				ChartViewer.this.updateSize();
+				SpiderChartViewer.this.placeControls();
+				SpiderChartViewer.this.updateScrollBarsConfiguration();
+				SpiderChartViewer.this.updateSize();
 			}
 		});
 		this.defaultCursor = new Cursor(parent.getDisplay(), 0);
@@ -166,7 +166,7 @@ public class ChartViewer extends Composite {
 		}
 	}
 
-	public Chart getChart() {
+	public SpiderChart getChart() {
 		return this.canvas.getChart();
 	}
 
@@ -257,7 +257,7 @@ public class ChartViewer extends Composite {
 		this.lastZoom = 0;
 	}
 
-	public void setChart(final Chart c) {
+	public void setChart(final SpiderChart c) {
 		if (this.canvas.getChart() != null) {
 			this.canvas.getChart().removeChartListener(this.chartAdapter);
 		}

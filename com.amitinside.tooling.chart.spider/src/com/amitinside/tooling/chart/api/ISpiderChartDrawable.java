@@ -13,33 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.amitinside.tooling.chart.gc;
+package com.amitinside.tooling.chart.api;
 
-import java.io.FileOutputStream;
-import java.io.OutputStream;
+public interface ISpiderChartDrawable {
 
-public abstract class ChartImage {
+	public abstract String areaColor();
 
-	public void dispose() {
-	}
+	public abstract double[] values();
 
-	public ChartGraphics getGraphics() {
-		return null;
-	}
-
-	public int getHeight() {
-		return 0;
-	}
-
-	public int getWidth() {
-		return 0;
-	}
-
-	public boolean saveToFile(final String sFormat, final String file) throws Exception {
-		return this.saveToStream(sFormat, new FileOutputStream(file));
-	}
-
-	public boolean saveToStream(final String sFormat, final OutputStream os) {
-		return false;
-	}
 }

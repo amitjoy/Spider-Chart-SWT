@@ -13,12 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.amitinside.tooling.chart.api;
+package com.amitinside.tooling.chart.gc;
 
-public interface ISpiderDrawable {
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 
-	public abstract String areaColor();
+public abstract class SpiderChartImage {
 
-	public abstract double[] values();
+	public void dispose() {
+	}
 
+	public SpiderChartGraphics getGraphics() {
+		return null;
+	}
+
+	public int getHeight() {
+		return 0;
+	}
+
+	public int getWidth() {
+		return 0;
+	}
+
+	public boolean saveToFile(final String sFormat, final String file) throws Exception {
+		return this.saveToStream(sFormat, new FileOutputStream(file));
+	}
+
+	public boolean saveToStream(final String sFormat, final OutputStream os) {
+		return false;
+	}
 }

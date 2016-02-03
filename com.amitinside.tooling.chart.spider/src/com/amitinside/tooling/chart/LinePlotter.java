@@ -15,7 +15,7 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart;
 
-import com.amitinside.tooling.chart.gc.ChartGraphics;
+import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.gc.Polygon;
 
 public class LinePlotter extends Plotter {
@@ -120,11 +120,11 @@ public class LinePlotter extends Plotter {
 		return finalP;
 	}
 
-	protected void plotCurve(final ChartGraphics g, final int[][] linePointsSC, final LineDataSeq l) {
+	protected void plotCurve(final SpiderChartGraphics g, final int[][] linePointsSC, final LineDataSeq l) {
 	}
 
 	@Override
-	protected void plotSerie(final ChartGraphics g, final DataSeq s, final int serieSec) {
+	protected void plotSerie(final SpiderChartGraphics g, final DataSeq s, final int serieSec) {
 		s.hotAreas.removeAllElements();
 		LineDataSeq l;
 		if (s instanceof LineDataSeq) {
@@ -247,7 +247,7 @@ public class LinePlotter extends Plotter {
 					if ((s.dataLabels != null) && (s.dataLabels.length > i)) {
 						txt = s.dataLabels[i];
 					}
-					final ChartLabel label = new ChartLabel(txt, txtValue, false, false);
+					final SpiderChartLabel label = new SpiderChartLabel(txt, txtValue, false, false);
 
 					label.initialize(g, this.chart);
 					label.paint(g, scX + 4, scY - 4 - label.requiredHeight, -1, -1);

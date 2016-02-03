@@ -91,10 +91,10 @@ public class DataSeq {
 			return d.toString();
 		}
 		DecimalFormat df = null;
-		if (Chart.numberLocale == null) {
+		if (SpiderChart.numberLocale == null) {
 			df = new DecimalFormat(this.valueFormat);
 		} else {
-			final NumberFormat nf = NumberFormat.getNumberInstance(new Locale(Chart.numberLocale, ""));
+			final NumberFormat nf = NumberFormat.getNumberInstance(new Locale(SpiderChart.numberLocale, ""));
 			df = (DecimalFormat) nf;
 
 			df.applyPattern(this.valueFormat);

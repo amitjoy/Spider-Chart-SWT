@@ -18,13 +18,13 @@ package com.amitinside.tooling.chart;
 import java.util.Calendar;
 import java.util.Vector;
 
-import com.amitinside.tooling.chart.gc.ChartGraphics;
-import com.amitinside.tooling.chart.gc.ChartImage;
+import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
+import com.amitinside.tooling.chart.gc.SpiderChartImage;
 
-public class Plotter extends ChartComponent {
+public class Plotter extends SpiderChartComponent {
 
 	public FillStyle back = null;
-	public ChartImage backImage;
+	public SpiderChartImage backImage;
 	protected boolean combinable = true;
 	public int depth = 0;
 	protected int needsAxis = 2;
@@ -117,7 +117,7 @@ public class Plotter extends ChartComponent {
 				&& ((tmpSerie.secondaryYAxis == s.secondaryYAxis) || !usingStackAxis);
 	}
 
-	public void plot(final ChartGraphics g) {
+	public void plot(final SpiderChartGraphics g) {
 		for (int i = 0; i < this.series.size(); i++) {
 			final DataSeq s = (DataSeq) this.series.elementAt(i);
 
@@ -125,7 +125,7 @@ public class Plotter extends ChartComponent {
 		}
 	}
 
-	public void plotBackground(final ChartGraphics g, final int bw, final int bh, final int offsetX,
+	public void plotBackground(final SpiderChartGraphics g, final int bw, final int bh, final int offsetX,
 			final int offsetY) {
 		if (this.back != null) {
 			final boolean D3 = false;
@@ -172,7 +172,7 @@ public class Plotter extends ChartComponent {
 		}
 	}
 
-	protected void plotSerie(final ChartGraphics g, final DataSeq s, final int serieSec) {
+	protected void plotSerie(final SpiderChartGraphics g, final DataSeq s, final int serieSec) {
 	}
 
 	public void replaceSerie(final int p, final DataSeq s) {
@@ -182,7 +182,7 @@ public class Plotter extends ChartComponent {
 			return;
 		}
 		Calendar.getInstance().get(2);
-		if ((Chart.d() != 1) && (this.series.size() > 3)) {
+		if ((SpiderChart.d() != 1) && (this.series.size() > 3)) {
 			return;
 		}
 		if (p == -1) {

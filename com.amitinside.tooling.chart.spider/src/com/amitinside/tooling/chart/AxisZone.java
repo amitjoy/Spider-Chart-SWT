@@ -15,7 +15,7 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart;
 
-import com.amitinside.tooling.chart.gc.ChartGraphics;
+import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 
 public class AxisZone {
 
@@ -25,7 +25,7 @@ public class AxisZone {
 		if (s.length() == 0) {
 			return null;
 		}
-		final String[] items = ChartLoader.convertList(s, ";");
+		final String[] items = SpiderChartLoader.convertList(s, ";");
 		double start = DISABLED;
 		double end = DISABLED;
 		int uStart = 0;
@@ -53,10 +53,10 @@ public class AxisZone {
 		}
 		final AxisZone zone = new AxisZone(start, end, uStart, uEnd);
 		if (items.length > 2) {
-			zone.style = ChartLoader.convertLineStyle(items[2]);
+			zone.style = SpiderChartLoader.convertLineStyle(items[2]);
 		}
 		if (items.length > 3) {
-			zone.fillStyle = ChartLoader.convertFillStyle(items[3]);
+			zone.fillStyle = SpiderChartLoader.convertFillStyle(items[3]);
 		}
 		if (items.length > 4) {
 			zone.label = items[4];
@@ -64,7 +64,7 @@ public class AxisZone {
 		return zone;
 	}
 
-	protected Chart chart = null;
+	protected SpiderChart chart = null;
 	public FillStyle fillStyle;
 	public String label = "";
 	public double positionEnd = DISABLED;
@@ -81,7 +81,7 @@ public class AxisZone {
 		this.positionEnd = end;
 	}
 
-	protected void paint(final ChartGraphics g, final Axis axis, final Axis peerAxis, final int axisPosition) {
+	protected void paint(final SpiderChartGraphics g, final Axis axis, final Axis peerAxis, final int axisPosition) {
 		if (this.positionStart != DISABLED) {
 			if (this.unitStart == 1) {
 				final double tmp = ((axis.scale.max - axis.scale.min) * this.positionStart) / 100.0D;

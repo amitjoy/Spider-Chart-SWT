@@ -15,24 +15,24 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart;
 
-import com.amitinside.tooling.chart.gc.ChartColor;
-import com.amitinside.tooling.chart.gc.ChartFont;
-import com.amitinside.tooling.chart.gc.ChartGraphics;
+import com.amitinside.tooling.chart.gc.SpiderChartColor;
+import com.amitinside.tooling.chart.gc.SpiderChartFont;
+import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
-public class AxisLabel extends ChartComponent {
+public class AxisLabel extends SpiderChartComponent {
 
-	public ChartColor color;
-	public ChartFont font = SWTGraphicsSupplier.getFont("Arial", ChartFont.PLAIN, 14);
+	public SpiderChartColor color;
+	public SpiderChartFont font = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.PLAIN, 14);
 	public String title;
 	public boolean vertical = false;
 
-	public AxisLabel(final String t, final ChartColor c, final ChartFont f) {
+	public AxisLabel(final String t, final SpiderChartColor c, final SpiderChartFont f) {
 		this.color = c;
 		this.title = t;
 		this.font = f;
 	}
 
-	protected void draw(final ChartGraphics g) {
+	protected void draw(final SpiderChartGraphics g) {
 	}
 }

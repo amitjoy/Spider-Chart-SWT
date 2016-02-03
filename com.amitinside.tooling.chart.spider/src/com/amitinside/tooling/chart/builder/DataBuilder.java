@@ -17,19 +17,19 @@ package com.amitinside.tooling.chart.builder;
 
 import static java.util.Objects.requireNonNull;
 
-import com.amitinside.tooling.chart.Chart;
-import com.amitinside.tooling.chart.api.ISpiderDrawable;
-import com.amitinside.tooling.chart.builder.model.Data;
+import com.amitinside.tooling.chart.SpiderChart;
+import com.amitinside.tooling.chart.api.ISpiderChartDrawable;
+import com.amitinside.tooling.chart.builder.model.AxisData;
 
 public class DataBuilder {
 
-	private final Chart chart;
-	private final Data data;
+	private final SpiderChart chart;
+	private final AxisData data;
 
-	public DataBuilder(final Chart chart) {
+	public DataBuilder(final SpiderChart chart) {
 		requireNonNull(chart);
 
-		this.data = new Data();
+		this.data = new AxisData();
 		this.chart = chart;
 	}
 
@@ -37,7 +37,7 @@ public class DataBuilder {
 		this.chart.addSeq(this.data.getData());
 	}
 
-	public void inject(final ISpiderDrawable drawableData) {
+	public void inject(final ISpiderChartDrawable drawableData) {
 		requireNonNull(drawableData);
 
 		this.data.setData(drawableData.values(), drawableData.areaColor());

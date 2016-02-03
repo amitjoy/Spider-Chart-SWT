@@ -24,26 +24,26 @@ import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 
-import com.amitinside.tooling.chart.Chart;
-import com.amitinside.tooling.chart.IChartListener;
-import com.amitinside.tooling.chart.gc.ChartGraphics;
+import com.amitinside.tooling.chart.SpiderChart;
+import com.amitinside.tooling.chart.ISpiderChartListener;
+import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
-public class ChartCanvas extends Canvas implements IChartListener {
+public class SpiderChartCanvas extends Canvas implements ISpiderChartListener {
 
-	private Chart chart = null;
+	private SpiderChart chart = null;
 
-	public ChartCanvas(final Composite parent, final int style) {
+	public SpiderChartCanvas(final Composite parent, final int style) {
 		super(parent, style | 0x40000);
 
-		this.addPaintListener(e -> ChartCanvas.this.paintChart(e));
-		final MouseMoveListener mouseMove = e -> ChartCanvas.this.mouseMoved(e);
+		this.addPaintListener(e -> SpiderChartCanvas.this.paintChart(e));
+		final MouseMoveListener mouseMove = e -> SpiderChartCanvas.this.mouseMoved(e);
 		this.addMouseMoveListener(mouseMove);
 
 		final MouseAdapter mouseAdapter = new MouseAdapter() {
 			@Override
 			public void mouseDown(final MouseEvent e) {
-				ChartCanvas.this.mouseClick();
+				SpiderChartCanvas.this.mouseClick();
 			}
 		};
 		this.addMouseListener(mouseAdapter);
@@ -55,26 +55,26 @@ public class ChartCanvas extends Canvas implements IChartListener {
 
 			@Override
 			public void controlResized(final ControlEvent e) {
-				ChartCanvas.this.resizeChart();
+				SpiderChartCanvas.this.resizeChart();
 			}
 		});
 	}
 
 	@Override
-	public void chartEvent(final Chart c, final int type) {
+	public void chartEvent(final SpiderChart c, final int type) {
 		if (type == 4) {
 			this.redraw();
 		}
 		if (type == 1) {
 			SWTGraphicsSupplier.startUIThread(() -> {
-				if (!ChartCanvas.this.isDisposed()) {
-					ChartCanvas.this.redraw();
+				if (!SpiderChartCanvas.this.isDisposed()) {
+					SpiderChartCanvas.this.redraw();
 				}
 			});
 		}
 	}
 
-	public Chart getChart() {
+	public SpiderChart getChart() {
 		return this.chart;
 	}
 
@@ -93,7 +93,7 @@ public class ChartCanvas extends Canvas implements IChartListener {
 	protected void paintChart(final PaintEvent e) {
 		try {
 			this.resizeChart();
-			final ChartGraphics g = SWTGraphicsSupplier.getGraphics(e.gc);
+			final SpiderChartGraphics g = SWTGraphicsSupplier.getGraphics(e.gc);
 			this.chart.paint(g);
 			g.dispose();
 		} catch (final Exception err) {
@@ -102,7 +102,7 @@ public class ChartCanvas extends Canvas implements IChartListener {
 	}
 
 	@Override
-	public void paintUserExit(final Chart c, final ChartGraphics g) {
+	public void paintUserExit(final SpiderChart c, final SpiderChartGraphics g) {
 	}
 
 	protected void resizeChart() {
@@ -110,7 +110,7 @@ public class ChartCanvas extends Canvas implements IChartListener {
 		this.chart.setHeight(this.getSize().y + 1);
 	}
 
-	public void setChart(final Chart c) {
+	public void setChart(final SpiderChart c) {
 		if (this.chart != null) {
 			this.chart.removeChartListener(this);
 		}

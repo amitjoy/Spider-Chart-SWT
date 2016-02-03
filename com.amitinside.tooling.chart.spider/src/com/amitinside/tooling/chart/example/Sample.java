@@ -16,8 +16,8 @@
 package com.amitinside.tooling.chart.example;
 
 import static com.amitinside.tooling.chart.LineStyle.LINE_NORMAL;
-import static com.amitinside.tooling.chart.gc.ChartColor.BLUE;
-import static com.amitinside.tooling.chart.gc.ChartColor.GREEN;
+import static com.amitinside.tooling.chart.gc.SpiderChartColor.BLUE;
+import static com.amitinside.tooling.chart.gc.SpiderChartColor.GREEN;
 import static com.amitinside.tooling.chart.gc.SWTGraphicsSupplier.getColor;
 
 import org.eclipse.swt.SWT;
@@ -25,17 +25,17 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import com.amitinside.tooling.chart.LineStyle;
-import com.amitinside.tooling.chart.api.ISpiderDrawable;
-import com.amitinside.tooling.chart.builder.ChartBuilder;
+import com.amitinside.tooling.chart.api.ISpiderChartDrawable;
+import com.amitinside.tooling.chart.builder.SpiderChartBuilder;
 
 public class Sample {
 
 	private static void buildSpiderChart(final Shell shell) {
 
-		final ISpiderDrawable iphoneData = new IPhone();
-		final ISpiderDrawable nexusData = new Nexus();
+		final ISpiderChartDrawable iphoneData = new IPhone();
+		final ISpiderChartDrawable nexusData = new Nexus();
 
-		ChartBuilder.config(shell, settingsBuilder -> {
+		SpiderChartBuilder.config(shell, settingsBuilder -> {
 
 			settingsBuilder.title(titleBuilder -> titleBuilder.setText("Mobile Phone Comparison"));
 

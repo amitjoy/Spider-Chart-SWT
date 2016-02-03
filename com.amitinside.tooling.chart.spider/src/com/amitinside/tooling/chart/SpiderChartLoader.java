@@ -18,12 +18,12 @@ package com.amitinside.tooling.chart;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.amitinside.tooling.chart.gc.ChartColor;
-import com.amitinside.tooling.chart.gc.ChartFont;
-import com.amitinside.tooling.chart.gc.ChartImage;
+import com.amitinside.tooling.chart.gc.SpiderChartColor;
+import com.amitinside.tooling.chart.gc.SpiderChartFont;
+import com.amitinside.tooling.chart.gc.SpiderChartImage;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
-public class ChartLoader {
+public class SpiderChartLoader {
 
 	protected static boolean convertBooleanParam(final String s, final boolean def) {
 		try {
@@ -60,7 +60,7 @@ public class ChartLoader {
 		return def;
 	}
 
-	public static ChartColor convertColor(final String s) {
+	public static SpiderChartColor convertColor(final String s) {
 		return SWTGraphicsSupplier.getColor(s);
 	}
 
@@ -68,7 +68,7 @@ public class ChartLoader {
 		return FillStyle.createFromString(f);
 	}
 
-	protected static ChartFont convertFont(final String f) {
+	protected static SpiderChartFont convertFont(final String f) {
 		final String[] items = convertList(f, "|");
 		if (items == null) {
 			return null;
@@ -76,12 +76,12 @@ public class ChartLoader {
 		if (items.length < 3) {
 			return null;
 		}
-		int s = ChartFont.PLAIN;
+		int s = SpiderChartFont.PLAIN;
 		if (items[1].compareTo("BOLD") == 0) {
-			s = ChartFont.BOLD;
+			s = SpiderChartFont.BOLD;
 		}
 		if (items[1].compareTo("ITALIC") == 0) {
-			s = ChartFont.ITALIC;
+			s = SpiderChartFont.ITALIC;
 		}
 		try {
 			return SWTGraphicsSupplier.getFont(items[0], s, new Integer(items[2]).intValue());
@@ -129,10 +129,10 @@ public class ChartLoader {
 		return result;
 	}
 
-	private ChartColor c;
+	private SpiderChartColor c;
 	private String dataFile = "";
 	public String fileEncoding = "";
-	public Chart gChart = null;
+	public SpiderChart gChart = null;
 	String[] loadedParameters = new String['ל'];
 	int loadedParametersCount = 0;
 	String[] loadedValues = new String['ל'];
@@ -172,15 +172,15 @@ public class ChartLoader {
 	String YlabelColor;
 	String YlabelFont;
 
-	public ChartLoader() {
+	public SpiderChartLoader() {
 		this.loadedParametersCount = 0;
 	}
 
-	public Chart build(final boolean clear, final boolean reReadFile) {
+	public SpiderChart build(final boolean clear, final boolean reReadFile) {
 		return this.build(null, clear, reReadFile);
 	}
 
-	public Chart build(final Chart currentChart, final boolean clear, final boolean reReadFile) {
+	public SpiderChart build(final SpiderChart currentChart, final boolean clear, final boolean reReadFile) {
 		if (clear) {
 			this.loadedParametersCount = 0;
 		}
@@ -190,8 +190,8 @@ public class ChartLoader {
 		return this.buildChart(currentChart);
 	}
 
-	private Chart buildChart(final Chart currentChart) {
-		ChartFont font = null;
+	private SpiderChart buildChart(final SpiderChart currentChart) {
+		SpiderChartFont font = null;
 
 		Title cTitle = null;
 		HAxisLabel cXLabel = null;
@@ -234,13 +234,13 @@ public class ChartLoader {
 			this.XlabelFont = this.getStringParam("XLABEL_FONT", "");
 			font = convertFont(this.XlabelFont);
 			if (font == null) {
-				font = SWTGraphicsSupplier.getFont("Arial", ChartFont.BOLD, 12);
+				font = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.BOLD, 12);
 			}
 			this.XlabelColor = this.getStringParam("XLABEL_COLOR", "");
 			if (this.XlabelColor != null) {
 				this.c = convertColor(this.XlabelColor);
 			} else {
-				this.c = SWTGraphicsSupplier.getColor(ChartColor.BLACK);
+				this.c = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
 			}
 			cXLabel = new HAxisLabel(this.Xlabel, this.c, font);
 			cXLabel.vertical = this.getBooleanParam("XLABEL_VERTICAL", false);
@@ -250,13 +250,13 @@ public class ChartLoader {
 			this.YlabelFont = this.getStringParam("YLABEL_FONT", "");
 			font = convertFont(this.YlabelFont);
 			if (font == null) {
-				font = SWTGraphicsSupplier.getFont("Arial", ChartFont.BOLD, 12);
+				font = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.BOLD, 12);
 			}
 			this.YlabelColor = this.getStringParam("YLABEL_COLOR", "");
 			if (this.YlabelColor != null) {
 				this.c = convertColor(this.YlabelColor);
 			} else {
-				this.c = SWTGraphicsSupplier.getColor(ChartColor.BLACK);
+				this.c = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
 			}
 			cYLabel = new VAxisLabel(this.Ylabel, this.c, font);
 			cYLabel.vertical = this.getBooleanParam("YLABEL_VERTICAL", false);
@@ -266,13 +266,13 @@ public class ChartLoader {
 			this.Y2labelFont = this.getStringParam("Y2LABEL_FONT", "");
 			font = convertFont(this.Y2labelFont);
 			if (font == null) {
-				font = SWTGraphicsSupplier.getFont("Arial", ChartFont.BOLD, 12);
+				font = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.BOLD, 12);
 			}
 			this.Y2labelColor = this.getStringParam("Y2LABEL_COLOR", "");
 			if (this.Y2labelColor != null) {
 				this.c = convertColor(this.Y2labelColor);
 			} else {
-				this.c = SWTGraphicsSupplier.getColor(ChartColor.BLACK);
+				this.c = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
 			}
 			cY2Label = new VAxisLabel(this.Y2label, this.c, font);
 			cY2Label.vertical = this.getBooleanParam("Y2LABEL_VERTICAL", false);
@@ -297,7 +297,7 @@ public class ChartLoader {
 		if (lstyle != null) {
 			clegend.border = lstyle;
 		}
-		ChartColor c = convertColor(this.getStringParam("LEGEND_COLOR", ""));
+		SpiderChartColor c = convertColor(this.getStringParam("LEGEND_COLOR", ""));
 		clegend.color = c;
 		font = convertFont(this.getStringParam("LEGEND_FONT", ""));
 		if (font != null) {
@@ -344,7 +344,7 @@ public class ChartLoader {
 				}
 				lstyle = convertLineStyle(this.getStringParam("SERIE_STYLE_" + i, ""));
 				if (lstyle == null) {
-					lstyle = new LineStyle(0.2F, SWTGraphicsSupplier.getColor(ChartColor.BLACK), 1);
+					lstyle = new LineStyle(0.2F, SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK), 1);
 				}
 				final LineStyle vstyle = convertLineStyle(this.getStringParam("SERIE_V_STYLE_" + i, ""));
 				if (!this.getBooleanParam("SERIE_DRAW_LINE_" + i, true)) {
@@ -399,7 +399,7 @@ public class ChartLoader {
 				((LineDataSeq) this.pSeries[i]).pointColor = c;
 				((LineDataSeq) this.pSeries[i]).drawPoint = this.getBooleanParam("SERIE_POINT_" + i, false);
 
-				ChartImage im2 = null;
+				SpiderChartImage im2 = null;
 				final String pointImageStr = this.getStringParam("SERIE_POINT_IMAGE_" + i, "");
 				if (pointImageStr.compareTo("") != 0) {
 					im2 = SWTGraphicsSupplier.getImage(pointImageStr);
@@ -428,7 +428,7 @@ public class ChartLoader {
 				}
 				lstyle = convertLineStyle(this.getStringParam("SERIE_STYLE_" + i, ""));
 				if (lstyle == null) {
-					lstyle = new LineStyle(0.2F, SWTGraphicsSupplier.getColor(ChartColor.BLACK), 1);
+					lstyle = new LineStyle(0.2F, SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK), 1);
 				}
 				this.pSeries[i] = null;
 				this.pSeries[i] = new LineDataSeq(this.convertDoubleList(this.pSeriesData[i]), lstyle);
@@ -487,7 +487,7 @@ public class ChartLoader {
 			if (this.getStringParam("RADARCHART_POINT_COLORS", "").length() > 0) {
 				final String[] listTMP = convertList(this.getStringParam("RADARCHART_POINT_COLORS", ""));
 
-				radarPlot.pointColors = new ChartColor[listTMP.length];
+				radarPlot.pointColors = new SpiderChartColor[listTMP.length];
 				for (int j = 0; j < listTMP.length; j++) {
 					radarPlot.pointColors[j] = convertColor(listTMP[j]);
 				}
@@ -495,7 +495,7 @@ public class ChartLoader {
 			if (this.getStringParam("RADARCHART_FACTOR_COLORS", "").length() > 0) {
 				final String[] listTMP = convertList(this.getStringParam("RADARCHART_FACTOR_COLORS", ""));
 
-				radarPlot.factorColors = new ChartColor[listTMP.length];
+				radarPlot.factorColors = new SpiderChartColor[listTMP.length];
 				for (int j = 0; j < listTMP.length; j++) {
 					radarPlot.factorColors[j] = convertColor(listTMP[j]);
 				}
@@ -545,9 +545,9 @@ public class ChartLoader {
 		if (plot == null) {
 			plot = radarPlot;
 		}
-		Chart chart = currentChart;
+		SpiderChart chart = currentChart;
 		if (chart == null) {
-			chart = new Chart();
+			chart = new SpiderChart();
 		}
 		chart.resetChart(cTitle, plot, cXAxis, cYAxis);
 		if (plot == radarPlot) {
@@ -635,7 +635,7 @@ public class ChartLoader {
 		}
 		final String backImageStr = this.getStringParam("BACK_IMAGE", "");
 		if (backImageStr.compareTo("") != 0) {
-			ChartImage im2 = null;
+			SpiderChartImage im2 = null;
 
 			im2 = SWTGraphicsSupplier.getImage(backImageStr);
 			chart.backImage = im2;
@@ -913,10 +913,10 @@ public class ChartLoader {
 		if (fstyle != null) {
 			axis.gridFillStyle = fstyle;
 		}
-		final ChartColor c = convertColor(this.getStringParam(name + "AXIS_FONT_COLOR", ""));
+		final SpiderChartColor c = convertColor(this.getStringParam(name + "AXIS_FONT_COLOR", ""));
 		axis.DescColor = c;
 
-		final ChartFont font = convertFont(this.getStringParam(name + "AXIS_FONT", ""));
+		final SpiderChartFont font = convertFont(this.getStringParam(name + "AXIS_FONT", ""));
 		if (font != null) {
 			axis.DescFont = font;
 		}

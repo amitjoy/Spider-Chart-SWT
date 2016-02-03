@@ -27,22 +27,22 @@ import org.eclipse.swt.graphics.ImageLoader;
 import org.eclipse.swt.graphics.PaletteData;
 import org.eclipse.swt.graphics.RGB;
 
-import com.amitinside.tooling.chart.gc.ChartColor;
-import com.amitinside.tooling.chart.gc.ChartGraphics;
-import com.amitinside.tooling.chart.gc.ChartImage;
+import com.amitinside.tooling.chart.gc.SpiderChartColor;
+import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
+import com.amitinside.tooling.chart.gc.SpiderChartImage;
 
-public class ChartSwtImage extends ChartImage {
+public class SpiderChartSwtImage extends SpiderChartImage {
 
 	private Image image = null;
-	private ChartColor transparentColor = null;
+	private SpiderChartColor transparentColor = null;
 
-	public ChartSwtImage(final int w, final int h) {
+	public SpiderChartSwtImage(final int w, final int h) {
 		this.image = new Image(SwtGraphicsProvider.getDefaultDisplay(), w, h);
 	}
 
-	public ChartSwtImage(final int w, final int h, final ChartColor transparent) {
+	public SpiderChartSwtImage(final int w, final int h, final SpiderChartColor transparent) {
 		this.transparentColor = transparent;
-		final Color trans = ((ChartSwtColor) transparent).getColor();
+		final Color trans = ((SpiderChartSwtColor) transparent).getColor();
 		final Image tmpImage = new Image(SwtGraphicsProvider.getDefaultDisplay(), w, h);
 		final ImageData imageData = tmpImage.getImageData();
 		tmpImage.dispose();
@@ -59,10 +59,10 @@ public class ChartSwtImage extends ChartImage {
 		trans.dispose();
 	}
 
-	public ChartSwtImage(final Object o) {
+	public SpiderChartSwtImage(final Object o) {
 		try {
 			if (o instanceof String) {
-				final InputStream is = ChartSwtImage.class.getClassLoader().getResourceAsStream((String) o);
+				final InputStream is = SpiderChartSwtImage.class.getClassLoader().getResourceAsStream((String) o);
 				if (is != null) {
 					this.image = new Image(SwtGraphicsProvider.getDefaultDisplay(), is);
 					return;
@@ -88,19 +88,19 @@ public class ChartSwtImage extends ChartImage {
 		this.image = null;
 	}
 
-	protected ChartSwtImage forRotation() {
+	protected SpiderChartSwtImage forRotation() {
 		final int h = this.getHeight();
 		final int w = this.getWidth();
 
-		ChartSwtImage dest = null;
+		SpiderChartSwtImage dest = null;
 		if (w > h) {
-			dest = new ChartSwtImage(w, w, this.transparentColor);
+			dest = new SpiderChartSwtImage(w, w, this.transparentColor);
 		} else if (h > w) {
-			dest = new ChartSwtImage(h, h, this.transparentColor);
+			dest = new SpiderChartSwtImage(h, h, this.transparentColor);
 		} else {
 			return this;
 		}
-		final ChartGraphics g = dest.getGraphics();
+		final SpiderChartGraphics g = dest.getGraphics();
 		g.drawImage(this, 0, 0);
 		g.dispose();
 
@@ -108,8 +108,8 @@ public class ChartSwtImage extends ChartImage {
 	}
 
 	@Override
-	public ChartGraphics getGraphics() {
-		final ChartSwtGraphics g = new ChartSwtGraphics(new GC(this.image));
+	public SpiderChartGraphics getGraphics() {
+		final SpiderChartSwtGraphics g = new SpiderChartSwtGraphics(new GC(this.image));
 		g.srcImage = this.image;
 		return g;
 	}

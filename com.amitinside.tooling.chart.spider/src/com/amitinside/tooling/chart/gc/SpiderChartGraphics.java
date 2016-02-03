@@ -15,7 +15,7 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.gc;
 
-public abstract class ChartGraphics {
+public abstract class SpiderChartGraphics {
 
 	public static int ROTATE_CENTER = 0;
 	public static int ROTATE_LEFTTOP = 1;
@@ -24,9 +24,9 @@ public abstract class ChartGraphics {
 	public static int STROKE_NORMAL = 1;
 	protected int lineStyle = STROKE_NORMAL;
 	protected int lineWidth = 1;
-	protected ChartImage textureImage = null;
+	protected SpiderChartImage textureImage = null;
 
-	public void createFadeArea(final ChartColor colorFrom, final ChartColor colorUntil, final int x, final int y,
+	public void createFadeArea(final SpiderChartColor colorFrom, final SpiderChartColor colorUntil, final int x, final int y,
 			final int w, final int h, final boolean vertical, final boolean cyclic) {
 	}
 
@@ -36,10 +36,10 @@ public abstract class ChartGraphics {
 	public void drawArc(final int x, final int y, final int w, final int h, final int a1, final int a2) {
 	}
 
-	public void drawImage(final ChartImage image, final int x, final int y) {
+	public void drawImage(final SpiderChartImage image, final int x, final int y) {
 	}
 
-	public void drawImage(final ChartImage image, final int x1Dest, final int y1Dest, final int x2Dest,
+	public void drawImage(final SpiderChartImage image, final int x1Dest, final int y1Dest, final int x2Dest,
 			final int y2Dest, final int x1Source, final int y1Source, final int x2Source, final int y2Source) {
 	}
 
@@ -110,7 +110,7 @@ public abstract class ChartGraphics {
 		this.drawLineWithStyle(x1 + w, y1, x1 + w, y1 + h);
 	}
 
-	public boolean drawRotatedText(final ChartFont descFont, final ChartColor descColor, final String txt,
+	public boolean drawRotatedText(final SpiderChartFont descFont, final SpiderChartColor descColor, final String txt,
 			final int angle, final int x, final int y, final boolean b) {
 		return false;
 	}
@@ -184,11 +184,11 @@ public abstract class ChartGraphics {
 		return null;
 	}
 
-	public ChartColor getColor() {
+	public SpiderChartColor getColor() {
 		return null;
 	}
 
-	public ChartFont getFont() {
+	public SpiderChartFont getFont() {
 		return null;
 	}
 
@@ -196,11 +196,11 @@ public abstract class ChartGraphics {
 		return this.getFontHeight(null);
 	}
 
-	public int getFontHeight(final ChartFont font) {
+	public int getFontHeight(final SpiderChartFont font) {
 		return 0;
 	}
 
-	public int getFontWidth(final ChartFont font, final String s) {
+	public int getFontWidth(final SpiderChartFont font, final String s) {
 		return 0;
 	}
 
@@ -208,7 +208,7 @@ public abstract class ChartGraphics {
 		return this.getFontWidth(null, s);
 	}
 
-	public void paintRotatedImage(final ChartImage srcImage, final int angle, final int x, final int y,
+	public void paintRotatedImage(final SpiderChartImage srcImage, final int angle, final int x, final int y,
 			final int alginment) {
 	}
 
@@ -218,10 +218,10 @@ public abstract class ChartGraphics {
 	public void setAlphaComposite(final Object a) {
 	}
 
-	public void setColor(final ChartColor color) {
+	public void setColor(final SpiderChartColor color) {
 	}
 
-	public void setFont(final ChartFont font) {
+	public void setFont(final SpiderChartFont font) {
 	}
 
 	public void setLineStyle(final int style) {
@@ -232,7 +232,7 @@ public abstract class ChartGraphics {
 		this.lineWidth = w;
 	}
 
-	public void setTexture(final ChartImage image) {
+	public void setTexture(final SpiderChartImage image) {
 		this.textureImage = image;
 	}
 }

@@ -15,22 +15,22 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart;
 
-import com.amitinside.tooling.chart.gc.ChartColor;
-import com.amitinside.tooling.chart.gc.ChartFont;
-import com.amitinside.tooling.chart.gc.ChartGraphics;
+import com.amitinside.tooling.chart.gc.SpiderChartColor;
+import com.amitinside.tooling.chart.gc.SpiderChartFont;
+import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 
 public class VAxisLabel extends AxisLabel {
 
-	public VAxisLabel(final String t, final ChartColor c, final ChartFont f) {
+	public VAxisLabel(final String t, final SpiderChartColor c, final SpiderChartFont f) {
 		super(t, c, f);
 	}
 
 	@Override
-	public void draw(final ChartGraphics g) {
+	public void draw(final SpiderChartGraphics g) {
 		g.setFont(this.font);
 		g.setColor(this.color);
 		if (this.title.indexOf("@") >= 0) {
-			final ChartLabel formattedLabel = new ChartLabel(this.title, "", this.vertical, true);
+			final SpiderChartLabel formattedLabel = new SpiderChartLabel(this.title, "", this.vertical, true);
 			formattedLabel.initialize(g, this.chart);
 			formattedLabel.paint(g, this.x + (this.width / 3), this.y + (this.height / 3), 10, 10);
 			return;

@@ -15,15 +15,15 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart;
 
-import com.amitinside.tooling.chart.gc.ChartGraphics;
+import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 
-public class ChartAdapter implements IChartListener {
+public class SpiderChartAdapter implements ISpiderChartListener {
 
 	@Override
-	public void chartEvent(final Chart c, final int type) {
+	public void chartEvent(final SpiderChart c, final int type) {
 	}
 
 	@Override
-	public void paintUserExit(final Chart c, final ChartGraphics g) {
+	public void paintUserExit(final SpiderChart c, final SpiderChartGraphics g) {
 	}
 }

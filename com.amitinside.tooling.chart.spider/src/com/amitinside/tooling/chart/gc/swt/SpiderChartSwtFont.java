@@ -17,31 +17,31 @@ package com.amitinside.tooling.chart.gc.swt;
 
 import org.eclipse.swt.graphics.Font;
 
-import com.amitinside.tooling.chart.gc.ChartFont;
+import com.amitinside.tooling.chart.gc.SpiderChartFont;
 
-public class ChartSwtFont extends ChartFont {
+public class SpiderChartSwtFont extends SpiderChartFont {
 
 	private String fontName = "";
 	private int fontSize = 10;
-	private int fontStyle = ChartFont.PLAIN;
+	private int fontStyle = SpiderChartFont.PLAIN;
 
-	public ChartSwtFont(final Object f) {
+	public SpiderChartSwtFont(final Object f) {
 		this.fontName = ((Font) f).getFontData()[0].getName();
 		final int s = ((Font) f).getFontData()[0].getStyle();
-		this.fontStyle = ChartFont.PLAIN;
+		this.fontStyle = SpiderChartFont.PLAIN;
 		if ((s & 0x1) == 1) {
-			this.fontStyle = ChartFont.BOLD;
+			this.fontStyle = SpiderChartFont.BOLD;
 		}
 		if ((s & 0x2) == 2) {
-			this.fontStyle = ChartFont.ITALIC;
+			this.fontStyle = SpiderChartFont.ITALIC;
 		}
 		if ((s & 0x3) == 3) {
-			this.fontStyle = ChartFont.BOLD_ITALIC;
+			this.fontStyle = SpiderChartFont.BOLD_ITALIC;
 		}
 		this.fontSize = ((Font) f).getFontData()[0].getHeight();
 	}
 
-	public ChartSwtFont(final String name, final int style, final int size) {
+	public SpiderChartSwtFont(final String name, final int style, final int size) {
 		this.fontName = name;
 		this.fontSize = size;
 		this.fontStyle = style;
@@ -49,13 +49,13 @@ public class ChartSwtFont extends ChartFont {
 
 	protected Font getFont() {
 		int s = 0;
-		if (this.fontStyle == ChartFont.BOLD) {
+		if (this.fontStyle == SpiderChartFont.BOLD) {
 			s = 1;
 		}
-		if (this.fontStyle == ChartFont.ITALIC) {
+		if (this.fontStyle == SpiderChartFont.ITALIC) {
 			s = 2;
 		}
-		if (this.fontStyle == ChartFont.BOLD_ITALIC) {
+		if (this.fontStyle == SpiderChartFont.BOLD_ITALIC) {
 			s = 3;
 		}
 		return new Font(SwtGraphicsProvider.getDefaultDisplay(), this.fontName, this.fontSize, s);

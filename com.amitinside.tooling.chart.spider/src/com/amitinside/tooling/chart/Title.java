@@ -15,25 +15,25 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart;
 
-import com.amitinside.tooling.chart.gc.ChartColor;
-import com.amitinside.tooling.chart.gc.ChartFont;
-import com.amitinside.tooling.chart.gc.ChartGraphics;
+import com.amitinside.tooling.chart.gc.SpiderChartColor;
+import com.amitinside.tooling.chart.gc.SpiderChartFont;
+import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
-public class Title extends ChartComponent {
+public class Title extends SpiderChartComponent {
 
-	public ChartColor color = SWTGraphicsSupplier.getColor(ChartColor.BLACK);
-	public ChartFont font = SWTGraphicsSupplier.getFont("Arial", ChartFont.PLAIN, 14);
+	public SpiderChartColor color = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
+	public SpiderChartFont font = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.PLAIN, 14);
 	private String text;
 
 	public Title() {
 	}
 
-	public void draw(final ChartGraphics g) {
+	public void draw(final SpiderChartGraphics g) {
 		g.setColor(this.color);
 		g.setFont(this.font);
 		if (this.text.indexOf("@") >= 0) {
-			final ChartLabel formattedLabel = new ChartLabel(this.text, "", false, true);
+			final SpiderChartLabel formattedLabel = new SpiderChartLabel(this.text, "", false, true);
 			formattedLabel.initialize(g, this.chart);
 			formattedLabel.paint(g, this.x, this.y, this.width, this.height);
 			return;

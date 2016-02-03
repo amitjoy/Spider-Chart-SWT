@@ -23,12 +23,12 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Vector;
 
-import com.amitinside.tooling.chart.gc.ChartColor;
-import com.amitinside.tooling.chart.gc.ChartFont;
-import com.amitinside.tooling.chart.gc.ChartGraphics;
+import com.amitinside.tooling.chart.gc.SpiderChartColor;
+import com.amitinside.tooling.chart.gc.SpiderChartFont;
+import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
-public class Axis extends ChartComponent {
+public class Axis extends SpiderChartComponent {
 	public static final int CEROAXIS_LINE = 0;
 	public static final int CEROAXIS_NO = 1;
 	public static final int CEROAXIS_SCALE = 2;
@@ -81,12 +81,12 @@ public class Axis extends ChartComponent {
 	public int bigTickPixels = 9;
 	public boolean bigTicksGrid = false;
 	public int ceroAxis = 0;
-	public LineStyle ceroAxisStyle = new LineStyle(0.2F, SWTGraphicsSupplier.getColor(ChartColor.DARKGRAY), 1);
+	public LineStyle ceroAxisStyle = new LineStyle(0.2F, SWTGraphicsSupplier.getColor(SpiderChartColor.DARKGRAY), 1);
 	public String dateLabelFormat = "dd-MMM-yyyy";
 	public String dateStep = "d";
 	public boolean dateStepPerUnit = false;
-	public ChartColor DescColor = SWTGraphicsSupplier.getColor(ChartColor.BLACK);
-	public ChartFont DescFont = SWTGraphicsSupplier.getFont("Arial", ChartFont.PLAIN, 10);
+	public SpiderChartColor DescColor = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
+	public SpiderChartFont DescFont = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.PLAIN, 10);
 	public FillStyle gridFillStyle = null;
 	public LineStyle gridStyle = null;
 	public Date initialDate = null;
@@ -109,7 +109,7 @@ public class Axis extends ChartComponent {
 	public double scaleTickInterval = 1.0D;
 	public boolean stackAdditionalAxis = false;
 	public boolean startWithBigTick = false;
-	public LineStyle style = new LineStyle(2.0F, SWTGraphicsSupplier.getColor(ChartColor.BLACK), 1);
+	public LineStyle style = new LineStyle(2.0F, SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK), 1);
 	protected Vector targetZones = new Vector();
 	public boolean tickAtBase = false;
 	public int tickLabelLength = 1000;
@@ -141,7 +141,7 @@ public class Axis extends ChartComponent {
 		}
 	}
 
-	public void draw(final ChartGraphics g, final Axis peerAxis, final boolean drawForeGround,
+	public void draw(final SpiderChartGraphics g, final Axis peerAxis, final boolean drawForeGround,
 			final boolean drawGridBackground) {
 		double range = this.scale.max - this.scale.min;
 
@@ -196,7 +196,7 @@ public class Axis extends ChartComponent {
 					this.style.draw(g, this.x, axisPosition, this.x + this.visibleSize, axisPosition);
 					if (!this.xscaleOnTop) {
 						if (this.label.length() > 0) {
-							final ChartLabel clabel = new ChartLabel(this.label, "", false, false);
+							final SpiderChartLabel clabel = new SpiderChartLabel(this.label, "", false, false);
 							g.setColor(this.DescColor);
 							g.setFont(this.DescFont);
 							clabel.initialize(g, this.chart);
@@ -213,7 +213,7 @@ public class Axis extends ChartComponent {
 							axisPosition - peerAxis.visibleSize);
 					if (this.xscaleOnTop) {
 						if (this.label.length() > 0) {
-							final ChartLabel clabel = new ChartLabel(this.label, "", false, false);
+							final SpiderChartLabel clabel = new SpiderChartLabel(this.label, "", false, false);
 							g.setColor(this.DescColor);
 							g.setFont(this.DescFont);
 							clabel.initialize(g, this.chart);
@@ -289,7 +289,7 @@ public class Axis extends ChartComponent {
 				}
 				if (!this.rightAxis) {
 					if (this.label.length() > 0) {
-						final ChartLabel clabel = new ChartLabel("@rotation value='90' center='LEFTTOP'@" + this.label,
+						final SpiderChartLabel clabel = new SpiderChartLabel("@rotation value='90' center='LEFTTOP'@" + this.label,
 								"", false, false);
 						g.setColor(this.DescColor);
 						g.setFont(this.DescFont);
@@ -301,7 +301,7 @@ public class Axis extends ChartComponent {
 				}
 				if (this.rightAxis) {
 					if (this.label.length() > 0) {
-						final ChartLabel clabel = new ChartLabel("@rotation value='90'  center='LEFTTOP'@" + this.label,
+						final SpiderChartLabel clabel = new SpiderChartLabel("@rotation value='90'  center='LEFTTOP'@" + this.label,
 								"", false, false);
 						g.setColor(this.DescColor);
 						g.setFont(this.DescFont);
@@ -490,11 +490,11 @@ public class Axis extends ChartComponent {
 						String txt = new Double(i).toString();
 						if (this.scaleLabelFormat.length() > 0) {
 							DecimalFormat df = null;
-							if (Chart.numberLocale == null) {
+							if (SpiderChart.numberLocale == null) {
 								df = new DecimalFormat(this.scaleLabelFormat);
 							} else {
 								final NumberFormat nf = NumberFormat
-										.getNumberInstance(new Locale(Chart.numberLocale, ""));
+										.getNumberInstance(new Locale(SpiderChart.numberLocale, ""));
 								df = (DecimalFormat) nf;
 								df.applyPattern(this.scaleLabelFormat);
 							}
@@ -506,11 +506,11 @@ public class Axis extends ChartComponent {
 						if (tickDate != null) {
 							txt = new SimpleDateFormat(this.dateLabelFormat).format(tickDate);
 						}
-						ChartLabel formattedlabel = null;
+						SpiderChartLabel formattedlabel = null;
 						if (this.tickLabels != null) {
 							if (this.tickLabels.length >= numberBigTicks) {
 								if (this.tickLabels[numberBigTicks - 1] != null) {
-									formattedlabel = new ChartLabel(this.tickLabels[numberBigTicks - 1], txt, false,
+									formattedlabel = new SpiderChartLabel(this.tickLabels[numberBigTicks - 1], txt, false,
 											true);
 									txt = this.tickLabels[numberBigTicks - 1];
 								} else {
@@ -521,7 +521,7 @@ public class Axis extends ChartComponent {
 							}
 						}
 						if ((formattedlabel == null) && (this.labelTemplate.length() > 0)) {
-							formattedlabel = new ChartLabel(this.labelTemplate, txt, false, false);
+							formattedlabel = new SpiderChartLabel(this.labelTemplate, txt, false, false);
 						}
 						boolean labelPainted = false;
 						if ((this.rotateLabels != 0) && (this.orientation == 0) && ((v - this.offset) >= this.x)
@@ -703,7 +703,7 @@ public class Axis extends ChartComponent {
 		}
 	}
 
-	protected void drawBackground(final ChartGraphics g, final Axis peerAxis) {
+	protected void drawBackground(final SpiderChartGraphics g, final Axis peerAxis) {
 		this.maxTickLabelLength = 0;
 
 		int tmpX = this.x;
@@ -759,7 +759,7 @@ public class Axis extends ChartComponent {
 		this.draw(g, peerAxis, false, false);
 	}
 
-	protected void drawForeground(final ChartGraphics g, final Axis peerAxis) {
+	protected void drawForeground(final SpiderChartGraphics g, final Axis peerAxis) {
 		if (this.isMainAxis && !this.xscaleOnTop) {
 			for (int i = 0; i < this.additionalAxis.size(); i++) {
 				final Axis a = (Axis) this.additionalAxis.elementAt(i);
@@ -769,7 +769,7 @@ public class Axis extends ChartComponent {
 		this.draw(g, peerAxis, true, false);
 	}
 
-	protected void drawGridBackground(final ChartGraphics g, final Axis peerAxis) {
+	protected void drawGridBackground(final SpiderChartGraphics g, final Axis peerAxis) {
 		this.draw(g, peerAxis, false, true);
 	}
 
@@ -789,7 +789,7 @@ public class Axis extends ChartComponent {
 		return a;
 	}
 
-	protected void paintTargetZones(final ChartGraphics g, final Axis peerAxis, final int position) {
+	protected void paintTargetZones(final SpiderChartGraphics g, final Axis peerAxis, final int position) {
 		for (int i = 0; i < this.targetZones.size(); i++) {
 			final AxisZone z = (AxisZone) this.targetZones.elementAt(i);
 			z.chart = this.chart;

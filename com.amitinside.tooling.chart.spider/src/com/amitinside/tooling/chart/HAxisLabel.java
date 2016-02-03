@@ -15,22 +15,22 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart;
 
-import com.amitinside.tooling.chart.gc.ChartColor;
-import com.amitinside.tooling.chart.gc.ChartFont;
-import com.amitinside.tooling.chart.gc.ChartGraphics;
+import com.amitinside.tooling.chart.gc.SpiderChartColor;
+import com.amitinside.tooling.chart.gc.SpiderChartFont;
+import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 
 public class HAxisLabel extends AxisLabel {
 
-	public HAxisLabel(final String t, final ChartColor c, final ChartFont f) {
+	public HAxisLabel(final String t, final SpiderChartColor c, final SpiderChartFont f) {
 		super(t, c, f);
 	}
 
 	@Override
-	protected void draw(final ChartGraphics g) {
+	protected void draw(final SpiderChartGraphics g) {
 		g.setColor(this.color);
 		g.setFont(this.font);
 		if (this.title.indexOf("@") >= 0) {
-			final ChartLabel formattedLabel = new ChartLabel(this.title, "", this.vertical, true);
+			final SpiderChartLabel formattedLabel = new SpiderChartLabel(this.title, "", this.vertical, true);
 			formattedLabel.initialize(g, this.chart);
 			formattedLabel.paint(g, this.x, this.y, this.width, this.height);
 			return;

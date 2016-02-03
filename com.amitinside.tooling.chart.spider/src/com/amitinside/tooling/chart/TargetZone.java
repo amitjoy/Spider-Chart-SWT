@@ -15,7 +15,7 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart;
 
-import com.amitinside.tooling.chart.gc.ChartGraphics;
+import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 
 public class TargetZone {
 
@@ -25,7 +25,7 @@ public class TargetZone {
 		if (s.length() == 0) {
 			return null;
 		}
-		final String[] items = ChartLoader.convertList(s, ";");
+		final String[] items = SpiderChartLoader.convertList(s, ";");
 		double start = DISABLED;
 		double end = DISABLED;
 		int uStart = 0;
@@ -59,25 +59,25 @@ public class TargetZone {
 		}
 		final TargetZone zone = new TargetZone(start, end, uStart, uEnd);
 		if (items.length > 2) {
-			zone.style = ChartLoader.convertLineStyle(items[2]);
+			zone.style = SpiderChartLoader.convertLineStyle(items[2]);
 		}
 		if (items.length > 3) {
-			zone.fillStyle = ChartLoader.convertFillStyle(items[3]);
+			zone.fillStyle = SpiderChartLoader.convertFillStyle(items[3]);
 		}
 		if (items.length > 4) {
 			zone.label = items[4];
 		}
 		if (items.length > 5) {
-			zone.vertical = ChartLoader.convertBooleanParam(items[5], false);
+			zone.vertical = SpiderChartLoader.convertBooleanParam(items[5], false);
 		}
 		if (items.length > 6) {
-			zone.background = ChartLoader.convertBooleanParam(items[6], false);
+			zone.background = SpiderChartLoader.convertBooleanParam(items[6], false);
 		}
 		return zone;
 	}
 
 	public boolean background = true;
-	protected Chart chart = null;
+	protected SpiderChart chart = null;
 	protected int effect3D = 0;
 	public FillStyle fillStyle;
 	public String label = "";
@@ -96,7 +96,7 @@ public class TargetZone {
 		this.positionEnd = end;
 	}
 
-	protected void paint(final ChartGraphics g, final Axis xaxis, final Axis yaxis) {
+	protected void paint(final SpiderChartGraphics g, final Axis xaxis, final Axis yaxis) {
 		int pixelStart = 0;
 		Axis axis = yaxis;
 		if (this.vertical) {
@@ -158,7 +158,7 @@ public class TargetZone {
 						hEnd - this.effect3D);
 			}
 			if (this.label.length() > 0) {
-				final ChartLabel clabel = new ChartLabel(" " + this.label, "", false, false);
+				final SpiderChartLabel clabel = new SpiderChartLabel(" " + this.label, "", false, false);
 				clabel.initialize(g, this.chart);
 				clabel.paint(g, pixelStart + this.effect3D, hEnd - this.effect3D, -1, -1);
 			}
@@ -189,7 +189,7 @@ public class TargetZone {
 						pixelEnd - this.effect3D);
 			}
 			if (this.label.length() > 0) {
-				final ChartLabel clabel = new ChartLabel(" " + this.label, "", false, false);
+				final SpiderChartLabel clabel = new SpiderChartLabel(" " + this.label, "", false, false);
 				clabel.initialize(g, this.chart);
 				clabel.paint(g, wEnd + this.effect3D, pixelStart - this.effect3D, -1, -1);
 			}

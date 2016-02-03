@@ -15,60 +15,60 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.gc;
 
-import com.amitinside.tooling.chart.gc.swt.ChartSwtColor;
-import com.amitinside.tooling.chart.gc.swt.ChartSwtFont;
-import com.amitinside.tooling.chart.gc.swt.ChartSwtGraphics;
-import com.amitinside.tooling.chart.gc.swt.ChartSwtImage;
+import com.amitinside.tooling.chart.gc.swt.SpiderChartSwtColor;
+import com.amitinside.tooling.chart.gc.swt.SpiderChartSwtFont;
+import com.amitinside.tooling.chart.gc.swt.SpiderChartSwtGraphics;
+import com.amitinside.tooling.chart.gc.swt.SpiderChartSwtImage;
 import com.amitinside.tooling.chart.gc.swt.SwtGraphicsProvider;
 
 public interface SWTGraphicsSupplier {
 
 	public static int DEFAULT_MODE = 1;
 
-	public static ChartImage createImage(final int w, final int h) {
-		return new ChartSwtImage(w, h);
+	public static SpiderChartImage createImage(final int w, final int h) {
+		return new SpiderChartSwtImage(w, h);
 	}
 
-	public static ChartImage createTransparentImage(final int w, final int h, final ChartColor transparent) {
-		return new ChartSwtImage(w, h, transparent);
+	public static SpiderChartImage createTransparentImage(final int w, final int h, final SpiderChartColor transparent) {
+		return new SpiderChartSwtImage(w, h, transparent);
 	}
 
-	public static ChartColor getColor(final int red, final int green, final int blue) {
-		return new ChartSwtColor(red, green, blue);
+	public static SpiderChartColor getColor(final int red, final int green, final int blue) {
+		return new SpiderChartSwtColor(red, green, blue);
 	}
 
-	public static ChartColor getColor(final String c) {
-		return new ChartSwtColor(c);
+	public static SpiderChartColor getColor(final String c) {
+		return new SpiderChartSwtColor(c);
 	}
 
-	public static ChartColor getColorFromObject(final Object o) {
-		return new ChartSwtColor(o);
+	public static SpiderChartColor getColorFromObject(final Object o) {
+		return new SpiderChartSwtColor(o);
 	}
 
-	public static ChartFont getFont(final String c, final int style, final int size) {
-		return new ChartSwtFont(c, style, size);
+	public static SpiderChartFont getFont(final String c, final int style, final int size) {
+		return new SpiderChartSwtFont(c, style, size);
 	}
 
-	public static ChartFont getFontFromObject(final Object o) {
-		return new ChartSwtFont(o);
+	public static SpiderChartFont getFontFromObject(final Object o) {
+		return new SpiderChartSwtFont(o);
 	}
 
-	public static ChartGraphics getGraphics(final Object o) {
-		return new ChartSwtGraphics(o);
+	public static SpiderChartGraphics getGraphics(final Object o) {
+		return new SpiderChartSwtGraphics(o);
 	}
 
-	public static ChartImage getImage(final Object o) {
+	public static SpiderChartImage getImage(final Object o) {
 		try {
-			return new ChartSwtImage(o);
+			return new SpiderChartSwtImage(o);
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
-	public static ChartImage getImageFromFile(final String file) {
+	public static SpiderChartImage getImageFromFile(final String file) {
 		try {
-			return new ChartSwtImage(file);
+			return new SpiderChartSwtImage(file);
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}

@@ -22,17 +22,17 @@ import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Vector;
 
-import com.amitinside.tooling.chart.gc.ChartColor;
-import com.amitinside.tooling.chart.gc.ChartFont;
-import com.amitinside.tooling.chart.gc.ChartGraphics;
-import com.amitinside.tooling.chart.gc.ChartImage;
+import com.amitinside.tooling.chart.gc.SpiderChartColor;
+import com.amitinside.tooling.chart.gc.SpiderChartFont;
+import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
+import com.amitinside.tooling.chart.gc.SpiderChartImage;
 import com.amitinside.tooling.chart.gc.Polygon;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
-public class Chart {
+public class SpiderChart {
 
 	private class Updater implements Runnable {
-		public Chart chart = null;
+		public SpiderChart chart = null;
 
 		public boolean stop = false;
 
@@ -47,7 +47,7 @@ public class Chart {
 		public void run() {
 			while (!this.stop) {
 				try {
-					Thread.sleep(Chart.this.msecs);
+					Thread.sleep(SpiderChart.this.msecs);
 				} catch (final Exception e) {
 					e.printStackTrace();
 				}
@@ -55,11 +55,11 @@ public class Chart {
 					break;
 				}
 				try {
-					Chart.this.triggerEvent(0);
-					if (Chart.this.autoRebuild) {
-						Chart.this.loader.build(Chart.this, false, false);
+					SpiderChart.this.triggerEvent(0);
+					if (SpiderChart.this.autoRebuild) {
+						SpiderChart.this.loader.build(SpiderChart.this, false, false);
 					}
-					Chart.this.triggerEvent(1);
+					SpiderChart.this.triggerEvent(1);
 				} catch (final Exception e) {
 					e.printStackTrace();
 				}
@@ -93,12 +93,12 @@ public class Chart {
 	public boolean autoSize = true;
 	public double axisMargin = 0.0625D;
 	public FillStyle back = null;
-	public ChartImage backImage;
-	private ChartImage backTmpImage = null;
+	public SpiderChartImage backImage;
+	private SpiderChartImage backTmpImage = null;
 	public LineStyle border = null;
 	public double bottomMargin = 0.125D;
 	protected Vector chartHotAreas = new Vector(0, 5);
-	private ChartImage chartImage = null;
+	private SpiderChartImage chartImage = null;
 	private final Vector chartListeners = new Vector();
 	public double currentValueX;
 	public double currentValueY;
@@ -109,7 +109,7 @@ public class Chart {
 	private int cursorLastY = 0;
 	private Updater deamon = null;
 	public boolean doubleBuffering = true;
-	private ChartImage finalImage = null;
+	private SpiderChartImage finalImage = null;
 	protected Vector floatingObjects = new Vector(0, 5);
 	public boolean fullXAxis = false;
 	private int height = 0;
@@ -120,7 +120,7 @@ public class Chart {
 	public double leftMargin = 0.125D;
 	public Legend legend;
 	public double legendMargin = 0.2D;
-	public ChartLoader loader = null;
+	public SpiderChartLoader loader = null;
 	private int minimumHeight = 0;
 	private int minimumWidth = 0;
 	public long msecs = 2000L;
@@ -136,7 +136,7 @@ public class Chart {
 	public boolean repaintAlways = true;
 	public double rightMargin = 0.125D;
 	public double secondYAxisMargin = 0.0D;
-	public ChartLabel selectedLabel = null;
+	public SpiderChartLabel selectedLabel = null;
 	public DataSeq selectedSerie = null;
 	public int selectedSeriePoint = -1;
 	private boolean showingTip = false;
@@ -144,9 +144,9 @@ public class Chart {
 	public boolean showTips = false;
 	private boolean stopped = false;
 	protected Vector targetZones = new Vector();
-	ChartColor tipColor = SWTGraphicsSupplier.getColor(ChartColor.YELLOW);
-	ChartFont tipFont = SWTGraphicsSupplier.getFont("Serif", ChartFont.PLAIN, 10);
-	ChartColor tipFontColor = SWTGraphicsSupplier.getColor(ChartColor.BLACK);
+	SpiderChartColor tipColor = SWTGraphicsSupplier.getColor(SpiderChartColor.YELLOW);
+	SpiderChartFont tipFont = SWTGraphicsSupplier.getFont("Serif", SpiderChartFont.PLAIN, 10);
+	SpiderChartColor tipFontColor = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
 	public Title title;
 	public double topMargin = 0.125D;
 	public int virtualHeight = 0;
@@ -163,18 +163,18 @@ public class Chart {
 
 	public VAxisLabel YLabel;
 
-	protected Chart() {
+	protected SpiderChart() {
 	}
 
-	public Chart(final Title t, final Plotter p) {
+	public SpiderChart(final Title t, final Plotter p) {
 		this.resetChart(t, p, null, null);
 	}
 
-	public Chart(final Title t, final Plotter p, final Axis X, final Axis Y) {
+	public SpiderChart(final Title t, final Plotter p, final Axis X, final Axis Y) {
 		this.resetChart(t, p, X, Y);
 	}
 
-	public void addChartListener(final IChartListener cl) {
+	public void addChartListener(final ISpiderChartListener cl) {
 		this.chartListeners.addElement(cl);
 	}
 
@@ -548,7 +548,7 @@ public class Chart {
 		this.stopUpdater();
 	}
 
-	private void drawBackImage(final ChartGraphics g) {
+	private void drawBackImage(final SpiderChartGraphics g) {
 		final int ImageW = this.backImage.getWidth();
 		final int ImageH = this.backImage.getHeight();
 		if ((ImageW == -1) || (ImageH == -1)) {
@@ -575,7 +575,7 @@ public class Chart {
 	public String getHTMLImageMap(final String name) {
 		String html = "<MAP NAME=\"" + name + "\" >";
 		boolean hasContent = false;
-		final Chart c = this;
+		final SpiderChart c = this;
 		for (final Plotter plotter : c.plotters) {
 			if (plotter != null) {
 				for (int s = 0; s < plotter.getSeriesCount(); s++) {
@@ -623,7 +623,7 @@ public class Chart {
 			}
 		}
 		for (int i = 0; i < this.chartHotAreas.size(); i++) {
-			final ChartLabel label = (ChartLabel) this.chartHotAreas.elementAt(i);
+			final SpiderChartLabel label = (SpiderChartLabel) this.chartHotAreas.elementAt(i);
 
 			final Polygon po = label.clickableArea;
 
@@ -748,7 +748,7 @@ public class Chart {
 			}
 			if (this.selectedSerie == null) {
 				for (int i = 0; i < this.chartHotAreas.size(); i++) {
-					final ChartLabel label = (ChartLabel) this.chartHotAreas.elementAt(i);
+					final SpiderChartLabel label = (SpiderChartLabel) this.chartHotAreas.elementAt(i);
 					if (label.clickableArea.contains(this.currentX + this.offsetX, this.currentY + this.offsetY)) {
 						this.selectedLabel = label;
 						break;
@@ -766,36 +766,36 @@ public class Chart {
 		}
 	}
 
-	public void paint(final ChartGraphics pg) {
+	public void paint(final SpiderChartGraphics pg) {
 		this.floatingObjects.removeAllElements();
 		this.chartHotAreas.removeAllElements();
 
 		System.currentTimeMillis();
 		if ((this.plotters[0] == null) || (this.plottersCount <= 0)) {
-			pg.setColor(SWTGraphicsSupplier.getColor(ChartColor.RED));
+			pg.setColor(SWTGraphicsSupplier.getColor(SpiderChartColor.RED));
 			pg.drawString("Error: No plotters/series have been defined", 30, 30);
 			return;
 		}
 		for (int j = 0; j < this.plottersCount; j++) {
 			if ((this.plotters[j].getNeedsAxis() > 0) && (this.XAxis == null)) {
-				pg.setColor(SWTGraphicsSupplier.getColor(ChartColor.RED));
+				pg.setColor(SWTGraphicsSupplier.getColor(SpiderChartColor.RED));
 				pg.drawString("Error: No X axis have been defined", 30, 30);
 				return;
 			}
 			if ((this.plotters[j].getNeedsAxis() > 1) && (this.YAxis == null)) {
-				pg.setColor(SWTGraphicsSupplier.getColor(ChartColor.RED));
+				pg.setColor(SWTGraphicsSupplier.getColor(SpiderChartColor.RED));
 				pg.drawString("Error: No Y axis have been defined", 30, 30);
 				return;
 			}
 			if ((this.plottersCount > 1) && !this.plotters[j].getCombinable()) {
-				pg.setColor(SWTGraphicsSupplier.getColor(ChartColor.RED));
+				pg.setColor(SWTGraphicsSupplier.getColor(SpiderChartColor.RED));
 				pg.drawString("Error: These plotters cannot be combined", 30, 30);
 				return;
 			}
 		}
-		ChartGraphics gScroll = pg;
-		ChartGraphics gBack = pg;
-		ChartGraphics g = pg;
+		SpiderChartGraphics gScroll = pg;
+		SpiderChartGraphics gBack = pg;
+		SpiderChartGraphics g = pg;
 		if ((this.lastWidth != this.width) || (this.lastHeight != this.height)) {
 			this.repaintAll = true;
 			this.lastWidth = this.width;
@@ -1001,7 +1001,7 @@ public class Chart {
 		}
 		if (this.chartListeners != null) {
 			for (int i = 0; i < this.chartListeners.size(); i++) {
-				((IChartListener) this.chartListeners.elementAt(i)).paintUserExit(this, g);
+				((ISpiderChartListener) this.chartListeners.elementAt(i)).paintUserExit(this, g);
 			}
 		}
 		if (this.XAxis != null) {
@@ -1037,19 +1037,19 @@ public class Chart {
 		}
 	}
 
-	private void paintNotes(final ChartGraphics g) {
+	private void paintNotes(final SpiderChartGraphics g) {
 		if (g == null) {
 			return;
 		}
 		for (int i = 0; i < this.notes.size(); i++) {
-			final ChartLabel label = new ChartLabel((String) this.notes.elementAt(i), "", false, false);
+			final SpiderChartLabel label = new SpiderChartLabel((String) this.notes.elementAt(i), "", false, false);
 			label.initialize(g, this);
 			label.paint(g, 0, 0, 0, 0);
 		}
 	}
 
-	protected void paintTargetZones(final ChartGraphics g, final boolean back) {
-		g.setFont(SWTGraphicsSupplier.getFont("Arial", ChartFont.BOLD, 10));
+	protected void paintTargetZones(final SpiderChartGraphics g, final boolean back) {
+		g.setFont(SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.BOLD, 10));
 		for (int i = 0; i < this.targetZones.size(); i++) {
 			final TargetZone z = (TargetZone) this.targetZones.elementAt(i);
 			z.chart = this;
@@ -1063,7 +1063,7 @@ public class Chart {
 		}
 	}
 
-	private void paintTips(final ChartGraphics g) {
+	private void paintTips(final SpiderChartGraphics g) {
 		this.showingTip = false;
 
 		String tipStr = "";
@@ -1076,7 +1076,7 @@ public class Chart {
 			tipStr = this.selectedLabel.getTip();
 		}
 		if ((tipStr != null) && (tipStr.length() > 0)) {
-			final String[] tip = ChartLoader.convertList(tipStr, "\\n");
+			final String[] tip = SpiderChartLoader.convertList(tipStr, "\\n");
 
 			g.setFont(this.tipFont);
 
@@ -1139,7 +1139,7 @@ public class Chart {
 		this.chartListeners.removeAllElements();
 	}
 
-	public void removeChartListener(final IChartListener cl) {
+	public void removeChartListener(final ISpiderChartListener cl) {
 		this.chartListeners.removeElement(cl);
 	}
 
@@ -1208,8 +1208,8 @@ public class Chart {
 	}
 
 	public void saveToFile(final OutputStream os, final String psFormat) throws Exception {
-		final ChartImage image = SWTGraphicsSupplier.createImage(this.width, this.height);
-		ChartGraphics g = null;
+		final SpiderChartImage image = SWTGraphicsSupplier.createImage(this.width, this.height);
+		SpiderChartGraphics g = null;
 		try {
 			g = image.getGraphics();
 			this.paint(g);
@@ -1348,7 +1348,7 @@ public class Chart {
 
 	private void triggerEvent(final int event) {
 		for (int i = 0; i < this.chartListeners.size(); i++) {
-			((IChartListener) this.chartListeners.elementAt(i)).chartEvent(this, event);
+			((ISpiderChartListener) this.chartListeners.elementAt(i)).chartEvent(this, event);
 		}
 	}
 }

@@ -18,18 +18,18 @@ package com.amitinside.tooling.chart;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import com.amitinside.tooling.chart.gc.ChartColor;
-import com.amitinside.tooling.chart.gc.ChartFont;
-import com.amitinside.tooling.chart.gc.ChartGraphics;
-import com.amitinside.tooling.chart.gc.ChartImage;
+import com.amitinside.tooling.chart.gc.SpiderChartColor;
+import com.amitinside.tooling.chart.gc.SpiderChartFont;
+import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
+import com.amitinside.tooling.chart.gc.SpiderChartImage;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
-public class Legend extends ChartComponent {
+public class Legend extends SpiderChartComponent {
 
 	public FillStyle background;
 	public LineStyle border;
-	public ChartColor color = SWTGraphicsSupplier.getColor(ChartColor.BLACK);
-	public ChartFont font = SWTGraphicsSupplier.getFont("Arial", ChartFont.PLAIN, 10);
+	public SpiderChartColor color = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
+	public SpiderChartFont font = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.PLAIN, 10);
 	Vector items = new Vector(10, 10);
 	public String legendLabel = "";
 	public int legendMargin = 8;
@@ -38,7 +38,7 @@ public class Legend extends ChartComponent {
 	public boolean verticalLayout = true;
 
 	public Legend() {
-		if (Chart.d() != 1) {
+		if (SpiderChart.d() != 1) {
 			this.addItem("Spider Chart", null);
 		} else if (this.title != null) {
 			this.addItem(this.title, null);
@@ -50,9 +50,9 @@ public class Legend extends ChartComponent {
 		this.names.addElement(name);
 	}
 
-	public void draw(final ChartGraphics g) {
+	public void draw(final SpiderChartGraphics g) {
 		if ((this.legendLabel != null) && (this.legendLabel.length() > 0)) {
-			final ChartLabel cl = new ChartLabel(this.legendLabel, "", false, true);
+			final SpiderChartLabel cl = new SpiderChartLabel(this.legendLabel, "", false, true);
 			cl.initialize(g, this.chart);
 			cl.paint(g, this.x, this.y, this.width, this.height);
 			return;
@@ -64,7 +64,7 @@ public class Legend extends ChartComponent {
 		}
 	}
 
-	public void drawHorizontal(final ChartGraphics g) {
+	public void drawHorizontal(final SpiderChartGraphics g) {
 		g.setFont(this.font);
 
 		int textWidth = 0;
@@ -97,9 +97,9 @@ public class Legend extends ChartComponent {
 				w = 10;
 				h = 10;
 			}
-			if (o instanceof ChartImage) {
-				w = ((ChartImage) o).getWidth();
-				h = ((ChartImage) o).getHeight();
+			if (o instanceof SpiderChartImage) {
+				w = ((SpiderChartImage) o).getWidth();
+				h = ((SpiderChartImage) o).getHeight();
 			}
 			if (w > iconWidth) {
 				iconWidth = w;
@@ -144,8 +144,8 @@ public class Legend extends ChartComponent {
 		offset = 0;
 		for (int i = 1; i <= this.names.size(); i++) {
 			final Object icon = this.items.elementAt(i - 1);
-			if (icon instanceof ChartImage) {
-				g.drawImage((ChartImage) icon, toCenterX + this.x + offset, toCenterY + this.y);
+			if (icon instanceof SpiderChartImage) {
+				g.drawImage((SpiderChartImage) icon, toCenterX + this.x + offset, toCenterY + this.y);
 			}
 			if (icon instanceof LineStyle) {
 				final LineStyle l = (LineStyle) icon;
@@ -163,7 +163,7 @@ public class Legend extends ChartComponent {
 		}
 	}
 
-	public void drawVertical(final ChartGraphics g) {
+	public void drawVertical(final SpiderChartGraphics g) {
 		g.setFont(this.font);
 
 		int textWidth = 0;
@@ -192,9 +192,9 @@ public class Legend extends ChartComponent {
 				w = 10;
 				h = 10;
 			}
-			if (o instanceof ChartImage) {
-				w = ((ChartImage) o).getWidth();
-				h = ((ChartImage) o).getHeight();
+			if (o instanceof SpiderChartImage) {
+				w = ((SpiderChartImage) o).getWidth();
+				h = ((SpiderChartImage) o).getHeight();
 			}
 			if (w > iconWidth) {
 				iconWidth = w;
@@ -234,8 +234,8 @@ public class Legend extends ChartComponent {
 		}
 		for (int i = 1; i <= this.names.size(); i++) {
 			final Object icon = this.items.elementAt(i - 1);
-			if (icon instanceof ChartImage) {
-				g.drawImage((ChartImage) icon, toCenterX + this.x, toCenterY + this.y + ((i - 1) * itemHeight));
+			if (icon instanceof SpiderChartImage) {
+				g.drawImage((SpiderChartImage) icon, toCenterX + this.x, toCenterY + this.y + ((i - 1) * itemHeight));
 			}
 			if (icon instanceof LineStyle) {
 				final LineStyle l = (LineStyle) icon;

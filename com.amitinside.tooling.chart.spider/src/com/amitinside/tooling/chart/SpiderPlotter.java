@@ -17,27 +17,27 @@ package com.amitinside.tooling.chart;
 
 import java.text.DecimalFormat;
 
-import com.amitinside.tooling.chart.gc.ChartColor;
-import com.amitinside.tooling.chart.gc.ChartFont;
-import com.amitinside.tooling.chart.gc.ChartGraphics;
+import com.amitinside.tooling.chart.gc.SpiderChartColor;
+import com.amitinside.tooling.chart.gc.SpiderChartFont;
+import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.Polygon;
 
 public class SpiderPlotter extends Plotter {
 
 	public FillStyle backStyle;
-	LineStyle border = new LineStyle(0.2F, SWTGraphicsSupplier.getColor(ChartColor.BLACK), 1);
+	LineStyle border = new LineStyle(0.2F, SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK), 1);
 	public boolean drawCircle = false;
-	public ChartColor factorColor = SWTGraphicsSupplier.getColor(ChartColor.BLACK);
-	public ChartColor[] factorColors;
-	public ChartFont factorFont = SWTGraphicsSupplier.getFont("Arial", ChartFont.PLAIN, 10);
+	public SpiderChartColor factorColor = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
+	public SpiderChartColor[] factorColors;
+	public SpiderChartFont factorFont = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.PLAIN, 10);
 	public double[] factorMaxs;
 	public double[] factorMins;
 	public String[] factorNames;
-	public ChartFont gridFont;
-	public ChartColor gridFontColor = SWTGraphicsSupplier.getColor(ChartColor.BLACK);
+	public SpiderChartFont gridFont;
+	public SpiderChartColor gridFontColor = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
 	public LineStyle gridStyle;
-	public ChartColor[] pointColors = null;
+	public SpiderChartColor[] pointColors = null;
 	public double[] pointColorScale = null;
 	public double radiusModifier = 0.9D;
 	public String tickLabelFormat = "#.#";
@@ -49,7 +49,7 @@ public class SpiderPlotter extends Plotter {
 	}
 
 	@Override
-	protected void plotSerie(final ChartGraphics g, final DataSeq s, final int serieSec) {
+	protected void plotSerie(final SpiderChartGraphics g, final DataSeq s, final int serieSec) {
 		LineDataSeq p;
 		if (s instanceof LineDataSeq) {
 			p = (LineDataSeq) s;
@@ -147,7 +147,7 @@ public class SpiderPlotter extends Plotter {
 					relativeY *= -1;
 					if (this.factorNames.length > i) {
 						if (this.factorNames[i].indexOf("@") >= 0) {
-							final ChartLabel label = new ChartLabel(this.factorNames[i], "", false, false);
+							final SpiderChartLabel label = new SpiderChartLabel(this.factorNames[i], "", false, false);
 							label.initialize(g, this.chart);
 							label.paint(g, (PieCenterX + relativeX) - correction, PieCenterY + relativeY, -1, -1);
 						} else {
@@ -205,7 +205,7 @@ public class SpiderPlotter extends Plotter {
 			s.hotAreas.addElement(po);
 			double YValue;
 			if (p.drawPoint) {
-				ChartColor c = p.pointColor;
+				SpiderChartColor c = p.pointColor;
 				YValue = ((Double) p.getElementY(i)).doubleValue();
 				if ((this.pointColors != null) && (this.pointColorScale != null)) {
 					if (this.pointColors.length > 0) {
@@ -245,7 +245,7 @@ public class SpiderPlotter extends Plotter {
 					txt = p.dataLabels[i];
 				}
 				if (txt.indexOf("@") >= 0) {
-					final ChartLabel label = new ChartLabel(txt, txtValue, false, false);
+					final SpiderChartLabel label = new SpiderChartLabel(txt, txtValue, false, false);
 					label.initialize(g, this.chart);
 					label.paint(g, xs[i] + 7, ys[i], -1, -1);
 				} else {

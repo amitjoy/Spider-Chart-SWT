@@ -22,11 +22,11 @@ import com.amitinside.tooling.chart.Legend;
 import com.amitinside.tooling.chart.LineStyle;
 import com.amitinside.tooling.chart.SpiderPlotter;
 import com.amitinside.tooling.chart.Title;
-import com.amitinside.tooling.chart.gc.ChartColor;
-import com.amitinside.tooling.chart.gc.ChartFont;
+import com.amitinside.tooling.chart.gc.SpiderChartColor;
+import com.amitinside.tooling.chart.gc.SpiderChartFont;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
-public class ChartConfigurationBuilder {
+public class SpiderChartConfigurationBuilder {
 
 	private Legend legend;
 	private SpiderPlotter plotter;
@@ -46,19 +46,19 @@ public class ChartConfigurationBuilder {
 
 	public void legend(final Consumer<Legend> legendBuilder) {
 		this.legend = new Legend();
-		this.legend.background = new FillStyle(SWTGraphicsSupplier.getColor(ChartColor.WHITE));
-		this.legend.border = new LineStyle(1, SWTGraphicsSupplier.getColor(ChartColor.BLACK), LineStyle.LINE_NORMAL);
+		this.legend.background = new FillStyle(SWTGraphicsSupplier.getColor(SpiderChartColor.WHITE));
+		this.legend.border = new LineStyle(1, SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK), LineStyle.LINE_NORMAL);
 		legendBuilder.accept(this.legend);
 	}
 
 	public void plotter(final Consumer<SpiderPlotter> plotter) {
 		this.plotter = new SpiderPlotter();
-		this.plotter.backStyle = new FillStyle(SWTGraphicsSupplier.getColor(ChartColor.YELLOW));
+		this.plotter.backStyle = new FillStyle(SWTGraphicsSupplier.getColor(SpiderChartColor.YELLOW));
 		this.plotter.radiusModifier = 0.8;
 
-		this.plotter.gridStyle = new LineStyle(1, SWTGraphicsSupplier.getColor(ChartColor.BLACK),
+		this.plotter.gridStyle = new LineStyle(1, SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK),
 				LineStyle.LINE_DASHED);
-		this.plotter.gridFont = SWTGraphicsSupplier.getFont("Arial", ChartFont.PLAIN, 10);
+		this.plotter.gridFont = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.PLAIN, 10);
 		plotter.accept(this.plotter);
 	}
 

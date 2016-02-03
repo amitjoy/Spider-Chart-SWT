@@ -23,13 +23,13 @@ import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.graphics.Rectangle;
 
-import com.amitinside.tooling.chart.gc.ChartColor;
-import com.amitinside.tooling.chart.gc.ChartFont;
-import com.amitinside.tooling.chart.gc.ChartGraphics;
-import com.amitinside.tooling.chart.gc.ChartImage;
+import com.amitinside.tooling.chart.gc.SpiderChartColor;
+import com.amitinside.tooling.chart.gc.SpiderChartFont;
+import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
+import com.amitinside.tooling.chart.gc.SpiderChartImage;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
-public class ChartSwtGraphics extends ChartGraphics {
+public class SpiderChartSwtGraphics extends SpiderChartGraphics {
 	private GC graphics;
 	private Font currentFont;
 	private Color currentColor;
@@ -38,15 +38,15 @@ public class ChartSwtGraphics extends ChartGraphics {
 	private Color transparent = null;
 	protected Image imageForTransparentFilling = null;
 
-	public ChartSwtGraphics(final Object g) {
+	public SpiderChartSwtGraphics(final Object g) {
 		this.graphics = (GC) g;
 	}
 
-	public void createFadeArea(final ChartColor colorFrom,
-			final ChartColor colorUntil, final int x, final int y, final int w,
+	public void createFadeArea(final SpiderChartColor colorFrom,
+			final SpiderChartColor colorUntil, final int x, final int y, final int w,
 			final int h, final boolean vertical, final boolean cyclic) {
-		final Color fore = ((ChartSwtColor) colorFrom).getColor();
-		final Color back = ((ChartSwtColor) colorUntil).getColor();
+		final Color fore = ((SpiderChartSwtColor) colorFrom).getColor();
+		final Color back = ((SpiderChartSwtColor) colorUntil).getColor();
 
 		this.graphics.setForeground(fore);
 		this.graphics.setBackground(back);
@@ -88,27 +88,27 @@ public class ChartSwtGraphics extends ChartGraphics {
 		this.graphics.drawArc(x, y, w, h, a1, a2);
 	}
 
-	public void drawImage(final ChartImage image, final int x, final int y) {
+	public void drawImage(final SpiderChartImage image, final int x, final int y) {
 		if (image == null) {
 			return;
 		}
-		if (((ChartSwtImage) image).getImage() == null) {
+		if (((SpiderChartSwtImage) image).getImage() == null) {
 			return;
 		}
-		this.graphics.drawImage(((ChartSwtImage) image).getImage(), x, y);
+		this.graphics.drawImage(((SpiderChartSwtImage) image).getImage(), x, y);
 	}
 
-	public void drawImage(final ChartImage image, final int x1Dest,
+	public void drawImage(final SpiderChartImage image, final int x1Dest,
 			final int y1Dest, final int x2Dest, final int y2Dest,
 			final int x1Source, final int y1Source, final int x2Source,
 			final int y2Source) {
 		if (image == null) {
 			return;
 		}
-		if (((ChartSwtImage) image).getImage() == null) {
+		if (((SpiderChartSwtImage) image).getImage() == null) {
 			return;
 		}
-		this.graphics.drawImage(((ChartSwtImage) image).getImage(), x1Source,
+		this.graphics.drawImage(((SpiderChartSwtImage) image).getImage(), x1Source,
 				y1Source, x2Source - x1Source, y2Source - y1Source, x1Dest,
 				y1Dest, x2Dest - x1Dest, y2Dest - y1Dest);
 	}
@@ -131,8 +131,8 @@ public class ChartSwtGraphics extends ChartGraphics {
 		super.drawRect(x1, y1, w, h);
 	}
 
-	public boolean drawRotatedText(final ChartFont descFont,
-			final ChartColor descColor, final String txt, final int angle,
+	public boolean drawRotatedText(final SpiderChartFont descFont,
+			final SpiderChartColor descColor, final String txt, final int angle,
 			final int x, final int y, final boolean b) {
 		setFont(descFont);
 		setColor(descColor);
@@ -169,8 +169,8 @@ public class ChartSwtGraphics extends ChartGraphics {
 		tmpImage = new Image(SwtGraphicsProvider.getDefaultDisplay(), imageData);
 
 		final GC g = new GC(tmpImage);
-		final Color c = ((ChartSwtColor) descColor).getColor();
-		final Font f = ((ChartSwtFont) descFont).getFont();
+		final Color c = ((SpiderChartSwtColor) descColor).getColor();
+		final Font f = ((SpiderChartSwtFont) descFont).getFont();
 
 		g.setForeground(transparent);
 		g.setBackground(transparent);
@@ -184,9 +184,9 @@ public class ChartSwtGraphics extends ChartGraphics {
 		c.dispose();
 		f.dispose();
 
-		final ChartImage tmpChartImage = SWTGraphicsSupplier.getImage(tmpImage);
+		final SpiderChartImage tmpChartImage = SWTGraphicsSupplier.getImage(tmpImage);
 		paintRotatedImage(tmpChartImage, angle, x - (w - h) / 2, y + 4,
-				ChartGraphics.ROTATE_CENTER);
+				SpiderChartGraphics.ROTATE_CENTER);
 
 		tmpChartImage.dispose();
 		tmpImage.dispose();
@@ -228,15 +228,15 @@ public class ChartSwtGraphics extends ChartGraphics {
 		return new Float(this.alphaValue);
 	}
 
-	public ChartColor getColor() {
-		return new ChartSwtColor(this.currentColor);
+	public SpiderChartColor getColor() {
+		return new SpiderChartSwtColor(this.currentColor);
 	}
 
-	public ChartFont getFont() {
-		return new ChartSwtFont(this.currentFont);
+	public SpiderChartFont getFont() {
+		return new SpiderChartSwtFont(this.currentFont);
 	}
 
-	public int getFontHeight(final ChartFont font) {
+	public int getFontHeight(final SpiderChartFont font) {
 		final Font tmpFont = this.currentFont;
 		this.currentFont = null;
 		if (font != null) {
@@ -250,7 +250,7 @@ public class ChartSwtGraphics extends ChartGraphics {
 		return result;
 	}
 
-	public int getFontWidth(final ChartFont font, final String s) {
+	public int getFontWidth(final SpiderChartFont font, final String s) {
 		final Font tmpFont = this.currentFont;
 		this.currentFont = null;
 		if (font != null) {
@@ -308,17 +308,17 @@ public class ChartSwtGraphics extends ChartGraphics {
 		return g;
 	}
 
-	public void paintRotatedImage(ChartImage srcImage, final int angle,
+	public void paintRotatedImage(SpiderChartImage srcImage, final int angle,
 			final int x, final int y, final int alignment) {
-		Image srcSwtImage = ((ChartSwtImage) srcImage).getImage();
+		Image srcSwtImage = ((SpiderChartSwtImage) srcImage).getImage();
 		int size = srcSwtImage.getImageData().width;
 		int h = srcSwtImage.getImageData().height;
 		int w = srcSwtImage.getImageData().width;
 		final int originalH = h;
 		final int originalW = w;
 		if (h != w) {
-			srcImage = ((ChartSwtImage) srcImage).forRotation();
-			srcSwtImage = ((ChartSwtImage) srcImage).getImage();
+			srcImage = ((SpiderChartSwtImage) srcImage).forRotation();
+			srcSwtImage = ((SpiderChartSwtImage) srcImage).getImage();
 
 			size = srcSwtImage.getImageData().width;
 			h = srcSwtImage.getImageData().height;
@@ -351,7 +351,7 @@ public class ChartSwtGraphics extends ChartGraphics {
 		}
 		final Image destImage = new Image(
 				SwtGraphicsProvider.getDefaultDisplay(), destData);
-		if (alignment == ChartGraphics.ROTATE_LEFTTOP) {
+		if (alignment == SpiderChartGraphics.ROTATE_LEFTTOP) {
 			if (angle == 90) {
 				this.graphics.drawImage(destImage, x - (w - originalH), y);
 			} else if (angle == -90) {
@@ -429,17 +429,17 @@ public class ChartSwtGraphics extends ChartGraphics {
 		}
 	}
 
-	public void setColor(final ChartColor color) {
+	public void setColor(final SpiderChartColor color) {
 		disposeCurrentColor();
-		this.currentColor = ((ChartSwtColor) color).getColor();
+		this.currentColor = ((SpiderChartSwtColor) color).getColor();
 
 		this.graphics.setForeground(this.currentColor);
 		this.graphics.setBackground(this.currentColor);
 	}
 
-	public void setFont(final ChartFont font) {
+	public void setFont(final SpiderChartFont font) {
 		disposeCurrentFont();
-		this.currentFont = ((ChartSwtFont) font).getFont();
+		this.currentFont = ((SpiderChartSwtFont) font).getFont();
 
 		this.graphics.setFont(this.currentFont);
 	}
