@@ -17,7 +17,7 @@ package com.amitinside.tooling.chart;
 
 import com.amitinside.tooling.chart.gc.Polygon;
 
-public abstract interface IFloatingObject {
+public interface IFloatingObject {
 
 	public static final String layerId = "";
 

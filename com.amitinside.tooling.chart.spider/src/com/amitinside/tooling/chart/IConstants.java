@@ -15,7 +15,7 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart;
 
-public abstract interface IConstants {
+public interface IConstants {
 	public static final int UNIT_PERCENTAGE = 1;
 	public static final int UNIT_PIXELS = 2;
 	public static final int UNIT_USER = 0;
