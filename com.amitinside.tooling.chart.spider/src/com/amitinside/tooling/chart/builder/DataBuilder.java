@@ -32,7 +32,7 @@ public class DataBuilder {
 		this.chart.addSeq(this.data.getData());
 	}
 
-	public void setValues(final double[] data, final String color) {
+	public void inject(final double[] data, final String color) {
 		this.data.setData(data, color);
 	}
 

@@ -38,18 +38,18 @@ public class Sample {
 				legendBuilder.background = new FillStyle(GraphicsProvider.getColor(ChartColor.WHITE));
 				legendBuilder.border = new LineStyle(1, GraphicsProvider.getColor(ChartColor.BLACK),
 						LineStyle.LINE_NORMAL);
-				legendBuilder.addItem("Products",
+				legendBuilder.addItem("iPhone 6",
 						new LineStyle(1, GraphicsProvider.getColor(ChartColor.BLUE), LineStyle.LINE_NORMAL));
-				legendBuilder.addItem("Services",
+				legendBuilder.addItem("Nexus 6",
 						new LineStyle(1, GraphicsProvider.getColor(ChartColor.GREEN), LineStyle.LINE_NORMAL));
 			});
 
-			settingsBuilder.title(titleBuilder -> titleBuilder.setText("Sales (thousands $)"));
+			settingsBuilder.title(titleBuilder -> titleBuilder.setText("Mobile Phone Comparison"));
 
 			settingsBuilder.plotter(plotterBuilder -> {
-				final double[] fMaxs = { 6, 6, 6, 6, 6 };
+				final double[] fMaxs = { 10, 10, 10, 10, 10 };
 				final double[] fMins = { 0, 0, 0, 0, 0 };
-				final String[] factors = { "factor1", "factor2", "factor3", "factor4", "factor5", "factor6" };
+				final String[] factors = { "Battery", "Camera", "Display", "Memory", "Brand", "Processor" };
 
 				plotterBuilder.factorMaxs = fMaxs;
 				plotterBuilder.factorMins = fMins;
@@ -65,14 +65,14 @@ public class Sample {
 		}).viewer(chartBuilder -> {
 			chartBuilder.chart(dataBuilder1 -> {
 				// First Data
-				final double[] d1 = { 1, 2, 3, 4, 5 };
-				dataBuilder1.setValues(d1, "BLUE");
+				final double[] data1 = { 1, 2, 3, 4, 5 };
+				dataBuilder1.inject(data1, "BLUE");
 				dataBuilder1.done();
 			});
 			chartBuilder.chart(dataBuilder2 -> {
 				// Second Data
-				final double[] d2 = { 2, 3, 4, 4.2, 3 };
-				dataBuilder2.setValues(d2, "GREEN");
+				final double[] data2 = { 2, 3, 4, 4.2, 3 };
+				dataBuilder2.inject(data2, "GREEN");
 				dataBuilder2.done();
 			});
 		});
