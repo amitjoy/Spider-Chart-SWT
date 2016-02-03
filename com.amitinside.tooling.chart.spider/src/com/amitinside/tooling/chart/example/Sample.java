@@ -47,7 +47,7 @@ public class Sample {
 			settingsBuilder.title(titleBuilder -> titleBuilder.setText("Mobile Phone Comparison"));
 
 			settingsBuilder.plotter(plotterBuilder -> {
-				final double[] fMaxs = { 10, 10, 10, 10, 10 };
+				final double[] fMaxs = { 5, 5, 5, 5, 5 };
 				final double[] fMins = { 0, 0, 0, 0, 0 };
 				final String[] factors = { "Battery", "Camera", "Display", "Memory", "Brand", "Processor" };
 
