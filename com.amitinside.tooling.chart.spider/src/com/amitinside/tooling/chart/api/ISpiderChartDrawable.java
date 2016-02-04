@@ -19,6 +19,8 @@ public interface ISpiderChartDrawable {
 
 	public abstract String areaColor();
 
+	public abstract String legend();
+
 	public abstract double[] values();
 
 }

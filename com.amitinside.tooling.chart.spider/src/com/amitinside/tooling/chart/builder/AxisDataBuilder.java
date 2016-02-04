@@ -18,6 +18,7 @@ package com.amitinside.tooling.chart.builder;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Optional;
+import java.util.function.Supplier;
 
 import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.api.ISpiderChartDrawable;
@@ -39,10 +40,10 @@ public class AxisDataBuilder {
 		this.chart.addSeq(this.data.getData());
 	}
 
-	public void inject(final ISpiderChartDrawable drawableData) {
+	public void inject(final Supplier<ISpiderChartDrawable> drawableData) {
 		requireNonNull(drawableData);
-		final Optional<double[]> values = Optional.of(drawableData.values());
-		final Optional<String> areaColor = Optional.of(drawableData.areaColor());
+		final Optional<double[]> values = Optional.of(drawableData.get().values());
+		final Optional<String> areaColor = Optional.of(drawableData.get().areaColor());
 
 		this.data.setData(values.orElseGet(() -> new double[] { 0 }), areaColor.orElse("RED"));
 		this.done();

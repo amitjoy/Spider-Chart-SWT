@@ -15,14 +15,12 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.example;
 
-import static com.amitinside.tooling.chart.LineStyle.NORMAL_LINE;
-import static com.amitinside.tooling.chart.gc.SWTGraphicsSupplier.getColor;
+import java.util.function.Supplier;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
-import com.amitinside.tooling.chart.LineStyle;
 import com.amitinside.tooling.chart.api.ISpiderChartDrawable;
 import com.amitinside.tooling.chart.builder.SpiderChartBuilder;
 
@@ -30,14 +28,14 @@ public final class Sample {
 
 	private static void buildSpiderChart(final Shell shell) {
 
-		final ISpiderChartDrawable iphoneData = new IPhone();
-		final ISpiderChartDrawable nexusData = new Nexus();
+		final Supplier<ISpiderChartDrawable> iPhoneData = IPhone::new;
+		final Supplier<ISpiderChartDrawable> nexusData = Nexus::new;
 
 		SpiderChartBuilder.config(shell, settings -> {
 
 			settings.title(title -> title.setText("Smartphone Comparison")).legend(legend -> {
-				legend.addItem("iPhone 6", LineStyle.of(1, getColor(iphoneData.areaColor()), NORMAL_LINE));
-				legend.addItem("Nexus 6", LineStyle.of(1, getColor(nexusData.areaColor()), NORMAL_LINE));
+				legend.addItem(iPhoneData);
+				legend.addItem(nexusData);
 			}).plotter(plotter -> {
 				final double[] maxScales = { 5, 5, 5, 5, 5 };
 				final double[] minScales = { 0, 0, 0, 0, 0 };
@@ -47,9 +45,8 @@ public final class Sample {
 				plotter.minScaleFactors = minScales;
 				plotter.axesFactors = axes;
 			});
-
 		}).viewer(chart -> {
-			chart.data(firstData -> firstData.inject(iphoneData)).data(secondData -> secondData.inject(nexusData));
+			chart.data(firstData -> firstData.inject(iPhoneData)).data(secondData -> secondData.inject(nexusData));
 		});
 	}
 
@@ -59,7 +56,6 @@ public final class Sample {
 		shell.setSize(800, 750);
 
 		buildSpiderChart(shell);
-
 		shell.open();
 
 		while (!shell.isDisposed()) {

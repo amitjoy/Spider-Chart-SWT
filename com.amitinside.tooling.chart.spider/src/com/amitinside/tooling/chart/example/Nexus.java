@@ -26,6 +26,11 @@ public class Nexus implements ISpiderChartDrawable {
 	}
 
 	@Override
+	public String legend() {
+		return "Nexus 6";
+	}
+
+	@Override
 	public double[] values() {
 		final double[] data = { 2, 3, 4, 4.2, 3 };
 		return data;

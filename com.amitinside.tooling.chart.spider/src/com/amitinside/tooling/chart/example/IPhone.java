@@ -26,6 +26,11 @@ public class IPhone implements ISpiderChartDrawable {
 	}
 
 	@Override
+	public String legend() {
+		return "iPhone";
+	}
+
+	@Override
 	public double[] values() {
 		final double[] data = { 1, 2, 3, 4, 5 };
 		return data;
