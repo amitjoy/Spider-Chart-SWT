@@ -39,17 +39,22 @@ public class SpiderChart {
 
 	private class SpiderChartWorker implements Runnable {
 
+		/** */
 		public SpiderChart chart = null;
 
+		/** */
 		public boolean stop = false;
 
+		/** Constructor */
 		private SpiderChartWorker() {
 		}
 
+		/** Constructor */
 		SpiderChartWorker(final Object object) {
 			this();
 		}
 
+		/** {@inheritDoc} */
 		@Override
 		public void run() {
 			while (!this.stop) {
@@ -84,16 +89,6 @@ public class SpiderChart {
 	}
 
 	/** */
-	private static String replaceStr(String s, final String sub1, final String sub2) {
-		int p = s.indexOf(sub1);
-		while (p >= 0) {
-			s = s.substring(0, p) + sub2 + s.substring(p + sub1.length(), s.length());
-			p = s.indexOf(sub1);
-		}
-		return s;
-	}
-
-	/** */
 	public boolean activateSelection = false;
 
 	/** Used to trigger thread automatically to build the Spider Chart */
@@ -121,13 +116,13 @@ public class SpiderChart {
 	public double bottomMargin = 0.125D;
 
 	/** */
-	protected Vector chartHotAreas = new Vector(0, 5);
+	protected Vector<Object> chartHotAreas = new Vector<>(0, 5);
 
 	/** Spider Chart Image */
 	private SpiderChartImage chartImage = null;
 
 	/** */
-	private final Vector chartListeners = new Vector();
+	private final Vector<ISpiderChartListener> chartListeners = new Vector<>();
 
 	/** */
 	public double currentValueX;
@@ -160,7 +155,7 @@ public class SpiderChart {
 	private SpiderChartImage finalImage = null;
 
 	/** */
-	protected Vector floatingObjects = new Vector(0, 5);
+	protected Vector<IFloatingObject> floatingObjects = new Vector<>(0, 5);
 
 	/** */
 	public boolean fullXAxis = false;
@@ -196,7 +191,7 @@ public class SpiderChart {
 	public long msecs = 2000L;
 
 	/** */
-	protected Vector notes = new Vector();
+	protected Vector<String> notes = new Vector<>();
 
 	/** */
 	public int offsetX = 0;
@@ -253,7 +248,7 @@ public class SpiderChart {
 	private boolean stopped = false;
 
 	/** */
-	protected Vector targetZones = new Vector();
+	protected Vector<TargetZone> targetZones = new Vector<>();
 
 	/** Spider Chart Tip Background Color */
 	SpiderChartColor tipColor = SWTGraphicsSupplier.getColor(SpiderChartColor.YELLOW);
@@ -292,13 +287,7 @@ public class SpiderChart {
 	public Axis Y2Axis;
 
 	/** */
-	public VAxisLabel Y2Label;
-
-	/** */
 	public Axis YAxis;
-
-	/** */
-	public VAxisLabel YLabel;
 
 	/**
 	 * Constructor
@@ -350,33 +339,6 @@ public class SpiderChart {
 	/** */
 	public void addTargetZone(final TargetZone zone) {
 		this.targetZones.addElement(zone);
-	}
-
-	/** */
-	private void adjustSize3d() {
-		final boolean D3 = false;
-		for (int i = 0; i < this.plottersCount; i++) {
-			if (D3 && (this.plotters[i].depth == 0)) {
-				this.plotters[i].depth = 20;
-			}
-			this.plotters[i].width = this.plotters[i].width - this.plotters[i].depth;
-			this.plotters[i].height = this.plotters[i].height - this.plotters[i].depth;
-			this.plotters[i].y = this.plotters[i].y + this.plotters[i].depth;
-		}
-		if (this.Y2Axis != null) {
-			this.Y2Axis.visibleSize -= this.plotters[0].depth;
-			this.Y2Axis.y = this.Y2Axis.y;
-			this.Y2Axis.height = this.Y2Axis.height - this.plotters[0].depth;
-		}
-		if (this.YAxis != null) {
-			this.YAxis.visibleSize -= this.plotters[0].depth;
-			this.YAxis.y = this.YAxis.y + this.plotters[0].depth;
-			this.YAxis.height = this.YAxis.height - this.plotters[0].depth;
-		}
-		if (this.XAxis != null) {
-			this.XAxis.visibleSize -= this.plotters[0].depth;
-			this.XAxis.width = this.XAxis.width - this.plotters[0].depth;
-		}
 	}
 
 	/** */
@@ -447,16 +409,7 @@ public class SpiderChart {
 			this.XLabel.height = (int) (myHeight * (this.bottomMargin / (2 + this.getCountParallelAxis(this.XAxis))));
 			this.XLabel.width = (int) (myWidth * (1.0D - (this.leftMargin + this.leftMargin)));
 		}
-		if (this.YLabel != null) {
-			this.YLabel.x = 0;
-			this.YLabel.y = (int) (myHeight * this.topMargin);
-			this.YLabel.height = (int) (myHeight * (1.0D - (this.topMargin + this.bottomMargin + this.legendMargin)));
-			this.YLabel.width = (int) (myWidth * (this.leftMargin / (2 + this.getCountParallelAxis(this.YAxis))));
-		}
 		if (this.Y2Axis != null) {
-			this.plotters[0].width = (int) (this.plotters[0].width - ((myWidth * this.secondYAxisMargin) / 2.0D));
-		}
-		if (this.Y2Label != null) {
 			this.plotters[0].width = (int) (this.plotters[0].width - ((myWidth * this.secondYAxisMargin) / 2.0D));
 		}
 		if (this.Y2Axis != null) {
@@ -468,21 +421,12 @@ public class SpiderChart {
 			this.Y2Axis.width = (int) ((myWidth * this.rightMargin) / (2 + this.getCountParallelAxis(this.Y2Axis)));
 			this.Y2Axis.height = this.virtualHeight - (myHeight - this.Y2Axis.visibleSize);
 		}
-		if (this.Y2Label != null) {
-			final int tmp = 2 + this.getCountParallelAxis(this.Y2Axis);
-			this.Y2Label.x = this.plotters[0].x + this.plotters[0].visibleWidth
-					+ (int) ((myWidth * this.rightMargin * (tmp - 1)) / tmp);
-			this.Y2Label.y = (int) (myHeight * this.topMargin);
-			this.Y2Label.height = (int) (myHeight * (1.0D - (this.topMargin + this.bottomMargin + this.legendMargin)));
-			this.Y2Label.width = (int) ((myWidth * this.rightMargin) / (2 + this.getCountParallelAxis(this.Y2Axis)));
-		}
 		if (this.legend != null) {
 			this.legend.x = (int) (myWidth * this.leftMargin);
 			this.legend.width = (int) (myWidth * (1.0D - (this.leftMargin + this.leftMargin)));
 			this.legend.y = (int) (myHeight * (1.0D - this.legendMargin));
 			this.legend.height = (int) (myHeight * this.legendMargin);
 		}
-		this.adjustSize3d();
 		this.setPlotterSize();
 	}
 
@@ -541,16 +485,7 @@ public class SpiderChart {
 			}
 			this.XLabel.width = (int) (myWidth * (1.0D - (this.legendMargin + this.leftMargin)));
 		}
-		if (this.YLabel != null) {
-			this.YLabel.x = 0;
-			this.YLabel.y = (int) (myHeight * this.topMargin);
-			this.YLabel.height = (int) (myHeight * (1.0D - (this.topMargin + this.bottomMargin)));
-			this.YLabel.width = (int) (myWidth * (this.leftMargin / (2 + this.getCountParallelAxis(this.YAxis))));
-		}
 		if (this.Y2Axis != null) {
-			this.plotters[0].width = (int) (this.plotters[0].width - ((myWidth * this.secondYAxisMargin) / 2.0D));
-		}
-		if (this.Y2Label != null) {
 			this.plotters[0].width = (int) (this.plotters[0].width - ((myWidth * this.secondYAxisMargin) / 2.0D));
 		}
 		if (this.Y2Axis != null) {
@@ -561,22 +496,12 @@ public class SpiderChart {
 			this.Y2Axis.width = (int) ((myWidth * this.rightMargin) / (2 + this.getCountParallelAxis(this.Y2Axis)));
 			this.Y2Axis.height = this.virtualHeight - (myHeight - this.Y2Axis.visibleSize);
 		}
-		if (this.Y2Label != null) {
-			final int tmp = 2 + this.getCountParallelAxis(this.Y2Axis);
-
-			this.Y2Label.x = this.plotters[0].x + this.plotters[0].visibleWidth
-					+ (int) ((myWidth * this.rightMargin * (tmp - 1)) / tmp);
-			this.Y2Label.y = (int) (myHeight * this.topMargin);
-			this.Y2Label.height = (int) (myHeight * (1.0D - (this.topMargin + this.bottomMargin)));
-			this.Y2Label.width = (int) ((myWidth * this.rightMargin) / (2 + this.getCountParallelAxis(this.Y2Axis)));
-		}
 		if (this.legend != null) {
 			this.legend.x = (int) (myWidth * (1.0D - this.legendMargin));
 			this.legend.width = (int) (myWidth * this.legendMargin);
 			this.legend.y = (int) (myHeight * this.topMargin);
 			this.legend.height = (int) (myHeight * 0.5D);
 		}
-		this.adjustSize3d();
 		this.setPlotterSize();
 	}
 
@@ -633,16 +558,7 @@ public class SpiderChart {
 			}
 			this.XLabel.width = (int) (myWidth * (1.0D - (this.leftMargin + this.leftMargin)));
 		}
-		if (this.YLabel != null) {
-			this.YLabel.x = 0;
-			this.YLabel.y = (int) (myHeight * (this.topMargin + this.legendMargin));
-			this.YLabel.height = (int) (myHeight * (1.0D - (this.topMargin + this.bottomMargin + this.legendMargin)));
-			this.YLabel.width = (int) (myWidth * (this.leftMargin / (2 + this.getCountParallelAxis(this.YAxis))));
-		}
 		if (this.Y2Axis != null) {
-			this.plotters[0].width = (int) (this.plotters[0].width - ((myWidth * this.secondYAxisMargin) / 2.0D));
-		}
-		if (this.Y2Label != null) {
 			this.plotters[0].width = (int) (this.plotters[0].width - ((myWidth * this.secondYAxisMargin) / 2.0D));
 		}
 		if (this.Y2Axis != null) {
@@ -654,14 +570,6 @@ public class SpiderChart {
 			this.Y2Axis.width = (int) ((myWidth * this.rightMargin) / (2 + this.getCountParallelAxis(this.Y2Axis)));
 			this.Y2Axis.height = this.virtualHeight - (myHeight - this.Y2Axis.visibleSize);
 		}
-		if (this.Y2Label != null) {
-			final int tmp = 2 + this.getCountParallelAxis(this.Y2Axis);
-			this.Y2Label.x = this.plotters[0].x + this.plotters[0].visibleWidth
-					+ (int) ((myWidth * this.rightMargin * (tmp - 1)) / tmp);
-			this.Y2Label.y = (int) (myHeight * (this.topMargin + this.legendMargin));
-			this.Y2Label.height = (int) (myHeight * (1.0D - (this.topMargin + this.bottomMargin + this.legendMargin)));
-			this.Y2Label.width = (int) ((myWidth * this.rightMargin) / (2 + this.getCountParallelAxis(this.Y2Axis)));
-		}
 		if (this.legend != null) {
 			this.legend.x = (int) (myWidth * this.leftMargin);
 			this.legend.width = (int) (myWidth * (1.0D - (this.leftMargin + this.rightMargin)));
@@ -671,7 +579,6 @@ public class SpiderChart {
 			}
 			this.legend.height = (int) (myHeight * this.legendMargin);
 		}
-		this.adjustSize3d();
 		this.setPlotterSize();
 	}
 
@@ -735,7 +642,7 @@ public class SpiderChart {
 	public TargetZone[] getTargetZones() {
 		final TargetZone[] a = new TargetZone[this.targetZones.size()];
 		for (int i = 0; i < a.length; i++) {
-			a[i] = (TargetZone) this.targetZones.elementAt(i);
+			a[i] = this.targetZones.elementAt(i);
 		}
 		return a;
 	}
@@ -1036,14 +943,6 @@ public class SpiderChart {
 			this.XLabel.chart = this;
 			this.XLabel.draw(g);
 		}
-		if (this.YLabel != null) {
-			this.YLabel.chart = this;
-			this.YLabel.draw(g);
-		}
-		if (this.Y2Label != null) {
-			this.Y2Label.chart = this;
-			this.Y2Label.draw(g);
-		}
 		if (this.repaintAll) {
 			for (int i = 0; i < this.plottersCount; i++) {
 				this.plotters[i].chart = this;
@@ -1067,7 +966,7 @@ public class SpiderChart {
 		}
 		if (this.chartListeners != null) {
 			for (int i = 0; i < this.chartListeners.size(); i++) {
-				((ISpiderChartListener) this.chartListeners.elementAt(i)).paintUserExit(this, g);
+				this.chartListeners.elementAt(i).paintUserExit(this, g);
 			}
 		}
 		if (this.XAxis != null) {
@@ -1109,7 +1008,7 @@ public class SpiderChart {
 			return;
 		}
 		for (int i = 0; i < this.notes.size(); i++) {
-			final SpiderChartLabel label = new SpiderChartLabel((String) this.notes.elementAt(i), "", false, false);
+			final SpiderChartLabel label = new SpiderChartLabel(this.notes.elementAt(i), "", false, false);
 			label.initialize(g, this);
 			label.paint(g, 0, 0, 0, 0);
 		}
@@ -1119,7 +1018,7 @@ public class SpiderChart {
 	protected void paintTargetZones(final SpiderChartGraphics g, final boolean back) {
 		g.setFont(SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.BOLD, 10));
 		for (int i = 0; i < this.targetZones.size(); i++) {
-			final TargetZone z = (TargetZone) this.targetZones.elementAt(i);
+			final TargetZone z = this.targetZones.elementAt(i);
 			z.chart = this;
 			z.effect3D = this.plotters[0].depth;
 			if (back && z.background) {
@@ -1216,8 +1115,6 @@ public class SpiderChart {
 		this.XAxis = null;
 		this.YAxis = null;
 		this.Y2Axis = null;
-		this.YLabel = null;
-		this.Y2Label = null;
 		this.XLabel = null;
 		this.legend = null;
 		this.title = null;
@@ -1413,7 +1310,7 @@ public class SpiderChart {
 	/** */
 	private void triggerEvent(final int event) {
 		for (int i = 0; i < this.chartListeners.size(); i++) {
-			((ISpiderChartListener) this.chartListeners.elementAt(i)).chartEvent(this, event);
+			this.chartListeners.elementAt(i).chartEvent(this, event);
 		}
 	}
 }

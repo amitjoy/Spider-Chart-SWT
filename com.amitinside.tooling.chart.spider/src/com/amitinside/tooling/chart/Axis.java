@@ -51,7 +51,7 @@ public class Axis extends SpiderChartComponent {
 	public static final int VERTICAL = 1;
 
 	/** */
-	protected Vector additionalAxis = new Vector();
+	protected Vector<Axis> additionalAxis = new Vector<>();
 
 	/** */
 	public int autoNumberOfTicks = 0;
@@ -165,7 +165,7 @@ public class Axis extends SpiderChartComponent {
 	public LineStyle style = new LineStyle(2.0F, SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK), 1);
 
 	/** */
-	protected Vector targetZones = new Vector();
+	protected Vector<AxisZone> targetZones = new Vector<>();
 
 	/** */
 	public boolean tickAtBase = false;
@@ -458,7 +458,6 @@ public class Axis extends SpiderChartComponent {
 		if (this.initialDate != null) {
 			tickDate = this.initialDate;
 		}
-		double i2 = tickBase;
 		double startValue = tickBase;
 		if (startValue == 0.0D) {
 			startValue = 1.0D;
@@ -708,35 +707,7 @@ public class Axis extends SpiderChartComponent {
 					}
 				}
 			}
-			if (this.logarithmicIntervals && (this.scale instanceof LogScale)) {
-				if ((this.bigTickInterval == 1) || (bigTickCount == (this.bigTickInterval - 1))) {
-					i = i2;
-					if (this.scaleTickInterval == 0.0D) {
-						if (i == 0.0D) {
-							i = 1.0D;
-						}
-						i *= ((LogScale) this.scale).base;
-					} else {
-						i += this.scaleTickInterval;
-					}
-					i2 = i;
-				} else {
-					double smallTickInterval = 0.0D;
-
-					double i3 = i2;
-					if (this.scaleTickInterval == 0.0D) {
-						if (i3 == 0.0D) {
-							i3 = 1.0D;
-						}
-						i3 *= ((LogScale) this.scale).base;
-					} else {
-						i3 += this.scaleTickInterval;
-					}
-					smallTickInterval = i3 - i2;
-					smallTickInterval /= this.bigTickInterval;
-					i += smallTickInterval;
-				}
-			} else {
+			{
 				i += usedTickInterval;
 
 				i = Math.rint(i * 100000.0D) / 100000.0D;
@@ -786,7 +757,7 @@ public class Axis extends SpiderChartComponent {
 		int realPositionY = this.realPosition;
 		if (this.isMainAxis && !this.xscaleOnTop) {
 			for (int i = 0; i < this.additionalAxis.size(); i++) {
-				final Axis a = (Axis) this.additionalAxis.elementAt(i);
+				final Axis a = this.additionalAxis.elementAt(i);
 				a.mainAxis = this;
 				if (this.rightAxis) {
 					a.rightAxis = true;
@@ -838,7 +809,7 @@ public class Axis extends SpiderChartComponent {
 	protected void drawForeground(final SpiderChartGraphics g, final Axis peerAxis) {
 		if (this.isMainAxis && !this.xscaleOnTop) {
 			for (int i = 0; i < this.additionalAxis.size(); i++) {
-				final Axis a = (Axis) this.additionalAxis.elementAt(i);
+				final Axis a = this.additionalAxis.elementAt(i);
 				a.draw(g, peerAxis, true, false);
 			}
 		}
@@ -852,7 +823,7 @@ public class Axis extends SpiderChartComponent {
 
 	/** */
 	protected Axis getAdditionalAxis(final int i) {
-		return (Axis) this.additionalAxis.elementAt(i);
+		return this.additionalAxis.elementAt(i);
 	}
 
 	/** */
@@ -864,7 +835,7 @@ public class Axis extends SpiderChartComponent {
 	public AxisZone[] getTargetZones() {
 		final AxisZone[] a = new AxisZone[this.targetZones.size()];
 		for (int i = 0; i < a.length; i++) {
-			a[i] = (AxisZone) this.targetZones.elementAt(i);
+			a[i] = this.targetZones.elementAt(i);
 		}
 		return a;
 	}
@@ -872,7 +843,7 @@ public class Axis extends SpiderChartComponent {
 	/** */
 	protected void paintTargetZones(final SpiderChartGraphics g, final Axis peerAxis, final int position) {
 		for (int i = 0; i < this.targetZones.size(); i++) {
-			final AxisZone z = (AxisZone) this.targetZones.elementAt(i);
+			final AxisZone z = this.targetZones.elementAt(i);
 			z.chart = this.chart;
 			z.paint(g, this, peerAxis, position);
 		}

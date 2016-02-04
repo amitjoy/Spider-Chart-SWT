@@ -161,7 +161,7 @@ public class SpiderChartSwtImage extends SpiderChartImage {
 			iData[0] = this.image.getImageData();
 			encoder.data = iData;
 			if (sFormat.toUpperCase().compareTo("GIF") == 0) {
-				final Hashtable colors = new Hashtable();
+				final Hashtable<Integer, RGB> colors = new Hashtable<>();
 
 				final RGB[] rgbs = new RGB['Ā'];
 				int count = 0;

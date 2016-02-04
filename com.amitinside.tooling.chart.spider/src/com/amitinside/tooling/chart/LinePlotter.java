@@ -21,18 +21,6 @@ import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 public class LinePlotter extends Plotter {
 
 	/** */
-	public static final int MM_CANDLESTICK = 2;
-	/** */
-	public static final int MM_NORMAL = 0;
-	/** */
-	public static final int MM_OHLC = 1;
-	/** */
-	public static final int TYPE_B_SPLINES = 2;
-	/** */
-	public static final int TYPE_CUBIC_NATURAL = 1;
-	/** */
-	public static final int TYPE_LEAST_SQUARES_LINE = 3;
-	/** */
 	public static final int TYPE_LINE = 0;
 	/** */
 	protected int[][] bottomCorners = new int[2][2];

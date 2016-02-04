@@ -17,28 +17,14 @@ package com.amitinside.tooling.chart.gc;
 
 import java.util.Vector;
 
-public class Polygon extends Vector {
+public class Polygon extends Vector<Point> {
+
+	/** */
+	private static final long serialVersionUID = 1L;
 
 	/** */
 	public void addPoint(final int x, final int y) {
 		super.addElement(new Point(x, y));
-	}
-
-	/** */
-	private Rectangle calculateRect() {
-		int MinX = 999999;
-		int MinY = 999999;
-		int MaxX = -999999;
-		int MaxY = -999999;
-		for (int i = 0; i < this.size(); i++) {
-			final int x = this.getX(i);
-			MinX = Math.min(MinX, x);
-			MaxX = Math.max(MaxX, x);
-			final int y = this.getY(i);
-			MinY = Math.min(MinY, y);
-			MaxY = Math.max(MaxY, y);
-		}
-		return new Rectangle(MinX, MinY, MaxX - MinX, MaxY - MinY);
 	}
 
 	/** */
@@ -65,11 +51,11 @@ public class Polygon extends Vector {
 
 	/** */
 	public int getX(final int i) {
-		return ((Point) super.elementAt(i)).x;
+		return super.elementAt(i).x;
 	}
 
 	/** */
 	public int getY(final int i) {
-		return ((Point) super.elementAt(i)).y;
+		return super.elementAt(i).y;
 	}
 }

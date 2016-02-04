@@ -17,7 +17,6 @@ package com.amitinside.tooling.chart;
 
 import static com.amitinside.tooling.chart.gc.SWTGraphicsSupplier.getColor;
 
-import java.util.Enumeration;
 import java.util.Vector;
 import java.util.function.Supplier;
 
@@ -43,7 +42,7 @@ public class Legend extends SpiderChartComponent {
 	public SpiderChartFont font = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.PLAIN, 10);
 
 	/** */
-	Vector items = new Vector(10, 10);
+	Vector<Object> items = new Vector<>(10, 10);
 
 	/** Legend Label */
 	public String legendLabel = "";
@@ -52,7 +51,7 @@ public class Legend extends SpiderChartComponent {
 	public int legendMargin = 8;
 
 	/** */
-	Vector names = new Vector(10, 10);
+	Vector<String> names = new Vector<>(10, 10);
 
 	/** Legend Title */
 	public String title = null;
@@ -107,17 +106,15 @@ public class Legend extends SpiderChartComponent {
 		final int textHeight = g.getFontHeight();
 		final int iconSeparator = 3;
 		final int textSeparator = 5;
-		for (final Enumeration e = this.names.elements(); e.hasMoreElements();) {
-			final String s = (String) e.nextElement();
+		for (final Object element : this.names) {
+			final String s = (String) element;
 			w = g.getFontWidth(s);
 			if (w > textWidth) {
 				textWidth = w;
 			}
 		}
 		totalWidth = (textWidth + textSeparator) * this.names.size();
-		for (final Enumeration e = this.items.elements(); e.hasMoreElements();) {
-			final Object o = e.nextElement();
-
+		for (Object o : this.items) {
 			w = 0;
 			h = 0;
 			if (o instanceof LineStyle) {
@@ -168,7 +165,7 @@ public class Legend extends SpiderChartComponent {
 		int offset = 0;
 		for (int i = 1; i <= this.names.size(); i++) {
 			g.setColor(this.color);
-			g.drawString((String) this.names.elementAt(i - 1), toCenterX + offset + iconWidth + iconSeparator + this.x,
+			g.drawString(this.names.elementAt(i - 1), toCenterX + offset + iconWidth + iconSeparator + this.x,
 					toCenterY + this.y + itemHeight);
 			offset = offset + iconWidth + iconSeparator + textWidth + textSeparator;
 		}
@@ -204,16 +201,14 @@ public class Legend extends SpiderChartComponent {
 		int w = 0;
 		int h = 0;
 		final int textHeight = g.getFontHeight();
-		for (final Enumeration e = this.names.elements(); e.hasMoreElements();) {
-			final String s = (String) e.nextElement();
+		for (final Object element : this.names) {
+			final String s = (String) element;
 			w = g.getFontWidth(s);
 			if (w > textWidth) {
 				textWidth = w;
 			}
 		}
-		for (final Enumeration e = this.items.elements(); e.hasMoreElements();) {
-			final Object o = e.nextElement();
-
+		for (Object o : this.items) {
 			w = 0;
 			h = 0;
 			if (o instanceof LineStyle) {
@@ -261,7 +256,7 @@ public class Legend extends SpiderChartComponent {
 		}
 		for (int i = 1; i <= this.names.size(); i++) {
 			g.setColor(this.color);
-			g.drawString((String) this.names.elementAt(i - 1), toCenterX + iconWidth + this.x,
+			g.drawString(this.names.elementAt(i - 1), toCenterX + iconWidth + this.x,
 					toCenterY + this.y + (i * itemHeight));
 		}
 		for (int i = 1; i <= this.names.size(); i++) {

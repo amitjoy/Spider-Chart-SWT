@@ -45,7 +45,7 @@ public class Plotter extends SpiderChartComponent {
 	protected int needsAxis = 2;
 
 	/** */
-	Vector series = new Vector(0, 1);
+	Vector<DataSeq> series = new Vector<>(0, 1);
 
 	/** */
 	public int visibleHeight = 0;
@@ -133,7 +133,7 @@ public class Plotter extends SpiderChartComponent {
 
 	/** */
 	public DataSeq getSerie(final int p) {
-		return (DataSeq) this.series.elementAt(p);
+		return this.series.elementAt(p);
 	}
 
 	/** */
@@ -157,7 +157,7 @@ public class Plotter extends SpiderChartComponent {
 	/** */
 	public void plot(final SpiderChartGraphics g) {
 		for (int i = 0; i < this.series.size(); i++) {
-			final DataSeq s = (DataSeq) this.series.elementAt(i);
+			final DataSeq s = this.series.elementAt(i);
 
 			this.plotSerie(g, s, i);
 		}
@@ -244,7 +244,7 @@ public class Plotter extends SpiderChartComponent {
 					if (cumulative) {
 						YValue = 0.0D;
 						for (int si = 0; si < this.series.size(); si++) {
-							final DataSeq ser = (DataSeq) this.series.elementAt(si);
+							final DataSeq ser = this.series.elementAt(si);
 							if (this.inSameSubChart(ser, s) && (ser.getSize() > i)) {
 								if (ser.getElementY(i) != null) {
 									final double d = ((Double) ser.getElementY(i)).doubleValue();
