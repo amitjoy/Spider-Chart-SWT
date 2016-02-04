@@ -176,7 +176,7 @@ public class SpiderChart {
 	public double leftMargin = 0.125D;
 
 	/** Spider Chart Legend */
-	public Legend legend;
+	public SpiderChartLegend legend;
 
 	/** Spider Chart Legend Margin */
 	public double legendMargin = 0.2D;
@@ -206,7 +206,7 @@ public class SpiderChart {
 	private int originalVirtualWidth = -1;
 
 	/** */
-	public Plotter[] plotters = new Plotter[10];
+	public SpiderChartPlotter[] plotters = new SpiderChartPlotter[10];
 
 	/** */
 	private int plottersCount = 0;
@@ -260,7 +260,7 @@ public class SpiderChart {
 	SpiderChartColor tipFontColor = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
 
 	/** Spider Chart Title */
-	public Title title;
+	public SpiderChartTitle title;
 
 	/** */
 	public double topMargin = 0.125D;
@@ -278,16 +278,16 @@ public class SpiderChart {
 	public boolean withScroll = false;
 
 	/** */
-	public Axis XAxis;
+	public SpiderChartAxis XAxis;
 
 	/** */
 	public HAxisLabel XLabel;
 
 	/** */
-	public Axis Y2Axis;
+	public SpiderChartAxis Y2Axis;
 
 	/** */
-	public Axis YAxis;
+	public SpiderChartAxis YAxis;
 
 	/**
 	 * Constructor
@@ -296,14 +296,14 @@ public class SpiderChart {
 	}
 
 	/** Constructor */
-	public SpiderChart(final Title t, final Plotter p) {
+	public SpiderChart(final SpiderChartTitle t, final SpiderChartPlotter p) {
 		this.resetChart(t, p, null, null);
 	}
 
 	/**
 	 * Constructor
 	 */
-	public SpiderChart(final Title t, final Plotter p, final Axis X, final Axis Y) {
+	public SpiderChart(final SpiderChartTitle t, final SpiderChartPlotter p, final SpiderChartAxis X, final SpiderChartAxis Y) {
 		this.resetChart(t, p, X, Y);
 	}
 
@@ -323,7 +323,7 @@ public class SpiderChart {
 	}
 
 	/** */
-	public void addPlotter(final Plotter p) {
+	public void addPlotter(final SpiderChartPlotter p) {
 		this.plotters[this.plottersCount] = p;
 		this.plotters[this.plottersCount].XScale = this.plotters[0].XScale;
 		this.plotters[this.plottersCount].YScale = this.plotters[0].YScale;
@@ -626,7 +626,7 @@ public class SpiderChart {
 	}
 
 	/** */
-	private int getCountParallelAxis(final Axis axis) {
+	private int getCountParallelAxis(final SpiderChartAxis axis) {
 		if (axis.stackAdditionalAxis) {
 			return 0;
 		}
@@ -691,7 +691,7 @@ public class SpiderChart {
 			}
 		}
 		if (this.activateSelection) {
-			for (final Plotter plotter : this.plotters) {
+			for (final SpiderChartPlotter plotter : this.plotters) {
 				if (plotter == null) {
 					break;
 				}
@@ -933,7 +933,7 @@ public class SpiderChart {
 		}
 		this.paintTargetZones(g, true);
 		if ((d() != 1) && (this.legend == null)) {
-			this.legend = new Legend();
+			this.legend = new SpiderChartLegend();
 		}
 		if (this.legend != null) {
 			this.legend.chart = this;
@@ -1109,9 +1109,9 @@ public class SpiderChart {
 	}
 
 	/** */
-	protected void resetChart(final Title t, final Plotter p, final Axis X, final Axis Y) {
+	protected void resetChart(final SpiderChartTitle t, final SpiderChartPlotter p, final SpiderChartAxis X, final SpiderChartAxis Y) {
 		this.plottersCount = 0;
-		this.plotters = new Plotter[10];
+		this.plotters = new SpiderChartPlotter[10];
 		this.XAxis = null;
 		this.YAxis = null;
 		this.Y2Axis = null;
@@ -1141,7 +1141,7 @@ public class SpiderChart {
 		}
 		this.title = t;
 		if (this.title == null) {
-			this.title = new Title();
+			this.title = new SpiderChartTitle();
 			this.title.text = "";
 		}
 		this.plottersCount = 1;
@@ -1202,7 +1202,7 @@ public class SpiderChart {
 	}
 
 	/** */
-	private void setPositionStackedAxis(final Axis axis) {
+	private void setPositionStackedAxis(final SpiderChartAxis axis) {
 		if (axis == null) {
 			return;
 		}
@@ -1223,7 +1223,7 @@ public class SpiderChart {
 				axis.scale.screenMaxMargin = axis.scale.screenMin + screenH2;
 				axis.visibleSize = visibleH;
 				for (int i = 0; i < axis.getAdditionalAxisCount(); i++) {
-					final Axis a = axis.getAdditionalAxis(i);
+					final SpiderChartAxis a = axis.getAdditionalAxis(i);
 
 					a.y = tmpY;
 					a.height = h;
@@ -1251,7 +1251,7 @@ public class SpiderChart {
 				axis.scale.screenMaxMargin = axis.scale.screenMin + screenW2;
 				axis.visibleSize = visibleW;
 				for (int i = 0; i < axis.getAdditionalAxisCount(); i++) {
-					final Axis a = axis.getAdditionalAxis(i);
+					final SpiderChartAxis a = axis.getAdditionalAxis(i);
 
 					a.x = tmpX;
 					a.width = w;
@@ -1282,7 +1282,7 @@ public class SpiderChart {
 	}
 
 	/** */
-	public void setY2Scale(final Axis a) {
+	public void setY2Scale(final SpiderChartAxis a) {
 		this.plotters[0].Y2Scale = a.scale;
 		this.Y2Axis = a;
 		a.rightAxis = true;

@@ -20,7 +20,7 @@ import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartFont;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 
-public class AxisLabel extends SpiderChartComponent {
+public class SpiderChartAxisLabel extends SpiderChartComponent {
 
 	/** */
 	public SpiderChartColor color;
@@ -32,7 +32,7 @@ public class AxisLabel extends SpiderChartComponent {
 	public boolean vertical = false;
 
 	/** */
-	public AxisLabel(final String t, final SpiderChartColor c, final SpiderChartFont f) {
+	public SpiderChartAxisLabel(final String t, final SpiderChartColor c, final SpiderChartFont f) {
 		this.color = c;
 		this.title = t;
 		this.font = f;

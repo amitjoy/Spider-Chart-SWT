@@ -35,9 +35,9 @@ public class DataSeq {
 	/** */
 	public double nullValue = -9.0D;
 	/** */
-	public Axis secondaryXAxis = null;
+	public SpiderChartAxis secondaryXAxis = null;
 	/** */
-	public Axis secondaryYAxis = null;
+	public SpiderChartAxis secondaryYAxis = null;
 	/** */
 	public boolean secondYAxis = false;
 	/** */

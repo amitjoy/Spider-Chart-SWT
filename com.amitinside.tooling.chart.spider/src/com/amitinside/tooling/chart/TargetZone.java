@@ -53,9 +53,9 @@ public class TargetZone {
 	}
 
 	/** */
-	protected void paint(final SpiderChartGraphics g, final Axis xaxis, final Axis yaxis) {
+	protected void paint(final SpiderChartGraphics g, final SpiderChartAxis xaxis, final SpiderChartAxis yaxis) {
 		int pixelStart = 0;
-		Axis axis = yaxis;
+		SpiderChartAxis axis = yaxis;
 		if (this.vertical) {
 			axis = xaxis;
 		}

@@ -28,7 +28,7 @@ import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
  *
  * @author AMIT KUMAR MONDAL
  */
-public class SpiderPlotter extends Plotter {
+public class SpiderPlotter extends SpiderChartPlotter {
 
 	/**
 	 * Spider Chart axes names

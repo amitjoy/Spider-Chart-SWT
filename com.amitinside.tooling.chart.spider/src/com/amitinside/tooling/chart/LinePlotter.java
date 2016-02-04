@@ -18,7 +18,7 @@ package com.amitinside.tooling.chart;
 import com.amitinside.tooling.chart.gc.Polygon;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 
-public class LinePlotter extends Plotter {
+public class LinePlotter extends SpiderChartPlotter {
 
 	/** */
 	public static final int TYPE_LINE = 0;

@@ -19,7 +19,7 @@ import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartFont;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 
-public class HAxisLabel extends AxisLabel {
+public class HAxisLabel extends SpiderChartAxisLabel {
 
 	/** Constructor */
 	public HAxisLabel(final String t, final SpiderChartColor c, final SpiderChartFont f) {

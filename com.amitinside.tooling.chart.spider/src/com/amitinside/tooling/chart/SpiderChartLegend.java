@@ -27,7 +27,7 @@ import com.amitinside.tooling.chart.gc.SpiderChartFont;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.gc.SpiderChartImage;
 
-public class Legend extends SpiderChartComponent {
+public class SpiderChartLegend extends SpiderChartComponent {
 
 	/** Legend Background Style */
 	public FillStyle background;
@@ -60,7 +60,7 @@ public class Legend extends SpiderChartComponent {
 	public boolean verticalLayout = true;
 
 	/** Constructor */
-	public Legend() {
+	public SpiderChartLegend() {
 		if (this.title != null) {
 			this.addItem(this.title, null);
 		}

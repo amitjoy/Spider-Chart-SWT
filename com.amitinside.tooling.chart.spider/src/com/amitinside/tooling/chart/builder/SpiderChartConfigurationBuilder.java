@@ -20,10 +20,10 @@ import static com.amitinside.tooling.chart.LineStyle.NORMAL_LINE;
 import java.util.function.Consumer;
 
 import com.amitinside.tooling.chart.FillStyle;
-import com.amitinside.tooling.chart.Legend;
+import com.amitinside.tooling.chart.SpiderChartLegend;
 import com.amitinside.tooling.chart.LineStyle;
 import com.amitinside.tooling.chart.SpiderPlotter;
-import com.amitinside.tooling.chart.Title;
+import com.amitinside.tooling.chart.SpiderChartTitle;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartFont;
@@ -31,14 +31,14 @@ import com.amitinside.tooling.chart.gc.SpiderChartFont;
 public class SpiderChartConfigurationBuilder {
 
 	/** */
-	private Legend legend;
+	private SpiderChartLegend legend;
 	/** */
 	private SpiderPlotter plotter;
 	/** */
-	private Title title;
+	private SpiderChartTitle title;
 
 	/** */
-	public Legend getLegend() {
+	public SpiderChartLegend getLegend() {
 		return this.legend;
 	}
 
@@ -48,13 +48,13 @@ public class SpiderChartConfigurationBuilder {
 	}
 
 	/** */
-	public Title getTitle() {
+	public SpiderChartTitle getTitle() {
 		return this.title;
 	}
 
 	/** */
-	public SpiderChartConfigurationBuilder legend(final Consumer<Legend> legendBuilder) {
-		this.legend = new Legend();
+	public SpiderChartConfigurationBuilder legend(final Consumer<SpiderChartLegend> legendBuilder) {
+		this.legend = new SpiderChartLegend();
 		this.legend.background = new FillStyle(SWTGraphicsSupplier.getColor(SpiderChartColor.WHITE));
 		this.legend.border = new LineStyle(1, SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK), NORMAL_LINE);
 		legendBuilder.accept(this.legend);
@@ -74,8 +74,8 @@ public class SpiderChartConfigurationBuilder {
 	}
 
 	/** */
-	public SpiderChartConfigurationBuilder title(final Consumer<Title> titleBuilder) {
-		this.title = new Title();
+	public SpiderChartConfigurationBuilder title(final Consumer<SpiderChartTitle> titleBuilder) {
+		this.title = new SpiderChartTitle();
 		titleBuilder.accept(this.title);
 		return this;
 	}

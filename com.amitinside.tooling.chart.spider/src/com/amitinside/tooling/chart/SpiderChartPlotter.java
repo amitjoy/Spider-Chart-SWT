@@ -27,7 +27,7 @@ import com.amitinside.tooling.chart.gc.SpiderChartImage;
  * @author AMIT KUMAR MONDAL
  *
  */
-public class Plotter extends SpiderChartComponent {
+public class SpiderChartPlotter extends SpiderChartComponent {
 
 	/** */
 	public FillStyle back = null;
