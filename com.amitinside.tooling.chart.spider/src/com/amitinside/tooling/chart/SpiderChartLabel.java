@@ -18,11 +18,8 @@ package com.amitinside.tooling.chart;
 import com.amitinside.tooling.chart.gc.Polygon;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
-import com.amitinside.tooling.chart.gc.SpiderChartFont;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.gc.SpiderChartImage;
-import com.amitinside.tooling.chart.tags.TagObject;
-import com.amitinside.tooling.chart.tags.TagParser;
 
 public class SpiderChartLabel implements IFloatingObject {
 
@@ -49,7 +46,6 @@ public class SpiderChartLabel implements IFloatingObject {
 	protected int marginX = 2;
 	protected int marginY = 2;
 	protected String name = "";
-	TagObject[] objects = null;
 	protected int positionX = 0;
 	protected int positionY = 0;
 	int requiredHeight = 0;
@@ -176,14 +172,9 @@ public class SpiderChartLabel implements IFloatingObject {
 
 	public void initialize(final SpiderChartGraphics g, final SpiderChart c) {
 		this.chart = c;
-		final TagParser tagParser = new TagParser();
-		this.objects = tagParser.parseTags(this.sFormat);
-
-		this.preProcessTags(g);
 	}
 
 	public void paint(final SpiderChartGraphics g, final int x, final int y, final int width, final int height) {
-		this.preProcessPositionTags(g, x, y, width, height);
 		if (this.chart != null) {
 			this.chart.placeFloatingObject(this);
 		}
@@ -200,111 +191,6 @@ public class SpiderChartLabel implements IFloatingObject {
 			e.printStackTrace();
 		}
 		return 0;
-	}
-
-	protected void preProcessPositionTags(final SpiderChartGraphics g, final int x, final int y, final int width,
-			final int height) {
-		this.positionX = x;
-		this.positionY = y;
-		this.requiredWidth = width;
-		this.requiredHeight = height;
-		for (final TagObject object : this.objects) {
-			if (object.compareAtt(TagObject.ATT_TYPE, TagObject.TAG_OBJECT)) {
-				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_POSITION)) {
-					if (object.compareAtt("IGNORE", "TRUE")) {
-						this.ignorePosition = true;
-					}
-				}
-			}
-		}
-		int w = 0;
-		int h = this.marginY * 2;
-		for (int i = 0; i <= this.lineCount; i++) {
-			final int lineW = this.lineWidths[i] + (this.marginX * 2);
-			if (w < lineW) {
-				w = lineW;
-			}
-			h += this.lineHeights[i];
-		}
-		if (w > this.requiredWidth) {
-			this.requiredWidth = w;
-		}
-		if (h > this.requiredHeight) {
-			this.requiredHeight = h;
-		}
-	}
-
-	protected void preProcessTags(final SpiderChartGraphics g) {
-		final SpiderChartFont tmpFont = g.getFont();
-		this.positionX = 0;
-		this.positionY = 0;
-		this.requiredWidth = 1;
-		this.requiredHeight = 1;
-
-		this.lineHeights[this.lineCount] = g.getFontHeight();
-		for (final TagObject object : this.objects) {
-			if (object.compareAtt(TagObject.ATT_TYPE, TagObject.TAG_LF)) {
-				this.lineCount += 1;
-				this.lineHeights[this.lineCount] = g.getFontHeight();
-			}
-			if (object.compareAtt(TagObject.ATT_TYPE, TagObject.TAG_STRING)) {
-				this.lineWidths[this.lineCount] += g.getFontWidth(object.getAttribute(TagObject.ATT_VALUE));
-			}
-			if (object.compareAtt(TagObject.ATT_TYPE, TagObject.TAG_OBJECT)) {
-				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_ALIGN)) {
-					if (object.compareAtt(TagObject.ATT_VALUE, "CENTER")) {
-						this.align = ALIGN_CENTER;
-					}
-					if (object.compareAtt(TagObject.ATT_VALUE, "LEFT")) {
-						this.align = ALIGN_LEFT;
-					}
-					if (object.compareAtt(TagObject.ATT_VALUE, "RIGHT")) {
-						this.align = ALIGN_RIGHT;
-					}
-				}
-				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_ROTATION)) {
-					this.rotation = this.parseInt(object.getAttribute(TagObject.ATT_VALUE));
-					if ((this.rotation != 90) && (this.rotation != -90) && (this.rotation != 180)
-							&& (this.rotation != 270) && (this.rotation != 45) && (this.rotation != -45)) {
-						this.rotation = 0;
-					}
-					if (object.compareAtt("CENTER", "LEFTTOP")) {
-						this.rotationAlign = SpiderChartGraphics.ROTATE_LEFTTOP;
-					}
-				}
-				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_CLICKINFO)) {
-					this.clickInfo = object.getAttribute(TagObject.ATT_VALUE);
-				}
-				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_TIP)) {
-					this.tip = object.getAttribute(TagObject.ATT_VALUE);
-				}
-				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_POSITION)
-						&& object.compareAtt("IGNORE", "TRUE")) {
-					this.ignorePosition = true;
-				}
-				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_IMAGE)) {
-					final SpiderChartImage image = SWTGraphicsSupplier
-							.getImage(object.getAttribute(TagObject.ATT_VALUE));
-					this.lineWidths[this.lineCount] += image.getWidth();
-				}
-			}
-		}
-		int w = 0;
-		int h = this.marginY * 2;
-		for (int i = 0; i <= this.lineCount; i++) {
-			final int lineW = this.lineWidths[i] + (this.marginX * 2);
-			if (w < lineW) {
-				w = lineW;
-			}
-			h += this.lineHeights[i];
-		}
-		if (w > this.requiredWidth) {
-			this.requiredWidth = w;
-		}
-		if (h > this.requiredHeight) {
-			this.requiredHeight = h;
-		}
-		g.setFont(tmpFont);
 	}
 
 	protected void render(final SpiderChartGraphics g2) {
@@ -338,9 +224,7 @@ public class SpiderChartLabel implements IFloatingObject {
 			this.positionX = 0;
 			this.positionY = 0;
 		}
-		int line = 0;
 		int x = this.positionX;
-		int y = this.positionY + this.marginY;
 		int lineStart = 0;
 		if (this.background != null) {
 			final SpiderChartColor c = g.getColor();
@@ -369,39 +253,7 @@ public class SpiderChartLabel implements IFloatingObject {
 		lineStart = x + this.marginX;
 
 		x = lineStart;
-		for (final TagObject object : this.objects) {
-			if (object.compareAtt(TagObject.ATT_TYPE, TagObject.TAG_LF)) {
-				line++;
-				x = this.positionX;
-				y += this.lineHeights[line - 1];
-				if (this.align == ALIGN_CENTER) {
-					x += (this.requiredWidth - (this.marginX * 2) - this.lineWidths[line]) / 2;
-				}
-				if (this.align == ALIGN_RIGHT) {
-					x += this.requiredWidth - (this.marginX * 2) - this.lineWidths[line];
-				}
-				lineStart = x + this.marginX;
-			}
-			if (object.compareAtt(TagObject.ATT_TYPE, TagObject.TAG_BACKSPACE)) {
-				x -= g.getFontWidth(" ");
-			}
-			if (object.compareAtt(TagObject.ATT_TYPE, TagObject.TAG_CR)) {
-				x = lineStart;
-			}
-			if (object.compareAtt(TagObject.ATT_TYPE, TagObject.TAG_STRING)) {
-				final String s = object.getAttribute(TagObject.ATT_VALUE);
-				g.drawString(s, x, y + this.lineHeights[line]);
-				x += g.getFontWidth(s);
-			}
-			if (object.compareAtt(TagObject.ATT_TYPE, TagObject.TAG_OBJECT)) {
-				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_IMAGE)) {
-					final SpiderChartImage image = SWTGraphicsSupplier
-							.getImage(object.getAttribute(TagObject.ATT_VALUE));
-					g.drawImage(image, x, y);
-					x += image.getWidth();
-				}
-			}
-		}
+
 		if (this.border != null) {
 			if (this.borderShape == BORDER_RECT) {
 				this.border.drawRect(g, this.positionX, this.positionY, (this.positionX + this.requiredWidth) - 1,
