@@ -22,24 +22,25 @@ import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Vector;
 
+import com.amitinside.tooling.chart.gc.Polygon;
+import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartFont;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.gc.SpiderChartImage;
-import com.amitinside.tooling.chart.gc.Polygon;
-import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
 public class SpiderChart {
 
-	private class Updater implements Runnable {
+	private class SpiderChartWorker implements Runnable {
+
 		public SpiderChart chart = null;
 
 		public boolean stop = false;
 
-		private Updater() {
+		private SpiderChartWorker() {
 		}
 
-		Updater(final Object object) {
+		SpiderChartWorker(final Object object) {
 			this();
 		}
 
@@ -107,7 +108,7 @@ public class SpiderChart {
 	public int currentY;
 	private int cursorLastX = 0;
 	private int cursorLastY = 0;
-	private Updater deamon = null;
+	private SpiderChartWorker deamon = null;
 	public boolean doubleBuffering = true;
 	private SpiderChartImage finalImage = null;
 	protected Vector floatingObjects = new Vector(0, 5);
@@ -545,7 +546,7 @@ public class SpiderChart {
 		if (this.backImage != null) {
 			this.backImage.dispose();
 		}
-		this.stopUpdater();
+		this.stopWorker();
 	}
 
 	private void drawBackImage(final SpiderChartGraphics g) {
@@ -1330,15 +1331,15 @@ public class SpiderChart {
 		a.plot = this.plotters[0];
 	}
 
-	public void startUpdater() {
+	public void startWorker() {
 		this.stopped = false;
 
-		this.deamon = new Updater(null);
+		this.deamon = new SpiderChartWorker(null);
 		this.deamon.chart = this;
 		new Thread(this.deamon).start();
 	}
 
-	public void stopUpdater() {
+	public void stopWorker() {
 		this.stopped = true;
 		if (this.deamon != null) {
 			this.deamon.stop = true;

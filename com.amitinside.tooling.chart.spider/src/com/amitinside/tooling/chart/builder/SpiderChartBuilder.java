@@ -23,10 +23,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 
-import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.FillStyle;
-import com.amitinside.tooling.chart.gc.SpiderChartColor;
+import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
+import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.swt.SwtGraphicsProvider;
 import com.amitinside.tooling.chart.swt.SpiderChartViewer;
 
@@ -35,7 +35,10 @@ public class SpiderChartBuilder {
 	private static SpiderChartConfigurationBuilder chartConfiguration;
 	private static SpiderChartBuilder chartViewerBuilder;
 
-	public static SpiderChartBuilder config(final Composite parent, final Consumer<SpiderChartConfigurationBuilder> settings) {
+	public static SpiderChartBuilder config(final Composite parent,
+			final Consumer<SpiderChartConfigurationBuilder> settings) {
+		requireNonNull(parent);
+
 		chartConfiguration = new SpiderChartConfigurationBuilder();
 		settings.accept(chartConfiguration);
 		chartViewerBuilder = new SpiderChartBuilder(parent);
@@ -53,8 +56,8 @@ public class SpiderChartBuilder {
 		this.prepareChartViewer(parent);
 	}
 
-	public void data(final Consumer<DataBuilder> dataBuilderConsumer) {
-		final DataBuilder dataBuilder = new DataBuilder(this.chart);
+	public void data(final Consumer<AxisDataBuilder> dataBuilderConsumer) {
+		final AxisDataBuilder dataBuilder = new AxisDataBuilder(this.chart);
 		dataBuilderConsumer.accept(dataBuilder);
 		this.chartViewer.setChart(this.chart);
 	}

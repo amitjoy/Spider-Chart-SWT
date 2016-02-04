@@ -17,16 +17,18 @@ package com.amitinside.tooling.chart.builder;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Optional;
+
 import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.api.ISpiderChartDrawable;
 import com.amitinside.tooling.chart.builder.model.AxisData;
 
-public class DataBuilder {
+public class AxisDataBuilder {
 
 	private final SpiderChart chart;
 	private final AxisData data;
 
-	public DataBuilder(final SpiderChart chart) {
+	public AxisDataBuilder(final SpiderChart chart) {
 		requireNonNull(chart);
 
 		this.data = new AxisData();
@@ -39,8 +41,10 @@ public class DataBuilder {
 
 	public void inject(final ISpiderChartDrawable drawableData) {
 		requireNonNull(drawableData);
+		final Optional<double[]> values = Optional.of(drawableData.values());
+		final Optional<String> areaColor = Optional.of(drawableData.areaColor());
 
-		this.data.setData(drawableData.values(), drawableData.areaColor());
+		this.data.setData(values.orElseGet(() -> new double[] { 0 }), areaColor.orElse("RED"));
 		this.done();
 	}
 

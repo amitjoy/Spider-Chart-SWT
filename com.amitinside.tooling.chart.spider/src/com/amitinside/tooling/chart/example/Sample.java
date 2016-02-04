@@ -15,7 +15,7 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.example;
 
-import static com.amitinside.tooling.chart.LineStyle.LINE_NORMAL;
+import static com.amitinside.tooling.chart.LineStyle.NORMAL_LINE;
 import static com.amitinside.tooling.chart.gc.SWTGraphicsSupplier.getColor;
 import static com.amitinside.tooling.chart.gc.SpiderChartColor.BLUE;
 import static com.amitinside.tooling.chart.gc.SpiderChartColor.GREEN;
@@ -40,8 +40,8 @@ public final class Sample {
 			settings.title(title -> title.setText("Mobile Phone Comparison"));
 
 			settings.legend(legend -> {
-				legend.addItem("iPhone 6", new LineStyle(1, getColor(BLUE), LINE_NORMAL));
-				legend.addItem("Nexus 6", new LineStyle(1, getColor(GREEN), LINE_NORMAL));
+				legend.addItem("iPhone 6", LineStyle.of(1, getColor(BLUE), NORMAL_LINE));
+				legend.addItem("Nexus 6", LineStyle.of(1, getColor(GREEN), NORMAL_LINE));
 			});
 
 			settings.plotter(plotter -> {

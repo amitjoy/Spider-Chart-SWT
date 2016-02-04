@@ -20,9 +20,9 @@ import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 
 public class LineStyle {
 
-	public static final int LINE_DASHED = 2;
-	public static final int LINE_DOTS = 3;
-	public static final int LINE_NORMAL = 1;
+	public static final int DASHED_LINE = 2;
+	public static final int DOTS_LINE = 3;
+	public static final int NORMAL_LINE = 1;
 
 	public static LineStyle createFromString(final String s) {
 		final String[] items = SpiderChartLoader.convertList(s);
@@ -56,8 +56,13 @@ public class LineStyle {
 		return null;
 	}
 
+	public static LineStyle of(final float w, final SpiderChartColor c, final int t) {
+		return new LineStyle(w, c, t);
+	}
+
 	public float alphaValue = 1.0F;
 	SpiderChartColor color;
+
 	int lineType;
 
 	float lWidth;

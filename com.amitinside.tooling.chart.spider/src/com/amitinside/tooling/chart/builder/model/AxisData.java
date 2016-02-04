@@ -15,11 +15,13 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.builder.model;
 
+import static com.amitinside.tooling.chart.LineStyle.NORMAL_LINE;
+
 import com.amitinside.tooling.chart.FillStyle;
 import com.amitinside.tooling.chart.LineDataSeq;
 import com.amitinside.tooling.chart.LineStyle;
-import com.amitinside.tooling.chart.gc.SpiderChartFont;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
+import com.amitinside.tooling.chart.gc.SpiderChartFont;
 
 public class AxisData {
 
@@ -30,8 +32,7 @@ public class AxisData {
 	}
 
 	public void setData(final double[] dataValues, final String color) {
-		this.data = new LineDataSeq(dataValues,
-				new LineStyle(2, SWTGraphicsSupplier.getColor(color), LineStyle.LINE_NORMAL));
+		this.data = new LineDataSeq(dataValues, new LineStyle(2, SWTGraphicsSupplier.getColor(color), NORMAL_LINE));
 		this.data.drawPoint = true;
 		this.data.valueFont = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.PLAIN, 10);
 		this.data.fillStyle = new FillStyle(SWTGraphicsSupplier.getColor(color), 0.5f);
