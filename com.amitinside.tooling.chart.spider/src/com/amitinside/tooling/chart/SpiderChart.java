@@ -55,15 +55,6 @@ public class SpiderChart {
 				if (this.stop) {
 					break;
 				}
-				try {
-					SpiderChart.this.triggerEvent(0);
-					if (SpiderChart.this.autoRebuild) {
-						SpiderChart.this.loader.build(SpiderChart.this, false, false);
-					}
-					SpiderChart.this.triggerEvent(1);
-				} catch (final Exception e) {
-					e.printStackTrace();
-				}
 			}
 		}
 	}
@@ -121,7 +112,7 @@ public class SpiderChart {
 	public double leftMargin = 0.125D;
 	public Legend legend;
 	public double legendMargin = 0.2D;
-	public SpiderChartLoader loader = null;
+	// public SpiderChartLoader loader = null;
 	private int minimumHeight = 0;
 	private int minimumWidth = 0;
 	public long msecs = 2000L;
@@ -196,7 +187,7 @@ public class SpiderChart {
 	}
 
 	public void addSeq(final DataSeq s) {
-		this.plotters[0].addSerie(s);
+		this.plotters[0].addSeq(s);
 	}
 
 	public void addTargetZone(final TargetZone zone) {
@@ -1067,37 +1058,12 @@ public class SpiderChart {
 	private void paintTips(final SpiderChartGraphics g) {
 		this.showingTip = false;
 
-		String tipStr = "";
 		if (this.showTips && (this.selectedSerie != null) && (this.selectedSeriePoint >= 0)) {
 			if ((this.selectedSerie.tips != null) && (this.selectedSerie.tips.length > this.selectedSeriePoint)) {
-				tipStr = this.selectedSerie.tips[this.selectedSeriePoint];
 			}
 		}
 		if (this.showTips && (this.selectedLabel != null)) {
-			tipStr = this.selectedLabel.getTip();
-		}
-		if ((tipStr != null) && (tipStr.length() > 0)) {
-			final String[] tip = SpiderChartLoader.convertList(tipStr, "\\n");
-
-			g.setFont(this.tipFont);
-
-			final int he = g.getFontHeight() + 4;
-			int wi = 4;
-			for (final String element : tip) {
-				if ((g.getFontWidth(element) + 4) > wi) {
-					wi = g.getFontWidth(element) + 4;
-				}
-			}
-			g.setColor(this.tipColor);
-			g.fillRect(this.currentX, this.currentY - (he * tip.length), wi, he * tip.length);
-			g.setColor(this.tipFontColor);
-			g.drawRect(this.currentX, this.currentY - (he * tip.length), wi, he * tip.length);
-			for (int h = 0; h < tip.length; h++) {
-				g.drawString(tip[h], this.currentX + 2, this.currentY - 2 - (he * (tip.length - h - 1)));
-			}
-			this.showingTip = true;
-
-			return;
+			this.selectedLabel.getTip();
 		}
 		if (this.showPosition) {
 			if ((this.currentX > 0) && (this.currentY > 0) && (this.currentX < this.XAxis.scale.screenMax)

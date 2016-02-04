@@ -15,60 +15,16 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart;
 
+import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.gc.SpiderChartImage;
-import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
 public class FillStyle {
 
 	public static int GRADIENT_HORIZONTAL = 1;
 	public static int GRADIENT_VERTICAL = 2;
 	public static int NO_GRADIENT = 0;
-
-	public static FillStyle createFromString(final String f) {
-
-		int p = f.indexOf(";");
-		String separator = ";";
-		if (p == -1) {
-			p = f.indexOf(":");
-			separator = ":";
-		}
-		if (p > -1) {
-			final String[] items = SpiderChartLoader.convertList(f, separator);
-
-			final FillStyle fillFrom = new FillStyle(SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK));
-
-			fillFrom.colorFrom = SpiderChartLoader.convertColor(items[0]);
-			fillFrom.color = fillFrom.colorFrom;
-			fillFrom.colorUntil = SpiderChartLoader.convertColor(items[1]);
-			fillFrom.gradientType = GRADIENT_VERTICAL;
-			if ((items.length > 2) && (items[2].toUpperCase().compareTo("HORIZONTAL") == 0)) {
-				fillFrom.gradientType = GRADIENT_HORIZONTAL;
-			}
-			return fillFrom;
-		}
-		if (f.compareTo("") == 0) {
-			return null;
-		}
-		final String[] items = SpiderChartLoader.convertList(f);
-		if (items == null) {
-			return null;
-		}
-		if (items.length < 1) {
-			return null;
-		}
-		final SpiderChartColor c = SpiderChartLoader.convertColor(items[0]);
-		try {
-			if (items.length == 1) {
-				return new FillStyle(c);
-			}
-			return new FillStyle(c, new Float(items[1]).floatValue());
-		} catch (final Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 
 	public float alphaValue = 1.0F;
 	SpiderChartColor color;
@@ -119,8 +75,8 @@ public class FillStyle {
 		}
 	}
 
-	protected void drawArc(final SpiderChartGraphics g, final int x, final int y, final int w, final int h, final int a1,
-			final int a2) {
+	protected void drawArc(final SpiderChartGraphics g, final int x, final int y, final int w, final int h,
+			final int a1, final int a2) {
 		g.setTexture(this.textureImage);
 		g.setColor(this.color);
 		this.setAlpha(g);

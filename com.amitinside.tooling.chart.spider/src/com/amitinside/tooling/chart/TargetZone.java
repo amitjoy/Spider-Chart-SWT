@@ -20,62 +20,6 @@ import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 public class TargetZone {
 
 	public static int DISABLED = -1;
-
-	public static TargetZone createFromString(final String s) {
-		if (s.length() == 0) {
-			return null;
-		}
-		final String[] items = SpiderChartLoader.convertList(s, ";");
-		double start = DISABLED;
-		double end = DISABLED;
-		int uStart = 0;
-		int uEnd = 0;
-		try {
-			if (items.length > 0) {
-				if (items[0].endsWith("%")) {
-					start = new Double(items[0].substring(0, items[0].length() - 1)).doubleValue();
-					uStart = 1;
-				} else {
-					try {
-						start = new Double(items[0]).doubleValue();
-					} catch (final Exception ignore) {
-					}
-				}
-			}
-			if (items.length > 1) {
-				if (items[1].endsWith("%")) {
-					end = new Double(items[1].substring(0, items[1].length() - 1)).doubleValue();
-					uEnd = 1;
-				} else {
-					try {
-						end = new Double(items[1]).doubleValue();
-					} catch (final Exception ignore) {
-					}
-				}
-			}
-		} catch (final Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-		final TargetZone zone = new TargetZone(start, end, uStart, uEnd);
-		if (items.length > 2) {
-			zone.style = SpiderChartLoader.convertLineStyle(items[2]);
-		}
-		if (items.length > 3) {
-			zone.fillStyle = SpiderChartLoader.convertFillStyle(items[3]);
-		}
-		if (items.length > 4) {
-			zone.label = items[4];
-		}
-		if (items.length > 5) {
-			zone.vertical = SpiderChartLoader.convertBooleanParam(items[5], false);
-		}
-		if (items.length > 6) {
-			zone.background = SpiderChartLoader.convertBooleanParam(items[6], false);
-		}
-		return zone;
-	}
-
 	public boolean background = true;
 	protected SpiderChart chart = null;
 	protected int effect3D = 0;

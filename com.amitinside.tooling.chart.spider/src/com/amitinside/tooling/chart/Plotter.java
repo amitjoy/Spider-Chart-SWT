@@ -35,7 +35,7 @@ public class Plotter extends SpiderChartComponent {
 	public Scale Y2Scale;
 	public Scale YScale;
 
-	public void addSerie(final DataSeq s) {
+	public void addSeq(final DataSeq s) {
 		this.replaceSerie(-1, s);
 	}
 

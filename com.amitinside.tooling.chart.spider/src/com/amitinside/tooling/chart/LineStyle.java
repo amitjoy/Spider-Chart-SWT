@@ -24,38 +24,6 @@ public class LineStyle {
 	public static final int DOTS_LINE = 3;
 	public static final int NORMAL_LINE = 1;
 
-	public static LineStyle createFromString(final String s) {
-		final String[] items = SpiderChartLoader.convertList(s);
-		if (items == null) {
-			return null;
-		}
-		if (items.length < 3) {
-			return null;
-		}
-		float floa = 0.0F;
-		try {
-			floa = new Float(items[0]).floatValue();
-		} catch (final Exception e) {
-			floa = 0.2F;
-		}
-		int typ = 1;
-		if (items[2].compareTo("DASHED") == 0) {
-			typ = 2;
-		}
-		if (items[2].compareTo("DOTS") == 0) {
-			typ = 3;
-		}
-		final SpiderChartColor c = SpiderChartLoader.convertColor(items[1]);
-		try {
-			if (items.length <= 3) {
-				return new LineStyle(floa, c, typ);
-			}
-			return new LineStyle(floa, c, typ, new Float(items[3]).floatValue());
-		} catch (final Exception e) {
-		}
-		return null;
-	}
-
 	public static LineStyle of(final float w, final SpiderChartColor c, final int t) {
 		return new LineStyle(w, c, t);
 	}

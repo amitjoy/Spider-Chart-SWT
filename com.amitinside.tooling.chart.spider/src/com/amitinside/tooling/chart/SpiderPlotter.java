@@ -39,9 +39,9 @@ public class SpiderPlotter extends Plotter {
 	public LineStyle gridStyle;
 	public SpiderChartColor[] pointColors = null;
 	public double[] pointColorScale = null;
-	public double radiusModifier = 0.9D;
-	public String tickLabelFormat = "#.#";
-	public int ticks = 5;
+	public double chartRadius = 0.9D;
+	public String scalingLabelFormat = "#.#";
+	public int scalingDivisions = 5;
 
 	public SpiderPlotter() {
 		this.combinable = false;
@@ -68,7 +68,7 @@ public class SpiderPlotter extends Plotter {
 		if (this.height < radi) {
 			radi = this.height;
 		}
-		radi = (int) (radi * this.radiusModifier);
+		radi = (int) (radi * this.chartRadius);
 
 		final int toCenterX = (this.width - radi) / 2;
 		final int toCenterY = (this.height - radi) / 2;
@@ -262,11 +262,11 @@ public class SpiderPlotter extends Plotter {
 			if (this.maxScaleFactors.length >= 1) {
 				max = this.maxScaleFactors[0];
 			}
-			final int tickInterval = 100 / this.ticks;
-			final double tickIntervalAbs = (max - min) / this.ticks;
+			final int tickInterval = 100 / this.scalingDivisions;
+			final double tickIntervalAbs = (max - min) / this.scalingDivisions;
 			int tickAt = 0;
 			double tickAtAbs = 0.0D;
-			for (int j = 0; j < this.ticks; j++) {
+			for (int j = 0; j < this.scalingDivisions; j++) {
 				tickAt += tickInterval;
 				tickAtAbs += tickIntervalAbs;
 				for (int i = 0; i < count; i++) {
@@ -301,9 +301,9 @@ public class SpiderPlotter extends Plotter {
 					if (tickValue == (int) tickValue) {
 						v = "" + (int) tickValue;
 					}
-					if (this.tickLabelFormat.length() > 0) {
+					if (this.scalingLabelFormat.length() > 0) {
 						DecimalFormat df = null;
-						df = new DecimalFormat(this.tickLabelFormat);
+						df = new DecimalFormat(this.scalingLabelFormat);
 						v = df.format(new Double(tickValue));
 					}
 					g.drawString("" + v, xs[0] - 3 - g.getFontWidth("" + v), ys[0]);

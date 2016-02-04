@@ -21,49 +21,6 @@ public class AxisZone {
 
 	protected static int DISABLED = -1;
 
-	public static AxisZone createFromString(final String s) {
-		if (s.length() == 0) {
-			return null;
-		}
-		final String[] items = SpiderChartLoader.convertList(s, ";");
-		double start = DISABLED;
-		double end = DISABLED;
-		int uStart = 0;
-		int uEnd = 0;
-		try {
-			if (items.length > 0) {
-				if (items[0].endsWith("%")) {
-					start = new Double(items[0].substring(0, items[0].length() - 1)).doubleValue();
-					uStart = 1;
-				} else {
-					start = new Double(items[0]).doubleValue();
-				}
-			}
-			if (items.length > 1) {
-				if (items[1].endsWith("%")) {
-					end = new Double(items[1].substring(0, items[1].length() - 1)).doubleValue();
-					uEnd = 1;
-				} else {
-					end = new Double(items[1]).doubleValue();
-				}
-			}
-		} catch (final Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-		final AxisZone zone = new AxisZone(start, end, uStart, uEnd);
-		if (items.length > 2) {
-			zone.style = SpiderChartLoader.convertLineStyle(items[2]);
-		}
-		if (items.length > 3) {
-			zone.fillStyle = SpiderChartLoader.convertFillStyle(items[3]);
-		}
-		if (items.length > 4) {
-			zone.label = items[4];
-		}
-		return zone;
-	}
-
 	protected SpiderChart chart = null;
 	public FillStyle fillStyle;
 	public String label = "";

@@ -74,6 +74,7 @@ public class SpiderChartBuilder {
 		this.chart.back = new FillStyle(SWTGraphicsSupplier.getColor(SpiderChartColor.YELLOW));
 		this.chart.back.gradientType = FillStyle.GRADIENT_VERTICAL;
 		this.chart.legend = chartConfiguration.getLegend();
+		this.chart.showTips = true;
 	}
 
 	public SpiderChartViewer viewer(final Consumer<SpiderChartBuilder> chartBuilderConsumer) {

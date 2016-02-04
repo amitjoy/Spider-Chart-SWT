@@ -15,12 +15,12 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart;
 
+import com.amitinside.tooling.chart.gc.Polygon;
+import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartFont;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.gc.SpiderChartImage;
-import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
-import com.amitinside.tooling.chart.gc.Polygon;
 import com.amitinside.tooling.chart.tags.TagObject;
 import com.amitinside.tooling.chart.tags.TagParser;
 
@@ -214,52 +214,6 @@ public class SpiderChartLabel implements IFloatingObject {
 					if (object.compareAtt("IGNORE", "TRUE")) {
 						this.ignorePosition = true;
 					}
-					if (!this.ignorePosition) {
-						String[] items = SpiderChartLoader.convertList(object.getAttribute(TagObject.ATT_VALUE), ",");
-						if (items == null) {
-							items = new String[0];
-						}
-						if (items.length > 0) {
-							this.positionX = this.calcRelativeX(items[0], x);
-						}
-						if (items.length > 1) {
-							this.positionY = this.calcRelativeY(items[1], y);
-						}
-					}
-				}
-				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_ANCHOR) && !this.ignorePosition) {
-					this.lineToAnchor = SpiderChartLoader.convertLineStyle(object.getAttribute("LINE"));
-
-					String[] items = SpiderChartLoader.convertList(object.getAttribute(TagObject.ATT_VALUE), ",");
-					if (items == null) {
-						items = new String[0];
-					}
-					if (items.length > 0) {
-						final int tmp = this.calcX(items[0]);
-						this.anchorX = tmp;
-					}
-					if (items.length > 1) {
-						final int tmp = this.calcY(items[1]);
-						this.anchorY = tmp;
-					}
-				}
-				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_SIZE) && !this.ignorePosition) {
-					String[] items = SpiderChartLoader.convertList(object.getAttribute(TagObject.ATT_VALUE), ",");
-					if (items == null) {
-						items = new String[0];
-					}
-					if (items.length > 0) {
-						final int tmp = this.calcX(items[0]);
-						if (tmp > this.requiredWidth) {
-							this.requiredWidth = tmp;
-						}
-					}
-					if (items.length > 1) {
-						final int tmp = this.calcY(items[1]);
-						if (tmp > this.requiredHeight) {
-							this.requiredHeight = tmp;
-						}
-					}
 				}
 			}
 		}
@@ -308,18 +262,6 @@ public class SpiderChartLabel implements IFloatingObject {
 						this.align = ALIGN_RIGHT;
 					}
 				}
-				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_BACKGROUND)) {
-					this.background = SpiderChartLoader.convertFillStyle(object.getAttribute(TagObject.ATT_VALUE));
-				}
-				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_BORDER)) {
-					this.border = SpiderChartLoader.convertLineStyle(object.getAttribute(TagObject.ATT_VALUE));
-					if (object.compareAtt("SHAPE", "ROUNDRECT")) {
-						this.borderShape = BORDER_ROUNDRECT;
-					}
-					if (object.compareAtt("SHAPE", "OVAL")) {
-						this.borderShape = BORDER_OVAL;
-					}
-				}
 				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_ROTATION)) {
 					this.rotation = this.parseInt(object.getAttribute(TagObject.ATT_VALUE));
 					if ((this.rotation != 90) && (this.rotation != -90) && (this.rotation != 180)
@@ -340,47 +282,9 @@ public class SpiderChartLabel implements IFloatingObject {
 						&& object.compareAtt("IGNORE", "TRUE")) {
 					this.ignorePosition = true;
 				}
-				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_SIZE) && !this.ignorePosition) {
-					String[] items = SpiderChartLoader.convertList(object.getAttribute(TagObject.ATT_VALUE), ",");
-					if (items == null) {
-						items = new String[0];
-					}
-					if (items.length > 0) {
-						final int tmp = this.calcX(items[0]);
-						if (tmp > this.requiredWidth) {
-							this.requiredWidth = tmp;
-						}
-					}
-					if (items.length > 1) {
-						final int tmp = this.calcY(items[1]);
-						if (tmp > this.requiredHeight) {
-							this.requiredHeight = tmp;
-						}
-					}
-				}
-				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_MARGIN)) {
-					String[] items = SpiderChartLoader.convertList(object.getAttribute(TagObject.ATT_VALUE), ",");
-					if (items == null) {
-						items = new String[0];
-					}
-					if (items.length > 0) {
-						this.marginX = this.calcX(items[0]);
-					}
-					if (items.length > 1) {
-						this.marginY = this.calcY(items[1]);
-					}
-				}
-				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_FONT)) {
-					final SpiderChartFont font = SpiderChartLoader.convertFont(object.getAttribute(TagObject.ATT_VALUE));
-					if (font != null) {
-						g.setFont(font);
-						if (g.getFontHeight() > this.lineHeights[this.lineCount]) {
-							this.lineHeights[this.lineCount] = g.getFontHeight();
-						}
-					}
-				}
 				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_IMAGE)) {
-					final SpiderChartImage image = SWTGraphicsSupplier.getImage(object.getAttribute(TagObject.ATT_VALUE));
+					final SpiderChartImage image = SWTGraphicsSupplier
+							.getImage(object.getAttribute(TagObject.ATT_VALUE));
 					this.lineWidths[this.lineCount] += image.getWidth();
 				}
 			}
@@ -490,20 +394,9 @@ public class SpiderChartLabel implements IFloatingObject {
 				x += g.getFontWidth(s);
 			}
 			if (object.compareAtt(TagObject.ATT_TYPE, TagObject.TAG_OBJECT)) {
-				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_FONT)) {
-					final SpiderChartFont font = SpiderChartLoader.convertFont(object.getAttribute(TagObject.ATT_VALUE));
-					if (font != null) {
-						g.setFont(font);
-					}
-				}
-				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_COLOR)) {
-					final SpiderChartColor c = SpiderChartLoader.convertColor(object.getAttribute(TagObject.ATT_VALUE));
-					if (c != null) {
-						g.setColor(c);
-					}
-				}
 				if (object.compareAtt(TagObject.ATT_OBJECT_NAME, TagObject.OBJ_IMAGE)) {
-					final SpiderChartImage image = SWTGraphicsSupplier.getImage(object.getAttribute(TagObject.ATT_VALUE));
+					final SpiderChartImage image = SWTGraphicsSupplier
+							.getImage(object.getAttribute(TagObject.ATT_VALUE));
 					g.drawImage(image, x, y);
 					x += image.getWidth();
 				}
