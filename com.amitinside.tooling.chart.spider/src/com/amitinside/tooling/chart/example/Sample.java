@@ -17,8 +17,6 @@ package com.amitinside.tooling.chart.example;
 
 import static com.amitinside.tooling.chart.LineStyle.NORMAL_LINE;
 import static com.amitinside.tooling.chart.gc.SWTGraphicsSupplier.getColor;
-import static com.amitinside.tooling.chart.gc.SpiderChartColor.BLUE;
-import static com.amitinside.tooling.chart.gc.SpiderChartColor.GREEN;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
@@ -37,11 +35,11 @@ public final class Sample {
 
 		SpiderChartBuilder.config(shell, settings -> {
 
-			settings.title(title -> title.setText("Mobile Phone Comparison"));
+			settings.title(title -> title.setText("Smartphone Comparison"));
 
 			settings.legend(legend -> {
-				legend.addItem("iPhone 6", LineStyle.of(1, getColor(BLUE), NORMAL_LINE));
-				legend.addItem("Nexus 6", LineStyle.of(1, getColor(GREEN), NORMAL_LINE));
+				legend.addItem("iPhone 6", LineStyle.of(1, getColor(iphoneData.areaColor()), NORMAL_LINE));
+				legend.addItem("Nexus 6", LineStyle.of(1, getColor(nexusData.areaColor()), NORMAL_LINE));
 			});
 
 			settings.plotter(plotter -> {

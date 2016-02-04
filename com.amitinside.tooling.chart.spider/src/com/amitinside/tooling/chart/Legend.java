@@ -18,11 +18,11 @@ package com.amitinside.tooling.chart;
 import java.util.Enumeration;
 import java.util.Vector;
 
+import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartFont;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.gc.SpiderChartImage;
-import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
 public class Legend extends SpiderChartComponent {
 
@@ -38,9 +38,7 @@ public class Legend extends SpiderChartComponent {
 	public boolean verticalLayout = true;
 
 	public Legend() {
-		if (SpiderChart.d() != 1) {
-			this.addItem("Spider Chart", null);
-		} else if (this.title != null) {
+		if (this.title != null) {
 			this.addItem(this.title, null);
 		}
 	}
