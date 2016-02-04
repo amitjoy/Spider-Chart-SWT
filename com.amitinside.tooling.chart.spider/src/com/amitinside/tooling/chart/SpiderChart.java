@@ -953,6 +953,7 @@ public class SpiderChart {
 	}
 
 	private void paintTips(final SpiderChartGraphics g) {
+		// TODO (AKM) To be implemented properly: Tips Functionality
 		this.showingTip = false;
 
 		if (this.showTips && (this.selectedSerie != null) && (this.selectedSeriePoint >= 0)) {

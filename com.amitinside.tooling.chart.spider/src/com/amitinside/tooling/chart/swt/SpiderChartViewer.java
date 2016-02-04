@@ -76,6 +76,7 @@ public class SpiderChartViewer extends Composite {
 		this.plusZoom = new Button(this.zoomPanel, 0);
 		this.plusZoom.setLocation(0, 0);
 
+		// TODO (AKM) To be implemented properly : ZOOM Functionality
 		// this.plusZoom.setImage(new Image(getDisplay(), getClass()
 		// .getClassLoader().getResourceAsStream("plus.bmp")));
 		this.plusZoom.setSize(25, this.scrollBarWidth);
