@@ -28,12 +28,12 @@ public class SpiderPlotter extends Plotter {
 	public FillStyle backStyle;
 	LineStyle border = new LineStyle(0.2F, SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK), 1);
 	public boolean drawCircle = false;
-	public SpiderChartColor factorColor = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
-	public SpiderChartColor[] factorColors;
-	public SpiderChartFont factorFont = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.PLAIN, 10);
-	public double[] factorMaxs;
-	public double[] factorMins;
-	public String[] factorNames;
+	public SpiderChartColor axisFactorColor = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
+	public SpiderChartColor[] axisFactorColors;
+	public SpiderChartFont axisFactorFont = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.PLAIN, 10);
+	public double[] maxScaleFactors;
+	public double[] minScaleFactors;
+	public String[] axesFactors;
 	public SpiderChartFont gridFont;
 	public SpiderChartColor gridFontColor = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
 	public LineStyle gridStyle;
@@ -121,12 +121,12 @@ public class SpiderPlotter extends Plotter {
 					this.border.draw(g, PieCenterX, PieCenterY, PieCenterX + relativeX, PieCenterY + relativeY);
 				}
 			}
-			if ((serieSec == 0) && (this.factorFont != null)) {
-				g.setFont(this.factorFont);
+			if ((serieSec == 0) && (this.axisFactorFont != null)) {
+				g.setFont(this.axisFactorFont);
 				for (int i = 0; i < count; i++) {
-					g.setColor(this.factorColor);
-					if ((this.factorColors != null) && (this.factorColors.length > i)) {
-						g.setColor(this.factorColors[i]);
+					g.setColor(this.axisFactorColor);
+					if ((this.axisFactorColors != null) && (this.axisFactorColors.length > i)) {
+						g.setColor(this.axisFactorColors[i]);
 					}
 					angle = (360.0D / count) * i;
 
@@ -137,7 +137,7 @@ public class SpiderPlotter extends Plotter {
 					final int tmpradi = (int) ((radi * 1.1D) / 2.0D);
 					int correction = 0;
 					if ((angle > 120.0D) && (angle < 240.0D)) {
-						correction = g.getFontWidth(this.factorNames[i]);
+						correction = g.getFontWidth(this.axesFactors[i]);
 					}
 					final double radian = 0.01745277777777778D * angle;
 					final double Sin = Math.sin(radian);
@@ -145,13 +145,13 @@ public class SpiderPlotter extends Plotter {
 					int relativeY = (int) (Sin * tmpradi);
 					final int relativeX = (int) (Cos * tmpradi);
 					relativeY *= -1;
-					if (this.factorNames.length > i) {
-						if (this.factorNames[i].indexOf("@") >= 0) {
-							final SpiderChartLabel label = new SpiderChartLabel(this.factorNames[i], "", false, false);
+					if (this.axesFactors.length > i) {
+						if (this.axesFactors[i].indexOf("@") >= 0) {
+							final SpiderChartLabel label = new SpiderChartLabel(this.axesFactors[i], "", false, false);
 							label.initialize(g, this.chart);
 							label.paint(g, (PieCenterX + relativeX) - correction, PieCenterY + relativeY, -1, -1);
 						} else {
-							g.drawString(this.factorNames[i], (PieCenterX + relativeX) - correction,
+							g.drawString(this.axesFactors[i], (PieCenterX + relativeX) - correction,
 									PieCenterY + relativeY);
 						}
 					}
@@ -169,11 +169,11 @@ public class SpiderPlotter extends Plotter {
 
 			double min = 0.0D;
 			double max = 100.0D;
-			if (this.factorMins.length >= (i + 1)) {
-				min = this.factorMins[i];
+			if (this.minScaleFactors.length >= (i + 1)) {
+				min = this.minScaleFactors[i];
 			}
-			if (this.factorMaxs.length >= (i + 1)) {
-				max = this.factorMaxs[i];
+			if (this.maxScaleFactors.length >= (i + 1)) {
+				max = this.maxScaleFactors[i];
 			}
 			tmpradi = (int) (((((Double) p.getElementY(i)).doubleValue() - min) * 100.0D) / (max - min));
 
@@ -256,11 +256,11 @@ public class SpiderPlotter extends Plotter {
 		if (this.gridStyle != null) {
 			double min = 0.0D;
 			double max = 100.0D;
-			if (this.factorMins.length >= 1) {
-				min = this.factorMins[0];
+			if (this.minScaleFactors.length >= 1) {
+				min = this.minScaleFactors[0];
 			}
-			if (this.factorMaxs.length >= 1) {
-				max = this.factorMaxs[0];
+			if (this.maxScaleFactors.length >= 1) {
+				max = this.maxScaleFactors[0];
 			}
 			final int tickInterval = 100 / this.ticks;
 			final double tickIntervalAbs = (max - min) / this.ticks;

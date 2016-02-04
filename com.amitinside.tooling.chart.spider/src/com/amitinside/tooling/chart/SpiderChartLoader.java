@@ -495,9 +495,9 @@ public class SpiderChartLoader {
 			if (this.getStringParam("RADARCHART_FACTOR_COLORS", "").length() > 0) {
 				final String[] listTMP = convertList(this.getStringParam("RADARCHART_FACTOR_COLORS", ""));
 
-				radarPlot.factorColors = new SpiderChartColor[listTMP.length];
+				radarPlot.axisFactorColors = new SpiderChartColor[listTMP.length];
 				for (int j = 0; j < listTMP.length; j++) {
-					radarPlot.factorColors[j] = convertColor(listTMP[j]);
+					radarPlot.axisFactorColors[j] = convertColor(listTMP[j]);
 				}
 			}
 			lstyle = convertLineStyle(this.getStringParam("RADARCHART_BORDER", ""));
@@ -516,21 +516,21 @@ public class SpiderChartLoader {
 
 			font = convertFont(this.getStringParam("RADARCHART_FACTOR_FONT", ""));
 			if (font != null) {
-				radarPlot.factorFont = font;
+				radarPlot.axisFactorFont = font;
 			}
-			radarPlot.factorColor = convertColor(this.getStringParam("RADARCHART_FACTOR_COLOR", ""));
+			radarPlot.axisFactorColor = convertColor(this.getStringParam("RADARCHART_FACTOR_COLOR", ""));
 
 			String tmpList = this.getStringParam("RADARCHART_FACTOR_MAX", "");
 			if (tmpList.length() > 0) {
-				radarPlot.factorMaxs = this.convertDoubleList(tmpList);
+				radarPlot.maxScaleFactors = this.convertDoubleList(tmpList);
 			}
 			tmpList = this.getStringParam("RADARCHART_FACTOR_MIN", "");
 			if (tmpList.length() > 0) {
-				radarPlot.factorMins = this.convertDoubleList(tmpList);
+				radarPlot.minScaleFactors = this.convertDoubleList(tmpList);
 			}
 			tmpList = this.getStringParam("RADARCHART_FACTOR_NAMES", "");
 			if (tmpList.length() > 0) {
-				radarPlot.factorNames = convertList(tmpList);
+				radarPlot.axesFactors = convertList(tmpList);
 			}
 			tmpList = this.getStringParam("RADARCHART_TICKS", "");
 			if (tmpList.length() > 0) {

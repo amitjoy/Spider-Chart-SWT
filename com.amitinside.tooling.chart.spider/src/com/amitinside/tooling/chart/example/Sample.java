@@ -49,18 +49,14 @@ public final class Sample {
 				final double[] minScales = { 0, 0, 0, 0, 0 };
 				final String[] axes = { "Battery", "Camera", "Display", "Memory", "Brand" };
 
-				plotter.factorMaxs = maxScales;
-				plotter.factorMins = minScales;
-				plotter.factorNames = axes;
+				plotter.maxScaleFactors = maxScales;
+				plotter.minScaleFactors = minScales;
+				plotter.axesFactors = axes;
 			});
 
 		}).viewer(chart -> {
-			chart.data(firstData -> {
-				firstData.inject(iphoneData);
-			});
-			chart.data(secondData -> {
-				secondData.inject(nexusData);
-			});
+			chart.data(firstData -> firstData.inject(iphoneData));
+			chart.data(secondData -> secondData.inject(nexusData));
 		});
 	}
 
