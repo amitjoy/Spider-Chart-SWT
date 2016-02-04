@@ -105,14 +105,12 @@ public class SpiderChart {
 	protected Vector floatingObjects = new Vector(0, 5);
 	public boolean fullXAxis = false;
 	private int height = 0;
-	public String htmlLinkTarget = "";
 	private int lastHeight = -1;
 	private int lastWidth = -1;
 	public int layout = 0;
 	public double leftMargin = 0.125D;
 	public Legend legend;
 	public double legendMargin = 0.2D;
-	// public SpiderChartLoader loader = null;
 	private int minimumHeight = 0;
 	private int minimumWidth = 0;
 	public long msecs = 2000L;
@@ -148,11 +146,8 @@ public class SpiderChart {
 	public Axis XAxis;
 	public HAxisLabel XLabel;
 	public Axis Y2Axis;
-
 	public VAxisLabel Y2Label;
-
 	public Axis YAxis;
-
 	public VAxisLabel YLabel;
 
 	protected SpiderChart() {
@@ -562,104 +557,6 @@ public class SpiderChart {
 
 	public int getHeight() {
 		return this.height;
-	}
-
-	public String getHTMLImageMap(final String name) {
-		String html = "<MAP NAME=\"" + name + "\" >";
-		boolean hasContent = false;
-		final SpiderChart c = this;
-		for (final Plotter plotter : c.plotters) {
-			if (plotter != null) {
-				for (int s = 0; s < plotter.getSeriesCount(); s++) {
-					final DataSeq se = plotter.getSerie(s);
-					for (int a = 0; a < se.hotAreas.size(); a++) {
-						final Polygon po = (Polygon) se.hotAreas.elementAt(a);
-
-						html = html + "<AREA SHAPE=POLY COORDS=\"";
-						for (int j = 0; j < po.size(); j++) {
-							if (j > 0) {
-								html = html + ", ";
-							}
-							html = html + "" + po.getX(j) + ", " + po.getY(j);
-						}
-						html = html + "\"";
-
-						String tip = "";
-						if (c.showTips) {
-							if ((plotter.getSerie(s).tips != null) && (plotter.getSerie(s).tips.length > a)) {
-								tip = plotter.getSerie(s).tips[a];
-							}
-							tip = replaceStr(tip, "\\n", "");
-							if (tip.length() > 0) {
-								hasContent = true;
-							}
-							html = html + " ALT=\"" + tip + "\"";
-							html = html + " TITLE=\"" + tip + "\"";
-						}
-						String link = "";
-						if ((plotter.getSerie(s).htmlLinks != null) && (plotter.getSerie(s).htmlLinks.length > a)) {
-							link = plotter.getSerie(s).htmlLinks[a];
-						}
-						if (link.length() > 0) {
-							html = html + " HREF=\"" + link + "\"";
-							if (link.length() > 0) {
-								hasContent = true;
-							}
-						}
-						if (this.htmlLinkTarget.length() > 0) {
-							html = html + " TARGET=\"" + this.htmlLinkTarget + "\"";
-						}
-						html = html + ">";
-					}
-				}
-			}
-		}
-		for (int i = 0; i < this.chartHotAreas.size(); i++) {
-			final SpiderChartLabel label = (SpiderChartLabel) this.chartHotAreas.elementAt(i);
-
-			final Polygon po = label.clickableArea;
-
-			html = html + "<AREA SHAPE=POLY COORDS=\"";
-			for (int j = 0; j < po.size(); j++) {
-				if (j > 0) {
-					html = html + ", ";
-				}
-				html = html + "" + po.getX(j) + ", " + po.getY(j);
-			}
-			html = html + "\"";
-
-			String tip = "";
-			if (c.showTips) {
-				if (label.getTip() != null) {
-					tip = label.getTip();
-				}
-				tip = replaceStr(tip, "\\n", "");
-				if (tip.length() > 0) {
-					hasContent = true;
-				}
-				html = html + " ALT=\"" + tip + "\"";
-				html = html + " TITLE=\"" + tip + "\"";
-			}
-			String link = "";
-			if (label.getClickInfo() != null) {
-				link = label.getClickInfo();
-			}
-			if (link.length() > 0) {
-				html = html + " HREF=\"" + link + "\"";
-				if (link.length() > 0) {
-					hasContent = true;
-				}
-			}
-			if (this.htmlLinkTarget.length() > 0) {
-				html = html + " TARGET=\"" + this.htmlLinkTarget + "\"";
-			}
-			html = html + ">";
-		}
-		html = html + "</MAP>";
-		if (!hasContent) {
-			return "";
-		}
-		return html;
 	}
 
 	public TargetZone[] getTargetZones() {
