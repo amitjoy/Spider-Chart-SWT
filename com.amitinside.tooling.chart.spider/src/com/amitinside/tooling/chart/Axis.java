@@ -23,104 +23,175 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Vector;
 
+import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartFont;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
-import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
+/**
+ * Spider Chart Axis
+ *
+ * @author AMIT KUMAR MONDAL
+ */
 public class Axis extends SpiderChartComponent {
+
+	/** */
 	public static final int CEROAXIS_LINE = 0;
+
+	/** */
 	public static final int CEROAXIS_NO = 1;
+
+	/** */
 	public static final int CEROAXIS_SCALE = 2;
+
+	/** */
 	public static final int HORIZONTAL = 0;
+
+	/** */
 	public static final int VERTICAL = 1;
 
-	public static double convertFromDate(final Date d, final String dateStep, final Date initialDate) {
-		final long diff = d.getTime() - initialDate.getTime();
-		double diff2 = diff;
-
-		int step = 1;
-		if (dateStep.length() > 1) {
-			step = new Integer(dateStep.substring(1, dateStep.length())).intValue();
-		}
-		if (dateStep.toLowerCase().indexOf("d") == 0) {
-			diff2 = diff / 8.64E7D;
-		}
-		if (dateStep.toLowerCase().indexOf("m") == 0) {
-			diff2 = diff / 8.64E7D;
-			diff2 /= 30.0D;
-		}
-		if (dateStep.toLowerCase().indexOf("w") == 0) {
-			diff2 = diff / 8.64E7D;
-			diff2 /= 7.0D;
-		}
-		if (dateStep.toLowerCase().indexOf("y") == 0) {
-			diff2 = diff / 8.64E7D;
-			diff2 /= 365.0D;
-		}
-		if (dateStep.toLowerCase().indexOf("h") == 0) {
-			diff2 = diff / 3600000.0D;
-		}
-		if (dateStep.toLowerCase().indexOf("s") == 0) {
-			diff2 = diff / 1000.0D;
-		}
-		if (dateStep.toLowerCase().indexOf("n") == 0) {
-			diff2 = diff / 60000.0D;
-		}
-		diff2 /= step;
-
-		return diff2;
-	}
-
+	/** */
 	protected Vector additionalAxis = new Vector();
+
+	/** */
 	public int autoNumberOfTicks = 0;
+
+	/** */
 	public boolean axisFrame = false;
+
+	/** */
 	public FillStyle barFilling = null;
+
+	/** */
 	public int bigTickInterval = 1;
+
+	/** */
 	public int[] bigTickIntervalList;
+
+	/** */
 	public int bigTickPixels = 9;
+
+	/** */
 	public boolean bigTicksGrid = false;
+
+	/** */
 	public int ceroAxis = 0;
+
+	/** */
 	public LineStyle ceroAxisStyle = new LineStyle(0.2F, SWTGraphicsSupplier.getColor(SpiderChartColor.DARKGRAY), 1);
+
+	/** */
 	public String dateLabelFormat = "dd-MMM-yyyy";
+
+	/** */
 	public String dateStep = "d";
+
+	/** */
 	public boolean dateStepPerUnit = false;
+
+	/** */
 	public SpiderChartColor DescColor = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
+
+	/** */
 	public SpiderChartFont DescFont = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.PLAIN, 10);
+
+	/** */
 	public FillStyle gridFillStyle = null;
+
+	/** */
 	public LineStyle gridStyle = null;
+
+	/** */
 	public Date initialDate = null;
+
+	/** */
 	public boolean IntegerScale = false;
+
+	/** */
 	protected boolean isMainAxis = true;
+
+	/** Axis Label */
 	public String label = "";
+
+	/** */
 	public String labelTemplate = "";
+
+	/** */
 	public boolean logarithmicIntervals = false;
+
+	/** */
 	protected Axis mainAxis = null;
+
+	/** */
 	private int maxTickLabelLength = 0;
+
+	/** */
 	protected int offset;
+
+	/** */
 	public int orientation;
+
+	/** */
 	public Axis peerAxis;
+
+	/** */
 	public Plotter plot;
+
+	/** */
 	protected int realPosition;
+
+	/** */
 	protected boolean rightAxis = false;
+
+	/** */
 	public int rotateLabels = 0;
+
+	/** */
 	public Scale scale;
+
+	/** */
 	public String scaleLabelFormat = "";
+
+	/** */
 	public double scaleTickInterval = 1.0D;
+
+	/** */
 	public boolean stackAdditionalAxis = false;
+
+	/** */
 	public boolean startWithBigTick = false;
+
+	/** */
 	public LineStyle style = new LineStyle(2.0F, SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK), 1);
+
+	/** */
 	protected Vector targetZones = new Vector();
+
+	/** */
 	public boolean tickAtBase = false;
+
+	/** */
 	public int tickLabelLength = 1000;
+
+	/** */
 	public String[] tickLabels = null;
+
+	/** */
 	public int tickPixels = 4;
+
+	/** */
 	public double[] ticks_preferred_Interval = { 0.1D, 0.5D, 1.0D, 5.0D, 10.0D, 25.0D, 50.0D, 100.0D, 250.0D, 500.0D,
 			1000.0D, 5000.0D, 10000.0D, 50000.0D, 100000.0D, 500000.0D, 1000000.0D };
+
+	/** */
 	protected int visibleSize = 0;
 
+	/** */
 	public boolean xscaleOnTop = false;
 
+	/**
+	 * Constructor
+	 */
 	public Axis(final int o, final Scale s) {
 		this.orientation = o;
 		this.scale = s;
@@ -129,18 +200,21 @@ public class Axis extends SpiderChartComponent {
 		}
 	}
 
+	/** */
 	public void addAdditionalAxis(final Axis axis) {
 		axis.isMainAxis = false;
 		axis.mainAxis = this;
 		this.additionalAxis.addElement(axis);
 	}
 
+	/** */
 	public void addTargetZone(final AxisZone zone) {
 		if (zone != null) {
 			this.targetZones.addElement(zone);
 		}
 	}
 
+	/** */
 	public void draw(final SpiderChartGraphics g, final Axis peerAxis, final boolean drawForeGround,
 			final boolean drawGridBackground) {
 		double range = this.scale.max - this.scale.min;
@@ -289,8 +363,8 @@ public class Axis extends SpiderChartComponent {
 				}
 				if (!this.rightAxis) {
 					if (this.label.length() > 0) {
-						final SpiderChartLabel clabel = new SpiderChartLabel("@rotation value='90' center='LEFTTOP'@" + this.label,
-								"", false, false);
+						final SpiderChartLabel clabel = new SpiderChartLabel(
+								"@rotation value='90' center='LEFTTOP'@" + this.label, "", false, false);
 						g.setColor(this.DescColor);
 						g.setFont(this.DescFont);
 						clabel.initialize(g, this.chart);
@@ -301,8 +375,8 @@ public class Axis extends SpiderChartComponent {
 				}
 				if (this.rightAxis) {
 					if (this.label.length() > 0) {
-						final SpiderChartLabel clabel = new SpiderChartLabel("@rotation value='90'  center='LEFTTOP'@" + this.label,
-								"", false, false);
+						final SpiderChartLabel clabel = new SpiderChartLabel(
+								"@rotation value='90'  center='LEFTTOP'@" + this.label, "", false, false);
 						g.setColor(this.DescColor);
 						g.setFont(this.DescFont);
 						clabel.initialize(g, this.chart);
@@ -510,8 +584,8 @@ public class Axis extends SpiderChartComponent {
 						if (this.tickLabels != null) {
 							if (this.tickLabels.length >= numberBigTicks) {
 								if (this.tickLabels[numberBigTicks - 1] != null) {
-									formattedlabel = new SpiderChartLabel(this.tickLabels[numberBigTicks - 1], txt, false,
-											true);
+									formattedlabel = new SpiderChartLabel(this.tickLabels[numberBigTicks - 1], txt,
+											false, true);
 									txt = this.tickLabels[numberBigTicks - 1];
 								} else {
 									txt = " ";
@@ -703,6 +777,7 @@ public class Axis extends SpiderChartComponent {
 		}
 	}
 
+	/** */
 	protected void drawBackground(final SpiderChartGraphics g, final Axis peerAxis) {
 		this.maxTickLabelLength = 0;
 
@@ -759,6 +834,7 @@ public class Axis extends SpiderChartComponent {
 		this.draw(g, peerAxis, false, false);
 	}
 
+	/** */
 	protected void drawForeground(final SpiderChartGraphics g, final Axis peerAxis) {
 		if (this.isMainAxis && !this.xscaleOnTop) {
 			for (int i = 0; i < this.additionalAxis.size(); i++) {
@@ -769,18 +845,22 @@ public class Axis extends SpiderChartComponent {
 		this.draw(g, peerAxis, true, false);
 	}
 
+	/** */
 	protected void drawGridBackground(final SpiderChartGraphics g, final Axis peerAxis) {
 		this.draw(g, peerAxis, false, true);
 	}
 
+	/** */
 	protected Axis getAdditionalAxis(final int i) {
 		return (Axis) this.additionalAxis.elementAt(i);
 	}
 
+	/** */
 	protected int getAdditionalAxisCount() {
 		return this.additionalAxis.size();
 	}
 
+	/** */
 	public AxisZone[] getTargetZones() {
 		final AxisZone[] a = new AxisZone[this.targetZones.size()];
 		for (int i = 0; i < a.length; i++) {
@@ -789,6 +869,7 @@ public class Axis extends SpiderChartComponent {
 		return a;
 	}
 
+	/** */
 	protected void paintTargetZones(final SpiderChartGraphics g, final Axis peerAxis, final int position) {
 		for (int i = 0; i < this.targetZones.size(); i++) {
 			final AxisZone z = (AxisZone) this.targetZones.elementAt(i);
@@ -797,10 +878,12 @@ public class Axis extends SpiderChartComponent {
 		}
 	}
 
+	/** */
 	public void removeTargetZones() {
 		this.targetZones.removeAllElements();
 	}
 
+	/** */
 	private String[] splitText(String s) {
 		final String[] r = new String[100];
 		int lines = 0;

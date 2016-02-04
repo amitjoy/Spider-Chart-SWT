@@ -15,20 +15,25 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart;
 
+import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartFont;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
-import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
 public class Title extends SpiderChartComponent {
 
+	/** Title Color */
 	public SpiderChartColor color = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
+	/** Title Font */
 	public SpiderChartFont font = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.PLAIN, 14);
-	private String text;
+	/** Title Text */
+	public String text;
 
+	/** Constructor */
 	public Title() {
 	}
 
+	/** */
 	public void draw(final SpiderChartGraphics g) {
 		g.setColor(this.color);
 		g.setFont(this.font);
@@ -62,9 +67,5 @@ public class Title extends SpiderChartComponent {
 				g.drawString(txt[i], this.x + toCenterX, this.y + toCenterY + (g.getFontHeight() * (i + 1)));
 			}
 		}
-	}
-
-	public void setText(final String text) {
-		this.text = text;
 	}
 }

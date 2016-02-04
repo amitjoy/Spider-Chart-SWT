@@ -22,23 +22,40 @@ import java.util.Vector;
 
 public class DataSeq {
 
+	/** */
 	public String[] dataLabels;
+	/** */
 	public Vector<Object> hotAreas = new Vector<>(0, 5);
+	/** */
 	public String[] htmlLinks = new String[0];
+	/** */
 	public String labelTemplate = "";
+	/** */
 	public String name = "";
+	/** */
 	public double nullValue = -9.0D;
+	/** */
 	public Axis secondaryXAxis = null;
+	/** */
 	public Axis secondaryYAxis = null;
+	/** */
 	public boolean secondYAxis = false;
+	/** */
 	public String[] tips = new String[0];
+	/** */
 	public String valueFormat = "######.##";
+	/** */
 	Vector<Double> xData = new Vector<>(0, 5);
+	/** */
 	Vector<Double> yData = new Vector<>(0, 5);
 
+	/**
+	 * Constructor
+	 */
 	public DataSeq() {
 	}
 
+	/** Constructor */
 	public DataSeq(final double[] y) {
 		if (y == null) {
 			return;
@@ -48,18 +65,21 @@ public class DataSeq {
 		}
 	}
 
+	/** Constructor */
 	public DataSeq(final double[] x, final double[] y) {
 		for (int i = 0; i < x.length; i++) {
 			this.addData(new Double(x[i]), new Double(y[i]));
 		}
 	}
 
+	/** Constructor */
 	public DataSeq(final double[] y, final int startingXValue) {
 		for (int i = 0; i < y.length; i++) {
 			this.addData(new Double(startingXValue + i), new Double(y[i]));
 		}
 	}
 
+	/** Constructor */
 	public DataSeq(final Double[] y) {
 		if (y == null) {
 			return;
@@ -69,23 +89,27 @@ public class DataSeq {
 		}
 	}
 
+	/** Constructor */
 	public DataSeq(final Double[] x, final Double[] y) {
 		for (int i = 0; i < x.length; i++) {
 			this.addData(x[i], y[i]);
 		}
 	}
 
+	/** Constructor */
 	public DataSeq(final Double[] y, final int startingXValue) {
 		for (int i = 0; i < y.length; i++) {
 			this.addData(new Double(startingXValue + i), y[i]);
 		}
 	}
 
+	/** Constructor */
 	public void addData(final Object x, final Object y) {
 		this.xData.addElement((Double) x);
 		this.yData.addElement((Double) y);
 	}
 
+	/** */
 	protected String doubleToString(final Double d) {
 		if (this.valueFormat.compareTo("") == 0) {
 			return d.toString();
@@ -103,18 +127,22 @@ public class DataSeq {
 		return df.format(d.doubleValue());
 	}
 
+	/** */
 	public Object getElementX(final int i) {
 		return this.xData.elementAt(i);
 	}
 
+	/** */
 	public Object getElementY(final int i) {
 		return this.yData.elementAt(i);
 	}
 
+	/** */
 	public int getSize() {
 		return this.xData.size();
 	}
 
+	/** */
 	public void replaceXValueAt(final int index, final double newValue) {
 		if (index < this.xData.size()) {
 			final Vector<Double> tmp = new Vector<>();
@@ -129,11 +157,13 @@ public class DataSeq {
 		}
 	}
 
+	/** */
 	public void replaceXYValueAt(final int index, final double newValueX, final double newValueY) {
 		this.replaceXValueAt(index, newValueX);
 		this.replaceYValueAt(index, newValueY);
 	}
 
+	/** */
 	public void replaceYValueAt(final int index, final double newValue) {
 		if (index < this.yData.size()) {
 			final Vector<Double> tmp = new Vector<>();
@@ -148,6 +178,7 @@ public class DataSeq {
 		}
 	}
 
+	/** */
 	public void setDatax(final double[] x) {
 		for (int i = 0; i < x.length; i++) {
 			if (i < this.xData.size()) {

@@ -21,10 +21,12 @@ import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 
 public class HAxisLabel extends AxisLabel {
 
+	/** Constructor */
 	public HAxisLabel(final String t, final SpiderChartColor c, final SpiderChartFont f) {
 		super(t, c, f);
 	}
 
+	/** {@inheritDoc}} */
 	@Override
 	protected void draw(final SpiderChartGraphics g) {
 		g.setColor(this.color);

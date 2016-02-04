@@ -30,22 +30,29 @@ import com.amitinside.tooling.chart.gc.SpiderChartFont;
 
 public class SpiderChartConfigurationBuilder {
 
+	/** */
 	private Legend legend;
+	/** */
 	private SpiderPlotter plotter;
+	/** */
 	private Title title;
 
+	/** */
 	public Legend getLegend() {
 		return this.legend;
 	}
 
+	/** */
 	public SpiderPlotter getPlotter() {
 		return this.plotter;
 	}
 
+	/** */
 	public Title getTitle() {
 		return this.title;
 	}
 
+	/** */
 	public SpiderChartConfigurationBuilder legend(final Consumer<Legend> legendBuilder) {
 		this.legend = new Legend();
 		this.legend.background = new FillStyle(SWTGraphicsSupplier.getColor(SpiderChartColor.WHITE));
@@ -54,6 +61,7 @@ public class SpiderChartConfigurationBuilder {
 		return this;
 	}
 
+	/** */
 	public SpiderChartConfigurationBuilder plotter(final Consumer<SpiderPlotter> plotter) {
 		this.plotter = new SpiderPlotter();
 		this.plotter.backStyle = new FillStyle(SWTGraphicsSupplier.getColor(SpiderChartColor.YELLOW));
@@ -65,6 +73,7 @@ public class SpiderChartConfigurationBuilder {
 		return this;
 	}
 
+	/** */
 	public SpiderChartConfigurationBuilder title(final Consumer<Title> titleBuilder) {
 		this.title = new Title();
 		titleBuilder.accept(this.title);

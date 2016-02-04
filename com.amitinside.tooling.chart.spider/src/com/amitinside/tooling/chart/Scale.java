@@ -17,27 +17,39 @@ package com.amitinside.tooling.chart;
 
 public class Scale {
 
+	/** */
 	public boolean exactMaxValue = false;
+	/** */
 	public boolean exactMinValue = false;
+	/** */
 	public double max = -99999.0D;
+	/** */
 	public double min = 99999.0D;
+	/** */
 	public double[] preferred_MaxMin_values = { -1000000.0D, -500000.0D, -100000.0D, -50000.0D, -10000.0D, -5000.0D,
 			-1000.0D, -500.0D, -250.0D, -100.0D, -50.0D, -35.0D, -5.0D, -1.0D, -0.5D, -0.1D, 0.0D, 0.1D, 0.5D, 1.0D,
 			5.0D, 10.0D, 25.0D, 50.0D, 100.0D, 250.0D, 500.0D, 1000.0D, 5000.0D, 10000.0D, 50000.0D, 100000.0D,
 			500000.0D, 1000000.0D };
+	/** */
 	public boolean reverse = false;
+	/** */
 	public int screenMax;
+	/** */
 	public int screenMaxMargin;
+	/** */
 	public int screenMin;
 
+	/** Constructor */
 	public Scale() {
 	}
 
+	/** Constructor */
 	public Scale(final int ma, final int mi) {
 		this.max = ma;
 		this.min = mi;
 	}
 
+	/** */
 	public int getScreenCoord(final double v) {
 		double range = this.max - this.min;
 		if ((this.min < 0.0D) && (this.max < 0.0D)) {
@@ -54,6 +66,7 @@ public class Scale {
 		return i;
 	}
 
+	/** */
 	public double getValue(int c) {
 		if (!this.reverse) {
 			c -= this.screenMin;

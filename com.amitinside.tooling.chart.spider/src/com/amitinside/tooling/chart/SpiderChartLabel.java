@@ -23,38 +23,70 @@ import com.amitinside.tooling.chart.gc.SpiderChartImage;
 
 public class SpiderChartLabel implements IFloatingObject {
 
+	/** */
 	protected static int ALIGN_CENTER = 1;
+	/** */
 	protected static int ALIGN_LEFT = 0;
+	/** */
 	protected static int ALIGN_RIGHT = 2;
+	/** */
 	protected static int BORDER_OVAL = 2;
+	/** */
 	protected static int BORDER_RECT = 0;
+	/** */
 	protected static int BORDER_ROUNDRECT = 1;
+	/** */
 	protected int align = ALIGN_LEFT;
+	/** */
 	protected int anchorX = 0;
+	/** */
 	protected int anchorY = 0;
+	/** */
 	protected FillStyle background = null;
+	/** */
 	protected LineStyle border = null;
+	/** */
 	protected int borderShape = BORDER_RECT;
+	/** */
 	protected SpiderChart chart = null;
+	/** */
 	protected Polygon clickableArea = null;
+	/** */
 	protected String clickInfo = "";
+	/** */
 	protected boolean ignorePosition = false;
+	/** */
 	int lineCount = 0;
+	/** */
 	int[] lineHeights = new int[100];
+	/** */
 	protected LineStyle lineToAnchor = null;
+	/** */
 	int[] lineWidths = new int[100];
+	/** */
 	protected int marginX = 2;
+	/** */
 	protected int marginY = 2;
+	/** */
 	protected String name = "";
+	/** */
 	protected int positionX = 0;
+	/** */
 	protected int positionY = 0;
+	/** */
 	int requiredHeight = 0;
+	/** */
 	int requiredWidth = 0;
+	/** */
 	protected int rotation = 0;
+	/** */
 	protected int rotationAlign = SpiderChartGraphics.ROTATE_CENTER;
+	/** */
 	private String sFormat = "";
+	/** */
 	protected String tip = "";
 
+	/** Constructor */
 	public SpiderChartLabel(String pformat, final String pvalue, final boolean pvertical, final boolean pCenter) {
 		if (pformat.length() == 0) {
 			pformat = pvalue;
@@ -72,6 +104,7 @@ public class SpiderChartLabel implements IFloatingObject {
 		this.sFormat = pformat;
 	}
 
+	/** */
 	protected int calcRelativeX(final String s, final int x) {
 		if (s.length() == 0) {
 			return x;
@@ -85,6 +118,7 @@ public class SpiderChartLabel implements IFloatingObject {
 		return this.calcX(s);
 	}
 
+	/** */
 	protected int calcRelativeY(final String s, final int y) {
 		if (s.length() == 0) {
 			return y;
@@ -98,6 +132,7 @@ public class SpiderChartLabel implements IFloatingObject {
 		return this.calcY(s);
 	}
 
+	/** */
 	protected int calcX(final String s) {
 		if (s.indexOf("px") > 0) {
 			return this.parseInt(s.substring(0, s.indexOf("px")));
@@ -111,6 +146,7 @@ public class SpiderChartLabel implements IFloatingObject {
 		return this.chart.XAxis.scale.getScreenCoord(new Double(s).doubleValue());
 	}
 
+	/** */
 	protected int calcY(final String s) {
 		if (s.indexOf("px") > 0) {
 			return this.parseInt(s.substring(0, s.indexOf("px")));
@@ -124,14 +160,17 @@ public class SpiderChartLabel implements IFloatingObject {
 		return this.chart.YAxis.scale.getScreenCoord(new Double(s).doubleValue());
 	}
 
+	/** */
 	public String getClickInfo() {
 		return this.clickInfo;
 	}
 
+	/** */
 	public String getName() {
 		return this.name;
 	}
 
+	/** {@inheritDoc}} */
 	@Override
 	public Polygon getObjectBounds() {
 		final Polygon pol = new Polygon();
@@ -142,6 +181,7 @@ public class SpiderChartLabel implements IFloatingObject {
 		return pol;
 	}
 
+	/** */
 	protected int getRotatedHeight() {
 		if ((this.rotation == 90) || (this.rotation == -90) || (this.rotation == 270)) {
 			return this.requiredWidth;
@@ -149,6 +189,7 @@ public class SpiderChartLabel implements IFloatingObject {
 		return this.requiredHeight;
 	}
 
+	/** */
 	protected int getRotatedWidth() {
 		if ((this.rotation == 90) || (this.rotation == -90) || (this.rotation == 270)) {
 			return this.requiredHeight;
@@ -156,24 +197,29 @@ public class SpiderChartLabel implements IFloatingObject {
 		return this.requiredWidth;
 	}
 
+	/** */
 	public String getTip() {
 		return this.tip;
 	}
 
+	/** {@inheritDoc}} */
 	@Override
 	public int getX() {
 		return this.positionX;
 	}
 
+	/** {@inheritDoc}} */
 	@Override
 	public int getY() {
 		return this.positionY;
 	}
 
+	/** */
 	public void initialize(final SpiderChartGraphics g, final SpiderChart c) {
 		this.chart = c;
 	}
 
+	/** */
 	public void paint(final SpiderChartGraphics g, final int x, final int y, final int width, final int height) {
 		if (this.chart != null) {
 			this.chart.placeFloatingObject(this);
@@ -184,6 +230,7 @@ public class SpiderChartLabel implements IFloatingObject {
 		this.render(g);
 	}
 
+	/** */
 	private int parseInt(final String s) {
 		try {
 			return Integer.parseInt(s);
@@ -193,6 +240,7 @@ public class SpiderChartLabel implements IFloatingObject {
 		return 0;
 	}
 
+	/** */
 	protected void render(final SpiderChartGraphics g2) {
 		SpiderChartGraphics g = g2;
 		SpiderChartImage rotatedImage = null;
@@ -288,11 +336,13 @@ public class SpiderChartLabel implements IFloatingObject {
 		}
 	}
 
+	/** {@inheritDoc}} */
 	@Override
 	public void setX(final int x) {
 		this.positionX = x;
 	}
 
+	/** {@inheritDoc}} */
 	@Override
 	public void setY(final int y) {
 		this.positionY = y;

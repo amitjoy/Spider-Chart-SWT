@@ -23,28 +23,37 @@ import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.graphics.Rectangle;
 
+import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartFont;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.gc.SpiderChartImage;
-import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
 public class SpiderChartSwtGraphics extends SpiderChartGraphics {
-	private GC graphics;
-	private Font currentFont;
-	private Color currentColor;
+	/** */
 	protected float alphaValue = 1.0F;
-	protected Image srcImage;
-	private Color transparent = null;
+	/** */
+	private Color currentColor;
+	/** */
+	private Font currentFont;
+	/** */
+	private GC graphics;
+	/** */
 	protected Image imageForTransparentFilling = null;
+	/** */
+	protected Image srcImage;
+	/** */
+	private Color transparent = null;
 
+	/** Constructor */
 	public SpiderChartSwtGraphics(final Object g) {
 		this.graphics = (GC) g;
 	}
 
-	public void createFadeArea(final SpiderChartColor colorFrom,
-			final SpiderChartColor colorUntil, final int x, final int y, final int w,
-			final int h, final boolean vertical, final boolean cyclic) {
+	/** {@inheritDoc}} */
+	@Override
+	public void createFadeArea(final SpiderChartColor colorFrom, final SpiderChartColor colorUntil, final int x,
+			final int y, final int w, final int h, final boolean vertical, final boolean cyclic) {
 		final Color fore = ((SpiderChartSwtColor) colorFrom).getColor();
 		final Color back = ((SpiderChartSwtColor) colorUntil).getColor();
 
@@ -60,34 +69,41 @@ public class SpiderChartSwtGraphics extends SpiderChartGraphics {
 		back.dispose();
 	}
 
+	/** {@inheritDoc} */
+	@Override
 	public void dispose() {
-		disposeCurrentColor();
-		disposeCurrentFont();
-		if (this.graphics != null && !this.graphics.isDisposed()) {
+		this.disposeCurrentColor();
+		this.disposeCurrentFont();
+		if ((this.graphics != null) && !this.graphics.isDisposed()) {
 			this.graphics.dispose();
 		}
 		this.graphics = null;
 	}
 
+	/** */
 	private void disposeCurrentColor() {
-		if (this.currentColor != null && !this.currentColor.isDisposed()) {
+		if ((this.currentColor != null) && !this.currentColor.isDisposed()) {
 			this.currentColor.dispose();
 		}
 		this.currentColor = null;
 	}
 
+	/** */
 	private void disposeCurrentFont() {
-		if (this.currentFont != null && !this.currentFont.isDisposed()) {
+		if ((this.currentFont != null) && !this.currentFont.isDisposed()) {
 			this.currentFont.dispose();
 		}
 		this.currentFont = null;
 	}
 
-	public void drawArc(final int x, final int y, final int w, final int h,
-			final int a1, final int a2) {
+	/** {@inheritDoc}} */
+	@Override
+	public void drawArc(final int x, final int y, final int w, final int h, final int a1, final int a2) {
 		this.graphics.drawArc(x, y, w, h, a1, a2);
 	}
 
+	/** {@inheritDoc} */
+	@Override
 	public void drawImage(final SpiderChartImage image, final int x, final int y) {
 		if (image == null) {
 			return;
@@ -98,25 +114,28 @@ public class SpiderChartSwtGraphics extends SpiderChartGraphics {
 		this.graphics.drawImage(((SpiderChartSwtImage) image).getImage(), x, y);
 	}
 
-	public void drawImage(final SpiderChartImage image, final int x1Dest,
-			final int y1Dest, final int x2Dest, final int y2Dest,
-			final int x1Source, final int y1Source, final int x2Source,
-			final int y2Source) {
+	/** {@inheritDoc} */
+	@Override
+	public void drawImage(final SpiderChartImage image, final int x1Dest, final int y1Dest, final int x2Dest,
+			final int y2Dest, final int x1Source, final int y1Source, final int x2Source, final int y2Source) {
 		if (image == null) {
 			return;
 		}
 		if (((SpiderChartSwtImage) image).getImage() == null) {
 			return;
 		}
-		this.graphics.drawImage(((SpiderChartSwtImage) image).getImage(), x1Source,
-				y1Source, x2Source - x1Source, y2Source - y1Source, x1Dest,
-				y1Dest, x2Dest - x1Dest, y2Dest - y1Dest);
+		this.graphics.drawImage(((SpiderChartSwtImage) image).getImage(), x1Source, y1Source, x2Source - x1Source,
+				y2Source - y1Source, x1Dest, y1Dest, x2Dest - x1Dest, y2Dest - y1Dest);
 	}
 
+	/** {@inheritDoc} */
+	@Override
 	public void drawLine(final int x1, final int y1, final int x2, final int y2) {
 		this.graphics.drawLine(x1, y1, x2, y2);
 	}
 
+	/** {@inheritDoc} */
+	@Override
 	public void drawPolygon(final int[] x1, final int[] y1, final int count) {
 		final int[] points = new int[count * 2];
 		int j = 0;
@@ -127,18 +146,21 @@ public class SpiderChartSwtGraphics extends SpiderChartGraphics {
 		this.graphics.drawPolygon(points);
 	}
 
+	/** {@inheritDoc} */
+	@Override
 	public void drawRect(final int x1, final int y1, final int w, final int h) {
 		super.drawRect(x1, y1, w, h);
 	}
 
-	public boolean drawRotatedText(final SpiderChartFont descFont,
-			final SpiderChartColor descColor, final String txt, final int angle,
-			final int x, final int y, final boolean b) {
-		setFont(descFont);
-		setColor(descColor);
+	/** {@inheritDoc} */
+	@Override
+	public boolean drawRotatedText(final SpiderChartFont descFont, final SpiderChartColor descColor, final String txt,
+			final int angle, final int x, final int y, final boolean b) {
+		this.setFont(descFont);
+		this.setColor(descColor);
 
-		final int h = getFontHeight();
-		final int w = getFontWidth(txt);
+		final int h = this.getFontHeight();
+		final int w = this.getFontWidth(txt);
 		int size = w;
 		int toCenterX = 0;
 		int toCenterY = 0;
@@ -148,23 +170,17 @@ public class SpiderChartSwtGraphics extends SpiderChartGraphics {
 		} else {
 			toCenterY = (size - h) / 2;
 		}
-		Image tmpImage = new Image(SwtGraphicsProvider.getDefaultDisplay(),
-				size, size);
+		Image tmpImage = new Image(SwtGraphicsProvider.getDefaultDisplay(), size, size);
 		final ImageData imageData = tmpImage.getImageData();
 		tmpImage.dispose();
 
 		Color transparent = null;
-		if (descColor.getRed() == 255 && descColor.getBlue() == 255
-				&& descColor.getGreen() == 255) {
-			transparent = new Color(SwtGraphicsProvider.getDefaultDisplay(), 0,
-					0, 0);
-			imageData.transparentPixel = imageData.palette.getPixel(new RGB(0,
-					0, 0));
+		if ((descColor.getRed() == 255) && (descColor.getBlue() == 255) && (descColor.getGreen() == 255)) {
+			transparent = new Color(SwtGraphicsProvider.getDefaultDisplay(), 0, 0, 0);
+			imageData.transparentPixel = imageData.palette.getPixel(new RGB(0, 0, 0));
 		} else {
-			transparent = new Color(SwtGraphicsProvider.getDefaultDisplay(),
-					255, 255, 255);
-			imageData.transparentPixel = imageData.palette.getPixel(new RGB(
-					255, 255, 255));
+			transparent = new Color(SwtGraphicsProvider.getDefaultDisplay(), 255, 255, 255);
+			imageData.transparentPixel = imageData.palette.getPixel(new RGB(255, 255, 255));
 		}
 		tmpImage = new Image(SwtGraphicsProvider.getDefaultDisplay(), imageData);
 
@@ -185,8 +201,7 @@ public class SpiderChartSwtGraphics extends SpiderChartGraphics {
 		f.dispose();
 
 		final SpiderChartImage tmpChartImage = SWTGraphicsSupplier.getImage(tmpImage);
-		paintRotatedImage(tmpChartImage, angle, x - (w - h) / 2, y + 4,
-				SpiderChartGraphics.ROTATE_CENTER);
+		this.paintRotatedImage(tmpChartImage, angle, x - ((w - h) / 2), y + 4, SpiderChartGraphics.ROTATE_CENTER);
 
 		tmpChartImage.dispose();
 		tmpImage.dispose();
@@ -194,18 +209,22 @@ public class SpiderChartSwtGraphics extends SpiderChartGraphics {
 		return true;
 	}
 
+	/** {@inheritDoc} */
+	@Override
 	public void drawString(final String s, final int x, final int y) {
-		this.graphics.drawString(s, x, y
-				- this.graphics.getFontMetrics().getHeight(), true);
+		this.graphics.drawString(s, x, y - this.graphics.getFontMetrics().getHeight(), true);
 	}
 
-	public void fillArc(final int x, final int y, final int w, final int h,
-			final int a1, final int a2) {
-		final GC g = getGraphicForFilling();
+	/** {@inheritDoc} */
+	@Override
+	public void fillArc(final int x, final int y, final int w, final int h, final int a1, final int a2) {
+		final GC g = this.getGraphicForFilling();
 		g.fillArc(x, y, w, h, a1, a2);
-		processFilling(g);
+		this.processFilling(g);
 	}
 
+	/** {@inheritDoc} */
+	@Override
 	public void fillPolygon(final int[] x1, final int[] y1, final int count) {
 		final int[] points = new int[count * 2];
 		int j = 0;
@@ -213,94 +232,99 @@ public class SpiderChartSwtGraphics extends SpiderChartGraphics {
 			points[j++] = x1[i];
 			points[j++] = y1[i];
 		}
-		final GC g = getGraphicForFilling();
+		final GC g = this.getGraphicForFilling();
 		g.fillPolygon(points);
-		processFilling(g);
+		this.processFilling(g);
 	}
 
+	/** {@inheritDoc} */
+	@Override
 	public void fillRect(final int x1, final int y1, final int w, final int h) {
-		final GC g = getGraphicForFilling();
+		final GC g = this.getGraphicForFilling();
 		g.fillRectangle(new Rectangle(x1, y1, w, h));
-		processFilling(g);
+		this.processFilling(g);
 	}
 
+	/** {@inheritDoc} */
+	@Override
 	public Object getAlphaComposite() {
 		return new Float(this.alphaValue);
 	}
 
+	/** {@inheritDoc} */
+	@Override
 	public SpiderChartColor getColor() {
 		return new SpiderChartSwtColor(this.currentColor);
 	}
 
+	/** {@inheritDoc} */
+	@Override
 	public SpiderChartFont getFont() {
 		return new SpiderChartSwtFont(this.currentFont);
 	}
 
+	/** {@inheritDoc} */
+	@Override
 	public int getFontHeight(final SpiderChartFont font) {
 		final Font tmpFont = this.currentFont;
 		this.currentFont = null;
 		if (font != null) {
-			setFont(font);
+			this.setFont(font);
 		}
 		final int result = this.graphics.getFontMetrics().getHeight();
 
-		disposeCurrentFont();
+		this.disposeCurrentFont();
 		this.currentFont = tmpFont;
 
 		return result;
 	}
 
+	/** {@inheritDoc} */
+	@Override
 	public int getFontWidth(final SpiderChartFont font, final String s) {
 		final Font tmpFont = this.currentFont;
 		this.currentFont = null;
 		if (font != null) {
-			setFont(font);
+			this.setFont(font);
 		}
 		int result = 0;
 
 		result = this.graphics.textExtent(s).x;
 
-		disposeCurrentFont();
+		this.disposeCurrentFont();
 		this.currentFont = tmpFont;
 
 		return result;
 	}
 
+	/** {@inheritDoc} */
 	protected GC getGraphicForFilling() {
-		if (this.alphaValue >= 1.0F || this.srcImage == null) {
+		if ((this.alphaValue >= 1.0F) || (this.srcImage == null)) {
 			this.imageForTransparentFilling = null;
 			return this.graphics;
 		}
 		this.transparent = null;
-		if (this.currentColor.getRed() == 255
-				&& this.currentColor.getBlue() == 255
-				&& this.currentColor.getGreen() == 255) {
-			this.transparent = new Color(
-					SwtGraphicsProvider.getDefaultDisplay(), 0, 0, 0);
+		if ((this.currentColor.getRed() == 255) && (this.currentColor.getBlue() == 255)
+				&& (this.currentColor.getGreen() == 255)) {
+			this.transparent = new Color(SwtGraphicsProvider.getDefaultDisplay(), 0, 0, 0);
 		} else {
-			this.transparent = new Color(
-					SwtGraphicsProvider.getDefaultDisplay(), 255, 255, 255);
+			this.transparent = new Color(SwtGraphicsProvider.getDefaultDisplay(), 255, 255, 255);
 		}
 		final RGB[] rgbs = new RGB['Ā'];
 		rgbs[0] = this.transparent.getRGB();
 		for (int i = 1; i <= 255; i++) {
 			rgbs[i] = this.currentColor.getRGB();
 		}
-		final ImageData imageData = new ImageData(
-				this.srcImage.getBounds().width,
-				this.srcImage.getBounds().height,
-				this.srcImage.getImageData().depth,
-				this.srcImage.getImageData().palette);
+		final ImageData imageData = new ImageData(this.srcImage.getBounds().width, this.srcImage.getBounds().height,
+				this.srcImage.getImageData().depth, this.srcImage.getImageData().palette);
 
-		this.imageForTransparentFilling = new Image(
-				SwtGraphicsProvider.getDefaultDisplay(), imageData);
+		this.imageForTransparentFilling = new Image(SwtGraphicsProvider.getDefaultDisplay(), imageData);
 
 		final GC g = new GC(this.imageForTransparentFilling);
 
 		g.setForeground(this.transparent);
 		g.setBackground(this.transparent);
-		g.fillRectangle(0, 0, this.srcImage.getBounds().width,
-				this.srcImage.getBounds().height);
+		g.fillRectangle(0, 0, this.srcImage.getBounds().width, this.srcImage.getBounds().height);
 
 		g.setForeground(this.currentColor);
 		g.setBackground(this.currentColor);
@@ -308,14 +332,15 @@ public class SpiderChartSwtGraphics extends SpiderChartGraphics {
 		return g;
 	}
 
-	public void paintRotatedImage(SpiderChartImage srcImage, final int angle,
-			final int x, final int y, final int alignment) {
+	/** {@inheritDoc} */
+	@Override
+	public void paintRotatedImage(SpiderChartImage srcImage, final int angle, final int x, final int y,
+			final int alignment) {
 		Image srcSwtImage = ((SpiderChartSwtImage) srcImage).getImage();
 		int size = srcSwtImage.getImageData().width;
 		int h = srcSwtImage.getImageData().height;
 		int w = srcSwtImage.getImageData().width;
 		final int originalH = h;
-		final int originalW = w;
 		if (h != w) {
 			srcImage = ((SpiderChartSwtImage) srcImage).forRotation();
 			srcSwtImage = ((SpiderChartSwtImage) srcImage).getImage();
@@ -325,8 +350,7 @@ public class SpiderChartSwtGraphics extends SpiderChartGraphics {
 			w = srcSwtImage.getImageData().width;
 		}
 		final ImageData srcData = srcSwtImage.getImageData();
-		final ImageData destData = new ImageData(size, size, srcData.depth,
-				srcData.palette);
+		final ImageData destData = new ImageData(size, size, srcData.depth, srcData.palette);
 		destData.transparentPixel = srcData.transparentPixel;
 		if (destData.transparentPixel != -1) {
 			for (int i = 0; i < size; i++) {
@@ -335,22 +359,17 @@ public class SpiderChartSwtGraphics extends SpiderChartGraphics {
 				}
 			}
 		}
-		int c = 0;
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				final int x2 = rotateX(i - size / 2, j - size / 2, -angle)
-						+ size / 2;
-				final int y2 = rotateY(i - size / 2, j - size / 2, -angle)
-						+ size / 2;
+				final int x2 = this.rotateX(i - (size / 2), j - (size / 2), -angle) + (size / 2);
+				final int y2 = this.rotateY(i - (size / 2), j - (size / 2), -angle) + (size / 2);
 
-				c++;
-				if (x2 < size && y2 < size && x2 >= 0 && y2 >= 0) {
+				if ((x2 < size) && (y2 < size) && (x2 >= 0) && (y2 >= 0)) {
 					destData.setPixel(i, j, srcData.getPixel(x2, y2));
 				}
 			}
 		}
-		final Image destImage = new Image(
-				SwtGraphicsProvider.getDefaultDisplay(), destData);
+		final Image destImage = new Image(SwtGraphicsProvider.getDefaultDisplay(), destData);
 		if (alignment == SpiderChartGraphics.ROTATE_LEFTTOP) {
 			if (angle == 90) {
 				this.graphics.drawImage(destImage, x - (w - originalH), y);
@@ -365,31 +384,27 @@ public class SpiderChartSwtGraphics extends SpiderChartGraphics {
 		destImage.dispose();
 	}
 
+	/** */
 	protected void processFilling(final GC g) {
 		if (g != this.graphics) {
 			g.dispose();
 
-			final ImageData imageData = this.imageForTransparentFilling
-					.getImageData();
+			final ImageData imageData = this.imageForTransparentFilling.getImageData();
 			for (int i = 0; i < this.srcImage.getBounds().width; i++) {
 				for (int j = 0; j < this.srcImage.getBounds().height; j++) {
-					final RGB rgb = imageData.palette.getRGB(imageData
-							.getPixel(i, j));
-					if (rgb.red == this.transparent.getRed()
-							&& rgb.green == this.transparent.getGreen()
-							&& rgb.blue == this.transparent.getBlue()) {
+					final RGB rgb = imageData.palette.getRGB(imageData.getPixel(i, j));
+					if ((rgb.red == this.transparent.getRed()) && (rgb.green == this.transparent.getGreen())
+							&& (rgb.blue == this.transparent.getBlue())) {
 						imageData.setAlpha(i, j, 0);
 					} else {
-						imageData.setAlpha(i, j,
-								(int) (this.alphaValue * 255.0F));
+						imageData.setAlpha(i, j, (int) (this.alphaValue * 255.0F));
 					}
 				}
 			}
 			this.transparent.dispose();
 			this.imageForTransparentFilling.dispose();
 
-			this.imageForTransparentFilling = new Image(
-					SwtGraphicsProvider.getDefaultDisplay(), imageData);
+			this.imageForTransparentFilling = new Image(SwtGraphicsProvider.getDefaultDisplay(), imageData);
 
 			this.graphics.drawImage(this.imageForTransparentFilling, 0, 0);
 			this.imageForTransparentFilling.dispose();
@@ -397,6 +412,7 @@ public class SpiderChartSwtGraphics extends SpiderChartGraphics {
 		}
 	}
 
+	/** */
 	private int rotateX(final int x, final int y, final int angle) {
 		if (angle == 90) {
 			return y * -1;
@@ -404,10 +420,10 @@ public class SpiderChartSwtGraphics extends SpiderChartGraphics {
 		if (angle == -90) {
 			return y * 1;
 		}
-		return (int) (x * Math.cos(Math.toRadians(angle)) - y
-				* Math.sin(Math.toRadians(angle)));
+		return (int) ((x * Math.cos(Math.toRadians(angle))) - (y * Math.sin(Math.toRadians(angle))));
 	}
 
+	/** */
 	private int rotateY(final int x, final int y, final int angle) {
 		if (angle == 90) {
 			return x * 1;
@@ -415,39 +431,50 @@ public class SpiderChartSwtGraphics extends SpiderChartGraphics {
 		if (angle == -90) {
 			return x * -1;
 		}
-		return (int) (x * Math.sin(Math.toRadians(angle)) + y
-				* Math.cos(Math.toRadians(angle)));
+		return (int) ((x * Math.sin(Math.toRadians(angle))) + (y * Math.cos(Math.toRadians(angle))));
 	}
 
+	/** {@inheritDoc} */
+	@Override
 	public void setAlpha(final float a) {
 		this.alphaValue = a;
 	}
 
+	/** {@inheritDoc} */
+	@Override
 	public void setAlphaComposite(final Object a) {
 		if (a instanceof Float) {
 			this.alphaValue = ((Float) a).floatValue();
 		}
 	}
 
+	/** {@inheritDoc} */
+	@Override
 	public void setColor(final SpiderChartColor color) {
-		disposeCurrentColor();
+		this.disposeCurrentColor();
 		this.currentColor = ((SpiderChartSwtColor) color).getColor();
 
 		this.graphics.setForeground(this.currentColor);
 		this.graphics.setBackground(this.currentColor);
 	}
 
+	/** {@inheritDoc} */
+	@Override
 	public void setFont(final SpiderChartFont font) {
-		disposeCurrentFont();
+		this.disposeCurrentFont();
 		this.currentFont = ((SpiderChartSwtFont) font).getFont();
 
 		this.graphics.setFont(this.currentFont);
 	}
 
+	/** {@inheritDoc} */
+	@Override
 	public void setLineStyle(final int style) {
 		super.setLineStyle(style);
 	}
 
+	/** {@inheritDoc} */
+	@Override
 	public void setLineWidth(final int w) {
 		super.setLineWidth(w);
 	}

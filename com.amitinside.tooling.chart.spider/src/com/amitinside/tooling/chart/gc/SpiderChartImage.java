@@ -20,25 +20,31 @@ import java.io.OutputStream;
 
 public abstract class SpiderChartImage {
 
+	/** */
 	public void dispose() {
 	}
 
+	/** */
 	public SpiderChartGraphics getGraphics() {
 		return null;
 	}
 
+	/** */
 	public int getHeight() {
 		return 0;
 	}
 
+	/** */
 	public int getWidth() {
 		return 0;
 	}
 
+	/** */
 	public boolean saveToFile(final String sFormat, final String file) throws Exception {
 		return this.saveToStream(sFormat, new FileOutputStream(file));
 	}
 
+	/** */
 	public boolean saveToStream(final String sFormat, final OutputStream os) {
 		return false;
 	}

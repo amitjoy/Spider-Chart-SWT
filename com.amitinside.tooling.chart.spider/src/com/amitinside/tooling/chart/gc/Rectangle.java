@@ -17,11 +17,16 @@ package com.amitinside.tooling.chart.gc;
 
 public class Rectangle {
 
+	/** */
 	public int h;
+	/** */
 	public int w;
+	/** */
 	public int x;
+	/** */
 	public int y;
 
+	/** Constructor */
 	public Rectangle(final int x, final int y, final int w, final int h) {
 		this.x = x;
 		this.y = y;
@@ -29,6 +34,7 @@ public class Rectangle {
 		this.h = h;
 	}
 
+	/** */
 	public boolean contains(final int x1, final int y1) {
 		if ((x1 >= this.x) && (x1 <= (this.x + this.w)) && (y1 >= this.y) && (y1 <= (this.y + this.h))) {
 			return true;
@@ -36,6 +42,7 @@ public class Rectangle {
 		return false;
 	}
 
+	/** */
 	public boolean intersects(final Rectangle r) {
 		return ((r.x + r.w) > this.x) && ((r.y + r.h) > this.y) && (r.x < (this.x + this.w))
 				&& (r.y < (this.y + this.h));

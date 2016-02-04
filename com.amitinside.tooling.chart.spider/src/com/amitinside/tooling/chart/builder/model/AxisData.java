@@ -25,12 +25,15 @@ import com.amitinside.tooling.chart.gc.SpiderChartFont;
 
 public class AxisData {
 
+	/** */
 	private LineDataSeq data;
 
+	/** */
 	public LineDataSeq getData() {
 		return this.data;
 	}
 
+	/** */
 	public void setData(final double[] dataValues, final String color) {
 		this.data = new LineDataSeq(dataValues, new LineStyle(2, SWTGraphicsSupplier.getColor(color), NORMAL_LINE));
 		this.data.drawPoint = true;

@@ -29,6 +29,12 @@ import com.amitinside.tooling.chart.gc.SpiderChartFont;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.gc.SpiderChartImage;
 
+/**
+ * Actual Spider Chart
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public class SpiderChart {
 
 	private class SpiderChartWorker implements Runnable {
@@ -59,17 +65,25 @@ public class SpiderChart {
 		}
 	}
 
+	/** */
 	public static final int dnum = 10;
+	/** */
 	public static final int LAYOUT_LEGEND_BOTTOM = 2;
+	/** */
 	public static final int LAYOUT_LEGEND_RIGHT = 0;
+	/** */
 	public static final int LAYOUT_LEGEND_TOP = 1;
+	/** */
 	protected static final int MAX_SERIES = 50;
+	/** */
 	public static String numberLocale;
 
+	/** */
 	protected static int d() {
 		return 0;
 	}
 
+	/** */
 	private static String replaceStr(String s, final String sub1, final String sub2) {
 		int p = s.indexOf(sub1);
 		while (p >= 0) {
@@ -79,100 +93,247 @@ public class SpiderChart {
 		return s;
 	}
 
+	/** */
 	public boolean activateSelection = false;
 
+	/** Used to trigger thread automatically to build the Spider Chart */
 	public boolean autoRebuild = true;
+
+	/** Auto Sizeable Property */
 	public boolean autoSize = true;
+
+	/** */
 	public double axisMargin = 0.0625D;
+
+	/** */
 	public FillStyle back = null;
+
+	/** Spider Chart Back Image */
 	public SpiderChartImage backImage;
+
+	/** */
 	private SpiderChartImage backTmpImage = null;
+
+	/**  */
 	public LineStyle border = null;
+
+	/** */
 	public double bottomMargin = 0.125D;
+
+	/** */
 	protected Vector chartHotAreas = new Vector(0, 5);
+
+	/** Spider Chart Image */
 	private SpiderChartImage chartImage = null;
+
+	/** */
 	private final Vector chartListeners = new Vector();
+
+	/** */
 	public double currentValueX;
+
+	/** */
 	public double currentValueY;
+
+	/** */
 	public double currentValueY2;
+
+	/** */
 	public int currentX;
+
+	/** */
 	public int currentY;
+
+	/** */
 	private int cursorLastX = 0;
+
+	/** */
 	private int cursorLastY = 0;
+
+	/** */
 	private SpiderChartWorker deamon = null;
+
+	/** */
 	public boolean doubleBuffering = true;
+
+	/** */
 	private SpiderChartImage finalImage = null;
+
+	/** */
 	protected Vector floatingObjects = new Vector(0, 5);
+
+	/** */
 	public boolean fullXAxis = false;
+
+	/** */
 	private int height = 0;
+
+	/** */
 	private int lastHeight = -1;
+
+	/** */
 	private int lastWidth = -1;
+
+	/** */
 	public int layout = 0;
+
+	/** Chart Left Margin */
 	public double leftMargin = 0.125D;
+
+	/** Spider Chart Legend */
 	public Legend legend;
+
+	/** Spider Chart Legend Margin */
 	public double legendMargin = 0.2D;
+
+	/** */
 	private int minimumHeight = 0;
+
+	/** */
 	private int minimumWidth = 0;
+
+	/** */
 	public long msecs = 2000L;
+
+	/** */
 	protected Vector notes = new Vector();
+
+	/** */
 	public int offsetX = 0;
+
+	/** */
 	public int offsetY = 0;
+
+	/** */
 	private int originalVirtualHeight = -1;
+
+	/** */
 	private int originalVirtualWidth = -1;
+
+	/** */
 	public Plotter[] plotters = new Plotter[10];
+
+	/** */
 	private int plottersCount = 0;
+
+	/** */
 	public String reloadFrom = "";
+
+	/** */
 	public boolean repaintAll = true;
+
+	/** */
 	public boolean repaintAlways = true;
+
+	/** */
 	public double rightMargin = 0.125D;
+
+	/** */
 	public double secondYAxisMargin = 0.0D;
+
+	/** */
 	public SpiderChartLabel selectedLabel = null;
+
+	/** */
 	public DataSeq selectedSerie = null;
+
+	/** */
 	public int selectedSeriePoint = -1;
+
+	/** */
 	private boolean showingTip = false;
+
+	/** */
 	public boolean showPosition = false;
+
+	/** Show Tips on the Spider Chart Points */
 	public boolean showTips = false;
+
+	/** */
 	private boolean stopped = false;
+
+	/** */
 	protected Vector targetZones = new Vector();
+
+	/** Spider Chart Tip Background Color */
 	SpiderChartColor tipColor = SWTGraphicsSupplier.getColor(SpiderChartColor.YELLOW);
+
+	/** Spider Chart Tip Font */
 	SpiderChartFont tipFont = SWTGraphicsSupplier.getFont("Serif", SpiderChartFont.PLAIN, 10);
+
+	/** Spider Chart Tip Font Color */
 	SpiderChartColor tipFontColor = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
+
+	/** Spider Chart Title */
 	public Title title;
+
+	/** */
 	public double topMargin = 0.125D;
+
+	/** */
 	public int virtualHeight = 0;
+
+	/** */
 	public int virtualWidth = 0;
+
+	/** */
 	private int width = 0;
+
+	/** Scrollable Property */
 	public boolean withScroll = false;
+
+	/** */
 	public Axis XAxis;
+
+	/** */
 	public HAxisLabel XLabel;
+
+	/** */
 	public Axis Y2Axis;
+
+	/** */
 	public VAxisLabel Y2Label;
+
+	/** */
 	public Axis YAxis;
+
+	/** */
 	public VAxisLabel YLabel;
 
+	/**
+	 * Constructor
+	 */
 	protected SpiderChart() {
 	}
 
+	/** Constructor */
 	public SpiderChart(final Title t, final Plotter p) {
 		this.resetChart(t, p, null, null);
 	}
 
+	/**
+	 * Constructor
+	 */
 	public SpiderChart(final Title t, final Plotter p, final Axis X, final Axis Y) {
 		this.resetChart(t, p, X, Y);
 	}
 
+	/** */
 	public void addChartListener(final ISpiderChartListener cl) {
 		this.chartListeners.addElement(cl);
 	}
 
+	/** */
 	protected void addFloationgObject(final IFloatingObject obj) {
 		this.floatingObjects.addElement(obj);
 	}
 
+	/** */
 	public void addNote(final String note) {
 		this.notes.addElement(note);
 	}
 
+	/** */
 	public void addPlotter(final Plotter p) {
 		this.plotters[this.plottersCount] = p;
 		this.plotters[this.plottersCount].XScale = this.plotters[0].XScale;
@@ -181,14 +342,17 @@ public class SpiderChart {
 		this.plottersCount += 1;
 	}
 
+	/** */
 	public void addSeq(final DataSeq s) {
 		this.plotters[0].addSeq(s);
 	}
 
+	/** */
 	public void addTargetZone(final TargetZone zone) {
 		this.targetZones.addElement(zone);
 	}
 
+	/** */
 	private void adjustSize3d() {
 		final boolean D3 = false;
 		for (int i = 0; i < this.plottersCount; i++) {
@@ -215,19 +379,21 @@ public class SpiderChart {
 		}
 	}
 
-	private void AutoSize() {
+	/** */
+	private void autoSize() {
 		if (this.layout == 0) {
-			this.AutoSize_LayoutRight();
+			this.autoSize_LayoutRight();
 		}
 		if (this.layout == 1) {
-			this.AutoSize_LayoutTop();
+			this.autoSize_LayoutTop();
 		}
 		if (this.layout == 2) {
-			this.AutoSize_LayoutBottom();
+			this.autoSize_LayoutBottom();
 		}
 	}
 
-	private void AutoSize_LayoutBottom() {
+	/** */
+	private void autoSize_LayoutBottom() {
 		final int myHeight = this.getHeight();
 		final int myWidth = this.getWidth();
 		if (this.virtualWidth < myWidth) {
@@ -320,7 +486,8 @@ public class SpiderChart {
 		this.setPlotterSize();
 	}
 
-	private void AutoSize_LayoutRight() {
+	/** */
+	private void autoSize_LayoutRight() {
 		final int myHeight = this.getHeight();
 		final int myWidth = this.getWidth();
 		if (this.virtualWidth < myWidth) {
@@ -413,7 +580,8 @@ public class SpiderChart {
 		this.setPlotterSize();
 	}
 
-	private void AutoSize_LayoutTop() {
+	/** */
+	private void autoSize_LayoutTop() {
 		final int myHeight = this.getHeight();
 		final int myWidth = this.getWidth();
 		if (this.virtualWidth < myWidth) {
@@ -507,6 +675,7 @@ public class SpiderChart {
 		this.setPlotterSize();
 	}
 
+	/** */
 	public void dispose() {
 		for (int i = 0; i < this.plottersCount; i++) {
 			if (this.plotters[i] != null) {
@@ -535,6 +704,7 @@ public class SpiderChart {
 		this.stopWorker();
 	}
 
+	/** */
 	private void drawBackImage(final SpiderChartGraphics g) {
 		final int ImageW = this.backImage.getWidth();
 		final int ImageH = this.backImage.getHeight();
@@ -548,6 +718,7 @@ public class SpiderChart {
 		}
 	}
 
+	/** */
 	private int getCountParallelAxis(final Axis axis) {
 		if (axis.stackAdditionalAxis) {
 			return 0;
@@ -555,10 +726,12 @@ public class SpiderChart {
 		return axis.getAdditionalAxisCount();
 	}
 
+	/** */
 	public int getHeight() {
 		return this.height;
 	}
 
+	/** */
 	public TargetZone[] getTargetZones() {
 		final TargetZone[] a = new TargetZone[this.targetZones.size()];
 		for (int i = 0; i < a.length; i++) {
@@ -567,10 +740,12 @@ public class SpiderChart {
 		return a;
 	}
 
+	/** */
 	public int getWidth() {
 		return this.width;
 	}
 
+	/** */
 	public void mouseClick() {
 		if (((this.selectedSerie != null) && (this.selectedSeriePoint >= 0)) || (this.selectedLabel != null)) {
 			this.triggerEvent(5);
@@ -579,6 +754,7 @@ public class SpiderChart {
 		this.triggerEvent(6);
 	}
 
+	/** */
 	public void mouseMoved(final int eX, final int eY) {
 		if (this.plotters[0] == null) {
 			return;
@@ -655,6 +831,7 @@ public class SpiderChart {
 		}
 	}
 
+	/** */
 	public void paint(final SpiderChartGraphics pg) {
 		this.floatingObjects.removeAllElements();
 		this.chartHotAreas.removeAllElements();
@@ -707,7 +884,7 @@ public class SpiderChart {
 				this.virtualHeight = this.originalVirtualHeight;
 				this.virtualWidth = this.originalVirtualWidth;
 			}
-			this.AutoSize();
+			this.autoSize();
 		}
 		try {
 			if (this.doubleBuffering && (this.repaintAll || (this.finalImage == null))) {
@@ -926,6 +1103,7 @@ public class SpiderChart {
 		}
 	}
 
+	/** */
 	private void paintNotes(final SpiderChartGraphics g) {
 		if (g == null) {
 			return;
@@ -937,6 +1115,7 @@ public class SpiderChart {
 		}
 	}
 
+	/** */
 	protected void paintTargetZones(final SpiderChartGraphics g, final boolean back) {
 		g.setFont(SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.BOLD, 10));
 		for (int i = 0; i < this.targetZones.size(); i++) {
@@ -952,6 +1131,7 @@ public class SpiderChart {
 		}
 	}
 
+	/** */
 	private void paintTips(final SpiderChartGraphics g) {
 		// TODO (AKM) To be implemented properly: Tips Functionality
 		this.showingTip = false;
@@ -997,21 +1177,26 @@ public class SpiderChart {
 		}
 	}
 
+	/** */
 	protected void placeFloatingObject(final IFloatingObject obj) {
 	}
 
+	/** */
 	public void removeAllChartListener() {
 		this.chartListeners.removeAllElements();
 	}
 
+	/** */
 	public void removeChartListener(final ISpiderChartListener cl) {
 		this.chartListeners.removeElement(cl);
 	}
 
+	/** */
 	public void removeNotes() {
 		this.notes.removeAllElements();
 	}
 
+	/** */
 	public void removePlotters() {
 		for (int i = 0; i < this.plottersCount; i++) {
 			this.plotters[i] = null;
@@ -1019,10 +1204,12 @@ public class SpiderChart {
 		this.plottersCount = 0;
 	}
 
+	/** */
 	public void removeTargetZones() {
 		this.targetZones.removeAllElements();
 	}
 
+	/** */
 	protected void resetChart(final Title t, final Plotter p, final Axis X, final Axis Y) {
 		this.plottersCount = 0;
 		this.plotters = new Plotter[10];
@@ -1058,11 +1245,12 @@ public class SpiderChart {
 		this.title = t;
 		if (this.title == null) {
 			this.title = new Title();
-			this.title.setText("");
+			this.title.text = "";
 		}
 		this.plottersCount = 1;
 	}
 
+	/** */
 	public void resetSize() {
 		if (this.originalVirtualHeight > -1) {
 			this.virtualHeight = this.originalVirtualHeight;
@@ -1072,6 +1260,7 @@ public class SpiderChart {
 		}
 	}
 
+	/** */
 	public void saveToFile(final OutputStream os, final String psFormat) throws Exception {
 		final SpiderChartImage image = SWTGraphicsSupplier.createImage(this.width, this.height);
 		SpiderChartGraphics g = null;
@@ -1087,21 +1276,25 @@ public class SpiderChart {
 		}
 	}
 
+	/** */
 	public void saveToFile(final String psFile, final String psFormat) throws Exception {
 		this.saveToFile(new FileOutputStream(psFile), psFormat);
 	}
 
+	/** */
 	public void setHeight(final int h) {
 		if (h > this.minimumHeight) {
 			this.height = h;
 		}
 	}
 
+	/** */
 	public void setMinimumSize(final int w, final int h) {
 		this.minimumWidth = w;
 		this.minimumHeight = h;
 	}
 
+	/** */
 	private void setPlotterSize() {
 		for (int i = 1; i < this.plottersCount; i++) {
 			this.plotters[i].x = this.plotters[0].x;
@@ -1111,6 +1304,7 @@ public class SpiderChart {
 		}
 	}
 
+	/** */
 	private void setPositionStackedAxis(final Axis axis) {
 		if (axis == null) {
 			return;
@@ -1177,17 +1371,20 @@ public class SpiderChart {
 		}
 	}
 
+	/** */
 	public void setSize(final int w, final int h) {
 		this.setWidth(w);
 		this.setHeight(h);
 	}
 
+	/** */
 	public void setWidth(final int w) {
 		if (w > this.minimumWidth) {
 			this.width = w;
 		}
 	}
 
+	/** */
 	public void setY2Scale(final Axis a) {
 		this.plotters[0].Y2Scale = a.scale;
 		this.Y2Axis = a;
@@ -1195,6 +1392,7 @@ public class SpiderChart {
 		a.plot = this.plotters[0];
 	}
 
+	/** */
 	public void startWorker() {
 		this.stopped = false;
 
@@ -1203,6 +1401,7 @@ public class SpiderChart {
 		new Thread(this.deamon).start();
 	}
 
+	/** */
 	public void stopWorker() {
 		this.stopped = true;
 		if (this.deamon != null) {
@@ -1211,6 +1410,7 @@ public class SpiderChart {
 		this.deamon = null;
 	}
 
+	/** */
 	private void triggerEvent(final int event) {
 		for (int i = 0; i < this.chartListeners.size(); i++) {
 			((ISpiderChartListener) this.chartListeners.elementAt(i)).chartEvent(this, event);

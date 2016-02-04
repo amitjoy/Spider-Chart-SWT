@@ -30,33 +30,56 @@ import com.amitinside.tooling.chart.gc.SpiderChartImage;
 
 public class Legend extends SpiderChartComponent {
 
+	/** Legend Background Style */
 	public FillStyle background;
+
+	/** Legend Border Line Style */
 	public LineStyle border;
+
+	/** Legend Color */
 	public SpiderChartColor color = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
+
+	/** Legend Font */
 	public SpiderChartFont font = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.PLAIN, 10);
+
+	/** */
 	Vector items = new Vector(10, 10);
+
+	/** Legend Label */
 	public String legendLabel = "";
+
+	/** Legend Margin */
 	public int legendMargin = 8;
+
+	/** */
 	Vector names = new Vector(10, 10);
+
+	/** Legend Title */
 	public String title = null;
+
+	/** */
 	public boolean verticalLayout = true;
 
+	/** Constructor */
 	public Legend() {
 		if (this.title != null) {
 			this.addItem(this.title, null);
 		}
 	}
 
+	/** */
 	public void addItem(final String name, final Object icon) {
 		this.items.addElement(icon);
 		this.names.addElement(name);
 	}
 
+	/** */
 	public void addItem(final Supplier<ISpiderChartDrawable> pojo) {
 		final LineStyle ls = LineStyle.of(1, getColor(pojo.get().areaColor()), LineStyle.NORMAL_LINE);
 		this.addItem(pojo.get().legend(), ls);
 	}
 
+	/** */
 	public void draw(final SpiderChartGraphics g) {
 		if ((this.legendLabel != null) && (this.legendLabel.length() > 0)) {
 			final SpiderChartLabel cl = new SpiderChartLabel(this.legendLabel, "", false, true);
@@ -71,6 +94,7 @@ public class Legend extends SpiderChartComponent {
 		}
 	}
 
+	/** */
 	public void drawHorizontal(final SpiderChartGraphics g) {
 		g.setFont(this.font);
 
@@ -170,6 +194,7 @@ public class Legend extends SpiderChartComponent {
 		}
 	}
 
+	/** */
 	public void drawVertical(final SpiderChartGraphics g) {
 		g.setFont(this.font);
 

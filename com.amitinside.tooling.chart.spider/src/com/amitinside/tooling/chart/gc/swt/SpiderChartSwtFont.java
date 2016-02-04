@@ -21,10 +21,14 @@ import com.amitinside.tooling.chart.gc.SpiderChartFont;
 
 public class SpiderChartSwtFont extends SpiderChartFont {
 
+	/** */
 	private String fontName = "";
+	/** */
 	private int fontSize = 10;
+	/** */
 	private int fontStyle = SpiderChartFont.PLAIN;
 
+	/** Constructor */
 	public SpiderChartSwtFont(final Object f) {
 		this.fontName = ((Font) f).getFontData()[0].getName();
 		final int s = ((Font) f).getFontData()[0].getStyle();
@@ -41,12 +45,14 @@ public class SpiderChartSwtFont extends SpiderChartFont {
 		this.fontSize = ((Font) f).getFontData()[0].getHeight();
 	}
 
+	/** Constructor */
 	public SpiderChartSwtFont(final String name, final int style, final int size) {
 		this.fontName = name;
 		this.fontSize = size;
 		this.fontStyle = style;
 	}
 
+	/** */
 	protected Font getFont() {
 		int s = 0;
 		if (this.fontStyle == SpiderChartFont.BOLD) {

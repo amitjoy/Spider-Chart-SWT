@@ -19,20 +19,32 @@ import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 
 public class TargetZone {
 
+	/** */
 	public static int DISABLED = -1;
+	/** */
 	public boolean background = true;
+	/** */
 	protected SpiderChart chart = null;
+	/** */
 	protected int effect3D = 0;
+	/** */
 	public FillStyle fillStyle;
+	/** */
 	public String label = "";
+	/** */
 	public double positionEnd = DISABLED;
+	/** */
 	public double positionStart = DISABLED;
+	/** */
 	public LineStyle style = null;
+	/** */
 	public int unitEnd = 0;
+	/** */
 	public int unitStart = 0;
-
+	/** */
 	public boolean vertical = false;
 
+	/** Constructor */
 	public TargetZone(final double start, final double end, final int uStart, final int uEnd) {
 		this.unitStart = uStart;
 		this.unitEnd = uEnd;
@@ -40,6 +52,7 @@ public class TargetZone {
 		this.positionEnd = end;
 	}
 
+	/** */
 	protected void paint(final SpiderChartGraphics g, final Axis xaxis, final Axis yaxis) {
 		int pixelStart = 0;
 		Axis axis = yaxis;

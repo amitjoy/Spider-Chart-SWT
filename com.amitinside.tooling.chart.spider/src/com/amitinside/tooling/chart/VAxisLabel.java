@@ -21,10 +21,12 @@ import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 
 public class VAxisLabel extends AxisLabel {
 
+	/** */
 	public VAxisLabel(final String t, final SpiderChartColor c, final SpiderChartFont f) {
 		super(t, c, f);
 	}
 
+	/** {@inheritDoc}} */
 	@Override
 	public void draw(final SpiderChartGraphics g) {
 		g.setFont(this.font);

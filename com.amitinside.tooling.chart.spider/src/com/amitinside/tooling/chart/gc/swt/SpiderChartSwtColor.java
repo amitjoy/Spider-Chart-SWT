@@ -21,14 +21,19 @@ import com.amitinside.tooling.chart.gc.SpiderChartColor;
 
 public class SpiderChartSwtColor extends SpiderChartColor {
 
+	/** */
 	private int blue = 0;
+	/** */
 	private int green = 0;
+	/** */
 	private int red = 0;
 
+	/** Constructor */
 	public SpiderChartSwtColor(final int iRed, final int iGreen, final int iBlue) {
 		this.setRGB(iRed, iGreen, iBlue);
 	}
 
+	/** Constructor */
 	public SpiderChartSwtColor(final Object c) {
 		if (c instanceof String) {
 			this.setFromString((String) c);
@@ -39,6 +44,7 @@ public class SpiderChartSwtColor extends SpiderChartColor {
 		}
 	}
 
+	/** {@inheritDoc}} */
 	@Override
 	public SpiderChartColor brighter() {
 		final int percent = 10;
@@ -51,6 +57,7 @@ public class SpiderChartSwtColor extends SpiderChartColor {
 		return new SpiderChartSwtColor(Math.min(r, 255), Math.min(g, 255), Math.min(b, 255));
 	}
 
+	/** {@inheritDoc}} */
 	@Override
 	public SpiderChartColor darker() {
 		final int percent = 10;
@@ -83,6 +90,7 @@ public class SpiderChartSwtColor extends SpiderChartColor {
 		return this.red;
 	}
 
+	/** String to RGB */
 	private void setFromString(String c) {
 		c = c.toUpperCase();
 		if (c.compareTo("") == 0) {
@@ -273,12 +281,14 @@ public class SpiderChartSwtColor extends SpiderChartColor {
 		}
 	}
 
+	/** */
 	private void setRGB(final int rgb) {
 		this.red = (rgb >> 16) & 0xFF;
 		this.green = (rgb >> 8) & 0xFF;
 		this.blue = rgb & 0xFF;
 	}
 
+	/** */
 	private void setRGB(final int iRed, final int iGreen, final int iBlue) {
 		this.red = iRed;
 		this.green = iGreen;

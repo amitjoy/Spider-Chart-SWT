@@ -93,30 +93,37 @@ public abstract class SpiderChartColor {
 	public static String YELLOW = "YELLOW";
 	public static String YELLOWGREEN = "YELLOWGREEN";
 
+	/** */
 	public SpiderChartColor brighter() {
 		return null;
 	}
 
+	/** */
 	public SpiderChartColor darker() {
 		return null;
 	}
 
+	/** */
 	public int getBlue() {
 		return 0;
 	}
 
+	/** */
 	public int getGreen() {
 		return 0;
 	}
 
+	/** */
 	public int getRed() {
 		return 0;
 	}
 
+	/** */
 	public int getRGB() {
 		return (this.getRed() * 256 * 256) + (this.getGreen() * 256) + this.getBlue();
 	}
 
+	/** */
 	public String getRGBString() {
 		return Integer.toHexString(this.getRGB());
 	}

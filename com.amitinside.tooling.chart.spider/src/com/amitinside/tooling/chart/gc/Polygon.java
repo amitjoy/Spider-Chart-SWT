@@ -19,10 +19,12 @@ import java.util.Vector;
 
 public class Polygon extends Vector {
 
+	/** */
 	public void addPoint(final int x, final int y) {
 		super.addElement(new Point(x, y));
 	}
 
+	/** */
 	private Rectangle calculateRect() {
 		int MinX = 999999;
 		int MinY = 999999;
@@ -39,10 +41,12 @@ public class Polygon extends Vector {
 		return new Rectangle(MinX, MinY, MaxX - MinX, MaxY - MinY);
 	}
 
+	/** */
 	public boolean contains(final int x, final int y) {
 		return this.contains1(x, y);
 	}
 
+	/** */
 	private boolean contains1(final int x, final int y) {
 		int i = 0;
 		int j = 0;
@@ -59,10 +63,12 @@ public class Polygon extends Vector {
 		return c;
 	}
 
+	/** */
 	public int getX(final int i) {
 		return ((Point) super.elementAt(i)).x;
 	}
 
+	/** */
 	public int getY(final int i) {
 		return ((Point) super.elementAt(i)).y;
 	}

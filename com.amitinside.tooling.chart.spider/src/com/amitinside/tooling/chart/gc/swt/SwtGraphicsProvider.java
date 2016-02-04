@@ -20,8 +20,10 @@ import org.eclipse.swt.widgets.Display;
 
 public class SwtGraphicsProvider {
 
+	/** */
 	private static Device display = null;
 
+	/** */
 	public static Device getDefaultDisplay() {
 		if (display == null) {
 			display = new Display();
@@ -29,10 +31,12 @@ public class SwtGraphicsProvider {
 		return display;
 	}
 
+	/** */
 	public static void setDefaultDisplay(final Display d) {
 		display = d;
 	}
 
+	/** */
 	public static void startUIThread(final Runnable r) {
 		((Display) getDefaultDisplay()).syncExec(r);
 	}

@@ -15,44 +15,59 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart;
 
+import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartFont;
 import com.amitinside.tooling.chart.gc.SpiderChartImage;
-import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 
 public class LineDataSeq extends DataSeq {
 
+	/** */
 	public static int startingXValue = 0;
+	/** */
 	public boolean drawPoint = false;
+	/** */
 	public FillStyle fillStyle = null;
+	/** */
 	public SpiderChartImage icon = null;
+	/** */
 	public int lineType = 0;
+	/** */
 	public SpiderChartColor pointColor = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
+	/** */
 	public LineStyle style = null;
+	/** */
 	public SpiderChartColor valueColor = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
+	/** */
 	public SpiderChartFont valueFont = null;
+	/** */
 	public LineStyle vstyle = null;
 
+	/** Constructor */
 	public LineDataSeq(final double[] x, final double[] y, final LineStyle s) {
 		super(x, y);
 		this.style = s;
 	}
 
+	/** Constructor */
 	public LineDataSeq(final double[] y, final LineStyle s) {
 		super(y, startingXValue);
 		this.style = s;
 	}
 
+	/** Constructor */
 	public LineDataSeq(final Double[] x, final Double[] y, final LineStyle s) {
 		super(x, y);
 		this.style = s;
 	}
 
+	/** Constructor */
 	public LineDataSeq(final Double[] y, final LineStyle s) {
 		super(y, startingXValue);
 		this.style = s;
 	}
 
+	/** Constructor */
 	public LineDataSeq(final LineStyle s) {
 		this.style = s;
 	}

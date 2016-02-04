@@ -32,9 +32,12 @@ import com.amitinside.tooling.chart.swt.SpiderChartViewer;
 
 public class SpiderChartBuilder {
 
+	/** */
 	private static SpiderChartConfigurationBuilder chartConfiguration;
+	/** */
 	private static SpiderChartBuilder chartViewerBuilder;
 
+	/** */
 	public static SpiderChartBuilder config(final Composite parent,
 			final Consumer<SpiderChartConfigurationBuilder> settings) {
 		requireNonNull(parent);
@@ -45,9 +48,12 @@ public class SpiderChartBuilder {
 		return chartViewerBuilder;
 	}
 
+	/** */
 	private SpiderChart chart;
+	/** */
 	private final SpiderChartViewer chartViewer;
 
+	/** Constructor */
 	public SpiderChartBuilder(final Composite parent) {
 		requireNonNull(parent);
 
@@ -56,6 +62,7 @@ public class SpiderChartBuilder {
 		this.prepareChartViewer(parent);
 	}
 
+	/** */
 	public SpiderChartBuilder data(final Consumer<AxisDataBuilder> dataBuilderConsumer) {
 		final AxisDataBuilder dataBuilder = new AxisDataBuilder(this.chart);
 		dataBuilderConsumer.accept(dataBuilder);
@@ -63,6 +70,7 @@ public class SpiderChartBuilder {
 		return this;
 	}
 
+	/** */
 	private void prepareChartViewer(final Composite parent) {
 		this.chartViewer.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true, true));
 		this.chartViewer.setBounds(parent.getShell().getClientArea().x, parent.getShell().getClientArea().y,
@@ -77,6 +85,7 @@ public class SpiderChartBuilder {
 		this.chart.showTips = true;
 	}
 
+	/** */
 	public SpiderChartViewer viewer(final Consumer<SpiderChartBuilder> chartBuilderConsumer) {
 		chartBuilderConsumer.accept(chartViewerBuilder);
 		return chartViewerBuilder.chartViewer;

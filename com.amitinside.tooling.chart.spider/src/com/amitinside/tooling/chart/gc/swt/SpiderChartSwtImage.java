@@ -33,13 +33,17 @@ import com.amitinside.tooling.chart.gc.SpiderChartImage;
 
 public class SpiderChartSwtImage extends SpiderChartImage {
 
+	/** */
 	private Image image = null;
+	/** */
 	private SpiderChartColor transparentColor = null;
 
+	/** Constructor */
 	public SpiderChartSwtImage(final int w, final int h) {
 		this.image = new Image(SwtGraphicsProvider.getDefaultDisplay(), w, h);
 	}
 
+	/** Constructor */
 	public SpiderChartSwtImage(final int w, final int h, final SpiderChartColor transparent) {
 		this.transparentColor = transparent;
 		final Color trans = ((SpiderChartSwtColor) transparent).getColor();
@@ -59,6 +63,7 @@ public class SpiderChartSwtImage extends SpiderChartImage {
 		trans.dispose();
 	}
 
+	/** Constructor */
 	public SpiderChartSwtImage(final Object o) {
 		try {
 			if (o instanceof String) {
@@ -80,6 +85,7 @@ public class SpiderChartSwtImage extends SpiderChartImage {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void dispose() {
 		if ((this.image != null) && !this.image.isDisposed()) {
@@ -88,6 +94,7 @@ public class SpiderChartSwtImage extends SpiderChartImage {
 		this.image = null;
 	}
 
+	/** */
 	protected SpiderChartSwtImage forRotation() {
 		final int h = this.getHeight();
 		final int w = this.getWidth();
@@ -107,6 +114,7 @@ public class SpiderChartSwtImage extends SpiderChartImage {
 		return dest;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SpiderChartGraphics getGraphics() {
 		final SpiderChartSwtGraphics g = new SpiderChartSwtGraphics(new GC(this.image));
@@ -114,6 +122,7 @@ public class SpiderChartSwtImage extends SpiderChartImage {
 		return g;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getHeight() {
 		if (this.image == null) {
@@ -134,6 +143,7 @@ public class SpiderChartSwtImage extends SpiderChartImage {
 		return new Integer((rgb.red << 16) + (rgb.green >> 8) + rgb.blue);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getWidth() {
 		if (this.image == null) {
@@ -142,6 +152,7 @@ public class SpiderChartSwtImage extends SpiderChartImage {
 		return this.image.getBounds().width;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean saveToStream(final String sFormat, final OutputStream os) {
 		try {

@@ -22,36 +22,52 @@ import com.amitinside.tooling.chart.gc.SpiderChartImage;
 
 public class FillStyle {
 
+	/** */
 	public static int GRADIENT_HORIZONTAL = 1;
+	/** */
 	public static int GRADIENT_VERTICAL = 2;
+	/** */
 	public static int NO_GRADIENT = 0;
 
+	/** */
 	public float alphaValue = 1.0F;
+	/** */
 	SpiderChartColor color;
+	/** */
 	public SpiderChartColor colorFrom = SWTGraphicsSupplier.getColor(SpiderChartColor.RED);
+	/** */
 	public SpiderChartColor colorUntil = SWTGraphicsSupplier.getColor(SpiderChartColor.WHITE);
+	/** */
 	private Object composite = null;
+	/** */
 	public Object fillPatern = null;
+	/** */
 	public boolean gradientCyclic = false;
 
+	/** */
 	public int gradientType = NO_GRADIENT;
 
+	/** */
 	public SpiderChartImage textureImage = null;
 
+	/** */
 	public FillStyle(final SpiderChartColor c) {
 		this.color = c;
 	}
 
+	/** */
 	public FillStyle(final SpiderChartColor c, final float f) {
 		this.color = c;
 		this.alphaValue = f;
 	}
 
+	/** */
 	public FillStyle(final SpiderChartImage i) {
 		this.textureImage = i;
 		this.color = SWTGraphicsSupplier.getColor(SpiderChartColor.WHITE);
 	}
 
+	/** */
 	protected void draw(final SpiderChartGraphics g, int x1, int y1, int x2, int y2) {
 		if (x1 > x2) {
 			final int xtmp = x2;
@@ -75,6 +91,7 @@ public class FillStyle {
 		}
 	}
 
+	/** */
 	protected void drawArc(final SpiderChartGraphics g, final int x, final int y, final int w, final int h,
 			final int a1, final int a2) {
 		g.setTexture(this.textureImage);
@@ -84,6 +101,7 @@ public class FillStyle {
 		this.resetAlpha(g);
 	}
 
+	/** */
 	protected void drawPolygon(final SpiderChartGraphics g, final int[] x1, final int[] y1, final int num) {
 		g.setTexture(this.textureImage);
 		g.setColor(this.color);
@@ -92,6 +110,7 @@ public class FillStyle {
 		this.resetAlpha(g);
 	}
 
+	/** */
 	public void drawRoundRect(final SpiderChartGraphics g, final int x1, final int y1, final int x2, final int y2) {
 		g.setTexture(this.textureImage);
 		g.setColor(this.color);
@@ -100,10 +119,12 @@ public class FillStyle {
 		this.resetAlpha(g);
 	}
 
+	/** */
 	public SpiderChartColor getColor() {
 		return this.color;
 	}
 
+	/** */
 	private void resetAlpha(final SpiderChartGraphics g) {
 		if (this.composite != null) {
 			g.setAlphaComposite(this.composite);
@@ -111,6 +132,7 @@ public class FillStyle {
 		this.composite = null;
 	}
 
+	/** */
 	private void setAlpha(final SpiderChartGraphics g) {
 		if (this.alphaValue != 1.0F) {
 			this.composite = g.getAlphaComposite();
@@ -118,6 +140,7 @@ public class FillStyle {
 		}
 	}
 
+	/** {@inheritDoc}} */
 	@Override
 	public String toString() {
 		if (this.gradientType != NO_GRADIENT) {

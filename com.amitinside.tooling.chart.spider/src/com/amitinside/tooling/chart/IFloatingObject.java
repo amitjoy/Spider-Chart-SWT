@@ -19,15 +19,21 @@ import com.amitinside.tooling.chart.gc.Polygon;
 
 public interface IFloatingObject {
 
+	/** */
 	public static final String layerId = "";
 
+	/** */
 	public abstract Polygon getObjectBounds();
 
+	/** */
 	public abstract int getX();
 
+	/** */
 	public abstract int getY();
 
+	/** */
 	public abstract void setX(int paramInt);
 
+	/** */
 	public abstract void setY(int paramInt);
 }

@@ -23,40 +23,51 @@ import com.amitinside.tooling.chart.gc.swt.SwtGraphicsProvider;
 
 public interface SWTGraphicsSupplier {
 
+	/** SWT Mode */
 	public static int DEFAULT_MODE = 1;
 
+	/** */
 	public static SpiderChartImage createImage(final int w, final int h) {
 		return new SpiderChartSwtImage(w, h);
 	}
 
-	public static SpiderChartImage createTransparentImage(final int w, final int h, final SpiderChartColor transparent) {
+	/** */
+	public static SpiderChartImage createTransparentImage(final int w, final int h,
+			final SpiderChartColor transparent) {
 		return new SpiderChartSwtImage(w, h, transparent);
 	}
 
+	/** */
 	public static SpiderChartColor getColor(final int red, final int green, final int blue) {
 		return new SpiderChartSwtColor(red, green, blue);
 	}
 
+	/** */
 	public static SpiderChartColor getColor(final String c) {
 		return new SpiderChartSwtColor(c);
 	}
 
+	/** */
 	public static SpiderChartColor getColorFromObject(final Object o) {
 		return new SpiderChartSwtColor(o);
 	}
 
+	/** */
 	public static SpiderChartFont getFont(final String c, final int style, final int size) {
 		return new SpiderChartSwtFont(c, style, size);
 	}
 
+	/** */
 	public static SpiderChartFont getFontFromObject(final Object o) {
 		return new SpiderChartSwtFont(o);
 	}
 
+	/** */
 	public static SpiderChartGraphics getGraphics(final Object o) {
 		return new SpiderChartSwtGraphics(o);
 	}
 
+	/** */
 	public static SpiderChartImage getImage(final Object o) {
 		try {
 			return new SpiderChartSwtImage(o);
@@ -66,6 +77,7 @@ public interface SWTGraphicsSupplier {
 		return null;
 	}
 
+	/** */
 	public static SpiderChartImage getImageFromFile(final String file) {
 		try {
 			return new SpiderChartSwtImage(file);
@@ -75,10 +87,12 @@ public interface SWTGraphicsSupplier {
 		return null;
 	}
 
+	/** */
 	public static int getMode() {
 		return DEFAULT_MODE;
 	}
 
+	/** */
 	public static void startUIThread(final Runnable r) {
 		SwtGraphicsProvider.startUIThread(r);
 	}

@@ -17,10 +17,15 @@ package com.amitinside.tooling.chart;
 
 public class SpiderChartComponent {
 
+	/** */
 	protected SpiderChart chart;
+	/** */
 	public int height;
+	/** */
 	public int width;
+	/** */
 	public int x;
+	/** */
 	public int y;
 
 }

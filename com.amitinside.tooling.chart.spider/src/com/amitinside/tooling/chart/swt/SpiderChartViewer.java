@@ -30,9 +30,13 @@ import com.amitinside.tooling.chart.SpiderChartAdapter;
 
 public class SpiderChartViewer extends Composite {
 
+	/** */
 	public boolean allowZoom = true;
+	/** */
 	SpiderChartCanvas canvas = null;
+	/** */
 	public boolean changePointer = true;
+	/** */
 	SpiderChartAdapter chartAdapter = new SpiderChartAdapter() {
 		@Override
 		public void chartEvent(final SpiderChart c, final int type) {
@@ -44,25 +48,44 @@ public class SpiderChartViewer extends Composite {
 			}
 		}
 	};
+	/** */
 	public int currentZoom = 100;
+	/** */
 	private Cursor defaultCursor = null;
+	/** */
 	Slider hSlider = null;
+	/** */
 	private int lastHeight = 0;
+	/** */
 	private int lastWidth = 0;
+	/** */
 	private int lastZoom = 0;
+	/** Maximum Zoom for Spider Chart */
 	public int maxZoom = 200;
+	/** */
 	private Button minusZoom;
+	/** Minimum Zoom for Spider Chart */
 	public int minZoom = 50;
+	/** */
 	private int originalHeight = -1;
+	/** */
 	private int originalWidth = -1;
+	/** */
 	private Button plusZoom;
+	/** */
 	private Cursor pointCursor = null;
+	/** */
 	private final int scrollBarWidth = 18;
+	/** */
 	Slider vSlider = null;
+	/** */
 	private Label zoom;
+	/** */
 	public int zoomIncrement = 25;
+	/** */
 	private Composite zoomPanel;
 
+	/** Constructor */
 	public SpiderChartViewer(final Composite parent, final int style) {
 		super(parent, style);
 
@@ -92,30 +115,36 @@ public class SpiderChartViewer extends Composite {
 		this.zoom.setText("" + this.currentZoom + " %");
 
 		this.minusZoom.addSelectionListener(new SelectionListener() {
+			/** {@inheritDoc} */
 			@Override
 			public void widgetDefaultSelected(final SelectionEvent e) {
 			}
 
+			/** {@inheritDoc} */
 			@Override
 			public void widgetSelected(final SelectionEvent e) {
 				SpiderChartViewer.this.minusZoom();
 			}
 		});
 		this.plusZoom.addSelectionListener(new SelectionListener() {
+			/** {@inheritDoc} */
 			@Override
 			public void widgetDefaultSelected(final SelectionEvent e) {
 			}
 
+			/** {@inheritDoc} */
 			@Override
 			public void widgetSelected(final SelectionEvent e) {
 				SpiderChartViewer.this.plusZoom();
 			}
 		});
 		this.hSlider.addSelectionListener(new SelectionListener() {
+			/** {@inheritDoc} */
 			@Override
 			public void widgetDefaultSelected(final SelectionEvent e) {
 			}
 
+			/** {@inheritDoc} */
 			@Override
 			public void widgetSelected(final SelectionEvent e) {
 				if (SpiderChartViewer.this.canvas.getChart() == null) {
@@ -125,10 +154,12 @@ public class SpiderChartViewer extends Composite {
 			}
 		});
 		this.vSlider.addSelectionListener(new SelectionListener() {
+			/** {@inheritDoc} */
 			@Override
 			public void widgetDefaultSelected(final SelectionEvent e) {
 			}
 
+			/** {@inheritDoc} */
 			@Override
 			public void widgetSelected(final SelectionEvent e) {
 				if (SpiderChartViewer.this.canvas.getChart() == null) {
@@ -138,10 +169,12 @@ public class SpiderChartViewer extends Composite {
 			}
 		});
 		this.addControlListener(new ControlListener() {
+			/** {@inheritDoc} */
 			@Override
 			public void controlMoved(final ControlEvent e) {
 			}
 
+			/** {@inheritDoc} */
 			@Override
 			public void controlResized(final ControlEvent e) {
 				if (SpiderChartViewer.this.canvas.getChart() == null) {
@@ -156,6 +189,7 @@ public class SpiderChartViewer extends Composite {
 		this.pointCursor = new Cursor(parent.getDisplay(), 21);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void dispose() {
 		super.dispose();
@@ -167,10 +201,12 @@ public class SpiderChartViewer extends Composite {
 		}
 	}
 
+	/** */
 	public SpiderChart getChart() {
 		return this.canvas.getChart();
 	}
 
+	/** */
 	private void hSliderScroll() {
 		int newBase = 0;
 		final int newValue = this.hSlider.getSelection();
@@ -186,6 +222,7 @@ public class SpiderChartViewer extends Composite {
 		this.canvas.redraw();
 	}
 
+	/** */
 	private void minusZoom() {
 		if ((this.currentZoom - this.zoomIncrement) > this.minZoom) {
 			this.currentZoom -= this.zoomIncrement;
@@ -195,6 +232,7 @@ public class SpiderChartViewer extends Composite {
 		this.zoomUpdated();
 	}
 
+	/** */
 	private void placeControls() {
 		int hSliderHeight = 0;
 		int vSliderWidth = 0;
@@ -239,6 +277,7 @@ public class SpiderChartViewer extends Composite {
 		}
 	}
 
+	/** */
 	private void plusZoom() {
 		if ((this.currentZoom + this.zoomIncrement) < this.maxZoom) {
 			this.currentZoom += this.zoomIncrement;
@@ -248,16 +287,19 @@ public class SpiderChartViewer extends Composite {
 		this.zoomUpdated();
 	}
 
+	/** */
 	public void redrawChart() {
 		this.canvas.redraw();
 	}
 
+	/** */
 	private void resetChart() {
 		this.lastWidth = 0;
 		this.lastHeight = 0;
 		this.lastZoom = 0;
 	}
 
+	/** */
 	public void setChart(final SpiderChart c) {
 		if (this.canvas.getChart() != null) {
 			this.canvas.getChart().removeChartListener(this.chartAdapter);
@@ -276,6 +318,7 @@ public class SpiderChartViewer extends Composite {
 		}
 	}
 
+	/** */
 	private void updateScrollBarsConfiguration() {
 		if (this.canvas.getChart().virtualWidth > 0) {
 			final int w = this.canvas.getChart().getWidth();
@@ -316,6 +359,7 @@ public class SpiderChartViewer extends Composite {
 		}
 	}
 
+	/** */
 	private void updateSize() {
 		this.canvas.getChart().repaintAll = true;
 		if ((this.lastWidth != this.getSize().x) || (this.lastHeight != this.getSize().y)
@@ -352,6 +396,7 @@ public class SpiderChartViewer extends Composite {
 		}
 	}
 
+	/** */
 	private void vSliderScroll() {
 		int newBase = 0;
 		final int newValue = this.vSlider.getSelection();
@@ -367,6 +412,7 @@ public class SpiderChartViewer extends Composite {
 		this.canvas.redraw();
 	}
 
+	/** */
 	private void zoomUpdated() {
 		this.zoom.setText("" + this.currentZoom + " %");
 

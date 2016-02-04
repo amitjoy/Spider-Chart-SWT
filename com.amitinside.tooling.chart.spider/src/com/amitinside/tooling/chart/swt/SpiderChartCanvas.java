@@ -24,15 +24,17 @@ import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 
-import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.ISpiderChartListener;
-import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
+import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
+import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 
 public class SpiderChartCanvas extends Canvas implements ISpiderChartListener {
 
+	/** */
 	private SpiderChart chart = null;
 
+	/** Constructor */
 	public SpiderChartCanvas(final Composite parent, final int style) {
 		super(parent, style | 0x40000);
 
@@ -41,6 +43,7 @@ public class SpiderChartCanvas extends Canvas implements ISpiderChartListener {
 		this.addMouseMoveListener(mouseMove);
 
 		final MouseAdapter mouseAdapter = new MouseAdapter() {
+			/** {@inheritDoc} */
 			@Override
 			public void mouseDown(final MouseEvent e) {
 				SpiderChartCanvas.this.mouseClick();
@@ -49,10 +52,12 @@ public class SpiderChartCanvas extends Canvas implements ISpiderChartListener {
 		this.addMouseListener(mouseAdapter);
 
 		this.addControlListener(new ControlListener() {
+			/** {@inheritDoc} */
 			@Override
 			public void controlMoved(final ControlEvent e) {
 			}
 
+			/** {@inheritDoc} */
 			@Override
 			public void controlResized(final ControlEvent e) {
 				SpiderChartCanvas.this.resizeChart();
@@ -60,6 +65,7 @@ public class SpiderChartCanvas extends Canvas implements ISpiderChartListener {
 		});
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void chartEvent(final SpiderChart c, final int type) {
 		if (type == 4) {
@@ -74,16 +80,19 @@ public class SpiderChartCanvas extends Canvas implements ISpiderChartListener {
 		}
 	}
 
+	/** */
 	public SpiderChart getChart() {
 		return this.chart;
 	}
 
+	/** */
 	private void mouseClick() {
 		if (this.chart != null) {
 			this.chart.mouseClick();
 		}
 	}
 
+	/** */
 	private void mouseMoved(final MouseEvent e) {
 		if (this.chart != null) {
 			this.chart.mouseMoved(e.x, e.y);
@@ -101,15 +110,18 @@ public class SpiderChartCanvas extends Canvas implements ISpiderChartListener {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintUserExit(final SpiderChart c, final SpiderChartGraphics g) {
 	}
 
+	/** */
 	protected void resizeChart() {
 		this.chart.setWidth(this.getSize().x + 1);
 		this.chart.setHeight(this.getSize().y + 1);
 	}
 
+	/** */
 	public void setChart(final SpiderChart c) {
 		if (this.chart != null) {
 			this.chart.removeChartListener(this);

@@ -21,24 +21,53 @@ import java.util.Vector;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.gc.SpiderChartImage;
 
+/**
+ * Base class used to create spider chart plotters
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public class Plotter extends SpiderChartComponent {
 
+	/** */
 	public FillStyle back = null;
-	public SpiderChartImage backImage;
+
+	/** Spider Chart Backgroud Image */
+	public SpiderChartImage backgroundImage;
+
+	/** */
 	protected boolean combinable = true;
+
+	/** */
 	public int depth = 0;
+
+	/** */
 	protected int needsAxis = 2;
+
+	/** */
 	Vector series = new Vector(0, 1);
+
+	/** */
 	public int visibleHeight = 0;
+
+	/** */
 	public int visibleWidth = 0;
+
+	/** */
 	public Scale XScale;
+
+	/** */
 	public Scale Y2Scale;
+
+	/** */
 	public Scale YScale;
 
+	/** */
 	public void addSeq(final DataSeq s) {
 		this.replaceSerie(-1, s);
 	}
 
+	/** */
 	private void calculateNewMax(final Scale s, final double m) {
 		if (!s.exactMaxValue) {
 			s.max = m;
@@ -55,6 +84,7 @@ public class Plotter extends SpiderChartComponent {
 		}
 	}
 
+	/** */
 	private void calculateNewMin(final Scale s, final double m) {
 		if (!s.exactMinValue) {
 			s.min = m;
@@ -71,6 +101,7 @@ public class Plotter extends SpiderChartComponent {
 		}
 	}
 
+	/** */
 	protected Scale getActiveXScale(final DataSeq s) {
 		Scale scale = this.XScale;
 		if (s.secondaryXAxis != null) {
@@ -79,6 +110,7 @@ public class Plotter extends SpiderChartComponent {
 		return scale;
 	}
 
+	/** */
 	protected Scale getActiveYScale(final DataSeq s) {
 		Scale scale = this.YScale;
 		if (s.secondYAxis && (this.Y2Scale != null)) {
@@ -89,22 +121,27 @@ public class Plotter extends SpiderChartComponent {
 		return scale;
 	}
 
+	/** */
 	public boolean getCombinable() {
 		return this.combinable;
 	}
 
+	/** */
 	public int getNeedsAxis() {
 		return this.needsAxis;
 	}
 
+	/** */
 	public DataSeq getSerie(final int p) {
 		return (DataSeq) this.series.elementAt(p);
 	}
 
+	/** */
 	public int getSeriesCount() {
 		return this.series.size();
 	}
 
+	/** */
 	protected boolean inSameSubChart(final DataSeq tmpSerie, final DataSeq s) {
 		boolean usingStackAxis = false;
 		if ((s.secondaryYAxis != null) && s.secondaryYAxis.mainAxis.stackAdditionalAxis) {
@@ -117,6 +154,7 @@ public class Plotter extends SpiderChartComponent {
 				&& ((tmpSerie.secondaryYAxis == s.secondaryYAxis) || !usingStackAxis);
 	}
 
+	/** */
 	public void plot(final SpiderChartGraphics g) {
 		for (int i = 0; i < this.series.size(); i++) {
 			final DataSeq s = (DataSeq) this.series.elementAt(i);
@@ -125,6 +163,7 @@ public class Plotter extends SpiderChartComponent {
 		}
 	}
 
+	/** */
 	public void plotBackground(final SpiderChartGraphics g, final int bw, final int bh, final int offsetX,
 			final int offsetY) {
 		if (this.back != null) {
@@ -155,9 +194,9 @@ public class Plotter extends SpiderChartComponent {
 				this.back.draw(g, this.x, this.y, this.x + bw, this.y + bh);
 			}
 		}
-		if (this.backImage != null) {
-			final int w = this.backImage.getWidth();
-			final int h = this.backImage.getHeight();
+		if (this.backgroundImage != null) {
+			final int w = this.backgroundImage.getWidth();
+			final int h = this.backgroundImage.getHeight();
 			if ((w > -1) && (h > -1)) {
 				int toCenterX = (bw - w) / 2;
 				if (toCenterX < 0) {
@@ -167,14 +206,16 @@ public class Plotter extends SpiderChartComponent {
 				if (toCenterY < 0) {
 					toCenterY = 0;
 				}
-				g.drawImage(this.backImage, toCenterX + this.x, this.y + toCenterY);
+				g.drawImage(this.backgroundImage, toCenterX + this.x, this.y + toCenterY);
 			}
 		}
 	}
 
+	/** */
 	protected void plotSerie(final SpiderChartGraphics g, final DataSeq s, final int serieSec) {
 	}
 
+	/** */
 	public void replaceSerie(final int p, final DataSeq s) {
 		final Scale tmpScaleX = this.getActiveXScale(s);
 		this.getActiveYScale(s);
@@ -240,6 +281,7 @@ public class Plotter extends SpiderChartComponent {
 		}
 	}
 
+	/** */
 	public void setSerie(final int p, final DataSeq s) {
 		if (p < this.series.size()) {
 			this.series.setElementAt(s, p);

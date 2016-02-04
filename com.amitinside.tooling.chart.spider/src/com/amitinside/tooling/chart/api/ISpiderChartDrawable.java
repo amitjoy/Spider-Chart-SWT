@@ -17,10 +17,13 @@ package com.amitinside.tooling.chart.api;
 
 public interface ISpiderChartDrawable {
 
+	/** Spider Chart Area Color */
 	public abstract String areaColor();
 
+	/** Spider Chart Legend Text */
 	public abstract String legend();
 
+	/** Spider Chart Axis Values in Order */
 	public abstract double[] values();
 
 }

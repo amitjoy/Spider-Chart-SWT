@@ -26,9 +26,12 @@ import com.amitinside.tooling.chart.builder.model.AxisData;
 
 public class AxisDataBuilder {
 
+	/** */
 	private final SpiderChart chart;
+	/** */
 	private final AxisData data;
 
+	/** Constructor */
 	public AxisDataBuilder(final SpiderChart chart) {
 		requireNonNull(chart);
 
@@ -36,10 +39,12 @@ public class AxisDataBuilder {
 		this.chart = chart;
 	}
 
+	/** */
 	private void done() {
 		this.chart.addSeq(this.data.getData());
 	}
 
+	/** */
 	public void inject(final Supplier<ISpiderChartDrawable> drawableData) {
 		requireNonNull(drawableData);
 		final Optional<double[]> values = Optional.of(drawableData.get().values());
