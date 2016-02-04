@@ -22,7 +22,7 @@ public class IPhone implements ISpiderChartDrawable {
 
 	@Override
 	public String areaColor() {
-		return SpiderChartColor.BLUE;
+		return SpiderChartColor.DARKORCHID;
 	}
 
 	@Override

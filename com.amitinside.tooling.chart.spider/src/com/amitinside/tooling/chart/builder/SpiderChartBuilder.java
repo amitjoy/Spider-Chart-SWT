@@ -56,10 +56,11 @@ public class SpiderChartBuilder {
 		this.prepareChartViewer(parent);
 	}
 
-	public void data(final Consumer<AxisDataBuilder> dataBuilderConsumer) {
+	public SpiderChartBuilder data(final Consumer<AxisDataBuilder> dataBuilderConsumer) {
 		final AxisDataBuilder dataBuilder = new AxisDataBuilder(this.chart);
 		dataBuilderConsumer.accept(dataBuilder);
 		this.chartViewer.setChart(this.chart);
+		return this;
 	}
 
 	private void prepareChartViewer(final Composite parent) {

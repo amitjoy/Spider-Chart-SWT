@@ -35,14 +35,10 @@ public final class Sample {
 
 		SpiderChartBuilder.config(shell, settings -> {
 
-			settings.title(title -> title.setText("Smartphone Comparison"));
-
-			settings.legend(legend -> {
+			settings.title(title -> title.setText("Smartphone Comparison")).legend(legend -> {
 				legend.addItem("iPhone 6", LineStyle.of(1, getColor(iphoneData.areaColor()), NORMAL_LINE));
 				legend.addItem("Nexus 6", LineStyle.of(1, getColor(nexusData.areaColor()), NORMAL_LINE));
-			});
-
-			settings.plotter(plotter -> {
+			}).plotter(plotter -> {
 				final double[] maxScales = { 5, 5, 5, 5, 5 };
 				final double[] minScales = { 0, 0, 0, 0, 0 };
 				final String[] axes = { "Battery", "Camera", "Display", "Memory", "Brand" };
@@ -53,8 +49,7 @@ public final class Sample {
 			});
 
 		}).viewer(chart -> {
-			chart.data(firstData -> firstData.inject(iphoneData));
-			chart.data(secondData -> secondData.inject(nexusData));
+			chart.data(firstData -> firstData.inject(iphoneData)).data(secondData -> secondData.inject(nexusData));
 		});
 	}
 

@@ -46,27 +46,30 @@ public class SpiderChartConfigurationBuilder {
 		return this.title;
 	}
 
-	public void legend(final Consumer<Legend> legendBuilder) {
+	public SpiderChartConfigurationBuilder legend(final Consumer<Legend> legendBuilder) {
 		this.legend = new Legend();
 		this.legend.background = new FillStyle(SWTGraphicsSupplier.getColor(SpiderChartColor.WHITE));
 		this.legend.border = new LineStyle(1, SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK), NORMAL_LINE);
 		legendBuilder.accept(this.legend);
+		return this;
 	}
 
-	public void plotter(final Consumer<SpiderPlotter> plotter) {
+	public SpiderChartConfigurationBuilder plotter(final Consumer<SpiderPlotter> plotter) {
 		this.plotter = new SpiderPlotter();
 		this.plotter.backStyle = new FillStyle(SWTGraphicsSupplier.getColor(SpiderChartColor.YELLOW));
 		this.plotter.radiusModifier = 0.8;
 
-		this.plotter.gridStyle = new LineStyle(1, SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK),
+		this.plotter.gridStyle = new LineStyle(1, SWTGraphicsSupplier.getColor(SpiderChartColor.TELA),
 				LineStyle.DASHED_LINE);
 		this.plotter.gridFont = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.PLAIN, 10);
 		plotter.accept(this.plotter);
+		return this;
 	}
 
-	public void title(final Consumer<Title> titleBuilder) {
+	public SpiderChartConfigurationBuilder title(final Consumer<Title> titleBuilder) {
 		this.title = new Title();
 		titleBuilder.accept(this.title);
+		return this;
 	}
 
 }
