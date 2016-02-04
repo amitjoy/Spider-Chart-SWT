@@ -82,6 +82,7 @@ public class SpiderChartLabel implements IFloatingObject {
 	/** */
 	protected int rotationAlign = SpiderChartGraphics.ROTATE_CENTER;
 	/** */
+	@SuppressWarnings("unused")
 	private String sFormat = "";
 	/** */
 	protected String tip = "";

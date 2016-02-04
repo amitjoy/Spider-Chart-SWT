@@ -40,6 +40,7 @@ public class SpiderChart {
 	private class SpiderChartWorker implements Runnable {
 
 		/** */
+		@SuppressWarnings("unused")
 		public SpiderChart chart = null;
 
 		/** */
@@ -236,6 +237,7 @@ public class SpiderChart {
 	public int selectedSeriePoint = -1;
 
 	/** */
+	@SuppressWarnings("unused")
 	private boolean showingTip = false;
 
 	/** */
@@ -245,6 +247,7 @@ public class SpiderChart {
 	public boolean showTips = false;
 
 	/** */
+	@SuppressWarnings("unused")
 	private boolean stopped = false;
 
 	/** */
@@ -281,9 +284,6 @@ public class SpiderChart {
 	public SpiderChartAxis XAxis;
 
 	/** */
-	public HAxisLabel XLabel;
-
-	/** */
 	public SpiderChartAxis Y2Axis;
 
 	/** */
@@ -303,7 +303,8 @@ public class SpiderChart {
 	/**
 	 * Constructor
 	 */
-	public SpiderChart(final SpiderChartTitle t, final SpiderChartPlotter p, final SpiderChartAxis X, final SpiderChartAxis Y) {
+	public SpiderChart(final SpiderChartTitle t, final SpiderChartPlotter p, final SpiderChartAxis X,
+			final SpiderChartAxis Y) {
 		this.resetChart(t, p, X, Y);
 	}
 
@@ -398,17 +399,6 @@ public class SpiderChart {
 					* (1.0D - (this.topMargin + this.bottomMargin + this.legendMargin)));
 			this.YAxis.height = this.virtualHeight - (myHeight - this.YAxis.visibleSize);
 		}
-		if (this.XLabel != null) {
-			final int tmp = 2 + this.getCountParallelAxis(this.XAxis);
-			this.XLabel.x = (int) (myWidth * this.leftMargin);
-			this.XLabel.y = (int) (myHeight * (1.0D - this.legendMargin))
-					- (int) (myHeight * (this.bottomMargin / tmp));
-			if ((this.XAxis != null) && this.XAxis.xscaleOnTop) {
-				this.XLabel.y = 0;
-			}
-			this.XLabel.height = (int) (myHeight * (this.bottomMargin / (2 + this.getCountParallelAxis(this.XAxis))));
-			this.XLabel.width = (int) (myWidth * (1.0D - (this.leftMargin + this.leftMargin)));
-		}
 		if (this.Y2Axis != null) {
 			this.plotters[0].width = (int) (this.plotters[0].width - ((myWidth * this.secondYAxisMargin) / 2.0D));
 		}
@@ -476,15 +466,6 @@ public class SpiderChart {
 			this.YAxis.visibleSize = (int) (myHeight * (1.0D - (this.topMargin + this.bottomMargin)));
 			this.YAxis.height = this.virtualHeight - (myHeight - this.YAxis.visibleSize);
 		}
-		if (this.XLabel != null) {
-			this.XLabel.height = (int) (myHeight * (this.bottomMargin / (2 + this.getCountParallelAxis(this.XAxis))));
-			this.XLabel.x = (int) (myWidth * this.leftMargin);
-			this.XLabel.y = myHeight - this.XLabel.height;
-			if ((this.XAxis != null) && this.XAxis.xscaleOnTop) {
-				this.XLabel.y = 0;
-			}
-			this.XLabel.width = (int) (myWidth * (1.0D - (this.legendMargin + this.leftMargin)));
-		}
 		if (this.Y2Axis != null) {
 			this.plotters[0].width = (int) (this.plotters[0].width - ((myWidth * this.secondYAxisMargin) / 2.0D));
 		}
@@ -548,15 +529,6 @@ public class SpiderChart {
 			this.YAxis.visibleSize = (int) (myHeight
 					* (1.0D - (this.topMargin + this.bottomMargin + this.legendMargin)));
 			this.YAxis.height = this.virtualHeight - (myHeight - this.YAxis.visibleSize);
-		}
-		if (this.XLabel != null) {
-			this.XLabel.height = (int) (myHeight * (this.bottomMargin / (2 + this.getCountParallelAxis(this.XAxis))));
-			this.XLabel.x = (int) (myWidth * this.leftMargin);
-			this.XLabel.y = myHeight - this.XLabel.height;
-			if ((this.XAxis != null) && this.XAxis.xscaleOnTop) {
-				this.XLabel.y = (int) (myHeight * this.legendMargin);
-			}
-			this.XLabel.width = (int) (myWidth * (1.0D - (this.leftMargin + this.leftMargin)));
 		}
 		if (this.Y2Axis != null) {
 			this.plotters[0].width = (int) (this.plotters[0].width - ((myWidth * this.secondYAxisMargin) / 2.0D));
@@ -939,10 +911,6 @@ public class SpiderChart {
 			this.legend.chart = this;
 			this.legend.draw(g);
 		}
-		if (this.XLabel != null) {
-			this.XLabel.chart = this;
-			this.XLabel.draw(g);
-		}
 		if (this.repaintAll) {
 			for (int i = 0; i < this.plottersCount; i++) {
 				this.plotters[i].chart = this;
@@ -1109,13 +1077,13 @@ public class SpiderChart {
 	}
 
 	/** */
-	protected void resetChart(final SpiderChartTitle t, final SpiderChartPlotter p, final SpiderChartAxis X, final SpiderChartAxis Y) {
+	protected void resetChart(final SpiderChartTitle t, final SpiderChartPlotter p, final SpiderChartAxis X,
+			final SpiderChartAxis Y) {
 		this.plottersCount = 0;
 		this.plotters = new SpiderChartPlotter[10];
 		this.XAxis = null;
 		this.YAxis = null;
 		this.Y2Axis = null;
-		this.XLabel = null;
 		this.legend = null;
 		this.title = null;
 		this.border = null;
