@@ -17,9 +17,6 @@ package com.amitinside.tooling.chart;
 
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Locale;
 import java.util.Vector;
 
 import com.amitinside.tooling.chart.gc.Polygon;
@@ -280,15 +277,6 @@ public class SpiderChart {
 	/** Scrollable Property */
 	public boolean withScroll = false;
 
-	/** */
-	public SpiderChartAxis XAxis;
-
-	/** */
-	public SpiderChartAxis Y2Axis;
-
-	/** */
-	public SpiderChartAxis YAxis;
-
 	/**
 	 * Constructor
 	 */
@@ -298,14 +286,6 @@ public class SpiderChart {
 	/** Constructor */
 	public SpiderChart(final SpiderChartTitle t, final SpiderChartPlotter p) {
 		this.resetChart(t, p, null, null);
-	}
-
-	/**
-	 * Constructor
-	 */
-	public SpiderChart(final SpiderChartTitle t, final SpiderChartPlotter p, final SpiderChartAxis X,
-			final SpiderChartAxis Y) {
-		this.resetChart(t, p, X, Y);
 	}
 
 	/** */
@@ -376,41 +356,8 @@ public class SpiderChart {
 
 		this.title.x = 0;
 		this.title.y = 0;
-		if ((this.XAxis != null) && this.XAxis.xscaleOnTop) {
-			this.title.y = this.virtualHeight - (int) (myHeight * (this.bottomMargin + this.legendMargin));
-		}
 		this.title.height = (int) (myHeight * this.topMargin);
 		this.title.width = myWidth;
-		if (this.XAxis != null) {
-			this.XAxis.x = (int) (myWidth * this.leftMargin);
-			this.XAxis.y = this.virtualHeight - (int) (myHeight * (this.bottomMargin + this.legendMargin));
-			this.XAxis.realPosition = (int) (myHeight * (1.0D - this.bottomMargin - this.legendMargin));
-			this.XAxis.height = (int) (myHeight * (this.bottomMargin / (2 + this.getCountParallelAxis(this.XAxis))));
-			this.XAxis.visibleSize = (int) (myWidth * (1.0D - (this.leftMargin + this.rightMargin)));
-
-			this.XAxis.width = this.virtualWidth - (myWidth - this.XAxis.visibleSize);
-		}
-		if (this.YAxis != null) {
-			this.YAxis.width = (int) (myWidth * (this.leftMargin / (2 + this.getCountParallelAxis(this.YAxis))));
-			this.YAxis.x = (int) (myWidth * this.leftMargin) - this.YAxis.width;
-			this.YAxis.realPosition = this.YAxis.x;
-			this.YAxis.y = (int) (myHeight * this.topMargin);
-			this.YAxis.visibleSize = (int) (myHeight
-					* (1.0D - (this.topMargin + this.bottomMargin + this.legendMargin)));
-			this.YAxis.height = this.virtualHeight - (myHeight - this.YAxis.visibleSize);
-		}
-		if (this.Y2Axis != null) {
-			this.plotters[0].width = (int) (this.plotters[0].width - ((myWidth * this.secondYAxisMargin) / 2.0D));
-		}
-		if (this.Y2Axis != null) {
-			this.Y2Axis.x = this.plotters[0].x + this.plotters[0].width;
-			this.Y2Axis.realPosition = this.plotters[0].x + this.plotters[0].visibleWidth;
-			this.Y2Axis.y = (int) (myHeight * this.topMargin);
-			this.Y2Axis.visibleSize = (int) (myHeight
-					* (1.0D - (this.topMargin + this.bottomMargin + this.legendMargin)));
-			this.Y2Axis.width = (int) ((myWidth * this.rightMargin) / (2 + this.getCountParallelAxis(this.Y2Axis)));
-			this.Y2Axis.height = this.virtualHeight - (myHeight - this.Y2Axis.visibleSize);
-		}
 		if (this.legend != null) {
 			this.legend.x = (int) (myWidth * this.leftMargin);
 			this.legend.width = (int) (myWidth * (1.0D - (this.leftMargin + this.leftMargin)));
@@ -431,10 +378,6 @@ public class SpiderChart {
 			this.virtualHeight = myHeight;
 		}
 		this.plotters[0].visibleWidth = (int) (myWidth * (1.0D - (this.legendMargin + this.leftMargin)));
-		if (this.Y2Axis != null) {
-			this.plotters[0].visibleWidth = (int) (myWidth
-					* (1.0D - (this.legendMargin + this.rightMargin + this.leftMargin)));
-		}
 		this.plotters[0].visibleHeight = (int) (myHeight * (1.0D - (this.topMargin + this.bottomMargin)));
 
 		this.plotters[0].x = (int) (myWidth * this.leftMargin);
@@ -444,39 +387,8 @@ public class SpiderChart {
 
 		this.title.x = 0;
 		this.title.y = 0;
-		if ((this.XAxis != null) && this.XAxis.xscaleOnTop) {
-			this.title.y = this.virtualHeight - (int) (myHeight * this.bottomMargin);
-		}
 		this.title.height = (int) (myHeight * this.topMargin);
 		this.title.width = myWidth;
-		if (this.XAxis != null) {
-			this.XAxis.x = (int) (myWidth * this.leftMargin);
-			this.XAxis.y = this.virtualHeight - (int) (myHeight * this.bottomMargin);
-			this.XAxis.realPosition = (int) (myHeight * (1.0D - this.bottomMargin));
-			this.XAxis.height = (int) (myHeight * (this.bottomMargin / (2 + this.getCountParallelAxis(this.XAxis))));
-			this.XAxis.visibleSize = this.plotters[0].visibleWidth;
-
-			this.XAxis.width = this.virtualWidth - (myWidth - this.XAxis.visibleSize);
-		}
-		if (this.YAxis != null) {
-			this.YAxis.width = (int) (myWidth * (this.leftMargin / (2 + this.getCountParallelAxis(this.YAxis))));
-			this.YAxis.x = (int) (myWidth * this.leftMargin) - this.YAxis.width;
-			this.YAxis.realPosition = this.YAxis.x;
-			this.YAxis.y = (int) (myHeight * this.topMargin);
-			this.YAxis.visibleSize = (int) (myHeight * (1.0D - (this.topMargin + this.bottomMargin)));
-			this.YAxis.height = this.virtualHeight - (myHeight - this.YAxis.visibleSize);
-		}
-		if (this.Y2Axis != null) {
-			this.plotters[0].width = (int) (this.plotters[0].width - ((myWidth * this.secondYAxisMargin) / 2.0D));
-		}
-		if (this.Y2Axis != null) {
-			this.Y2Axis.x = this.plotters[0].x + this.plotters[0].width;
-			this.Y2Axis.realPosition = this.plotters[0].x + this.plotters[0].visibleWidth;
-			this.Y2Axis.y = (int) (myHeight * this.topMargin);
-			this.Y2Axis.visibleSize = (int) (myHeight * (1.0D - (this.topMargin + this.bottomMargin)));
-			this.Y2Axis.width = (int) ((myWidth * this.rightMargin) / (2 + this.getCountParallelAxis(this.Y2Axis)));
-			this.Y2Axis.height = this.virtualHeight - (myHeight - this.Y2Axis.visibleSize);
-		}
 		if (this.legend != null) {
 			this.legend.x = (int) (myWidth * (1.0D - this.legendMargin));
 			this.legend.width = (int) (myWidth * this.legendMargin);
@@ -507,48 +419,12 @@ public class SpiderChart {
 
 		this.title.x = 0;
 		this.title.y = 0;
-		if ((this.XAxis != null) && this.XAxis.xscaleOnTop) {
-			this.title.y = this.virtualHeight - (int) (myHeight * this.bottomMargin);
-		}
 		this.title.height = (int) (myHeight * this.topMargin);
 		this.title.width = myWidth;
-		if (this.XAxis != null) {
-			this.XAxis.x = (int) (myWidth * this.leftMargin);
-			this.XAxis.y = this.virtualHeight - (int) (myHeight * this.bottomMargin);
-			this.XAxis.realPosition = (int) (myHeight * (1.0D - this.bottomMargin));
-			this.XAxis.height = (int) (myHeight * (this.bottomMargin / (2 + this.getCountParallelAxis(this.XAxis))));
-			this.XAxis.visibleSize = (int) (myWidth * (1.0D - (this.leftMargin + this.rightMargin)));
-
-			this.XAxis.width = this.virtualWidth - (myWidth - this.XAxis.visibleSize);
-		}
-		if (this.YAxis != null) {
-			this.YAxis.width = (int) (myWidth * (this.leftMargin / (2 + this.getCountParallelAxis(this.YAxis))));
-			this.YAxis.x = (int) (myWidth * this.leftMargin) - this.YAxis.width;
-			this.YAxis.realPosition = this.YAxis.x;
-			this.YAxis.y = (int) (myHeight * (this.topMargin + this.legendMargin));
-			this.YAxis.visibleSize = (int) (myHeight
-					* (1.0D - (this.topMargin + this.bottomMargin + this.legendMargin)));
-			this.YAxis.height = this.virtualHeight - (myHeight - this.YAxis.visibleSize);
-		}
-		if (this.Y2Axis != null) {
-			this.plotters[0].width = (int) (this.plotters[0].width - ((myWidth * this.secondYAxisMargin) / 2.0D));
-		}
-		if (this.Y2Axis != null) {
-			this.Y2Axis.x = this.plotters[0].x + this.plotters[0].width;
-			this.Y2Axis.realPosition = this.plotters[0].x + this.plotters[0].visibleWidth;
-			this.Y2Axis.y = (int) (myHeight * (this.topMargin + this.legendMargin));
-			this.Y2Axis.visibleSize = (int) (myHeight
-					* (1.0D - (this.topMargin + this.bottomMargin + this.legendMargin)));
-			this.Y2Axis.width = (int) ((myWidth * this.rightMargin) / (2 + this.getCountParallelAxis(this.Y2Axis)));
-			this.Y2Axis.height = this.virtualHeight - (myHeight - this.Y2Axis.visibleSize);
-		}
 		if (this.legend != null) {
 			this.legend.x = (int) (myWidth * this.leftMargin);
 			this.legend.width = (int) (myWidth * (1.0D - (this.leftMargin + this.rightMargin)));
 			this.legend.y = (int) (myHeight * this.topMargin);
-			if ((this.XAxis != null) && this.XAxis.xscaleOnTop) {
-				this.legend.y = 0;
-			}
 			this.legend.height = (int) (myHeight * this.legendMargin);
 		}
 		this.setPlotterSize();
@@ -595,14 +471,6 @@ public class SpiderChart {
 				g.drawImage(this.backImage, j, i);
 			}
 		}
-	}
-
-	/** */
-	private int getCountParallelAxis(final SpiderChartAxis axis) {
-		if (axis.stackAdditionalAxis) {
-			return 0;
-		}
-		return axis.getAdditionalAxisCount();
 	}
 
 	/** */
@@ -653,15 +521,6 @@ public class SpiderChart {
 		this.selectedSerie = null;
 		this.selectedLabel = null;
 		this.selectedSeriePoint = -1;
-		if (this.XAxis != null) {
-			this.currentValueX = this.XAxis.scale.getValue(this.currentX + this.offsetX);
-		}
-		if (this.YAxis != null) {
-			this.currentValueY = this.YAxis.scale.getValue(this.currentY + this.offsetY);
-			if (this.Y2Axis != null) {
-				this.currentValueY2 = this.Y2Axis.scale.getValue(this.currentY + this.offsetY);
-			}
-		}
 		if (this.activateSelection) {
 			for (final SpiderChartPlotter plotter : this.plotters) {
 				if (plotter == null) {
@@ -722,16 +581,6 @@ public class SpiderChart {
 			return;
 		}
 		for (int j = 0; j < this.plottersCount; j++) {
-			if ((this.plotters[j].getNeedsAxis() > 0) && (this.XAxis == null)) {
-				pg.setColor(SWTGraphicsSupplier.getColor(SpiderChartColor.RED));
-				pg.drawString("Error: No X axis have been defined", 30, 30);
-				return;
-			}
-			if ((this.plotters[j].getNeedsAxis() > 1) && (this.YAxis == null)) {
-				pg.setColor(SWTGraphicsSupplier.getColor(SpiderChartColor.RED));
-				pg.drawString("Error: No Y axis have been defined", 30, 30);
-				return;
-			}
 			if ((this.plottersCount > 1) && !this.plotters[j].getCombinable()) {
 				pg.setColor(SWTGraphicsSupplier.getColor(SpiderChartColor.RED));
 				pg.drawString("Error: These plotters cannot be combined", 30, 30);
@@ -795,22 +644,6 @@ public class SpiderChart {
 			}
 			gBack = this.backTmpImage.getGraphics();
 		}
-		if ((this.virtualWidth > this.width) && this.XAxis.stackAdditionalAxis) {
-			this.XAxis.stackAdditionalAxis = false;
-			System.err.println("Warning: additional axis cannot be stacked if using scroll.");
-			if (this.XAxis.getTargetZones().length > 0) {
-				this.XAxis.removeTargetZones();
-				System.err.println("Warning: axis target zones not compatible scroll.");
-			}
-		}
-		if ((this.virtualHeight > this.height) && this.YAxis.stackAdditionalAxis) {
-			this.YAxis.stackAdditionalAxis = false;
-			System.err.println("Warning: additional axis cannot be stacked if using scroll.");
-			if (this.YAxis.getTargetZones().length > 0) {
-				this.YAxis.removeTargetZones();
-				System.err.println("Warning: axis target zones not compatible scroll.");
-			}
-		}
 		if (this.repaintAll) {
 			if (this.back != null) {
 				this.back.draw(gBack, 0, 0, this.virtualWidth, this.virtualHeight);
@@ -850,59 +683,12 @@ public class SpiderChart {
 			this.plotters[0].Y2Scale.screenMin = this.plotters[0].y - this.plotters[0].depth;
 		}
 		if (this.repaintAll) {
-			int plotterBackWidth = this.plotters[0].width;
-			int plotterBackHeight = this.plotters[0].height;
-			if (this.XAxis != null) {
-				plotterBackWidth = this.XAxis.width;
-			}
-			if (this.YAxis != null) {
-				plotterBackHeight = this.YAxis.height;
-			}
+			final int plotterBackWidth = this.plotters[0].width;
+			final int plotterBackHeight = this.plotters[0].height;
 			this.plotters[0].plotBackground(gScroll, plotterBackWidth, plotterBackHeight, this.offsetX, this.offsetY);
 		}
 		this.title.chart = this;
 		this.title.draw(g);
-		if (this.repaintAll) {
-			if (this.XAxis != null) {
-				this.XAxis.chart = this;
-			}
-			if (this.YAxis != null) {
-				this.YAxis.chart = this;
-			}
-			if (this.Y2Axis != null) {
-				this.Y2Axis.chart = this;
-			}
-			this.setPositionStackedAxis(this.XAxis);
-			this.setPositionStackedAxis(this.YAxis);
-			this.setPositionStackedAxis(this.Y2Axis);
-			if (this.XAxis != null) {
-				this.XAxis.offset = this.offsetX;
-			}
-			if (this.YAxis != null) {
-				this.YAxis.offset = this.offsetY;
-			}
-			if (this.Y2Axis != null) {
-				this.Y2Axis.offset = this.offsetY;
-			}
-			if (this.XAxis != null) {
-				this.XAxis.drawGridBackground(gScroll, this.YAxis);
-			}
-			if (this.YAxis != null) {
-				this.YAxis.drawGridBackground(gScroll, this.XAxis);
-			}
-			if (this.Y2Axis != null) {
-				this.Y2Axis.drawGridBackground(gScroll, this.XAxis);
-			}
-			if (this.XAxis != null) {
-				this.XAxis.drawBackground(gScroll, this.YAxis);
-			}
-			if (this.YAxis != null) {
-				this.YAxis.drawBackground(gScroll, this.XAxis);
-			}
-			if (this.Y2Axis != null) {
-				this.Y2Axis.drawBackground(gScroll, this.XAxis);
-			}
-		}
 		this.paintTargetZones(g, true);
 		if ((d() != 1) && (this.legend == null)) {
 			this.legend = new SpiderChartLegend();
@@ -936,18 +722,6 @@ public class SpiderChart {
 			for (int i = 0; i < this.chartListeners.size(); i++) {
 				this.chartListeners.elementAt(i).paintUserExit(this, g);
 			}
-		}
-		if (this.XAxis != null) {
-			this.XAxis.offset = this.offsetX;
-			this.XAxis.drawForeground(g, this.YAxis);
-		}
-		if (this.YAxis != null) {
-			this.YAxis.offset = this.offsetY;
-			this.YAxis.drawForeground(g, this.XAxis);
-		}
-		if (this.Y2Axis != null) {
-			this.Y2Axis.offset = this.offsetY;
-			this.Y2Axis.drawForeground(g, this.XAxis);
 		}
 		this.paintTargetZones(g, false);
 
@@ -989,12 +763,6 @@ public class SpiderChart {
 			final TargetZone z = this.targetZones.elementAt(i);
 			z.chart = this;
 			z.effect3D = this.plotters[0].depth;
-			if (back && z.background) {
-				z.paint(g, this.XAxis, this.YAxis);
-			}
-			if (!back && !z.background) {
-				z.paint(g, this.XAxis, this.YAxis);
-			}
 		}
 	}
 
@@ -1009,38 +777,6 @@ public class SpiderChart {
 		}
 		if (this.showTips && (this.selectedLabel != null)) {
 			this.selectedLabel.getTip();
-		}
-		if (this.showPosition) {
-			if ((this.currentX > 0) && (this.currentY > 0) && (this.currentX < this.XAxis.scale.screenMax)
-					&& (this.currentX > this.XAxis.scale.screenMin) && (this.currentY < this.YAxis.scale.screenMax)
-					&& (this.currentY > this.YAxis.scale.screenMin)) {
-				String txt = "" + this.currentValueY;
-				String sFormat = this.YAxis.scaleLabelFormat;
-				if (sFormat.length() == 0) {
-					sFormat = "#";
-				}
-				if ((this.YAxis != null) && (sFormat.length() > 0)) {
-					DecimalFormat df = null;
-					if (numberLocale == null) {
-						df = new DecimalFormat(sFormat);
-					} else {
-						final NumberFormat nf = NumberFormat.getNumberInstance(new Locale(numberLocale, ""));
-						df = (DecimalFormat) nf;
-						df.applyPattern(sFormat);
-					}
-					txt = df.format(new Double(this.currentValueY));
-				}
-				g.setFont(this.tipFont);
-				final int he = g.getFontHeight() + 4;
-				final int wi = g.getFontWidth(txt + "  ");
-				g.setColor(this.tipColor);
-				g.fillRect(this.currentX, this.currentY - he, wi, he);
-				g.setColor(this.tipFontColor);
-				g.drawRect(this.currentX, this.currentY - he, wi, he);
-
-				this.showingTip = true;
-				g.drawString(txt, this.currentX + 2, this.currentY - 2);
-			}
 		}
 	}
 
@@ -1081,9 +817,6 @@ public class SpiderChart {
 			final SpiderChartAxis Y) {
 		this.plottersCount = 0;
 		this.plotters = new SpiderChartPlotter[10];
-		this.XAxis = null;
-		this.YAxis = null;
-		this.Y2Axis = null;
 		this.legend = null;
 		this.title = null;
 		this.border = null;
@@ -1097,8 +830,6 @@ public class SpiderChart {
 		this.floatingObjects.removeAllElements();
 
 		this.plotters[0] = p;
-		this.XAxis = X;
-		this.YAxis = Y;
 		if ((X != null) && (this.plotters[0] != null)) {
 			this.plotters[0].XScale = X.scale;
 			X.plot = this.plotters[0];
@@ -1170,73 +901,6 @@ public class SpiderChart {
 	}
 
 	/** */
-	private void setPositionStackedAxis(final SpiderChartAxis axis) {
-		if (axis == null) {
-			return;
-		}
-		final int aCount = axis.getAdditionalAxisCount() + 1;
-		if (axis.stackAdditionalAxis && (aCount > 1)) {
-			if (axis.orientation == 1) {
-				int tmpY = axis.y;
-				final int h = axis.height / aCount;
-				int screenMin = axis.scale.screenMin;
-				final int screenH = (axis.scale.screenMax - axis.scale.screenMin) / aCount;
-				final int screenH2 = (axis.scale.screenMaxMargin - axis.scale.screenMin) / aCount;
-				final int visibleH = axis.visibleSize / aCount;
-				tmpY += h;
-				screenMin += screenH;
-
-				axis.height = h;
-				axis.scale.screenMax = axis.scale.screenMin + screenH;
-				axis.scale.screenMaxMargin = axis.scale.screenMin + screenH2;
-				axis.visibleSize = visibleH;
-				for (int i = 0; i < axis.getAdditionalAxisCount(); i++) {
-					final SpiderChartAxis a = axis.getAdditionalAxis(i);
-
-					a.y = tmpY;
-					a.height = h;
-					a.scale.screenMin = screenMin;
-					a.scale.screenMax = a.scale.screenMin + screenH;
-					a.scale.screenMaxMargin = a.scale.screenMin + screenH2;
-					a.visibleSize = visibleH;
-					a.realPosition = axis.realPosition;
-					a.width = axis.width;
-					tmpY += h;
-					screenMin += screenH;
-				}
-			} else {
-				int tmpX = axis.x;
-				final int w = axis.width / aCount;
-				int screenMin = axis.scale.screenMin;
-				final int screenW = (axis.scale.screenMax - axis.scale.screenMin) / aCount;
-				final int screenW2 = (axis.scale.screenMaxMargin - axis.scale.screenMin) / aCount;
-				final int visibleW = axis.visibleSize / aCount;
-				tmpX += w;
-				screenMin += screenW;
-
-				axis.width = w;
-				axis.scale.screenMax = axis.scale.screenMin + screenW;
-				axis.scale.screenMaxMargin = axis.scale.screenMin + screenW2;
-				axis.visibleSize = visibleW;
-				for (int i = 0; i < axis.getAdditionalAxisCount(); i++) {
-					final SpiderChartAxis a = axis.getAdditionalAxis(i);
-
-					a.x = tmpX;
-					a.width = w;
-					a.scale.screenMin = screenMin;
-					a.scale.screenMax = a.scale.screenMin + screenW;
-					a.scale.screenMaxMargin = a.scale.screenMin + screenW2;
-					a.visibleSize = visibleW;
-					a.realPosition = axis.realPosition;
-					a.height = axis.height;
-					tmpX += w;
-					screenMin += screenW;
-				}
-			}
-		}
-	}
-
-	/** */
 	public void setSize(final int w, final int h) {
 		this.setWidth(w);
 		this.setHeight(h);
@@ -1252,7 +916,6 @@ public class SpiderChart {
 	/** */
 	public void setY2Scale(final SpiderChartAxis a) {
 		this.plotters[0].Y2Scale = a.scale;
-		this.Y2Axis = a;
 		a.rightAxis = true;
 		a.plot = this.plotters[0];
 	}

@@ -106,62 +106,6 @@ public class SpiderChartLabel implements IFloatingObject {
 	}
 
 	/** */
-	protected int calcRelativeX(final String s, final int x) {
-		if (s.length() == 0) {
-			return x;
-		}
-		if (s.indexOf("+") == 0) {
-			return x + this.calcX(s.substring(1));
-		}
-		if (s.indexOf("-") == 0) {
-			return x - this.calcX(s.substring(1));
-		}
-		return this.calcX(s);
-	}
-
-	/** */
-	protected int calcRelativeY(final String s, final int y) {
-		if (s.length() == 0) {
-			return y;
-		}
-		if (s.indexOf("+") == 0) {
-			return y + this.calcY(s.substring(1));
-		}
-		if (s.indexOf("-") == 0) {
-			return y - this.calcY(s.substring(1));
-		}
-		return this.calcY(s);
-	}
-
-	/** */
-	protected int calcX(final String s) {
-		if (s.indexOf("px") > 0) {
-			return this.parseInt(s.substring(0, s.indexOf("px")));
-		}
-		if (s.indexOf("%") > 0) {
-			return (this.chart.getWidth() * Integer.parseInt(s.substring(0, s.indexOf("%")))) / 100;
-		}
-		if (this.chart.XAxis == null) {
-			return 0;
-		}
-		return this.chart.XAxis.scale.getScreenCoord(new Double(s).doubleValue());
-	}
-
-	/** */
-	protected int calcY(final String s) {
-		if (s.indexOf("px") > 0) {
-			return this.parseInt(s.substring(0, s.indexOf("px")));
-		}
-		if (s.indexOf("%") > 0) {
-			return (this.chart.getHeight() * Integer.parseInt(s.substring(0, s.indexOf("%")))) / 100;
-		}
-		if (this.chart.YAxis == null) {
-			return 0;
-		}
-		return this.chart.YAxis.scale.getScreenCoord(new Double(s).doubleValue());
-	}
-
-	/** */
 	public String getClickInfo() {
 		return this.clickInfo;
 	}
@@ -229,16 +173,6 @@ public class SpiderChartLabel implements IFloatingObject {
 			this.chart.addFloationgObject(this);
 		}
 		this.render(g);
-	}
-
-	/** */
-	private int parseInt(final String s) {
-		try {
-			return Integer.parseInt(s);
-		} catch (final Exception e) {
-			e.printStackTrace();
-		}
-		return 0;
 	}
 
 	/** */
