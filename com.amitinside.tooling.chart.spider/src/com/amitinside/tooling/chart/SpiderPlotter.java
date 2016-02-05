@@ -230,14 +230,8 @@ public class SpiderPlotter extends SpiderChartPlotter {
 					final int relativeX = (int) (Cos * tmpradi);
 					relativeY *= -1;
 					if (this.axesFactors.length > i) {
-						if (this.axesFactors[i].indexOf("@") >= 0) {
-							final SpiderChartLabel label = new SpiderChartLabel(this.axesFactors[i], "", false, false);
-							label.initialize(g, this.chart);
-							label.paint(g, (PieCenterX + relativeX) - correction, PieCenterY + relativeY, -1, -1);
-						} else {
-							g.drawString(this.axesFactors[i], (PieCenterX + relativeX) - correction,
-									PieCenterY + relativeY);
-						}
+						g.drawString(this.axesFactors[i], (PieCenterX + relativeX) - correction,
+								PieCenterY + relativeY);
 					}
 				}
 			}
@@ -321,20 +315,13 @@ public class SpiderPlotter extends SpiderChartPlotter {
 				if (YValue == (int) YValue) {
 					txt = new Integer((int) YValue).toString();
 				}
-				final String txtValue = txt;
 				if (p.labelTemplate.length() > 0) {
 					txt = p.labelTemplate;
 				}
 				if ((p.dataLabels != null) && (p.dataLabels.length > i)) {
 					txt = p.dataLabels[i];
 				}
-				if (txt.indexOf("@") >= 0) {
-					final SpiderChartLabel label = new SpiderChartLabel(txt, txtValue, false, false);
-					label.initialize(g, this.chart);
-					label.paint(g, xs[i] + 7, ys[i], -1, -1);
-				} else {
-					g.drawString(txt, xs[i] + 7, ys[i]);
-				}
+				g.drawString(txt, xs[i] + 7, ys[i]);
 			}
 		}
 		if (this.gridStyle != null) {

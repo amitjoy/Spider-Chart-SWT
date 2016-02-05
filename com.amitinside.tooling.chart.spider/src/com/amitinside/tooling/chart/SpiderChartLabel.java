@@ -92,16 +92,6 @@ public class SpiderChartLabel implements IFloatingObject {
 		if (pformat.length() == 0) {
 			pformat = pvalue;
 		}
-		if (pvertical) {
-			pformat = "@rotation value='90'@" + pformat;
-		}
-		if (pCenter) {
-			pformat = "@align value='CENTER'@" + pformat;
-		}
-		final int p = pformat.indexOf("#value#");
-		if (p >= 0) {
-			pformat = pformat.substring(0, p - 1) + pvalue + pformat.substring(p + 7);
-		}
 		this.sFormat = pformat;
 	}
 

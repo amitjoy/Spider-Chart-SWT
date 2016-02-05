@@ -37,23 +37,9 @@ public class SpiderChartTitle extends SpiderChartComponent {
 	public void draw(final SpiderChartGraphics g) {
 		g.setColor(this.color);
 		g.setFont(this.font);
-		if (this.text.indexOf("@") >= 0) {
-			final SpiderChartLabel formattedLabel = new SpiderChartLabel(this.text, "", false, true);
-			formattedLabel.initialize(g, this.chart);
-			formattedLabel.paint(g, this.x, this.y, this.width, this.height);
-			return;
-		}
 		final String[] txt = new String[3];
 
 		txt[0] = this.text;
-		if (txt[0].indexOf("\\n") > -1) {
-			txt[1] = txt[0].substring(txt[0].indexOf("\\n") + 2, txt[0].length());
-			txt[0] = txt[0].substring(0, txt[0].indexOf("\\n"));
-			if (txt[1].indexOf("\\n") > -1) {
-				txt[2] = txt[1].substring(txt[1].indexOf("\\n") + 2, txt[1].length());
-				txt[1] = txt[1].substring(0, txt[1].indexOf("\\n"));
-			}
-		}
 		for (int i = 0; i < 3; i++) {
 			if (txt[i] != null) {
 				int toCenterX = (this.width - g.getFontWidth(null, txt[i])) / 2;

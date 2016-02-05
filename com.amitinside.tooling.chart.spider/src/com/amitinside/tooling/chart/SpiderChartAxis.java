@@ -855,24 +855,11 @@ public class SpiderChartAxis extends SpiderChartComponent {
 	}
 
 	/** */
-	private String[] splitText(String s) {
+	private String[] splitText(final String s) {
 		final String[] r = new String[100];
-		int lines = 0;
+		final int lines = 0;
 		if (this.tickLabelLength == 0) {
 			this.tickLabelLength = 1000;
-		}
-		while ((s.indexOf("\\n") > -1) || (s.length() > this.tickLabelLength)) {
-			if ((s.indexOf("\\n") > -1) && (s.indexOf("\\n") < this.tickLabelLength)) {
-				r[lines] = s.substring(0, s.indexOf("\\n"));
-				s = s.substring(s.indexOf("\\n") + 2, s.length());
-			} else {
-				r[lines] = s.substring(0, this.tickLabelLength);
-				s = s.substring(this.tickLabelLength, s.length());
-			}
-			lines++;
-			if (lines >= r.length) {
-				break;
-			}
 		}
 		r[lines] = s;
 
