@@ -377,10 +377,9 @@ public class SpiderPlotter extends SpiderChartPlotter {
 						df = new DecimalFormat(this.scalingLabelFormat);
 						v = df.format(new Double(tickValue));
 					}
+					// TODO (AKM) To be implemented different scales for axes
 					if (this.markScalesOnEveryAxis) {
 						for (int i = 0; i < xs.length; i++) {
-							// TODO (AKM) Implement Each Axes Scaling Interval
-							// Display
 							g.drawString("" + v, xs[i] - 3 - g.getFontWidth("" + v), ys[i]);
 						}
 					} else {

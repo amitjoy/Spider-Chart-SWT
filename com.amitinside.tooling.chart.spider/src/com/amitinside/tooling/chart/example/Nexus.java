@@ -15,10 +15,10 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.example;
 
-import com.amitinside.tooling.chart.api.ISpiderChartDrawable;
+import com.amitinside.tooling.chart.api.ISpiderChartPlottable;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 
-public class Nexus implements ISpiderChartDrawable {
+public class Nexus implements ISpiderChartPlottable {
 
 	@Override
 	public String areaColor() {

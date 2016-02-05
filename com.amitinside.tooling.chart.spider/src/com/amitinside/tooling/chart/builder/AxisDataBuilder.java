@@ -21,7 +21,7 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 import com.amitinside.tooling.chart.SpiderChart;
-import com.amitinside.tooling.chart.api.ISpiderChartDrawable;
+import com.amitinside.tooling.chart.api.ISpiderChartPlottable;
 import com.amitinside.tooling.chart.builder.model.AxisData;
 
 public class AxisDataBuilder {
@@ -45,7 +45,7 @@ public class AxisDataBuilder {
 	}
 
 	/** */
-	public void inject(final Supplier<ISpiderChartDrawable> drawableData) {
+	public void inject(final Supplier<ISpiderChartPlottable> drawableData) {
 		requireNonNull(drawableData);
 		final Optional<double[]> values = Optional.of(drawableData.get().values());
 		final Optional<String> areaColor = Optional.of(drawableData.get().areaColor());

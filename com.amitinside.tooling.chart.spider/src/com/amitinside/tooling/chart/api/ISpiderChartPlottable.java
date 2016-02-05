@@ -15,7 +15,7 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.api;
 
-public interface ISpiderChartDrawable {
+public interface ISpiderChartPlottable {
 
 	/** Spider Chart Area Color */
 	public abstract String areaColor();

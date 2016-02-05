@@ -21,7 +21,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
-import com.amitinside.tooling.chart.api.ISpiderChartDrawable;
+import com.amitinside.tooling.chart.api.ISpiderChartPlottable;
 import com.amitinside.tooling.chart.builder.AxesConfigurer;
 import com.amitinside.tooling.chart.builder.SpiderChartBuilder;
 import com.amitinside.tooling.chart.swt.SpiderChartViewer;
@@ -32,8 +32,8 @@ public final class Sample {
 
 	private static void buildSpiderChart(final Shell shell) {
 
-		final Supplier<ISpiderChartDrawable> iPhoneData = IPhone::new;
-		final Supplier<ISpiderChartDrawable> nexusData = Nexus::new;
+		final Supplier<ISpiderChartPlottable> iPhoneData = IPhone::new;
+		final Supplier<ISpiderChartPlottable> nexusData = Nexus::new;
 
 		viewer = SpiderChartBuilder.config(shell, settings -> {
 
@@ -45,6 +45,7 @@ public final class Sample {
 						.addAxis("Camera", 5, 0).addAxis("Display", 5, 0).addAxis("Memory", 5, 0).addAxis("Brand", 5, 0)
 						.build();
 				plotter.inject(configurer);
+				plotter.markScalesOnEveryAxis = true;
 			});
 		}).viewer(chart -> {
 			chart.data(firstData -> firstData.inject(iPhoneData)).data(secondData -> secondData.inject(nexusData));

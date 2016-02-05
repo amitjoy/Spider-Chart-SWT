@@ -20,7 +20,7 @@ import static com.amitinside.tooling.chart.gc.SWTGraphicsSupplier.getColor;
 import java.util.Vector;
 import java.util.function.Supplier;
 
-import com.amitinside.tooling.chart.api.ISpiderChartDrawable;
+import com.amitinside.tooling.chart.api.ISpiderChartPlottable;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartFont;
@@ -76,7 +76,7 @@ public class SpiderChartLegend extends SpiderChartComponent {
 	}
 
 	/** */
-	public void addItem(final Supplier<ISpiderChartDrawable> pojo) {
+	public void addItem(final Supplier<ISpiderChartPlottable> pojo) {
 		final LineStyle ls = LineStyle.of(1, getColor(pojo.get().areaColor()), LineStyle.NORMAL_LINE);
 		this.addItem(pojo.get().legend(), ls);
 	}
