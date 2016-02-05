@@ -335,7 +335,6 @@ public class SpiderPlotter extends SpiderChartPlotter {
 			final int tickInterval = 100 / this.scalingDivisions;
 			final double tickIntervalAbs = (max - min) / this.scalingDivisions;
 			int tickAt = 0;
-			// TODO Implement Each Axes Interval Display
 			double tickAtAbs = 0.0D;
 			for (int j = 0; j < this.scalingDivisions; j++) {
 				tickAt += tickInterval;
@@ -380,6 +379,7 @@ public class SpiderPlotter extends SpiderChartPlotter {
 					}
 					if (this.markScalesOnEveryAxis) {
 						for (int i = 0; i < xs.length; i++) {
+							// TODO Implement Each Axes Interval Display
 							g.drawString("" + v, xs[i] - 3 - g.getFontWidth("" + v), ys[i]);
 						}
 					} else {
