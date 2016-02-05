@@ -86,6 +86,7 @@ public class SpiderChartBuilder {
 		this.chart.legend = chartConfiguration.getLegend();
 		this.chart.repaintAll = true;
 		this.chart.showTips = true;
+		this.chart.activateSelection = true;
 	}
 
 	/** */

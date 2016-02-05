@@ -38,6 +38,7 @@ public class SpiderChartViewer extends Composite {
 	public boolean changePointer = true;
 	/** */
 	SpiderChartAdapter chartAdapter = new SpiderChartAdapter() {
+		/** {@inheritDoc} */
 		@Override
 		public void chartEvent(final SpiderChart c, final int type) {
 			if (type == 2) {

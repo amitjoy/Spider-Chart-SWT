@@ -17,7 +17,9 @@ package com.amitinside.tooling.chart;
 
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.Vector;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.amitinside.tooling.chart.gc.Polygon;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
@@ -123,7 +125,7 @@ public class SpiderChart {
 	private SpiderChartImage chartImage = null;
 
 	/** */
-	private final Vector<ISpiderChartListener> chartListeners = new Vector<>();
+	private final List<ISpiderChartListener> chartListeners = new CopyOnWriteArrayList<>();
 
 	/** */
 	public double currentValueX;
@@ -293,7 +295,7 @@ public class SpiderChart {
 
 	/** */
 	public void addChartListener(final ISpiderChartListener cl) {
-		this.chartListeners.addElement(cl);
+		this.chartListeners.add(cl);
 	}
 
 	/** */
@@ -518,6 +520,7 @@ public class SpiderChart {
 
 		Object previousSelectedObject = this.selectedSerie;
 		final int previousPoint = this.selectedSeriePoint;
+
 		if ((this.selectedSerie == null) && (this.selectedLabel != null)) {
 			previousSelectedObject = this.selectedLabel;
 		}
@@ -560,6 +563,7 @@ public class SpiderChart {
 						break;
 					}
 				}
+
 			}
 			if ((Math.abs(this.currentX - this.cursorLastX) > 2) || (Math.abs(this.currentY - this.cursorLastY) > 2)) {
 				this.cursorLastX = this.currentX;
@@ -723,7 +727,7 @@ public class SpiderChart {
 		}
 		if (this.chartListeners != null) {
 			for (int i = 0; i < this.chartListeners.size(); i++) {
-				this.chartListeners.elementAt(i).paintUserExit(this, g);
+				this.chartListeners.get(i).paintUserExit(this, g);
 			}
 		}
 		this.paintTargetZones(g, false);
@@ -785,12 +789,12 @@ public class SpiderChart {
 
 	/** */
 	public void removeAllChartListener() {
-		this.chartListeners.removeAllElements();
+		this.chartListeners.clear();
 	}
 
 	/** */
 	public void removeChartListener(final ISpiderChartListener cl) {
-		this.chartListeners.removeElement(cl);
+		this.chartListeners.remove(cl);
 	}
 
 	/** */
@@ -940,7 +944,7 @@ public class SpiderChart {
 	/** */
 	private void triggerEvent(final int event) {
 		for (int i = 0; i < this.chartListeners.size(); i++) {
-			this.chartListeners.elementAt(i).chartEvent(this, event);
+			this.chartListeners.get(i).chartEvent(this, event);
 		}
 	}
 }

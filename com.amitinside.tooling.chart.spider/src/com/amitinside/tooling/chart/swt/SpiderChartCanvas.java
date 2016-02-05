@@ -99,6 +99,7 @@ public class SpiderChartCanvas extends Canvas implements ISpiderChartListener {
 		}
 	}
 
+	/** */
 	protected void paintChart(final PaintEvent e) {
 		try {
 			this.resizeChart();
