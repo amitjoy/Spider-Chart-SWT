@@ -50,6 +50,9 @@ public class SpiderChartLegend extends SpiderChartComponent {
 	/** Legend Margin */
 	public int legendMargin = 8;
 
+	/** Legend Offset Used to position the legend on vertical basis */
+	public final int LegendOffset = 200;
+
 	/** */
 	Vector<String> names = new Vector<>(10, 10);
 
@@ -215,14 +218,6 @@ public class SpiderChartLegend extends SpiderChartComponent {
 				w = 10;
 				h = 10;
 			}
-			if (o instanceof FillStyle) {
-				w = 10;
-				h = 10;
-			}
-			if (o instanceof SpiderChartImage) {
-				w = ((SpiderChartImage) o).getWidth();
-				h = ((SpiderChartImage) o).getHeight();
-			}
 			if (w > iconWidth) {
 				iconWidth = w;
 			}
@@ -246,37 +241,30 @@ public class SpiderChartLegend extends SpiderChartComponent {
 		final int legendY1 = this.y + toCenterY;
 		final int legendX2 = this.x + toCenterX + iconWidth + textWidth;
 		final int legendY2 = this.y + toCenterY + (this.names.size() * itemHeight);
+		final int x1 = legendX1 - this.legendMargin;
+		final int y1 = legendY1 - this.legendMargin;
+		final int x2 = legendX2 + this.legendMargin;
+		final int y2 = legendY2 + this.legendMargin;
+
 		if (this.background != null) {
-			this.background.draw(g, legendX1 - this.legendMargin, legendY1 - this.legendMargin,
-					legendX2 + this.legendMargin, legendY2 + this.legendMargin);
+			this.background.draw(g, x1, y1 + this.LegendOffset, x2, y2 + this.LegendOffset);
 		}
 		if (this.border != null) {
-			this.border.drawRect(g, legendX1 - this.legendMargin, legendY1 - this.legendMargin,
-					legendX2 + this.legendMargin, legendY2 + this.legendMargin);
+			this.border.drawRect(g, x1, y1 + this.LegendOffset, x2, y2 + this.LegendOffset);
 		}
 		for (int i = 1; i <= this.names.size(); i++) {
 			g.setColor(this.color);
 			g.drawString(this.names.elementAt(i - 1), toCenterX + iconWidth + this.x,
-					toCenterY + this.y + (i * itemHeight));
+					toCenterY + this.y + (i * itemHeight) + this.LegendOffset);
 		}
 		for (int i = 1; i <= this.names.size(); i++) {
 			final Object icon = this.items.elementAt(i - 1);
-			if (icon instanceof SpiderChartImage) {
-				g.drawImage((SpiderChartImage) icon, toCenterX + this.x, toCenterY + this.y + ((i - 1) * itemHeight));
-			}
 			if (icon instanceof LineStyle) {
 				final LineStyle l = (LineStyle) icon;
-				l.draw(g, toCenterX + this.x, toCenterY + this.y + (iconHeight / 2) + ((i - 1) * itemHeight),
+				l.draw(g, toCenterX + this.x,
+						toCenterY + this.y + (iconHeight / 2) + (((i - 1) * itemHeight) + this.LegendOffset),
 						(toCenterX + this.x + iconWidth) - 2,
-						toCenterY + this.y + (iconHeight / 2) + ((i - 1) * itemHeight));
-			}
-			if (icon instanceof FillStyle) {
-				final int sidelentgh = (iconWidth / 2);
-
-				final FillStyle f = (FillStyle) icon;
-				f.draw(g, toCenterX + this.x, toCenterY + this.y + (itemHeight / 2) + ((i - 1) * itemHeight),
-						toCenterX + this.x + sidelentgh,
-						toCenterY + this.y + (itemHeight / 2) + ((i - 1) * itemHeight) + sidelentgh);
+						toCenterY + this.y + (iconHeight / 2) + ((i - 1) * itemHeight) + this.LegendOffset);
 			}
 		}
 	}
