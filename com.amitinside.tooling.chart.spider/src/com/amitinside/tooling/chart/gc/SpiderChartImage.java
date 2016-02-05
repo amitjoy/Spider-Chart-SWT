@@ -15,9 +15,6 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.gc;
 
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-
 public abstract class SpiderChartImage {
 
 	/** */
@@ -39,13 +36,4 @@ public abstract class SpiderChartImage {
 		return 0;
 	}
 
-	/** */
-	public boolean saveToFile(final String sFormat, final String file) throws Exception {
-		return this.saveToStream(sFormat, new FileOutputStream(file));
-	}
-
-	/** */
-	public boolean saveToStream(final String sFormat, final OutputStream os) {
-		return false;
-	}
 }

@@ -16,16 +16,11 @@
 package com.amitinside.tooling.chart.gc.swt;
 
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Hashtable;
 
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
-import org.eclipse.swt.graphics.ImageLoader;
-import org.eclipse.swt.graphics.PaletteData;
-import org.eclipse.swt.graphics.RGB;
 
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
@@ -135,14 +130,6 @@ public class SpiderChartSwtImage extends SpiderChartImage {
 		return this.image;
 	}
 
-	private RGB getRGBFromImage(final ImageData data, final int x, final int y) {
-		return data.palette.getRGB(data.getPixel(x, y));
-	}
-
-	private Integer getRGBInt(final RGB rgb) {
-		return new Integer((rgb.red << 16) + (rgb.green >> 8) + rgb.blue);
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public int getWidth() {
@@ -152,74 +139,4 @@ public class SpiderChartSwtImage extends SpiderChartImage {
 		return this.image.getBounds().width;
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public boolean saveToStream(final String sFormat, final OutputStream os) {
-		try {
-			final ImageLoader encoder = new ImageLoader();
-			final ImageData[] iData = new ImageData[1];
-			iData[0] = this.image.getImageData();
-			encoder.data = iData;
-			if (sFormat.toUpperCase().compareTo("GIF") == 0) {
-				final Hashtable<Integer, RGB> colors = new Hashtable<>();
-
-				final RGB[] rgbs = new RGB['Ā'];
-				int count = 0;
-				final ImageData imageData = this.image.getImageData();
-				for (int i = 0; i < this.image.getBounds().width; i++) {
-					for (int j = 0; j < this.image.getBounds().height; j++) {
-						final RGB rgb = this.getRGBFromImage(imageData, i, j);
-						final Integer iRGB = this.getRGBInt(rgb);
-						if (!colors.containsKey(iRGB)) {
-							colors.put(iRGB, rgb);
-							rgbs[count++] = rgb;
-						}
-						if (count >= 256) {
-							break;
-						}
-					}
-				}
-				for (int i = count; i < 256; i++) {
-					rgbs[count++] = new RGB(count - 1, count - 1, count - 1);
-				}
-				final ImageData image2Data = new ImageData(this.image.getBounds().width, this.image.getBounds().height,
-						8, new PaletteData(rgbs));
-				final Image image2 = new Image(SwtGraphicsProvider.getDefaultDisplay(), image2Data);
-
-				final GC g2 = new GC(image2);
-				g2.drawImage(this.image, 0, 0);
-				g2.dispose();
-
-				final ImageData[] image2DataArray = new ImageData[1];
-				image2DataArray[0] = image2.getImageData();
-
-				final ImageLoader encoder2 = new ImageLoader();
-				encoder2.data = image2DataArray;
-				encoder2.save(os, 2);
-				image2.dispose();
-			}
-			if (sFormat.toUpperCase().compareTo("JPEG") == 0) {
-				encoder.save(os, 4);
-			}
-			if (sFormat.toUpperCase().compareTo("JPG") == 0) {
-				encoder.save(os, 4);
-			}
-			if (sFormat.toUpperCase().compareTo("PNG") == 0) {
-				encoder.save(os, 5);
-			}
-			if (sFormat.toUpperCase().compareTo("ICO") == 0) {
-				encoder.save(os, 3);
-			}
-			if (sFormat.toUpperCase().compareTo("BMP") == 0) {
-				encoder.save(os, 0);
-			}
-			if (sFormat.toUpperCase().compareTo("BMP_RLE") == 0) {
-				encoder.save(os, 1);
-			}
-		} catch (final Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
 }

@@ -15,8 +15,6 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart;
 
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -770,27 +768,6 @@ public class SpiderChart {
 			this.title.text = "";
 		}
 		this.plottersCount = 1;
-	}
-
-	/** */
-	public void saveToFile(final OutputStream os, final String psFormat) throws Exception {
-		final SpiderChartImage image = SWTGraphicsSupplier.createImage(this.width, this.height);
-		SpiderChartGraphics g = null;
-		try {
-			g = image.getGraphics();
-			this.paint(g);
-			image.saveToStream(psFormat, os);
-		} finally {
-			if (g != null) {
-				g.dispose();
-			}
-			image.dispose();
-		}
-	}
-
-	/** */
-	public void saveToFile(final String psFile, final String psFormat) throws Exception {
-		this.saveToFile(new FileOutputStream(psFile), psFormat);
 	}
 
 	/** */
