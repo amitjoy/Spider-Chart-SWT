@@ -37,7 +37,7 @@ public class AxisData {
 	public void setData(final double[] dataValues, final String color) {
 		this.data = new LineDataSeq(dataValues, new LineStyle(2, SWTGraphicsSupplier.getColor(color), NORMAL_LINE));
 		this.data.drawPoint = true;
-		this.data.valueFont = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.PLAIN, 10);
+		this.data.valueFont = SWTGraphicsSupplier.getFont("Verdana", SpiderChartFont.PLAIN, 12);
 		this.data.fillStyle = new FillStyle(SWTGraphicsSupplier.getColor(color), 0.5f);
 	}
 

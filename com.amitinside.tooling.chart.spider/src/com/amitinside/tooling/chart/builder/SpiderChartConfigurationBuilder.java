@@ -69,6 +69,7 @@ public class SpiderChartConfigurationBuilder {
 		this.plotter.gridStyle = new LineStyle(1, SWTGraphicsSupplier.getColor(SpiderChartColor.TELA),
 				LineStyle.DASHED_LINE);
 		this.plotter.gridFont = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.PLAIN, 10);
+		this.plotter.gridFontColor = SWTGraphicsSupplier.getColor(SpiderChartColor.BLUE);
 		plotter.accept(this.plotter);
 		return this;
 	}

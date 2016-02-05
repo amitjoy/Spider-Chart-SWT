@@ -39,7 +39,7 @@ public class SpiderChartLegend extends SpiderChartComponent {
 	public SpiderChartColor color = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
 
 	/** Legend Font */
-	public SpiderChartFont font = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.PLAIN, 10);
+	public SpiderChartFont font = SWTGraphicsSupplier.getFont("Verdana", SpiderChartFont.PLAIN, 10);
 
 	/** */
 	Vector<Object> items = new Vector<>(10, 10);
@@ -114,7 +114,7 @@ public class SpiderChartLegend extends SpiderChartComponent {
 			}
 		}
 		totalWidth = (textWidth + textSeparator) * this.names.size();
-		for (Object o : this.items) {
+		for (final Object o : this.items) {
 			w = 0;
 			h = 0;
 			if (o instanceof LineStyle) {
@@ -208,7 +208,7 @@ public class SpiderChartLegend extends SpiderChartComponent {
 				textWidth = w;
 			}
 		}
-		for (Object o : this.items) {
+		for (final Object o : this.items) {
 			w = 0;
 			h = 0;
 			if (o instanceof LineStyle) {
@@ -271,7 +271,7 @@ public class SpiderChartLegend extends SpiderChartComponent {
 						toCenterY + this.y + (iconHeight / 2) + ((i - 1) * itemHeight));
 			}
 			if (icon instanceof FillStyle) {
-				final int sidelentgh = iconWidth / 2;
+				final int sidelentgh = (iconWidth / 2);
 
 				final FillStyle f = (FillStyle) icon;
 				f.draw(g, toCenterX + this.x, toCenterY + this.y + (itemHeight / 2) + ((i - 1) * itemHeight),

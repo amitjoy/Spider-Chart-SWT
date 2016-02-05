@@ -23,9 +23,9 @@ import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 public class SpiderChartTitle extends SpiderChartComponent {
 
 	/** Title Color */
-	public SpiderChartColor color = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
+	public SpiderChartColor color = SWTGraphicsSupplier.getColor(SpiderChartColor.BLUE);
 	/** Title Font */
-	public SpiderChartFont font = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.PLAIN, 14);
+	public SpiderChartFont font = SWTGraphicsSupplier.getFont("Verdana", SpiderChartFont.PLAIN, 14);
 	/** Title Text */
 	public String text;
 

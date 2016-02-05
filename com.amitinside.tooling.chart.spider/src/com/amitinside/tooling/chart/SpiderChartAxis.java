@@ -93,7 +93,7 @@ public class SpiderChartAxis extends SpiderChartComponent {
 	public SpiderChartColor DescColor = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
 
 	/** */
-	public SpiderChartFont DescFont = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.PLAIN, 10);
+	public SpiderChartFont DescFont = SWTGraphicsSupplier.getFont("Verdana", SpiderChartFont.PLAIN, 10);
 
 	/** */
 	public FillStyle gridFillStyle = null;

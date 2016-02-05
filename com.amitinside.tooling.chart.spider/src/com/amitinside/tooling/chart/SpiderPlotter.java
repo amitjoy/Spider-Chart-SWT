@@ -50,7 +50,7 @@ public class SpiderPlotter extends SpiderChartPlotter {
 	/**
 	 * Spider Chart Axes Factor Text Font
 	 */
-	public SpiderChartFont axisFactorFont = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.PLAIN, 10);
+	public SpiderChartFont axisFactorFont = SWTGraphicsSupplier.getFont("Verdana", SpiderChartFont.PLAIN, 10);
 
 	/**
 	 * Spider Chart Polygon Area Background Style

@@ -761,7 +761,7 @@ public class SpiderChart {
 
 	/** */
 	protected void paintTargetZones(final SpiderChartGraphics g, final boolean back) {
-		g.setFont(SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.BOLD, 10));
+		g.setFont(SWTGraphicsSupplier.getFont("Verdana", SpiderChartFont.BOLD, 10));
 		for (int i = 0; i < this.targetZones.size(); i++) {
 			final TargetZone z = this.targetZones.elementAt(i);
 			z.chart = this;

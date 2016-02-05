@@ -25,7 +25,7 @@ public class SpiderChartAxisLabel extends SpiderChartComponent {
 	/** */
 	public SpiderChartColor color;
 	/** */
-	public SpiderChartFont font = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.PLAIN, 14);
+	public SpiderChartFont font = SWTGraphicsSupplier.getFont("Verdana", SpiderChartFont.PLAIN, 14);
 	/** */
 	public String title;
 	/** */
