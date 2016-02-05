@@ -29,7 +29,7 @@ import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.listener.ISpiderChartListener;
 
-public class SpiderChartCanvas extends Canvas implements ISpiderChartListener {
+public final class SpiderChartCanvas extends Canvas implements ISpiderChartListener {
 
 	/** */
 	private SpiderChart chart = null;

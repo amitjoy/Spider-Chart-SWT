@@ -19,7 +19,7 @@ import org.eclipse.swt.graphics.Color;
 
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 
-public class SpiderChartSwtColor extends SpiderChartColor {
+public final class SpiderChartSwtColor extends SpiderChartColor {
 
 	/** */
 	private int blue = 0;

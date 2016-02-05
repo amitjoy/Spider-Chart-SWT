@@ -15,383 +15,283 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.plotter;
 
-import java.text.DecimalFormat;
+import java.util.Calendar;
+import java.util.Vector;
 
-import com.amitinside.tooling.chart.builder.AxesConfigurer;
-import com.amitinside.tooling.chart.gc.Polygon;
-import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
-import com.amitinside.tooling.chart.gc.SpiderChartColor;
-import com.amitinside.tooling.chart.gc.SpiderChartFont;
+import com.amitinside.tooling.chart.Scale;
+import com.amitinside.tooling.chart.SpiderChart;
+import com.amitinside.tooling.chart.SpiderChartComponent;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
+import com.amitinside.tooling.chart.gc.SpiderChartImage;
+import com.amitinside.tooling.chart.plotter.line.LinePlotter;
 import com.amitinside.tooling.chart.plotter.spider.SpiderChartPlotter;
 import com.amitinside.tooling.chart.sequence.DataSeq;
-import com.amitinside.tooling.chart.sequence.LineDataSeq;
 import com.amitinside.tooling.chart.style.FillStyle;
-import com.amitinside.tooling.chart.style.LineStyle;
 
 /**
- * Used to plot spider chart
+ * Base class used to create spider chart plotters
  *
  * @author AMIT KUMAR MONDAL
+ *
  */
-public class SpiderPlotter extends SpiderChartPlotter {
-
-	/**
-	 * Spider Chart axes names
-	 */
-	public String[] axesFactors;
-
-	/**
-	 * Spider Chart Axes Factor Color
-	 */
-	public SpiderChartColor axisFactorColor = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
-
-	/**
-	 * Spider Chart Axis Factor Colors (in case you need to set different colors
-	 * for different axes)
-	 */
-	public SpiderChartColor[] axisFactorColors;
-
-	/**
-	 * Spider Chart Axes Factor Text Font
-	 */
-	public SpiderChartFont axisFactorFont = SWTGraphicsSupplier.getFont("Verdana", SpiderChartFont.PLAIN, 10);
-
-	/**
-	 * Spider Chart Polygon Area Background Style
-	 */
-	public FillStyle backStyle;
-
-	/**
-	 * Spider Chart Border Style
-	 */
-	LineStyle border = new LineStyle(0.2F, SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK), 1);
-
-	/**
-	 * Spider Chart Radius
-	 */
-	public double chartRadius = 0.9D;
-
-	/**
-	 * Spider Chart would be surrounded by an enclosing circle
-	 */
-	public boolean drawCircle = false;
-
-	/**
-	 * Spider Chart Font for Grid Label
-	 */
-	public SpiderChartFont gridFont;
-
-	/**
-	 * Spider Chart Font Color for Grid Label
-	 */
-	public SpiderChartColor gridFontColor = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
-
-	/**
-	 * Spider Chart Grid Style
-	 */
-	public LineStyle gridStyle;
-
-	/** Mark Scales on Every Axis */
-	public boolean markScalesOnEveryAxis = false;
-
-	/**
-	 * Spider Chart Scaling Factors (Maximum Values)
-	 */
-	public double[] maxScaleFactors;
-
-	/**
-	 * Spider Chart Scaling Factors (Minimum Values)
-	 */
-	public double[] minScaleFactors;
+public class SpiderPlotter extends SpiderChartComponent {
 
 	/** */
-	public SpiderChartColor[] pointColors = null;
+	public FillStyle back = null;
+
+	/** Spider Chart Backgroud Image */
+	public SpiderChartImage backgroundImage;
 
 	/** */
-	public double[] pointColorScale = null;
+	protected boolean combinable = true;
 
-	/**
-	 * Spider Chart Scaling Divisions
-	 */
-	public int scalingDivisions = 5;
+	/** */
+	public int depth = 0;
 
-	/**
-	 * Spider Chart Scaling Label Format
-	 */
-	public String scalingLabelFormat = "#.#";
+	/** */
+	protected int needsAxis = 2;
 
-	/**
-	 * Constructor
-	 */
-	public SpiderPlotter() {
-		this.combinable = false;
-		this.needsAxis = 0;
+	/** */
+	public Vector<DataSeq> series = new Vector<>(0, 1);
+
+	/** */
+	public int visibleHeight = 0;
+
+	/** */
+	public int visibleWidth = 0;
+
+	/** */
+	public Scale XScale;
+
+	/** */
+	public Scale Y2Scale;
+
+	/** */
+	public Scale YScale;
+
+	/** */
+	public void addSeq(final DataSeq s) {
+		this.replaceSerie(-1, s);
 	}
 
 	/** */
-	public void inject(final AxesConfigurer configurer) {
-		this.maxScaleFactors = configurer.maxScales();
-		this.minScaleFactors = configurer.minScales();
-		this.axesFactors = configurer.axesNames();
-	}
-
-	/** {@inheritDoc}} **/
-	@Override
-	protected void plot(final SpiderChartGraphics g, final DataSeq s, final int serieSec) {
-		LineDataSeq p;
-		if (s instanceof LineDataSeq) {
-			p = (LineDataSeq) s;
-		} else {
+	private void calculateNewMax(final Scale s, final double m) {
+		if (!s.exactMaxValue) {
+			s.max = m;
 			return;
 		}
-		s.hotAreas.removeAllElements();
+		if ((s.preferred_MaxMin_values != null) && (s.preferred_MaxMin_values.length > 0)) {
+			for (final double preferred_MaxMin_value : s.preferred_MaxMin_values) {
+				if (preferred_MaxMin_value >= m) {
+					s.max = preferred_MaxMin_value;
 
-		final double count = p.yData.size();
-
-		final int[] xs = new int[(int) count];
-		final int[] ys = new int[(int) count];
-
-		int radi = 0;
-		radi = this.width;
-		if (this.height < radi) {
-			radi = this.height;
-		}
-		radi = (int) (radi * this.chartRadius);
-
-		final int toCenterX = (this.width - radi) / 2;
-		final int toCenterY = (this.height - radi) / 2;
-
-		final int PieCenterX = toCenterX + this.x + (radi / 2);
-		final int PieCenterY = toCenterY + this.y + (radi / 2);
-		double angle;
-		if ((serieSec == 0) || (serieSec >= (this.series.size() - 1))) {
-			if ((serieSec == 0) && (this.backStyle != null) && this.drawCircle) {
-				this.backStyle.drawArc(g, toCenterX + this.x, toCenterY + this.y, radi, radi, 0, 360);
-			}
-			if ((serieSec == 0) && (this.backStyle != null) && !this.drawCircle) {
-				for (int i = 0; i < count; i++) {
-					angle = (360.0D / count) * i;
-
-					angle += 90.0D;
-					if (angle > 360.0D) {
-						angle -= 360.0D;
-					}
-					final double radian = 0.01745277777777778D * angle;
-					final double Sin = Math.sin(radian);
-					final double Cos = Math.cos(radian);
-					int relativeY = (int) (Sin * (radi / 2));
-					final int relativeX = (int) (Cos * (radi / 2));
-					relativeY *= -1;
-
-					xs[i] = PieCenterX + relativeX;
-					ys[i] = PieCenterY + relativeY;
-				}
-				this.backStyle.drawPolygon(g, xs, ys, (int) count);
-			}
-			if ((serieSec == (this.series.size() - 1)) && (this.border != null)) {
-				if (this.drawCircle) {
-					this.border.drawArc(g, toCenterX + this.x, toCenterY + this.y, radi, radi, 0, 360);
-				}
-				for (int i = 0; i < count; i++) {
-					angle = (360.0D / count) * i;
-
-					angle += 90.0D;
-					if (angle > 360.0D) {
-						angle -= 360.0D;
-					}
-					final double radian = 0.01745277777777778D * angle;
-					final double Sin = Math.sin(radian);
-					final double Cos = Math.cos(radian);
-					int relativeY = (int) (Sin * (radi / 2));
-					final int relativeX = (int) (Cos * (radi / 2));
-					relativeY *= -1;
-
-					this.border.draw(g, PieCenterX, PieCenterY, PieCenterX + relativeX, PieCenterY + relativeY);
-				}
-			}
-			if ((serieSec == 0) && (this.axisFactorFont != null)) {
-				g.setFont(this.axisFactorFont);
-				for (int i = 0; i < count; i++) {
-					g.setColor(this.axisFactorColor);
-					if ((this.axisFactorColors != null) && (this.axisFactorColors.length > i)) {
-						g.setColor(this.axisFactorColors[i]);
-					}
-					angle = (360.0D / count) * i;
-
-					angle += 90.0D;
-					if (angle > 360.0D) {
-						angle -= 360.0D;
-					}
-					final int tmpradi = (int) ((radi * 1.1D) / 2.0D);
-					int correction = 0;
-					if ((angle > 120.0D) && (angle < 240.0D)) {
-						correction = g.getFontWidth(this.axesFactors[i]);
-					}
-					final double radian = 0.01745277777777778D * angle;
-					final double Sin = Math.sin(radian);
-					final double Cos = Math.cos(radian);
-					int relativeY = (int) (Sin * tmpradi);
-					final int relativeX = (int) (Cos * tmpradi);
-					relativeY *= -1;
-					if (this.axesFactors.length > i) {
-						g.drawString(this.axesFactors[i], (PieCenterX + relativeX) - correction,
-								PieCenterY + relativeY);
-					}
+					break;
 				}
 			}
 		}
-		for (int i = 0; i < count; i++) {
-			angle = (360.0D / count) * i;
+	}
 
-			angle += 90.0D;
-			if (angle > 360.0D) {
-				angle -= 360.0D;
-			}
-			int tmpradi = 0;
-
-			double min = 0.0D;
-			double max = 100.0D;
-			if (this.minScaleFactors.length >= (i + 1)) {
-				min = this.minScaleFactors[i];
-			}
-			if (this.maxScaleFactors.length >= (i + 1)) {
-				max = this.maxScaleFactors[i];
-			}
-			tmpradi = (int) (((((Double) p.getElementY(i)).doubleValue() - min) * 100.0D) / (max - min));
-			tmpradi = (tmpradi * radi) / 100;
-
-			final double radian = 0.01745277777777778D * angle;
-			final double Sin = Math.sin(radian);
-			final double Cos = Math.cos(radian);
-			int relativeY = (int) (Sin * (tmpradi / 2));
-			final int relativeX = (int) (Cos * (tmpradi / 2));
-			relativeY *= -1;
-			xs[i] = PieCenterX + relativeX;
-			ys[i] = PieCenterY + relativeY;
+	/** */
+	private void calculateNewMin(final Scale s, final double m) {
+		if (!s.exactMinValue) {
+			s.min = m;
+			return;
 		}
-		if (p.style != null) {
-			p.style.drawPolygon(g, xs, ys, (int) count);
-		}
-		if (p.fillStyle != null) {
-			p.fillStyle.drawPolygon(g, xs, ys, (int) count);
-		}
-		for (int i = 0; i < count; i++) {
-			final Polygon po = new Polygon();
-			po.addPoint(xs[i] - 3, ys[i] - 3);
-			po.addPoint(xs[i] - 3, ys[i] + 3);
-			po.addPoint(xs[i] + 3, ys[i] + 3);
-			po.addPoint(xs[i] + 3, ys[i] - 3);
+		if ((s.preferred_MaxMin_values != null) && (s.preferred_MaxMin_values.length > 0)) {
+			for (int j = s.preferred_MaxMin_values.length - 1; j > 0; j--) {
+				if (s.preferred_MaxMin_values[j] <= m) {
+					s.min = s.preferred_MaxMin_values[j];
 
-			s.hotAreas.addElement(po);
-			double YValue;
-			if (p.drawPoint) {
-				SpiderChartColor c = p.pointColor;
-				YValue = ((Double) p.getElementY(i)).doubleValue();
-				if ((this.pointColors != null) && (this.pointColorScale != null)) {
-					if (this.pointColors.length > 0) {
-						c = this.pointColors[0];
-					}
-					for (int j = 1; j < this.pointColors.length; j++) {
-						if (this.pointColorScale.length >= j) {
-							if (this.pointColorScale[j - 1] > YValue) {
-								break;
+					break;
+				}
+			}
+		}
+	}
+
+	/** */
+	protected Scale getActiveXScale(final DataSeq s) {
+		Scale scale = this.XScale;
+		if (s.secondaryXAxis != null) {
+			scale = s.secondaryXAxis.scale;
+		}
+		return scale;
+	}
+
+	/** */
+	protected Scale getActiveYScale(final DataSeq s) {
+		Scale scale = this.YScale;
+		if (s.secondYAxis && (this.Y2Scale != null)) {
+			scale = this.Y2Scale;
+		} else if (s.secondaryYAxis != null) {
+			scale = s.secondaryYAxis.scale;
+		}
+		return scale;
+	}
+
+	/** */
+	public boolean getCombinable() {
+		return this.combinable;
+	}
+
+	/** */
+	public int getNeedsAxis() {
+		return this.needsAxis;
+	}
+
+	/** */
+	public DataSeq getSerie(final int p) {
+		return this.series.elementAt(p);
+	}
+
+	/** */
+	public int getSeriesCount() {
+		return this.series.size();
+	}
+
+	/** */
+	protected boolean inSameSubChart(final DataSeq tmpSerie, final DataSeq s) {
+		boolean usingStackAxis = false;
+		if ((s.secondaryYAxis != null) && s.secondaryYAxis.mainAxis.stackAdditionalAxis) {
+			usingStackAxis = true;
+		}
+		if ((tmpSerie.secondaryYAxis != null) && tmpSerie.secondaryYAxis.mainAxis.stackAdditionalAxis) {
+			usingStackAxis = true;
+		}
+		return (tmpSerie.secondaryXAxis == s.secondaryXAxis)
+				&& ((tmpSerie.secondaryYAxis == s.secondaryYAxis) || !usingStackAxis);
+	}
+
+	/** */
+	public void plot(final SpiderChartGraphics g) {
+		for (int i = 0; i < this.series.size(); i++) {
+			final DataSeq s = this.series.elementAt(i);
+
+			this.plot(g, s, i);
+		}
+	}
+
+	/** */
+	protected void plot(final SpiderChartGraphics g, final DataSeq s, final int serieSec) {
+	}
+
+	/** */
+	public void plotBackground(final SpiderChartGraphics g, final int bw, final int bh, final int offsetX,
+			final int offsetY) {
+		if (this.back != null) {
+			final boolean D3 = false;
+			if (D3) {
+				final int[] xs = new int[6];
+				final int[] ys = new int[6];
+				xs[0] = this.x + offsetX;
+				ys[0] = this.y + offsetY;
+
+				xs[1] = this.x + offsetX + this.depth;
+				ys[1] = (this.y + offsetY) - this.depth;
+
+				xs[2] = this.x + offsetX + this.visibleWidth;
+				ys[2] = (this.y + offsetY) - this.depth;
+
+				xs[3] = this.x + offsetX + this.visibleWidth;
+				ys[3] = (this.y + offsetY + this.visibleHeight) - this.depth - this.depth;
+
+				xs[4] = (this.x + offsetX + this.visibleWidth) - this.depth;
+				ys[4] = (this.y + offsetY + this.visibleHeight) - this.depth;
+
+				xs[5] = this.x + offsetX;
+				ys[5] = (this.y + offsetY + this.visibleHeight) - this.depth;
+
+				this.back.drawPolygon(g, xs, ys, 6);
+			} else {
+				this.back.draw(g, this.x, this.y, this.x + bw, this.y + bh);
+			}
+		}
+		if (this.backgroundImage != null) {
+			final int w = this.backgroundImage.getWidth();
+			final int h = this.backgroundImage.getHeight();
+			if ((w > -1) && (h > -1)) {
+				int toCenterX = (bw - w) / 2;
+				if (toCenterX < 0) {
+					toCenterX = 0;
+				}
+				int toCenterY = (bh - h) / 2;
+				if (toCenterY < 0) {
+					toCenterY = 0;
+				}
+				g.drawImage(this.backgroundImage, toCenterX + this.x, this.y + toCenterY);
+			}
+		}
+	}
+
+	/** */
+	public void replaceSerie(final int p, final DataSeq s) {
+		final Scale tmpScaleX = this.getActiveXScale(s);
+		this.getActiveYScale(s);
+		if (p >= this.series.size()) {
+			return;
+		}
+		Calendar.getInstance().get(2);
+		if ((SpiderChart.d() != 1) && (this.series.size() > 3)) {
+			return;
+		}
+		if (p == -1) {
+			this.series.addElement(s);
+		} else {
+			this.series.setElementAt(s, p);
+		}
+		boolean fixedLimits = false;
+		if (this instanceof LinePlotter) {
+			fixedLimits = ((LinePlotter) this).fixedLimits;
+		}
+		final boolean cumulative = false;
+		if (!(this instanceof SpiderPlotter)) {
+			for (int i = 0; i < s.getSize(); i++) {
+				if (s.getElementY(i) != null) {
+					final double XValue = ((Double) s.getElementX(i)).doubleValue();
+					double YValue = ((Double) s.getElementY(i)).doubleValue();
+					if (cumulative) {
+						YValue = 0.0D;
+						for (int si = 0; si < this.series.size(); si++) {
+							final DataSeq ser = this.series.elementAt(si);
+							if (this.inSameSubChart(ser, s) && (ser.getSize() > i)) {
+								if (ser.getElementY(i) != null) {
+									final double d = ((Double) ser.getElementY(i)).doubleValue();
+									YValue += d;
+								}
 							}
-							c = this.pointColors[j];
+						}
+					}
+					if (XValue >= tmpScaleX.max) {
+						this.calculateNewMax(tmpScaleX, XValue);
+					}
+					if (XValue < tmpScaleX.min) {
+						this.calculateNewMin(tmpScaleX, XValue);
+					}
+					if (!fixedLimits) {
+						if (s.secondYAxis && (this.Y2Scale != null)) {
+							if (YValue > this.Y2Scale.max) {
+								this.calculateNewMax(this.Y2Scale, YValue);
+							}
+							if (YValue < this.Y2Scale.min) {
+								this.calculateNewMin(this.Y2Scale, YValue);
+							}
+						} else {
+							if (YValue > this.YScale.max) {
+								this.calculateNewMax(this.YScale, YValue);
+							}
+							if (YValue < this.YScale.min) {
+								this.calculateNewMin(this.YScale, YValue);
+							}
 						}
 					}
 				}
-				g.setColor(c);
-				if (p.icon == null) {
-					g.fillRect(xs[i] - 3, ys[i] - 3, 6, 6);
-				} else {
-					g.drawImage(p.icon, xs[i] - 4, ys[i] - 4);
-				}
-			}
-			if (p.valueFont != null) {
-				g.setColor(p.valueColor);
-				g.setFont(p.valueFont);
-
-				YValue = ((Double) p.getElementY(i)).doubleValue();
-
-				String txt = p.doubleToString(new Double(YValue));
-
-				if (YValue == (int) YValue) {
-					txt = new Integer((int) YValue).toString();
-				}
-				if (p.labelTemplate.length() > 0) {
-					txt = p.labelTemplate;
-				}
-				if ((p.dataLabels != null) && (p.dataLabels.length > i)) {
-					txt = p.dataLabels[i];
-				}
-				g.drawString(txt, xs[i] + 7, ys[i]);
 			}
 		}
-		if (this.gridStyle != null) {
-			double min = 0.0D;
-			double max = 100.0D;
-			if (this.minScaleFactors.length >= 1) {
-				min = this.minScaleFactors[0];
-			}
-			if (this.maxScaleFactors.length >= 1) {
-				max = this.maxScaleFactors[0];
-			}
-			final int tickInterval = 100 / this.scalingDivisions;
-			final double tickIntervalAbs = (max - min) / this.scalingDivisions;
-			int tickAt = 0;
-			double tickAtAbs = 0.0D;
-			for (int j = 0; j < this.scalingDivisions; j++) {
-				tickAt += tickInterval;
-				tickAtAbs += tickIntervalAbs;
-				for (int i = 0; i < count; i++) {
-					angle = (360.0D / count) * i;
+	}
 
-					angle += 90.0D;
-					if (angle > 360.0D) {
-						angle -= 360.0D;
-					}
-					final int tmpradi = (radi * tickAt) / 100;
-					final double radian = 0.01745277777777778D * angle;
-					final double Sin = Math.sin(radian);
-					final double Cos = Math.cos(radian);
-					int relativeY = (int) (Sin * (tmpradi / 2));
-					final int relativeX = (int) (Cos * (tmpradi / 2));
-					relativeY *= -1;
-
-					xs[i] = PieCenterX + relativeX;
-					ys[i] = PieCenterY + relativeY;
-				}
-				if (serieSec >= (this.series.size() - 1)) {
-					this.gridStyle.drawPolygon(g, xs, ys, (int) count);
-				}
-				if ((serieSec >= (this.series.size() - 1)) && (this.gridFont != null)) {
-					g.setColor(this.gridFontColor);
-					g.setFont(this.gridFont);
-
-					final double tickValue = tickAtAbs;
-
-					String v = "";
-					v = "" + tickValue;
-
-					if (tickValue == (int) tickValue) {
-						v = "" + (int) tickValue;
-					}
-					if (this.scalingLabelFormat.length() > 0) {
-						DecimalFormat df = null;
-						df = new DecimalFormat(this.scalingLabelFormat);
-						v = df.format(new Double(tickValue));
-					}
-					// TODO (AKM) To be implemented different scales for axes
-					if (this.markScalesOnEveryAxis) {
-						for (int i = 0; i < xs.length; i++) {
-							g.drawString("" + v, xs[i] - 3 - g.getFontWidth("" + v), ys[i]);
-						}
-					} else {
-						g.drawString("" + v, xs[0] - 3 - g.getFontWidth("" + v), ys[0]);
-					}
-				}
-			}
+	/** */
+	public void setSerie(final int p, final DataSeq s) {
+		if (p < this.series.size()) {
+			this.series.setElementAt(s, p);
 		}
 	}
 }

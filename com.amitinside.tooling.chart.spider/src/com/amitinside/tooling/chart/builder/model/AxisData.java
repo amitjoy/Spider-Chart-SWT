@@ -23,7 +23,7 @@ import com.amitinside.tooling.chart.sequence.LineDataSeq;
 import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.style.LineStyle;
 
-public class AxisData {
+public final class AxisData {
 
 	/** */
 	private LineDataSeq data;

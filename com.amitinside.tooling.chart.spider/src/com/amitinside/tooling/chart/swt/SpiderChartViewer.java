@@ -28,7 +28,7 @@ import org.eclipse.swt.widgets.Slider;
 import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.listener.SpiderChartAdapter;
 
-public class SpiderChartViewer extends Composite {
+public final class SpiderChartViewer extends Composite {
 
 	/** */
 	public boolean allowZoom = true;

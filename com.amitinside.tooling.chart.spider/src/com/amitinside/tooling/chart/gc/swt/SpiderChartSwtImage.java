@@ -26,7 +26,7 @@ import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.gc.SpiderChartImage;
 
-public class SpiderChartSwtImage extends SpiderChartImage {
+public final class SpiderChartSwtImage extends SpiderChartImage {
 
 	/** */
 	private Image image = null;

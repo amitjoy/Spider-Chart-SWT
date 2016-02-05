@@ -31,7 +31,7 @@ import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartFont;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.label.SpiderChartLabel;
-import com.amitinside.tooling.chart.plotter.spider.SpiderChartPlotter;
+import com.amitinside.tooling.chart.plotter.SpiderPlotter;
 import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.style.LineStyle;
 
@@ -40,7 +40,7 @@ import com.amitinside.tooling.chart.style.LineStyle;
  *
  * @author AMIT KUMAR MONDAL
  */
-public class SpiderChartAxis extends SpiderChartComponent {
+public final class SpiderChartAxis extends SpiderChartComponent {
 
 	/** */
 	public static final int HORIZONTAL = 0;
@@ -121,7 +121,7 @@ public class SpiderChartAxis extends SpiderChartComponent {
 	public int orientation;
 
 	/** */
-	public SpiderChartPlotter plot;
+	public SpiderPlotter plot;
 
 	/** */
 	protected int realPosition;

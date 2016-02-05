@@ -21,14 +21,14 @@ import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartFont;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 
-public class SpiderChartAxisLabel extends SpiderChartComponent {
+public final class SpiderChartAxisLabel extends SpiderChartComponent {
 
 	/** */
-	public SpiderChartColor color;
+	public final SpiderChartColor color;
 	/** */
 	public SpiderChartFont font = SWTGraphicsSupplier.getFont("Verdana", SpiderChartFont.PLAIN, 14);
 	/** */
-	public String title;
+	public final String title;
 	/** */
 	public boolean vertical = false;
 

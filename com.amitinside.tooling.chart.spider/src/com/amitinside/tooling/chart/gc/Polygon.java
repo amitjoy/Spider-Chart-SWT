@@ -17,7 +17,7 @@ package com.amitinside.tooling.chart.gc;
 
 import java.util.Vector;
 
-public class Polygon extends Vector<Point> {
+public final class Polygon extends Vector<Point> {
 
 	/** */
 	private static final long serialVersionUID = 1L;

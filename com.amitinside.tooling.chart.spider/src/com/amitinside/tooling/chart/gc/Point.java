@@ -15,12 +15,12 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.gc;
 
-public class Point {
+public final class Point {
 
 	/** */
-	public int x;
+	public final int x;
 	/** */
-	public int y;
+	public final int y;
 
 	/** Constructor */
 	public Point(final int x1, final int y1) {

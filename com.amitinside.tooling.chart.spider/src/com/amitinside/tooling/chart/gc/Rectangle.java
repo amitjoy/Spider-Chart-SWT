@@ -15,16 +15,16 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.gc;
 
-public class Rectangle {
+public final class Rectangle {
 
 	/** */
-	public int h;
+	public final int h;
 	/** */
-	public int w;
+	public final int w;
 	/** */
-	public int x;
+	public final int x;
 	/** */
-	public int y;
+	public final int y;
 
 	/** Constructor */
 	public Rectangle(final int x, final int y, final int w, final int h) {

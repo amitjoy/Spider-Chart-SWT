@@ -31,12 +31,10 @@ public final class Sample {
 	private static SpiderChartViewer viewer;
 
 	private static void buildSpiderChart(final Shell shell) {
-
 		final Supplier<ISpiderChartPlottable> iPhoneData = IPhone::new;
 		final Supplier<ISpiderChartPlottable> nexusData = Nexus::new;
 
 		viewer = SpiderChartBuilder.config(shell, settings -> {
-
 			settings.title(title -> title.text = "Smartphone Comparison Data").legend(legend -> {
 				legend.addItem(iPhoneData);
 				legend.addItem(nexusData);

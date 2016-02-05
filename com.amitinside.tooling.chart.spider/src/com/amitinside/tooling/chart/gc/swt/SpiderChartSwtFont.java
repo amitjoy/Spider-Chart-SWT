@@ -19,7 +19,7 @@ import org.eclipse.swt.graphics.Font;
 
 import com.amitinside.tooling.chart.gc.SpiderChartFont;
 
-public class SpiderChartSwtFont extends SpiderChartFont {
+public final class SpiderChartSwtFont extends SpiderChartFont {
 
 	/** */
 	private String fontName = "";

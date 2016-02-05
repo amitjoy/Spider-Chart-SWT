@@ -18,7 +18,7 @@ package com.amitinside.tooling.chart.gc.swt;
 import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.widgets.Display;
 
-public class SwtGraphicsProvider {
+public final class SwtGraphicsProvider {
 
 	/** */
 	private static Device display = null;

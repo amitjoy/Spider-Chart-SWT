@@ -31,7 +31,7 @@ import com.amitinside.tooling.chart.label.SpiderChartLabel;
 import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.style.LineStyle;
 
-public class SpiderChartLegend extends SpiderChartComponent {
+public final class SpiderChartLegend extends SpiderChartComponent {
 
 	/** Legend Background Style */
 	public FillStyle background;

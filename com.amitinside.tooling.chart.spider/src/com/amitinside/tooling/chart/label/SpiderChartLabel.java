@@ -23,7 +23,7 @@ import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.style.LineStyle;
 
-public class SpiderChartLabel implements IFloatingObject {
+public final class SpiderChartLabel implements IFloatingObject {
 
 	/** */
 	protected static int ALIGN_CENTER = 1;

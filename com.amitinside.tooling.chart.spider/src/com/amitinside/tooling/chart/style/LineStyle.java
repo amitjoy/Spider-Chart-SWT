@@ -18,7 +18,7 @@ package com.amitinside.tooling.chart.style;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 
-public class LineStyle {
+public final class LineStyle {
 
 	/** */
 	public static final int DASHED_LINE = 2;

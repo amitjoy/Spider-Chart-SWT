@@ -19,16 +19,14 @@ import com.amitinside.tooling.chart.Scale;
 import com.amitinside.tooling.chart.gc.Polygon;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.label.SpiderChartLabel;
-import com.amitinside.tooling.chart.plotter.spider.SpiderChartPlotter;
+import com.amitinside.tooling.chart.plotter.SpiderPlotter;
 import com.amitinside.tooling.chart.sequence.DataSeq;
 import com.amitinside.tooling.chart.sequence.LineDataSeq;
 
-public class LinePlotter extends SpiderChartPlotter {
+public final class LinePlotter extends SpiderPlotter {
 
 	/** */
 	public static final int TYPE_LINE = 0;
-	/** */
-	protected int[][] bottomCorners = new int[2][2];
 	/** */
 	public boolean fixedLimits = false;
 	/** */
@@ -126,10 +124,6 @@ public class LinePlotter extends SpiderChartPlotter {
 		return finalP;
 	}
 
-	/** */
-	protected void plotCurve(final SpiderChartGraphics g, final int[][] linePointsSC, final LineDataSeq l) {
-	}
-
 	/** {@inheritDoc}} */
 	@Override
 	protected void plot(final SpiderChartGraphics g, final DataSeq s, final int serieSec) {
@@ -147,11 +141,12 @@ public class LinePlotter extends SpiderChartPlotter {
 		boolean isNull = false;
 
 		final Scale tmpScaleY = super.getActiveYScale(s);
-
 		final Scale tmpScaleX = super.getActiveXScale(s);
+
 		double XValue;
 		int i;
 		double YValue;
+
 		if ((l.fillStyle != null) && (count > 1)) {
 			double[][] Points = new double[2][count + 2];
 
@@ -179,13 +174,6 @@ public class LinePlotter extends SpiderChartPlotter {
 			for (i = 0; i < Points[0].length; i++) {
 				PointsSC[0][i] = tmpScaleX.getScreenCoord(Points[0][i]);
 				PointsSC[1][i] = tmpScaleY.getScreenCoord(Points[1][i]);
-			}
-			this.bottomCorners[0][0] = PointsSC[0][0];
-			this.bottomCorners[1][0] = PointsSC[1][0];
-			this.bottomCorners[0][1] = PointsSC[0][PointsSC[0].length - 1];
-			this.bottomCorners[1][1] = PointsSC[1][PointsSC[0].length - 1];
-			if (l.lineType == 0) {
-				l.fillStyle.drawPolygon(g, PointsSC[0], PointsSC[1], PointsSC[0].length);
 			}
 		}
 		double[][] linePoints = new double[2][count];
@@ -303,5 +291,9 @@ public class LinePlotter extends SpiderChartPlotter {
 				}
 			}
 		}
+	}
+
+	/** */
+	protected void plotCurve(final SpiderChartGraphics g, final int[][] linePointsSC, final LineDataSeq l) {
 	}
 }

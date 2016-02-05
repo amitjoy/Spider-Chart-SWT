@@ -30,7 +30,7 @@ import com.amitinside.tooling.chart.gc.swt.SwtGraphicsProvider;
 import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.swt.SpiderChartViewer;
 
-public class SpiderChartBuilder {
+public final class SpiderChartBuilder {
 
 	/** */
 	private static SpiderChartConfigurationBuilder chartConfiguration;

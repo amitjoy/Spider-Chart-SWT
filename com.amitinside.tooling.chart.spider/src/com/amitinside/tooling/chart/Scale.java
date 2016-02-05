@@ -15,7 +15,7 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart;
 
-public class Scale {
+public final class Scale {
 
 	/** */
 	public boolean exactMaxValue = false;

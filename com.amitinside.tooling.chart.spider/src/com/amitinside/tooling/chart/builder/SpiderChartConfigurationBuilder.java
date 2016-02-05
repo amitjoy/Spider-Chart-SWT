@@ -23,17 +23,17 @@ import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartFont;
 import com.amitinside.tooling.chart.legend.SpiderChartLegend;
-import com.amitinside.tooling.chart.plotter.SpiderPlotter;
+import com.amitinside.tooling.chart.plotter.spider.SpiderChartPlotter;
 import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.style.LineStyle;
 import com.amitinside.tooling.chart.title.SpiderChartTitle;
 
-public class SpiderChartConfigurationBuilder {
+public final class SpiderChartConfigurationBuilder {
 
 	/** */
 	private SpiderChartLegend legend;
 	/** */
-	private SpiderPlotter plotter;
+	private SpiderChartPlotter plotter;
 	/** */
 	private SpiderChartTitle title;
 
@@ -43,7 +43,7 @@ public class SpiderChartConfigurationBuilder {
 	}
 
 	/** */
-	public SpiderPlotter getPlotter() {
+	public SpiderChartPlotter getPlotter() {
 		return this.plotter;
 	}
 
@@ -62,8 +62,8 @@ public class SpiderChartConfigurationBuilder {
 	}
 
 	/** */
-	public SpiderChartConfigurationBuilder plotter(final Consumer<SpiderPlotter> plotter) {
-		this.plotter = new SpiderPlotter();
+	public SpiderChartConfigurationBuilder plotter(final Consumer<SpiderChartPlotter> plotter) {
+		this.plotter = new SpiderChartPlotter();
 		this.plotter.backStyle = new FillStyle(SWTGraphicsSupplier.getColor(SpiderChartColor.PALEGREEN));
 
 		this.plotter.gridStyle = new LineStyle(1, SWTGraphicsSupplier.getColor(SpiderChartColor.TELA),

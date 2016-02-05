@@ -22,7 +22,7 @@ import com.amitinside.tooling.chart.gc.SpiderChartImage;
 import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.style.LineStyle;
 
-public class LineDataSeq extends DataSeq {
+public final class LineDataSeq extends DataSeq {
 
 	/** */
 	public static int startingXValue = 0;

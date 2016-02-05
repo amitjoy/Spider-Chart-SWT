@@ -20,7 +20,7 @@ import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.style.LineStyle;
 
-public class TargetZone {
+public final class TargetZone {
 
 	/** */
 	public static int DISABLED = -1;

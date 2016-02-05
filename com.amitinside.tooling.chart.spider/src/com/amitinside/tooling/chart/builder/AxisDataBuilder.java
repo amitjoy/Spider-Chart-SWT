@@ -24,7 +24,7 @@ import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.api.ISpiderChartPlottable;
 import com.amitinside.tooling.chart.builder.model.AxisData;
 
-public class AxisDataBuilder {
+public final class AxisDataBuilder {
 
 	/** */
 	private final SpiderChart chart;

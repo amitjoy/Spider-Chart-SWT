@@ -29,7 +29,7 @@ import com.amitinside.tooling.chart.gc.SpiderChartFont;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.gc.SpiderChartImage;
 
-public class SpiderChartSwtGraphics extends SpiderChartGraphics {
+public final class SpiderChartSwtGraphics extends SpiderChartGraphics {
 	/** */
 	protected float alphaValue = 1.0F;
 	/** */

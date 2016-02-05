@@ -29,7 +29,7 @@ import com.amitinside.tooling.chart.gc.SpiderChartImage;
 import com.amitinside.tooling.chart.label.SpiderChartLabel;
 import com.amitinside.tooling.chart.legend.SpiderChartLegend;
 import com.amitinside.tooling.chart.listener.ISpiderChartListener;
-import com.amitinside.tooling.chart.plotter.spider.SpiderChartPlotter;
+import com.amitinside.tooling.chart.plotter.SpiderPlotter;
 import com.amitinside.tooling.chart.sequence.DataSeq;
 import com.amitinside.tooling.chart.sequence.LineDataSeq;
 import com.amitinside.tooling.chart.style.FillStyle;
@@ -42,7 +42,7 @@ import com.amitinside.tooling.chart.title.SpiderChartTitle;
  * @author AMIT KUMAR MONDAL
  *
  */
-public class SpiderChart {
+public final class SpiderChart {
 
 	private class SpiderChartWorker implements Runnable {
 
@@ -190,7 +190,7 @@ public class SpiderChart {
 	public int offsetY = 0;
 
 	/** */
-	public SpiderChartPlotter[] plotters = new SpiderChartPlotter[10];
+	public SpiderPlotter[] plotters = new SpiderPlotter[10];
 
 	/** */
 	private int plottersCount = 0;
@@ -267,7 +267,7 @@ public class SpiderChart {
 	}
 
 	/** Constructor */
-	public SpiderChart(final SpiderChartTitle t, final SpiderChartPlotter p) {
+	public SpiderChart(final SpiderChartTitle t, final SpiderPlotter p) {
 		this.resetChart(t, p, null, null);
 	}
 
@@ -287,7 +287,7 @@ public class SpiderChart {
 	}
 
 	/** */
-	public void addPlotter(final SpiderChartPlotter p) {
+	public void addPlotter(final SpiderPlotter p) {
 		this.plotters[this.plottersCount] = p;
 		this.plotters[this.plottersCount].XScale = this.plotters[0].XScale;
 		this.plotters[this.plottersCount].YScale = this.plotters[0].YScale;
@@ -497,7 +497,7 @@ public class SpiderChart {
 		this.selectedLabel = null;
 		this.selectedSeriePoint = -1;
 		if (this.activateSelection) {
-			for (final SpiderChartPlotter plotter : this.plotters) {
+			for (final SpiderPlotter plotter : this.plotters) {
 				if (plotter == null) {
 					break;
 				}
@@ -737,10 +737,10 @@ public class SpiderChart {
 	}
 
 	/** */
-	protected void resetChart(final SpiderChartTitle t, final SpiderChartPlotter p, final SpiderChartAxis X,
+	protected void resetChart(final SpiderChartTitle t, final SpiderPlotter p, final SpiderChartAxis X,
 			final SpiderChartAxis Y) {
 		this.plottersCount = 0;
-		this.plotters = new SpiderChartPlotter[10];
+		this.plotters = new SpiderPlotter[10];
 		this.legend = null;
 		this.title = null;
 		this.border = null;

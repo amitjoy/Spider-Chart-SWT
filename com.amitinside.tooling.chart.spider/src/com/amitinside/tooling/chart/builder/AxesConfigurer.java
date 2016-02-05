@@ -18,7 +18,7 @@ package com.amitinside.tooling.chart.builder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AxesConfigurer {
+public final class AxesConfigurer {
 
 	public static class Builder {
 
