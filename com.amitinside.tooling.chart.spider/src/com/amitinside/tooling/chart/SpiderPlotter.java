@@ -254,7 +254,6 @@ public class SpiderPlotter extends SpiderChartPlotter {
 				max = this.maxScaleFactors[i];
 			}
 			tmpradi = (int) (((((Double) p.getElementY(i)).doubleValue() - min) * 100.0D) / (max - min));
-
 			tmpradi = (tmpradi * radi) / 100;
 
 			final double radian = 0.01745277777777778D * angle;
@@ -263,7 +262,6 @@ public class SpiderPlotter extends SpiderChartPlotter {
 			int relativeY = (int) (Sin * (tmpradi / 2));
 			final int relativeX = (int) (Cos * (tmpradi / 2));
 			relativeY *= -1;
-
 			xs[i] = PieCenterX + relativeX;
 			ys[i] = PieCenterY + relativeY;
 		}
@@ -312,6 +310,7 @@ public class SpiderPlotter extends SpiderChartPlotter {
 				YValue = ((Double) p.getElementY(i)).doubleValue();
 
 				String txt = p.doubleToString(new Double(YValue));
+
 				if (YValue == (int) YValue) {
 					txt = new Integer((int) YValue).toString();
 				}
