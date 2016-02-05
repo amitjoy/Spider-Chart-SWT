@@ -774,10 +774,6 @@ public class SpiderChart {
 		// TODO (AKM) To be implemented properly: Tips Functionality
 		this.showingTip = false;
 
-		if (this.showTips && (this.selectedSerie != null) && (this.selectedSeriePoint >= 0)) {
-			if ((this.selectedSerie.tips != null) && (this.selectedSerie.tips.length > this.selectedSeriePoint)) {
-			}
-		}
 		if (this.showTips && (this.selectedLabel != null)) {
 			this.selectedLabel.getTip();
 		}
