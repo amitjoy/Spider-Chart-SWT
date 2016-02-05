@@ -238,7 +238,6 @@ public class SpiderChartViewer extends Composite {
 		int hSliderHeight = 0;
 		int vSliderWidth = 0;
 
-		this.canvas.getChart().resetSize();
 		if (this.canvas.getChart().virtualWidth > 0) {
 			hSliderHeight = this.scrollBarWidth;
 		}

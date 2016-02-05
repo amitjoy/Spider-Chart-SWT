@@ -21,7 +21,7 @@ import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartFont;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 
-public class SpiderChartTitle extends SpiderChartComponent {
+public final class SpiderChartTitle extends SpiderChartComponent {
 
 	/** Title Color */
 	public SpiderChartColor color = SWTGraphicsSupplier.getColor(SpiderChartColor.BLUE);

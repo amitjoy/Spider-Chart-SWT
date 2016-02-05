@@ -18,10 +18,8 @@ package com.amitinside.tooling.chart.label;
 import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.api.IFloatingObject;
 import com.amitinside.tooling.chart.gc.Polygon;
-import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
-import com.amitinside.tooling.chart.gc.SpiderChartImage;
 import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.style.LineStyle;
 
@@ -82,8 +80,6 @@ public class SpiderChartLabel implements IFloatingObject {
 	/** */
 	public int requiredWidth = 0;
 	/** */
-	protected int rotation = 0;
-	/** */
 	protected int rotationAlign = SpiderChartGraphics.ROTATE_CENTER;
 	/** */
 	@SuppressWarnings("unused")
@@ -121,22 +117,6 @@ public class SpiderChartLabel implements IFloatingObject {
 	}
 
 	/** */
-	public int getRotatedHeight() {
-		if ((this.rotation == 90) || (this.rotation == -90) || (this.rotation == 270)) {
-			return this.requiredWidth;
-		}
-		return this.requiredHeight;
-	}
-
-	/** */
-	public int getRotatedWidth() {
-		if ((this.rotation == 90) || (this.rotation == -90) || (this.rotation == 270)) {
-			return this.requiredHeight;
-		}
-		return this.requiredWidth;
-	}
-
-	/** */
 	public String getTip() {
 		return this.tip;
 	}
@@ -171,11 +151,8 @@ public class SpiderChartLabel implements IFloatingObject {
 
 	/** */
 	protected void render(final SpiderChartGraphics g2) {
-		SpiderChartGraphics g = g2;
-		SpiderChartImage rotatedImage = null;
-		final int tmpPositionX = this.positionX;
-		final int tmpPositionY = this.positionY;
-		if ((this.lineToAnchor != null) && (this.rotation == 0)) {
+		final SpiderChartGraphics g = g2;
+		if ((this.lineToAnchor != null)) {
 			if (this.anchorY > this.positionY) {
 				if (this.anchorX <= this.positionX) {
 					this.lineToAnchor.draw(g2, this.anchorX, this.anchorY, this.positionX,
@@ -190,16 +167,6 @@ public class SpiderChartLabel implements IFloatingObject {
 				this.lineToAnchor.draw(g2, this.anchorX, this.anchorY, this.positionX + this.requiredWidth,
 						this.positionY);
 			}
-		}
-		if (this.rotation != 0) {
-			final SpiderChartColor transparentColor = SWTGraphicsSupplier.getColor(1, 1, 1);
-			rotatedImage = SWTGraphicsSupplier.createTransparentImage(this.requiredWidth, this.requiredHeight,
-					transparentColor);
-			g = rotatedImage.getGraphics();
-			g.setFont(g2.getFont());
-			g.setColor(g2.getColor());
-			this.positionX = 0;
-			this.positionY = 0;
 		}
 		int x = this.positionX;
 		int lineStart = 0;
@@ -248,20 +215,14 @@ public class SpiderChartLabel implements IFloatingObject {
 			}
 		}
 		this.clickableArea = null;
-		if (this.rotation != 0) {
-			this.positionX = tmpPositionX;
-			this.positionY = tmpPositionY;
-			g2.paintRotatedImage(rotatedImage, this.rotation, this.positionX, this.positionY, this.rotationAlign);
-		} else {
-			this.clickableArea = new Polygon();
-			this.clickableArea.addPoint(this.positionX, this.positionY);
-			this.clickableArea.addPoint(this.positionX, (this.positionY + this.requiredHeight) - 1);
-			this.clickableArea.addPoint((this.positionX + this.requiredWidth) - 1,
-					(this.positionY + this.requiredHeight) - 1);
-			this.clickableArea.addPoint((this.positionX + this.requiredWidth) - 1, this.positionY);
-			if (this.chart != null) {
-				this.chart.chartHotAreas.addElement(this);
-			}
+		this.clickableArea = new Polygon();
+		this.clickableArea.addPoint(this.positionX, this.positionY);
+		this.clickableArea.addPoint(this.positionX, (this.positionY + this.requiredHeight) - 1);
+		this.clickableArea.addPoint((this.positionX + this.requiredWidth) - 1,
+				(this.positionY + this.requiredHeight) - 1);
+		this.clickableArea.addPoint((this.positionX + this.requiredWidth) - 1, this.positionY);
+		if (this.chart != null) {
+			this.chart.chartHotAreas.addElement(this);
 		}
 	}
 

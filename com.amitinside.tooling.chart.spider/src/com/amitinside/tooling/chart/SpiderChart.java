@@ -23,7 +23,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.amitinside.tooling.chart.api.IFloatingObject;
 import com.amitinside.tooling.chart.axis.SpiderChartAxis;
-import com.amitinside.tooling.chart.gc.Polygon;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartFont;
@@ -139,27 +138,6 @@ public class SpiderChart {
 	private final List<ISpiderChartListener> chartListeners = new CopyOnWriteArrayList<>();
 
 	/** */
-	public double currentValueX;
-
-	/** */
-	public double currentValueY;
-
-	/** */
-	public double currentValueY2;
-
-	/** */
-	public int currentX;
-
-	/** */
-	public int currentY;
-
-	/** */
-	private int cursorLastX = 0;
-
-	/** */
-	private int cursorLastY = 0;
-
-	/** */
 	private SpiderChartWorker deamon = null;
 
 	/** */
@@ -214,12 +192,6 @@ public class SpiderChart {
 	public int offsetY = 0;
 
 	/** */
-	private int originalVirtualHeight = -1;
-
-	/** */
-	private int originalVirtualWidth = -1;
-
-	/** */
 	public SpiderChartPlotter[] plotters = new SpiderChartPlotter[10];
 
 	/** */
@@ -236,9 +208,6 @@ public class SpiderChart {
 
 	/** */
 	public double rightMargin = 0.125D;
-
-	/** */
-	public double secondYAxisMargin = 0.0D;
 
 	/** */
 	public SpiderChartLabel selectedLabel = null;
@@ -522,16 +491,7 @@ public class SpiderChart {
 		if (this.plotters[0] == null) {
 			return;
 		}
-		this.currentValueX = 0.0D;
-		this.currentValueY = 0.0D;
-		this.currentValueY2 = 0.0D;
-
-		this.currentX = eX;
-		this.currentY = eY;
-
 		Object previousSelectedObject = this.selectedSerie;
-		final int previousPoint = this.selectedSeriePoint;
-
 		if ((this.selectedSerie == null) && (this.selectedLabel != null)) {
 			previousSelectedObject = this.selectedLabel;
 		}
@@ -543,43 +503,6 @@ public class SpiderChart {
 				if (plotter == null) {
 					break;
 				}
-				for (int k = 0; k < plotter.getSeriesCount(); k++) {
-					final DataSeq d = plotter.getSerie(k);
-					for (int i = 0; i < d.hotAreas.size(); i++) {
-						if (((Polygon) d.hotAreas.elementAt(i)).contains(this.currentX + this.offsetX,
-								this.currentY + this.offsetY)) {
-							boolean triggerEnter = false;
-							if (previousSelectedObject == null) {
-								triggerEnter = true;
-							} else if ((previousSelectedObject != d) || (previousPoint != i)) {
-								this.triggerEvent(3);
-								triggerEnter = true;
-							}
-							this.selectedSerie = d;
-							this.selectedSeriePoint = i;
-							if (!triggerEnter) {
-								break;
-							}
-							this.triggerEvent(2);
-							break;
-						}
-					}
-				}
-			}
-			if (this.selectedSerie == null) {
-				for (int i = 0; i < this.chartHotAreas.size(); i++) {
-					final SpiderChartLabel label = (SpiderChartLabel) this.chartHotAreas.elementAt(i);
-					if (label.clickableArea.contains(this.currentX + this.offsetX, this.currentY + this.offsetY)) {
-						this.selectedLabel = label;
-						break;
-					}
-				}
-
-			}
-			if ((Math.abs(this.currentX - this.cursorLastX) > 2) || (Math.abs(this.currentY - this.cursorLastY) > 2)) {
-				this.cursorLastX = this.currentX;
-				this.cursorLastY = this.currentY;
-				this.triggerEvent(4);
 			}
 		}
 		if ((previousSelectedObject != null) && (this.selectedSerie == null) && (this.selectedLabel == null)) {
@@ -595,7 +518,7 @@ public class SpiderChart {
 		System.currentTimeMillis();
 		if ((this.plotters[0] == null) || (this.plottersCount <= 0)) {
 			pg.setColor(SWTGraphicsSupplier.getColor(SpiderChartColor.RED));
-			pg.drawString("Error: No plotters/series have been defined", 30, 30);
+			pg.drawString("Error: No plotters have been defined", 30, 30);
 			return;
 		}
 		for (int j = 0; j < this.plottersCount; j++) {
@@ -613,12 +536,6 @@ public class SpiderChart {
 			this.lastWidth = this.width;
 			this.lastHeight = this.height;
 		}
-		if (this.originalVirtualHeight == -1) {
-			this.originalVirtualHeight = this.virtualHeight;
-		}
-		if (this.originalVirtualWidth == -1) {
-			this.originalVirtualWidth = this.virtualWidth;
-		}
 		if (!this.withScroll) {
 			this.repaintAlways = true;
 		}
@@ -626,10 +543,6 @@ public class SpiderChart {
 			this.repaintAll = true;
 		}
 		if (this.autoSize) {
-			if (!this.withScroll) {
-				this.virtualHeight = this.originalVirtualHeight;
-				this.virtualWidth = this.originalVirtualWidth;
-			}
 			this.autoSize();
 		}
 		try {
@@ -860,16 +773,6 @@ public class SpiderChart {
 	}
 
 	/** */
-	public void resetSize() {
-		if (this.originalVirtualHeight > -1) {
-			this.virtualHeight = this.originalVirtualHeight;
-		}
-		if (this.originalVirtualWidth > -1) {
-			this.virtualWidth = this.originalVirtualWidth;
-		}
-	}
-
-	/** */
 	public void saveToFile(final OutputStream os, final String psFormat) throws Exception {
 		final SpiderChartImage image = SWTGraphicsSupplier.createImage(this.width, this.height);
 		SpiderChartGraphics g = null;
@@ -924,13 +827,6 @@ public class SpiderChart {
 		if (w > this.minimumWidth) {
 			this.width = w;
 		}
-	}
-
-	/** */
-	public void setY2Scale(final SpiderChartAxis a) {
-		this.plotters[0].Y2Scale = a.scale;
-		a.rightAxis = true;
-		a.plot = this.plotters[0];
 	}
 
 	/** */

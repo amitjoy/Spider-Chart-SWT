@@ -43,15 +43,6 @@ import com.amitinside.tooling.chart.style.LineStyle;
 public class SpiderChartAxis extends SpiderChartComponent {
 
 	/** */
-	public static final int CEROAXIS_LINE = 0;
-
-	/** */
-	public static final int CEROAXIS_NO = 1;
-
-	/** */
-	public static final int CEROAXIS_SCALE = 2;
-
-	/** */
 	public static final int HORIZONTAL = 0;
 
 	/** */
@@ -80,12 +71,6 @@ public class SpiderChartAxis extends SpiderChartComponent {
 
 	/** */
 	public boolean bigTicksGrid = false;
-
-	/** */
-	public int ceroAxis = 0;
-
-	/** */
-	public LineStyle ceroAxisStyle = new LineStyle(0.2F, SWTGraphicsSupplier.getColor(SpiderChartColor.DARKGRAY), 1);
 
 	/** */
 	public String dateLabelFormat = "dd-MMM-yyyy";
@@ -124,9 +109,6 @@ public class SpiderChartAxis extends SpiderChartComponent {
 	public String labelTemplate = "";
 
 	/** */
-	public boolean logarithmicIntervals = false;
-
-	/** */
 	public SpiderChartAxis mainAxis = null;
 
 	/** */
@@ -139,16 +121,10 @@ public class SpiderChartAxis extends SpiderChartComponent {
 	public int orientation;
 
 	/** */
-	public SpiderChartAxis peerAxis;
-
-	/** */
 	public SpiderChartPlotter plot;
 
 	/** */
 	protected int realPosition;
-
-	/** */
-	public boolean rightAxis = false;
 
 	/** */
 	public int rotateLabels = 0;
@@ -233,7 +209,6 @@ public class SpiderChartAxis extends SpiderChartComponent {
 		}
 		int bigTickCount = 0;
 		int axisPosition = 0;
-		int axisCeroPosition = 0;
 		boolean drawTick = true;
 		int effect3D = this.plot.depth;
 		if (!this.isMainAxis && !this.mainAxis.stackAdditionalAxis) {
@@ -264,14 +239,10 @@ public class SpiderChartAxis extends SpiderChartComponent {
 			}
 		}
 		if ((peerAxis.scale.min < 0.0D) && (peerAxis.scale.max > 0.0D)) {
-			axisCeroPosition = peerAxis.scale.getScreenCoord(0.0D);
+			peerAxis.scale.getScreenCoord(0.0D);
 		}
 		if (this.orientation == 0) {
-			if ((this.ceroAxis == 2) && (axisCeroPosition != 0)) {
-				axisPosition = axisCeroPosition;
-			} else {
-				axisPosition = this.realPosition;
-			}
+			axisPosition = this.realPosition;
 			if (drawForeGround) {
 				if (!this.xscaleOnTop || this.axisFrame) {
 					this.style.draw(g, this.x, axisPosition, this.x + this.visibleSize, axisPosition);
@@ -319,145 +290,18 @@ public class SpiderChartAxis extends SpiderChartComponent {
 				ys[2] = axisPosition + peerAxis.offset;
 				xs[3] = this.x + this.offset;
 				ys[3] = axisPosition + peerAxis.offset;
-				if (!this.rightAxis) {
-					if (effect3D != 0) {
-						this.style.draw(g, xs[0], ys[0], xs[1], ys[1]);
-					}
-					if (effect3D != 0) {
-						this.style.draw(g, xs[2], ys[2], xs[1], ys[1]);
-					}
-					if (effect3D != 0) {
-						this.style.draw(g, xs[3], ys[3], xs[0], ys[0]);
-					}
-					if (effect3D != 0) {
-						this.style.draw(g, xs[0], (this.plot.y - effect3D) + peerAxis.offset, xs[1],
-								(this.plot.y - effect3D) + peerAxis.offset);
-					}
-				}
-			}
-			if ((axisCeroPosition != 0) && (this.ceroAxis == 0) && !drawForeGround) {
-				this.ceroAxisStyle.draw(g, this.x, axisCeroPosition, this.x + this.width, axisCeroPosition);
-				if (!this.rightAxis) {
-					if (effect3D != 0) {
-						this.ceroAxisStyle.draw(g, this.x + effect3D, axisCeroPosition - effect3D,
-								this.x + this.width + effect3D, axisCeroPosition - effect3D);
-					}
-					if (effect3D != 0) {
-						this.ceroAxisStyle.draw(g, this.x, axisCeroPosition, this.x + effect3D,
-								axisCeroPosition - effect3D);
-					}
-					if (effect3D != 0) {
-						this.ceroAxisStyle.draw(g, this.x + this.width, axisCeroPosition,
-								this.x + this.width + effect3D, axisCeroPosition - effect3D);
-					}
-				}
 			}
 		} else {
-			if ((this.ceroAxis == 2) && (axisCeroPosition != 0)) {
-				axisPosition = axisCeroPosition;
-			} else if (!this.isMainAxis && this.rightAxis) {
-				axisPosition = this.x;
-			} else if (this.rightAxis) {
-				axisPosition = this.realPosition;
-			} else {
+			{
 				axisPosition = this.x + this.width;
 			}
 			if (drawForeGround) {
 				this.style.draw(g, axisPosition, this.y, axisPosition, this.y + this.visibleSize);
-				if (this.axisFrame && (peerAxis != null) && (effect3D == 0) && !this.rightAxis) {
-					this.style.draw(g, axisPosition + peerAxis.visibleSize, this.y, axisPosition + peerAxis.visibleSize,
-							this.y + this.visibleSize);
-				}
-				if (!this.rightAxis) {
-					if (this.label.length() > 0) {
-						final SpiderChartLabel clabel = new SpiderChartLabel(
-								"@rotation value='90' center='LEFTTOP'@" + this.label, "", false, false);
-						g.setColor(this.DescColor);
-						g.setFont(this.DescFont);
-						clabel.initialize(g, this.chart);
-						if (this.mainAxis.stackAdditionalAxis) {
-							clabel.paint(g, this.x, this.y, 0, 0);
-						}
-					}
-				}
-				if (this.rightAxis) {
-					if (this.label.length() > 0) {
-						final SpiderChartLabel clabel = new SpiderChartLabel(
-								"@rotation value='90'  center='LEFTTOP'@" + this.label, "", false, false);
-						g.setColor(this.DescColor);
-						g.setFont(this.DescFont);
-						clabel.initialize(g, this.chart);
-						if (this.mainAxis.stackAdditionalAxis) {
-							clabel.paint(g, (axisPosition + this.width) - clabel.requiredHeight, this.y, 0, 0);
-						} else {
-							clabel.paint(g, axisPosition, this.y + this.visibleSize + 4, 0, 0);
-						}
-					}
-				}
-			}
-			if (!drawForeGround && !drawGridBackground) {
-				final int[] xs = new int[4];
-				final int[] ys = new int[4];
-				final int[] xs2 = new int[4];
-				final int[] ys2 = new int[4];
-				peerAxis.scale.getScreenCoord(peerAxis.scale.min);
-				peerAxis.scale.getScreenCoord(peerAxis.scale.max);
-
-				xs[0] = axisPosition + peerAxis.offset + effect3D;
-				ys[0] = (this.y - effect3D) + this.offset;
-				xs[1] = axisPosition + peerAxis.offset + effect3D;
-				ys[1] = ((this.y + this.visibleSize) - effect3D) + this.offset;
-				xs[2] = axisPosition + peerAxis.offset;
-				ys[2] = this.y + this.visibleSize + this.offset;
-				xs[3] = axisPosition + peerAxis.offset;
-				ys[3] = this.y + this.offset;
-
-				xs2[0] = axisPosition + peerAxis.visibleSize + effect3D + peerAxis.offset;
-				ys2[0] = ys[0];
-				xs2[1] = axisPosition + peerAxis.visibleSize + effect3D + peerAxis.offset;
-				ys2[1] = ys[1];
-				xs2[2] = xs[1];
-				ys2[2] = ys[1];
-				xs2[3] = xs[0];
-				ys2[3] = ys[0];
-				if (!this.rightAxis) {
-					if (effect3D != 0) {
-						this.style.draw(g, xs[0], ys[0], xs[1], ys[1]);
-					}
-					if (effect3D != 0) {
-						this.style.draw(g, xs[2], ys[2], xs[1], ys[1]);
-					}
-					if (effect3D != 0) {
-						this.style.draw(g, xs[3], ys[3], xs[0], ys[0]);
-					}
-					if (effect3D != 0) {
-						this.style.draw(g, xs2[0], ys2[0], xs2[1], ys2[1]);
-					}
-				}
-			}
-			if ((axisCeroPosition != 0) && (this.ceroAxis == 0) && !drawForeGround) {
-				this.ceroAxisStyle.draw(g, axisCeroPosition, this.y, axisCeroPosition, this.y + this.height);
-				if (!this.rightAxis) {
-					if (effect3D != 0) {
-						this.ceroAxisStyle.draw(g, axisCeroPosition + effect3D, this.y - effect3D,
-								axisCeroPosition + effect3D, (this.y + this.height) - effect3D);
-					}
-					if (effect3D != 0) {
-						this.ceroAxisStyle.draw(g, axisCeroPosition, this.y + this.height, axisCeroPosition + effect3D,
-								(this.y + this.height) - effect3D);
-					}
-					if (effect3D != 0) {
-						this.ceroAxisStyle.draw(g, axisCeroPosition, this.y, axisCeroPosition + effect3D,
-								this.y - effect3D);
-					}
-				}
 			}
 		}
 		final double tickBase = this.scale.min;
 
 		int iteration = 0;
-		if (this.logarithmicIntervals) {
-		}
 		if (this.startWithBigTick) {
 			bigTickCount = this.bigTickInterval - 1;
 		}
@@ -518,26 +362,6 @@ public class SpiderChartAxis extends SpiderChartComponent {
 							fillGrid = !fillGrid;
 						}
 					}
-					if ((i != this.scale.min) && !drawForeGround && !drawGridBackground) {
-						if ((this.gridStyle != null) && ((bigTickCount == 0) || !this.bigTicksGrid)) {
-							if ((this.ceroAxis != 0) || (i != 0.0D)) {
-								if (this.orientation == 0) {
-									if (effect3D != 0) {
-										this.gridStyle.draw(g, v, this.plot.y + this.plot.height, v + effect3D,
-												(this.plot.y + this.plot.height) - effect3D);
-									}
-									this.gridStyle.draw(g, v + effect3D, this.plot.y - effect3D, v + effect3D,
-											(this.plot.y + this.plot.height) - effect3D);
-								} else {
-									this.gridStyle.draw(g, this.plot.x + effect3D, v - effect3D,
-											this.plot.x + this.plot.width + effect3D, v - effect3D);
-									if (effect3D != 0) {
-										this.gridStyle.draw(g, this.plot.x, v, this.plot.x + effect3D, v - effect3D);
-									}
-								}
-							}
-						}
-					}
 				}
 				if (drawForeGround) {
 					if (drawTick) {
@@ -551,205 +375,187 @@ public class SpiderChartAxis extends SpiderChartComponent {
 											v - this.offset, axisPosition - peerAxis.visibleSize - tickLength);
 								}
 							}
-						} else if (this.rightAxis) {
 							if (((v - this.offset) >= this.y) && ((v - this.offset) <= (this.visibleSize + this.y))) {
-								this.style.draw(g, axisPosition, v - this.offset, axisPosition + tickLength,
+								this.style.draw(g, axisPosition - tickLength, v - this.offset, axisPosition,
 										v - this.offset);
 							}
-						} else if (((v - this.offset) >= this.y)
-								&& ((v - this.offset) <= (this.visibleSize + this.y))) {
-							this.style.draw(g, axisPosition - tickLength, v - this.offset, axisPosition,
-									v - this.offset);
 						}
-					}
-					if (bigTickCount == 0) {
-						numberBigTicks++;
-						g.setColor(this.DescColor);
-						g.setFont(this.DescFont);
+						if (bigTickCount == 0) {
+							numberBigTicks++;
+							g.setColor(this.DescColor);
+							g.setFont(this.DescFont);
 
-						String txt = new Double(i).toString();
-						if (this.scaleLabelFormat.length() > 0) {
-							DecimalFormat df = null;
-							if (SpiderChart.numberLocale == null) {
-								df = new DecimalFormat(this.scaleLabelFormat);
-							} else {
-								final NumberFormat nf = NumberFormat
-										.getNumberInstance(new Locale(SpiderChart.numberLocale, ""));
-								df = (DecimalFormat) nf;
-								df.applyPattern(this.scaleLabelFormat);
+							String txt = new Double(i).toString();
+							if (this.scaleLabelFormat.length() > 0) {
+								DecimalFormat df = null;
+								if (SpiderChart.numberLocale == null) {
+									df = new DecimalFormat(this.scaleLabelFormat);
+								} else {
+									final NumberFormat nf = NumberFormat
+											.getNumberInstance(new Locale(SpiderChart.numberLocale, ""));
+									df = (DecimalFormat) nf;
+									df.applyPattern(this.scaleLabelFormat);
+								}
+								txt = df.format(new Double(i));
 							}
-							txt = df.format(new Double(i));
-						}
-						if (this.IntegerScale) {
-							txt = new Integer((int) i).toString();
-						}
-						if (tickDate != null) {
-							txt = new SimpleDateFormat(this.dateLabelFormat).format(tickDate);
-						}
-						SpiderChartLabel formattedlabel = null;
-						if (this.tickLabels != null) {
-							if (this.tickLabels.length >= numberBigTicks) {
-								if (this.tickLabels[numberBigTicks - 1] != null) {
-									formattedlabel = new SpiderChartLabel(this.tickLabels[numberBigTicks - 1], txt,
-											false, true);
-									txt = this.tickLabels[numberBigTicks - 1];
+							if (this.IntegerScale) {
+								txt = new Integer((int) i).toString();
+							}
+							if (tickDate != null) {
+								txt = new SimpleDateFormat(this.dateLabelFormat).format(tickDate);
+							}
+							SpiderChartLabel formattedlabel = null;
+							if (this.tickLabels != null) {
+								if (this.tickLabels.length >= numberBigTicks) {
+									if (this.tickLabels[numberBigTicks - 1] != null) {
+										formattedlabel = new SpiderChartLabel(this.tickLabels[numberBigTicks - 1], txt,
+												false, true);
+										txt = this.tickLabels[numberBigTicks - 1];
+									} else {
+										txt = " ";
+									}
 								} else {
 									txt = " ";
 								}
-							} else {
-								txt = " ";
 							}
-						}
-						if ((formattedlabel == null) && (this.labelTemplate.length() > 0)) {
-							formattedlabel = new SpiderChartLabel(this.labelTemplate, txt, false, false);
-						}
-						boolean labelPainted = false;
-						if ((this.rotateLabels != 0) && (this.orientation == 0) && ((v - this.offset) >= this.x)
-								&& ((v - this.offset) <= (this.visibleSize + this.x))) {
-							final int textWidth = g.getFontWidth(this.DescFont, txt);
-							if (!this.xscaleOnTop) {
-								labelPainted = g.drawRotatedText(this.DescFont, this.DescColor, txt, this.rotateLabels,
-										v - this.offset, this.realPosition + tickLength, false);
-							} else {
-								labelPainted = g.drawRotatedText(this.DescFont, this.DescColor, txt, this.rotateLabels,
-										v - this.offset,
-										this.realPosition - this.bigTickPixels - peerAxis.visibleSize - textWidth - 2,
-										false);
+							if ((formattedlabel == null) && (this.labelTemplate.length() > 0)) {
+								formattedlabel = new SpiderChartLabel(this.labelTemplate, txt, false, false);
 							}
-							if (this.maxTickLabelLength < textWidth) {
-								this.maxTickLabelLength = textWidth;
+							boolean labelPainted = false;
+							if ((this.rotateLabels != 0) && (this.orientation == 0) && ((v - this.offset) >= this.x)
+									&& ((v - this.offset) <= (this.visibleSize + this.x))) {
+								final int textWidth = g.getFontWidth(this.DescFont, txt);
+								if (!this.xscaleOnTop) {
+									labelPainted = g.drawRotatedText(this.DescFont, this.DescColor, txt,
+											this.rotateLabels, v - this.offset, this.realPosition + tickLength, false);
+								} else {
+									labelPainted = g
+											.drawRotatedText(this.DescFont, this.DescColor, txt,
+													this.rotateLabels, v - this.offset, this.realPosition
+															- this.bigTickPixels - peerAxis.visibleSize - textWidth - 2,
+											false);
+								}
+								if (this.maxTickLabelLength < textWidth) {
+									this.maxTickLabelLength = textWidth;
+								}
 							}
-						}
-						if ((this.rotateLabels != 0) && (this.orientation == 1) && ((v - this.offset) >= this.y)
-								&& ((v - this.offset) <= (this.visibleSize + this.y))) {
-							int lblx = 0;
-							int lbly = 0;
+							if ((this.rotateLabels != 0) && (this.orientation == 1) && ((v - this.offset) >= this.y)
+									&& ((v - this.offset) <= (this.visibleSize + this.y))) {
+								int lblx = 0;
+								int lbly = 0;
 
-							final int textHeight = g.getFontHeight(this.DescFont);
-							if (this.rightAxis) {
-								lblx = this.realPosition + tickLength + 1;
-							} else {
+								final int textHeight = g.getFontHeight(this.DescFont);
 								lblx = (this.x + this.width) - tickLength - g.getFontHeight(null);
-							}
-							lbly = v - (g.getFontWidth(null, txt) / 2);
+								lbly = v - (g.getFontWidth(null, txt) / 2);
 
-							labelPainted = g.drawRotatedText(this.DescFont, this.DescColor, txt, this.rotateLabels,
-									lblx, lbly - this.offset, false);
-							if (this.maxTickLabelLength < textHeight) {
-								this.maxTickLabelLength = textHeight;
-							}
-						}
-						if (!labelPainted && drawTick && (formattedlabel != null)) {
-							formattedlabel.initialize(g, this.chart);
-							labelPainted = true;
-
-							final int lblw = formattedlabel.requiredWidth;
-							int lblx = 0;
-							int lbly = 0;
-							if (this.orientation == 1) {
-								lbly = v - formattedlabel.requiredHeight;
-								if (((lbly - this.offset) >= this.y)
-										&& ((lbly - this.offset) <= (this.visibleSize + this.y))) {
-									formattedlabel.paint(g, lblx, lbly - this.offset, formattedlabel.requiredWidth,
-											formattedlabel.requiredHeight);
-								}
-								if (this.maxTickLabelLength < formattedlabel.getRotatedWidth()) {
-									this.maxTickLabelLength = formattedlabel.getRotatedWidth();
-								}
-							} else {
-								lblx = v - (lblw / 2);
-								lbly = this.realPosition + tickLength;
-								if (((v - this.offset) >= this.x)
-										&& ((v - this.offset) <= (this.visibleSize + this.x))) {
-									formattedlabel.paint(g, lblx - this.offset, lbly, formattedlabel.requiredWidth,
-											formattedlabel.requiredHeight);
-								}
-								if (this.maxTickLabelLength < formattedlabel.getRotatedHeight()) {
-									this.maxTickLabelLength = formattedlabel.getRotatedHeight();
+								labelPainted = g.drawRotatedText(this.DescFont, this.DescColor, txt, this.rotateLabels,
+										lblx, lbly - this.offset, false);
+								if (this.maxTickLabelLength < textHeight) {
+									this.maxTickLabelLength = textHeight;
 								}
 							}
-						}
-						if (!labelPainted && drawTick) {
-							final String[] txts = this.splitText(txt);
+							if (!labelPainted && drawTick && (formattedlabel != null)) {
+								formattedlabel.initialize(g, this.chart);
+								labelPainted = true;
 
-							final int lblw = g.getFontWidth(null, txts[0] + " ");
-							final int lblh = g.getFontHeight(null);
-							int lblx = 0;
-							int lbly = 0;
-							if (this.orientation == 1) {
-								lbly = v;
-								if (((lbly - this.offset) >= this.y)
-										&& ((lbly - this.offset) <= (this.visibleSize + this.y))) {
-									g.drawString(txts[0], lblx, lbly - this.offset);
-								}
-								for (int h = 1; h < txts.length; h++) {
-									final int lblw1 = g.getFontWidth(null, txts[h]);
-									if (this.rightAxis) {
-										lblx = this.realPosition + tickLength + 1;
-									} else {
-										lblx = (this.x + this.width) - tickLength - lblw1;
-									}
+								final int lblw = formattedlabel.requiredWidth;
+								int lblx = 0;
+								int lbly = 0;
+								if (this.orientation == 1) {
+									lbly = v - formattedlabel.requiredHeight;
 									if (((lbly - this.offset) >= this.y)
 											&& ((lbly - this.offset) <= (this.visibleSize + this.y))) {
-										g.drawString(txts[h], lblx, (lbly - this.offset) + (lblh * h));
+										formattedlabel.paint(g, lblx, lbly - this.offset, formattedlabel.requiredWidth,
+												formattedlabel.requiredHeight);
 									}
-								}
-							} else {
-								lblx = v - (lblw / 2);
-								lbly = this.realPosition + tickLength + lblh;
-								if (((v - this.offset) >= this.x)
-										&& ((v - this.offset) <= (this.visibleSize + this.x))) {
-									g.drawString(txts[0], lblx - this.offset, lbly);
-								}
-								for (int h = 1; h < txts.length; h++) {
-									final int lblw1 = g.getFontWidth(null, txts[h]);
-									lblx = v - (lblw1 / 2);
+								} else {
+									lblx = v - (lblw / 2);
+									lbly = this.realPosition + tickLength;
 									if (((v - this.offset) >= this.x)
 											&& ((v - this.offset) <= (this.visibleSize + this.x))) {
-										g.drawString(txts[h], lblx - this.offset, lbly + (lblh * h));
+										formattedlabel.paint(g, lblx - this.offset, lbly, formattedlabel.requiredWidth,
+												formattedlabel.requiredHeight);
+									}
+								}
+							}
+							if (!labelPainted && drawTick) {
+								final String[] txts = this.splitText(txt);
+
+								final int lblw = g.getFontWidth(null, txts[0] + " ");
+								final int lblh = g.getFontHeight(null);
+								int lblx = 0;
+								int lbly = 0;
+								if (this.orientation == 1) {
+									lbly = v;
+									if (((lbly - this.offset) >= this.y)
+											&& ((lbly - this.offset) <= (this.visibleSize + this.y))) {
+										g.drawString(txts[0], lblx, lbly - this.offset);
+									}
+									for (int h = 1; h < txts.length; h++) {
+										final int lblw1 = g.getFontWidth(null, txts[h]);
+										lblx = (this.x + this.width) - tickLength - lblw1;
+										if (((lbly - this.offset) >= this.y)
+												&& ((lbly - this.offset) <= (this.visibleSize + this.y))) {
+											g.drawString(txts[h], lblx, (lbly - this.offset) + (lblh * h));
+										}
+									}
+								} else {
+									lblx = v - (lblw / 2);
+									lbly = this.realPosition + tickLength + lblh;
+									if (((v - this.offset) >= this.x)
+											&& ((v - this.offset) <= (this.visibleSize + this.x))) {
+										g.drawString(txts[0], lblx - this.offset, lbly);
+									}
+									for (int h = 1; h < txts.length; h++) {
+										final int lblw1 = g.getFontWidth(null, txts[h]);
+										lblx = v - (lblw1 / 2);
+										if (((v - this.offset) >= this.x)
+												&& ((v - this.offset) <= (this.visibleSize + this.x))) {
+											g.drawString(txts[h], lblx - this.offset, lbly + (lblh * h));
+										}
 									}
 								}
 							}
 						}
 					}
 				}
-			}
-			{
-				i += usedTickInterval;
+				{
+					i += usedTickInterval;
 
-				i = Math.rint(i * 100000.0D) / 100000.0D;
-				if (tickDate != null) {
-					int step = 1;
-					if (this.dateStep.length() > 1) {
-						step = new Integer(this.dateStep.substring(1, this.dateStep.length())).intValue();
+					i = Math.rint(i * 100000.0D) / 100000.0D;
+					if (tickDate != null) {
+						int step = 1;
+						if (this.dateStep.length() > 1) {
+							step = new Integer(this.dateStep.substring(1, this.dateStep.length())).intValue();
+						}
+						if (this.dateStepPerUnit) {
+							step = (int) (step * usedTickInterval);
+						}
+						final Calendar c = Calendar.getInstance();
+						c.setTime(tickDate);
+						if (this.dateStep.toLowerCase().indexOf("d") == 0) {
+							c.add(5, step);
+						}
+						if (this.dateStep.toLowerCase().indexOf("m") == 0) {
+							c.add(2, step);
+						}
+						if (this.dateStep.toLowerCase().indexOf("w") == 0) {
+							c.add(5, step * 7);
+						}
+						if (this.dateStep.toLowerCase().indexOf("y") == 0) {
+							c.add(1, step);
+						}
+						if (this.dateStep.toLowerCase().indexOf("h") == 0) {
+							c.add(10, step);
+						}
+						if (this.dateStep.toLowerCase().indexOf("s") == 0) {
+							c.add(13, step);
+						}
+						if (this.dateStep.toLowerCase().indexOf("n") == 0) {
+							c.add(12, step);
+						}
+						tickDate = c.getTime();
 					}
-					if (this.dateStepPerUnit) {
-						step = (int) (step * usedTickInterval);
-					}
-					final Calendar c = Calendar.getInstance();
-					c.setTime(tickDate);
-					if (this.dateStep.toLowerCase().indexOf("d") == 0) {
-						c.add(5, step);
-					}
-					if (this.dateStep.toLowerCase().indexOf("m") == 0) {
-						c.add(2, step);
-					}
-					if (this.dateStep.toLowerCase().indexOf("w") == 0) {
-						c.add(5, step * 7);
-					}
-					if (this.dateStep.toLowerCase().indexOf("y") == 0) {
-						c.add(1, step);
-					}
-					if (this.dateStep.toLowerCase().indexOf("h") == 0) {
-						c.add(10, step);
-					}
-					if (this.dateStep.toLowerCase().indexOf("s") == 0) {
-						c.add(13, step);
-					}
-					if (this.dateStep.toLowerCase().indexOf("n") == 0) {
-						c.add(12, step);
-					}
-					tickDate = c.getTime();
 				}
 			}
 		}
@@ -759,16 +565,13 @@ public class SpiderChartAxis extends SpiderChartComponent {
 	protected void drawBackground(final SpiderChartGraphics g, final SpiderChartAxis peerAxis) {
 		this.maxTickLabelLength = 0;
 
-		int tmpX = this.x;
+		final int tmpX = this.x;
 		int tmpY = this.y;
 		int realPositionY = this.realPosition;
 		if (this.isMainAxis && !this.xscaleOnTop) {
 			for (int i = 0; i < this.additionalAxis.size(); i++) {
 				final SpiderChartAxis a = this.additionalAxis.elementAt(i);
 				a.mainAxis = this;
-				if (this.rightAxis) {
-					a.rightAxis = true;
-				}
 				if (this.xscaleOnTop) {
 					a.xscaleOnTop = true;
 				}
@@ -782,12 +585,6 @@ public class SpiderChartAxis extends SpiderChartComponent {
 						tmpY -= this.height;
 						realPositionY -= this.height;
 						a.realPosition = realPositionY;
-					}
-					if ((this.orientation == 1) && !this.rightAxis) {
-						tmpX -= this.width;
-					}
-					if ((this.orientation == 1) && this.rightAxis) {
-						tmpX += this.width;
 					}
 					a.x = tmpX;
 					a.y = tmpY;
