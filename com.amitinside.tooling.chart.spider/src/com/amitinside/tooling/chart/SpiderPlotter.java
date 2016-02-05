@@ -17,6 +17,7 @@ package com.amitinside.tooling.chart;
 
 import java.text.DecimalFormat;
 
+import com.amitinside.tooling.chart.builder.AxesConfigurer;
 import com.amitinside.tooling.chart.gc.Polygon;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
@@ -92,7 +93,7 @@ public class SpiderPlotter extends SpiderChartPlotter {
 	public double[] maxScaleFactors;
 
 	/**
-	 * Spider Chart Scaling Factors (Minium Values)
+	 * Spider Chart Scaling Factors (Minimum Values)
 	 */
 	public double[] minScaleFactors;
 
@@ -118,6 +119,13 @@ public class SpiderPlotter extends SpiderChartPlotter {
 	public SpiderPlotter() {
 		this.combinable = false;
 		this.needsAxis = 0;
+	}
+
+	/** */
+	public void inject(final AxesConfigurer configurer) {
+		this.maxScaleFactors = configurer.maxScales();
+		this.minScaleFactors = configurer.minScales();
+		this.axesFactors = configurer.axesNames();
 	}
 
 	/** {@inheritDoc}} **/

@@ -22,28 +22,29 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import com.amitinside.tooling.chart.api.ISpiderChartDrawable;
+import com.amitinside.tooling.chart.builder.AxesConfigurer;
 import com.amitinside.tooling.chart.builder.SpiderChartBuilder;
+import com.amitinside.tooling.chart.swt.SpiderChartViewer;
 
 public final class Sample {
+
+	private static SpiderChartViewer viewer;
 
 	private static void buildSpiderChart(final Shell shell) {
 
 		final Supplier<ISpiderChartDrawable> iPhoneData = IPhone::new;
 		final Supplier<ISpiderChartDrawable> nexusData = Nexus::new;
 
-		SpiderChartBuilder.config(shell, settings -> {
+		viewer = SpiderChartBuilder.config(shell, settings -> {
 
 			settings.title(title -> title.text = "Smartphone Comparison").legend(legend -> {
 				legend.addItem(iPhoneData);
 				legend.addItem(nexusData);
 			}).plotter(plotter -> {
-				final double[] maxScales = { 5, 5, 5, 5, 5 };
-				final double[] minScales = { 0, 0, 0, 0, 0 };
-				final String[] axes = { "Battery", "Camera", "Display", "Memory", "Brand" };
-
-				plotter.maxScaleFactors = maxScales;
-				plotter.minScaleFactors = minScales;
-				plotter.axesFactors = axes;
+				final AxesConfigurer configurer = new AxesConfigurer.Builder().addAxis("Battery", 5, 0)
+						.addAxis("Camera", 5, 0).addAxis("Display", 5, 0).addAxis("Memory", 5, 0).addAxis("Brand", 5, 0)
+						.build();
+				plotter.inject(configurer);
 			});
 		}).viewer(chart -> {
 			chart.data(firstData -> firstData.inject(iPhoneData)).data(secondData -> secondData.inject(nexusData));
@@ -63,6 +64,7 @@ public final class Sample {
 				display.sleep();
 			}
 		}
+		viewer.getChart().stopWorker();
 		display.dispose();
 	}
 

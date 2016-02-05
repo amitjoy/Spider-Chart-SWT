@@ -20,10 +20,10 @@ import static com.amitinside.tooling.chart.LineStyle.NORMAL_LINE;
 import java.util.function.Consumer;
 
 import com.amitinside.tooling.chart.FillStyle;
-import com.amitinside.tooling.chart.SpiderChartLegend;
 import com.amitinside.tooling.chart.LineStyle;
-import com.amitinside.tooling.chart.SpiderPlotter;
+import com.amitinside.tooling.chart.SpiderChartLegend;
 import com.amitinside.tooling.chart.SpiderChartTitle;
+import com.amitinside.tooling.chart.SpiderPlotter;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartFont;
