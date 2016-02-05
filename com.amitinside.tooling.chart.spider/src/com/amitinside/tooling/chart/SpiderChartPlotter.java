@@ -159,7 +159,7 @@ public class SpiderChartPlotter extends SpiderChartComponent {
 		for (int i = 0; i < this.series.size(); i++) {
 			final DataSeq s = this.series.elementAt(i);
 
-			this.plotSerie(g, s, i);
+			this.plot(g, s, i);
 		}
 	}
 
@@ -212,7 +212,7 @@ public class SpiderChartPlotter extends SpiderChartComponent {
 	}
 
 	/** */
-	protected void plotSerie(final SpiderChartGraphics g, final DataSeq s, final int serieSec) {
+	protected void plot(final SpiderChartGraphics g, final DataSeq s, final int serieSec) {
 	}
 
 	/** */

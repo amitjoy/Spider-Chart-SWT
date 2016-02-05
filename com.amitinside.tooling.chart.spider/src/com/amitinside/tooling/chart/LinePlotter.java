@@ -127,7 +127,7 @@ public class LinePlotter extends SpiderChartPlotter {
 
 	/** {@inheritDoc}} */
 	@Override
-	protected void plotSerie(final SpiderChartGraphics g, final DataSeq s, final int serieSec) {
+	protected void plot(final SpiderChartGraphics g, final DataSeq s, final int serieSec) {
 		s.hotAreas.removeAllElements();
 		LineDataSeq l;
 		if (s instanceof LineDataSeq) {

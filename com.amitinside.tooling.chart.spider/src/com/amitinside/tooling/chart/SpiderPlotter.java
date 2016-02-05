@@ -87,6 +87,9 @@ public class SpiderPlotter extends SpiderChartPlotter {
 	 */
 	public LineStyle gridStyle;
 
+	/** Mark Scales on Every Axis */
+	public boolean markScalesOnEveryAxis = false;
+
 	/**
 	 * Spider Chart Scaling Factors (Maximum Values)
 	 */
@@ -130,7 +133,7 @@ public class SpiderPlotter extends SpiderChartPlotter {
 
 	/** {@inheritDoc}} **/
 	@Override
-	protected void plotSerie(final SpiderChartGraphics g, final DataSeq s, final int serieSec) {
+	protected void plot(final SpiderChartGraphics g, final DataSeq s, final int serieSec) {
 		LineDataSeq p;
 		if (s instanceof LineDataSeq) {
 			p = (LineDataSeq) s;
@@ -387,7 +390,13 @@ public class SpiderPlotter extends SpiderChartPlotter {
 						df = new DecimalFormat(this.scalingLabelFormat);
 						v = df.format(new Double(tickValue));
 					}
-					g.drawString("" + v, xs[0] - 3 - g.getFontWidth("" + v), ys[0]);
+					if (this.markScalesOnEveryAxis) {
+						for (int i = 0; i < xs.length; i++) {
+							g.drawString("" + v, xs[i] - 3 - g.getFontWidth("" + v), ys[i]);
+						}
+					} else {
+						g.drawString("" + v, xs[0] - 3 - g.getFontWidth("" + v), ys[0]);
+					}
 				}
 			}
 		}
