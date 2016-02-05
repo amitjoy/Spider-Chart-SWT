@@ -99,7 +99,10 @@ public class SpiderChart {
 	public double axisMargin = 0.0625D;
 
 	/** */
-	public FillStyle back = null;
+	public FillStyle back = new FillStyle(SWTGraphicsSupplier.getColor(SpiderChartColor.AQUA));
+
+	/** */
+	public String backgroundCanvasColor = SpiderChartColor.AQUA;
 
 	/** Spider Chart Back Image */
 	public SpiderChartImage backImage;
@@ -645,8 +648,8 @@ public class SpiderChart {
 			gBack = this.backTmpImage.getGraphics();
 		}
 		if (this.repaintAll) {
-			if (this.back != null) {
-				this.back.draw(gBack, 0, 0, this.virtualWidth, this.virtualHeight);
+			if ((this.back != null) && (this.backgroundCanvasColor != null)) {
+				this.back.draw(gBack, this.backgroundCanvasColor, 0, 0, this.virtualWidth, this.virtualHeight);
 			}
 			if (this.backImage != null) {
 				this.drawBackImage(gBack);

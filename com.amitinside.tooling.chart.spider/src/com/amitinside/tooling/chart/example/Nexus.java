@@ -22,7 +22,7 @@ public class Nexus implements ISpiderChartDrawable {
 
 	@Override
 	public String areaColor() {
-		return SpiderChartColor.GREEN;
+		return SpiderChartColor.OLIVE;
 	}
 
 	@Override

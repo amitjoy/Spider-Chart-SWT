@@ -37,7 +37,7 @@ public final class Sample {
 
 		viewer = SpiderChartBuilder.config(shell, settings -> {
 
-			settings.title(title -> title.text = "Smartphone Comparison").legend(legend -> {
+			settings.title(title -> title.text = "Smartphone Comparison Data").legend(legend -> {
 				legend.addItem(iPhoneData);
 				legend.addItem(nexusData);
 			}).plotter(plotter -> {

@@ -53,7 +53,7 @@ public class SpiderPlotter extends SpiderChartPlotter {
 	public SpiderChartFont axisFactorFont = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.PLAIN, 10);
 
 	/**
-	 * Spider Chart Area Background Style
+	 * Spider Chart Polygon Area Background Style
 	 */
 	public FillStyle backStyle;
 

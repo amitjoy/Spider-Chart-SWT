@@ -33,8 +33,8 @@ public class FillStyle {
 	public float alphaValue = 1.0F;
 	/** */
 	SpiderChartColor color;
-	/** */
-	public SpiderChartColor colorFrom = SWTGraphicsSupplier.getColor(SpiderChartColor.RED);
+	/** Spider Chart Canvas Background Color */
+	public SpiderChartColor colorFrom = SWTGraphicsSupplier.getColor(SpiderChartColor.AZURE);
 	/** */
 	public SpiderChartColor colorUntil = SWTGraphicsSupplier.getColor(SpiderChartColor.WHITE);
 	/** */
@@ -50,18 +50,18 @@ public class FillStyle {
 	/** */
 	public SpiderChartImage textureImage = null;
 
-	/** */
+	/** Constructor */
 	public FillStyle(final SpiderChartColor c) {
 		this.color = c;
 	}
 
-	/** */
+	/** Constructor */
 	public FillStyle(final SpiderChartColor c, final float f) {
 		this.color = c;
 		this.alphaValue = f;
 	}
 
-	/** */
+	/** Constructor */
 	public FillStyle(final SpiderChartImage i) {
 		this.textureImage = i;
 		this.color = SWTGraphicsSupplier.getColor(SpiderChartColor.WHITE);
@@ -82,6 +82,32 @@ public class FillStyle {
 		g.setTexture(this.textureImage);
 		g.setColor(this.color);
 		if (this.gradientType != NO_GRADIENT) {
+			g.createFadeArea(this.colorFrom, this.colorUntil, x1, y1, x2 - x1, y2 - y1,
+					this.gradientType == GRADIENT_VERTICAL, this.gradientCyclic);
+		} else {
+			this.setAlpha(g);
+			g.fillRect(x1, y1, x2 - x1, y2 - y1);
+			this.resetAlpha(g);
+		}
+	}
+
+	/** */
+	protected void draw(final SpiderChartGraphics g, final String backgroundCanvasColor, int x1, int y1, int x2,
+			int y2) {
+		if (x1 > x2) {
+			final int xtmp = x2;
+			x2 = x1;
+			x1 = xtmp;
+		}
+		if (y1 > y2) {
+			final int ytmp = y2;
+			y2 = y1;
+			y1 = ytmp;
+		}
+		g.setTexture(this.textureImage);
+		g.setColor(this.color);
+		if (this.gradientType != NO_GRADIENT) {
+			this.colorFrom = SWTGraphicsSupplier.getColor(backgroundCanvasColor);
 			g.createFadeArea(this.colorFrom, this.colorUntil, x1, y1, x2 - x1, y2 - y1,
 					this.gradientType == GRADIENT_VERTICAL, this.gradientCyclic);
 		} else {

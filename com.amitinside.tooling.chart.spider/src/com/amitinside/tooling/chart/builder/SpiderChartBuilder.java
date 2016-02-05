@@ -78,10 +78,13 @@ public class SpiderChartBuilder {
 		this.chartViewer.changePointer = true;
 		this.chartViewer.allowZoom = true;
 
+		// Some chart related default configurations
 		this.chart = new SpiderChart(chartConfiguration.getTitle(), chartConfiguration.getPlotter());
 		this.chart.back = new FillStyle(SWTGraphicsSupplier.getColor(SpiderChartColor.YELLOW));
+		this.chart.backgroundCanvasColor = SpiderChartColor.ANTIQUEWHITE;
 		this.chart.back.gradientType = FillStyle.GRADIENT_VERTICAL;
 		this.chart.legend = chartConfiguration.getLegend();
+		this.chart.repaintAll = true;
 		this.chart.showTips = true;
 	}
 

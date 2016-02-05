@@ -64,7 +64,7 @@ public class SpiderChartConfigurationBuilder {
 	/** */
 	public SpiderChartConfigurationBuilder plotter(final Consumer<SpiderPlotter> plotter) {
 		this.plotter = new SpiderPlotter();
-		this.plotter.backStyle = new FillStyle(SWTGraphicsSupplier.getColor(SpiderChartColor.YELLOW));
+		this.plotter.backStyle = new FillStyle(SWTGraphicsSupplier.getColor(SpiderChartColor.PALEGREEN));
 
 		this.plotter.gridStyle = new LineStyle(1, SWTGraphicsSupplier.getColor(SpiderChartColor.TELA),
 				LineStyle.DASHED_LINE);
