@@ -16,6 +16,7 @@
 package com.amitinside.tooling.chart.builder;
 
 import static com.amitinside.tooling.chart.style.LineStyle.NORMAL_LINE;
+import static java.util.Objects.requireNonNull;
 
 import java.util.function.Consumer;
 
@@ -63,6 +64,7 @@ public final class SpiderChartConfigurationBuilder {
 
 	/** */
 	public SpiderChartConfigurationBuilder plotter(final Consumer<SpiderChartPlotter> plotter) {
+		requireNonNull(plotter);
 		this.plotter = new SpiderChartPlotter();
 		this.plotter.backStyle = new FillStyle(SWTGraphicsSupplier.getColor(SpiderChartColor.PALEGREEN));
 
@@ -76,6 +78,7 @@ public final class SpiderChartConfigurationBuilder {
 
 	/** */
 	public SpiderChartConfigurationBuilder title(final Consumer<SpiderChartTitle> titleBuilder) {
+		requireNonNull(titleBuilder);
 		this.title = new SpiderChartTitle();
 		titleBuilder.accept(this.title);
 		return this;

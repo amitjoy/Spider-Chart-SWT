@@ -15,6 +15,8 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.plotter.spider;
 
+import static java.util.Objects.requireNonNull;
+
 import java.text.DecimalFormat;
 
 import com.amitinside.tooling.chart.builder.AxesConfigurer;
@@ -131,6 +133,8 @@ public final class SpiderChartPlotter extends SpiderPlotter {
 
 	/** */
 	public void inject(final AxesConfigurer configurer) {
+		requireNonNull(configurer);
+
 		this.maxScaleFactors = configurer.maxScales();
 		this.minScaleFactors = configurer.minScales();
 		this.axesFactors = configurer.axesNames();

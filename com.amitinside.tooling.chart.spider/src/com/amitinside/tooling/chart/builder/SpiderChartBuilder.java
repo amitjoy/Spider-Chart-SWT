@@ -41,6 +41,7 @@ public final class SpiderChartBuilder {
 	public static SpiderChartBuilder config(final Composite parent,
 			final Consumer<SpiderChartConfigurationBuilder> settings) {
 		requireNonNull(parent);
+		requireNonNull(settings);
 
 		chartConfiguration = new SpiderChartConfigurationBuilder();
 		settings.accept(chartConfiguration);
@@ -64,6 +65,7 @@ public final class SpiderChartBuilder {
 
 	/** */
 	public SpiderChartBuilder data(final Consumer<AxisDataBuilder> dataBuilderConsumer) {
+		requireNonNull(dataBuilderConsumer);
 		final AxisDataBuilder dataBuilder = new AxisDataBuilder(this.chart);
 		dataBuilderConsumer.accept(dataBuilder);
 		this.chartViewer.setChart(this.chart);
@@ -91,6 +93,7 @@ public final class SpiderChartBuilder {
 
 	/** */
 	public SpiderChartViewer viewer(final Consumer<SpiderChartBuilder> chartBuilderConsumer) {
+		requireNonNull(chartBuilderConsumer);
 		chartBuilderConsumer.accept(chartViewerBuilder);
 		return chartViewerBuilder.chartViewer;
 	}
