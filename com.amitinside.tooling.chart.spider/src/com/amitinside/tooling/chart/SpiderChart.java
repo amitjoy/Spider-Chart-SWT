@@ -21,6 +21,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.amitinside.tooling.chart.api.IFloatingObject;
 import com.amitinside.tooling.chart.axis.SpiderChartAxis;
+import com.amitinside.tooling.chart.gc.Polygon;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartFont;
@@ -29,7 +30,7 @@ import com.amitinside.tooling.chart.gc.SpiderChartImage;
 import com.amitinside.tooling.chart.label.SpiderChartLabel;
 import com.amitinside.tooling.chart.legend.SpiderChartLegend;
 import com.amitinside.tooling.chart.listener.ISpiderChartListener;
-import com.amitinside.tooling.chart.plotter.SpiderPlotter;
+import com.amitinside.tooling.chart.plotter.spider.SpiderChartPlotter;
 import com.amitinside.tooling.chart.sequence.DataSeq;
 import com.amitinside.tooling.chart.sequence.LineDataSeq;
 import com.amitinside.tooling.chart.style.FillStyle;
@@ -42,7 +43,7 @@ import com.amitinside.tooling.chart.title.SpiderChartTitle;
  * @author AMIT KUMAR MONDAL
  *
  */
-public final class SpiderChart {
+public class SpiderChart {
 
 	private class SpiderChartWorker implements Runnable {
 
@@ -136,6 +137,27 @@ public final class SpiderChart {
 	private final List<ISpiderChartListener> chartListeners = new CopyOnWriteArrayList<>();
 
 	/** */
+	public double currentValueX;
+
+	/** */
+	public double currentValueY;
+
+	/** */
+	public double currentValueY2;
+
+	/** */
+	public int currentX;
+
+	/** */
+	public int currentY;
+
+	/** */
+	private int cursorLastX = 0;
+
+	/** */
+	private int cursorLastY = 0;
+
+	/** */
 	private SpiderChartWorker deamon = null;
 
 	/** */
@@ -190,7 +212,13 @@ public final class SpiderChart {
 	public int offsetY = 0;
 
 	/** */
-	public SpiderPlotter[] plotters = new SpiderPlotter[10];
+	private int originalVirtualHeight = -1;
+
+	/** */
+	private int originalVirtualWidth = -1;
+
+	/** */
+	public SpiderChartPlotter[] plotters = new SpiderChartPlotter[10];
 
 	/** */
 	private int plottersCount = 0;
@@ -206,6 +234,9 @@ public final class SpiderChart {
 
 	/** */
 	public double rightMargin = 0.125D;
+
+	/** */
+	public double secondYAxisMargin = 0.0D;
 
 	/** */
 	public SpiderChartLabel selectedLabel = null;
@@ -267,7 +298,7 @@ public final class SpiderChart {
 	}
 
 	/** Constructor */
-	public SpiderChart(final SpiderChartTitle t, final SpiderPlotter p) {
+	public SpiderChart(final SpiderChartTitle t, final SpiderChartPlotter p) {
 		this.resetChart(t, p, null, null);
 	}
 
@@ -287,7 +318,7 @@ public final class SpiderChart {
 	}
 
 	/** */
-	public void addPlotter(final SpiderPlotter p) {
+	public void addPlotter(final SpiderChartPlotter p) {
 		this.plotters[this.plottersCount] = p;
 		this.plotters[this.plottersCount].XScale = this.plotters[0].XScale;
 		this.plotters[this.plottersCount].YScale = this.plotters[0].YScale;
@@ -489,7 +520,16 @@ public final class SpiderChart {
 		if (this.plotters[0] == null) {
 			return;
 		}
+		this.currentValueX = 0.0D;
+		this.currentValueY = 0.0D;
+		this.currentValueY2 = 0.0D;
+
+		this.currentX = eX;
+		this.currentY = eY;
+
 		Object previousSelectedObject = this.selectedSerie;
+		final int previousPoint = this.selectedSeriePoint;
+
 		if ((this.selectedSerie == null) && (this.selectedLabel != null)) {
 			previousSelectedObject = this.selectedLabel;
 		}
@@ -497,10 +537,47 @@ public final class SpiderChart {
 		this.selectedLabel = null;
 		this.selectedSeriePoint = -1;
 		if (this.activateSelection) {
-			for (final SpiderPlotter plotter : this.plotters) {
+			for (final SpiderChartPlotter plotter : this.plotters) {
 				if (plotter == null) {
 					break;
 				}
+				for (int k = 0; k < plotter.getSeriesCount(); k++) {
+					final DataSeq d = plotter.getSerie(k);
+					for (int i = 0; i < d.hotAreas.size(); i++) {
+						if (((Polygon) d.hotAreas.elementAt(i)).contains(this.currentX + this.offsetX,
+								this.currentY + this.offsetY)) {
+							boolean triggerEnter = false;
+							if (previousSelectedObject == null) {
+								triggerEnter = true;
+							} else if ((previousSelectedObject != d) || (previousPoint != i)) {
+								this.triggerEvent(3);
+								triggerEnter = true;
+							}
+							this.selectedSerie = d;
+							this.selectedSeriePoint = i;
+							if (!triggerEnter) {
+								break;
+							}
+							this.triggerEvent(2);
+							break;
+						}
+					}
+				}
+			}
+			if (this.selectedSerie == null) {
+				for (int i = 0; i < this.chartHotAreas.size(); i++) {
+					final SpiderChartLabel label = (SpiderChartLabel) this.chartHotAreas.elementAt(i);
+					if (label.clickableArea.contains(this.currentX + this.offsetX, this.currentY + this.offsetY)) {
+						this.selectedLabel = label;
+						break;
+					}
+				}
+
+			}
+			if ((Math.abs(this.currentX - this.cursorLastX) > 2) || (Math.abs(this.currentY - this.cursorLastY) > 2)) {
+				this.cursorLastX = this.currentX;
+				this.cursorLastY = this.currentY;
+				this.triggerEvent(4);
 			}
 		}
 		if ((previousSelectedObject != null) && (this.selectedSerie == null) && (this.selectedLabel == null)) {
@@ -516,7 +593,7 @@ public final class SpiderChart {
 		System.currentTimeMillis();
 		if ((this.plotters[0] == null) || (this.plottersCount <= 0)) {
 			pg.setColor(SWTGraphicsSupplier.getColor(SpiderChartColor.RED));
-			pg.drawString("Error: No plotters have been defined", 30, 30);
+			pg.drawString("Error: No plotters/series have been defined", 30, 30);
 			return;
 		}
 		for (int j = 0; j < this.plottersCount; j++) {
@@ -534,6 +611,12 @@ public final class SpiderChart {
 			this.lastWidth = this.width;
 			this.lastHeight = this.height;
 		}
+		if (this.originalVirtualHeight == -1) {
+			this.originalVirtualHeight = this.virtualHeight;
+		}
+		if (this.originalVirtualWidth == -1) {
+			this.originalVirtualWidth = this.virtualWidth;
+		}
 		if (!this.withScroll) {
 			this.repaintAlways = true;
 		}
@@ -541,6 +624,10 @@ public final class SpiderChart {
 			this.repaintAll = true;
 		}
 		if (this.autoSize) {
+			if (!this.withScroll) {
+				this.virtualHeight = this.originalVirtualHeight;
+				this.virtualWidth = this.originalVirtualWidth;
+			}
 			this.autoSize();
 		}
 		try {
@@ -737,10 +824,10 @@ public final class SpiderChart {
 	}
 
 	/** */
-	protected void resetChart(final SpiderChartTitle t, final SpiderPlotter p, final SpiderChartAxis X,
+	protected void resetChart(final SpiderChartTitle t, final SpiderChartPlotter p, final SpiderChartAxis X,
 			final SpiderChartAxis Y) {
 		this.plottersCount = 0;
-		this.plotters = new SpiderPlotter[10];
+		this.plotters = new SpiderChartPlotter[10];
 		this.legend = null;
 		this.title = null;
 		this.border = null;
@@ -768,6 +855,16 @@ public final class SpiderChart {
 			this.title.text = "";
 		}
 		this.plottersCount = 1;
+	}
+
+	/** */
+	public void resetSize() {
+		if (this.originalVirtualHeight > -1) {
+			this.virtualHeight = this.originalVirtualHeight;
+		}
+		if (this.originalVirtualWidth > -1) {
+			this.virtualWidth = this.originalVirtualWidth;
+		}
 	}
 
 	/** */
