@@ -13,19 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.amitinside.tooling.chart;
+package com.amitinside.tooling.chart.legend;
 
 import static com.amitinside.tooling.chart.gc.SWTGraphicsSupplier.getColor;
 
 import java.util.Vector;
 import java.util.function.Supplier;
 
+import com.amitinside.tooling.chart.SpiderChartComponent;
 import com.amitinside.tooling.chart.api.ISpiderChartPlottable;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartFont;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.gc.SpiderChartImage;
+import com.amitinside.tooling.chart.label.SpiderChartLabel;
+import com.amitinside.tooling.chart.style.FillStyle;
+import com.amitinside.tooling.chart.style.LineStyle;
 
 public class SpiderChartLegend extends SpiderChartComponent {
 

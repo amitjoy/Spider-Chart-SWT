@@ -23,11 +23,11 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 
-import com.amitinside.tooling.chart.FillStyle;
 import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.swt.SwtGraphicsProvider;
+import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.swt.SpiderChartViewer;
 
 public class SpiderChartBuilder {

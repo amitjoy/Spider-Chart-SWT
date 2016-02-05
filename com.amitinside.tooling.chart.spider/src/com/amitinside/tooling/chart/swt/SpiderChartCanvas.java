@@ -24,10 +24,10 @@ import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 
-import com.amitinside.tooling.chart.ISpiderChartListener;
 import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
+import com.amitinside.tooling.chart.listener.ISpiderChartListener;
 
 public class SpiderChartCanvas extends Canvas implements ISpiderChartListener {
 

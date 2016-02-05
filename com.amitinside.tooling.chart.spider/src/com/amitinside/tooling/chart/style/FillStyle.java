@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.amitinside.tooling.chart;
+package com.amitinside.tooling.chart.style;
 
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.gc.SpiderChartImage;
 
-public class FillStyle {
+public final class FillStyle {
 
 	/** */
 	public static int GRADIENT_HORIZONTAL = 1;
@@ -68,7 +68,7 @@ public class FillStyle {
 	}
 
 	/** */
-	protected void draw(final SpiderChartGraphics g, int x1, int y1, int x2, int y2) {
+	public void draw(final SpiderChartGraphics g, int x1, int y1, int x2, int y2) {
 		if (x1 > x2) {
 			final int xtmp = x2;
 			x2 = x1;
@@ -92,8 +92,7 @@ public class FillStyle {
 	}
 
 	/** */
-	protected void draw(final SpiderChartGraphics g, final String backgroundCanvasColor, int x1, int y1, int x2,
-			int y2) {
+	public void draw(final SpiderChartGraphics g, final String backgroundCanvasColor, int x1, int y1, int x2, int y2) {
 		if (x1 > x2) {
 			final int xtmp = x2;
 			x2 = x1;
@@ -118,8 +117,8 @@ public class FillStyle {
 	}
 
 	/** */
-	protected void drawArc(final SpiderChartGraphics g, final int x, final int y, final int w, final int h,
-			final int a1, final int a2) {
+	public void drawArc(final SpiderChartGraphics g, final int x, final int y, final int w, final int h, final int a1,
+			final int a2) {
 		g.setTexture(this.textureImage);
 		g.setColor(this.color);
 		this.setAlpha(g);
@@ -128,7 +127,7 @@ public class FillStyle {
 	}
 
 	/** */
-	protected void drawPolygon(final SpiderChartGraphics g, final int[] x1, final int[] y1, final int num) {
+	public void drawPolygon(final SpiderChartGraphics g, final int[] x1, final int[] y1, final int num) {
 		g.setTexture(this.textureImage);
 		g.setColor(this.color);
 		this.setAlpha(g);

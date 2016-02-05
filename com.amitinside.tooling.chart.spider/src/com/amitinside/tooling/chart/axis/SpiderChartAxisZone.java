@@ -13,9 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.amitinside.tooling.chart;
+package com.amitinside.tooling.chart.axis;
 
+import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
+import com.amitinside.tooling.chart.style.FillStyle;
+import com.amitinside.tooling.chart.style.LineStyle;
 
 public class SpiderChartAxisZone {
 

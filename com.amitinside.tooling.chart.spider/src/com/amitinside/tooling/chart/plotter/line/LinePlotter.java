@@ -13,10 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.amitinside.tooling.chart;
+package com.amitinside.tooling.chart.plotter.line;
 
+import com.amitinside.tooling.chart.Scale;
 import com.amitinside.tooling.chart.gc.Polygon;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
+import com.amitinside.tooling.chart.label.SpiderChartLabel;
+import com.amitinside.tooling.chart.plotter.spider.SpiderChartPlotter;
+import com.amitinside.tooling.chart.sequence.DataSeq;
+import com.amitinside.tooling.chart.sequence.LineDataSeq;
 
 public class LinePlotter extends SpiderChartPlotter {
 

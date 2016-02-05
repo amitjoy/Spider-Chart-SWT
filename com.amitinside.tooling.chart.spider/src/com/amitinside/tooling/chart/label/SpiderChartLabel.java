@@ -13,13 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.amitinside.tooling.chart;
+package com.amitinside.tooling.chart.label;
 
+import com.amitinside.tooling.chart.SpiderChart;
+import com.amitinside.tooling.chart.api.IFloatingObject;
 import com.amitinside.tooling.chart.gc.Polygon;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.gc.SpiderChartImage;
+import com.amitinside.tooling.chart.style.FillStyle;
+import com.amitinside.tooling.chart.style.LineStyle;
 
 public class SpiderChartLabel implements IFloatingObject {
 
@@ -50,7 +54,7 @@ public class SpiderChartLabel implements IFloatingObject {
 	/** */
 	protected SpiderChart chart = null;
 	/** */
-	protected Polygon clickableArea = null;
+	public Polygon clickableArea = null;
 	/** */
 	protected String clickInfo = "";
 	/** */
@@ -74,9 +78,9 @@ public class SpiderChartLabel implements IFloatingObject {
 	/** */
 	protected int positionY = 0;
 	/** */
-	int requiredHeight = 0;
+	public int requiredHeight = 0;
 	/** */
-	int requiredWidth = 0;
+	public int requiredWidth = 0;
 	/** */
 	protected int rotation = 0;
 	/** */
@@ -117,7 +121,7 @@ public class SpiderChartLabel implements IFloatingObject {
 	}
 
 	/** */
-	protected int getRotatedHeight() {
+	public int getRotatedHeight() {
 		if ((this.rotation == 90) || (this.rotation == -90) || (this.rotation == 270)) {
 			return this.requiredWidth;
 		}
@@ -125,7 +129,7 @@ public class SpiderChartLabel implements IFloatingObject {
 	}
 
 	/** */
-	protected int getRotatedWidth() {
+	public int getRotatedWidth() {
 		if ((this.rotation == 90) || (this.rotation == -90) || (this.rotation == 270)) {
 			return this.requiredHeight;
 		}

@@ -45,7 +45,6 @@ public final class Sample {
 						.addAxis("Camera", 5, 0).addAxis("Display", 5, 0).addAxis("Memory", 5, 0).addAxis("Brand", 5, 0)
 						.build();
 				plotter.inject(configurer);
-				plotter.markScalesOnEveryAxis = true;
 			});
 		}).viewer(chart -> {
 			chart.data(firstData -> firstData.inject(iPhoneData)).data(secondData -> secondData.inject(nexusData));

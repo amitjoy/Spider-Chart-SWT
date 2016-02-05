@@ -15,7 +15,10 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart;
 
+import com.amitinside.tooling.chart.axis.SpiderChartAxis;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
+import com.amitinside.tooling.chart.style.FillStyle;
+import com.amitinside.tooling.chart.style.LineStyle;
 
 public class TargetZone {
 
@@ -25,8 +28,6 @@ public class TargetZone {
 	public boolean background = true;
 	/** */
 	protected SpiderChart chart = null;
-	/** */
-	protected int effect3D = 0;
 	/** */
 	public FillStyle fillStyle;
 	/** */
@@ -104,20 +105,6 @@ public class TargetZone {
 					x1 = pixelEnd;
 					x2 = pixelStart;
 				}
-				this.fillStyle.draw(g, x1 + this.effect3D, y1 - this.effect3D, x2 + this.effect3D, y2 - this.effect3D);
-			}
-			if ((this.style != null) && (pixelStart >= 0)) {
-				this.style.draw(g, pixelStart + this.effect3D, hStart - this.effect3D, pixelStart + this.effect3D,
-						hEnd - this.effect3D);
-			}
-			if ((this.style != null) && (pixelEnd >= 0)) {
-				this.style.draw(g, pixelEnd + this.effect3D, hStart - this.effect3D, pixelEnd + this.effect3D,
-						hEnd - this.effect3D);
-			}
-			if (this.label.length() > 0) {
-				final SpiderChartLabel clabel = new SpiderChartLabel(" " + this.label, "", false, false);
-				clabel.initialize(g, this.chart);
-				clabel.paint(g, pixelStart + this.effect3D, hEnd - this.effect3D, -1, -1);
 			}
 		} else {
 			final int wStart = xaxis.x;
@@ -135,20 +122,6 @@ public class TargetZone {
 					y1 = pixelEnd;
 					y2 = pixelStart;
 				}
-				this.fillStyle.draw(g, x1 + this.effect3D, y1 - this.effect3D, x2 + this.effect3D, y2 - this.effect3D);
-			}
-			if ((this.style != null) && (pixelStart >= 0)) {
-				this.style.draw(g, wStart + this.effect3D, pixelStart - this.effect3D, wEnd + this.effect3D,
-						pixelStart - this.effect3D);
-			}
-			if ((this.style != null) && (pixelEnd >= 0)) {
-				this.style.draw(g, wStart + this.effect3D, pixelEnd - this.effect3D, wEnd + this.effect3D,
-						pixelEnd - this.effect3D);
-			}
-			if (this.label.length() > 0) {
-				final SpiderChartLabel clabel = new SpiderChartLabel(" " + this.label, "", false, false);
-				clabel.initialize(g, this.chart);
-				clabel.paint(g, wEnd + this.effect3D, pixelStart - this.effect3D, -1, -1);
 			}
 		}
 	}

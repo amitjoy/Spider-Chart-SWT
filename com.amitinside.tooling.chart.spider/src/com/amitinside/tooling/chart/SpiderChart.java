@@ -21,12 +21,23 @@ import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import com.amitinside.tooling.chart.api.IFloatingObject;
+import com.amitinside.tooling.chart.axis.SpiderChartAxis;
 import com.amitinside.tooling.chart.gc.Polygon;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartFont;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.gc.SpiderChartImage;
+import com.amitinside.tooling.chart.label.SpiderChartLabel;
+import com.amitinside.tooling.chart.legend.SpiderChartLegend;
+import com.amitinside.tooling.chart.listener.ISpiderChartListener;
+import com.amitinside.tooling.chart.plotter.spider.SpiderChartPlotter;
+import com.amitinside.tooling.chart.sequence.DataSeq;
+import com.amitinside.tooling.chart.sequence.LineDataSeq;
+import com.amitinside.tooling.chart.style.FillStyle;
+import com.amitinside.tooling.chart.style.LineStyle;
+import com.amitinside.tooling.chart.title.SpiderChartTitle;
 
 /**
  * Actual Spider Chart
@@ -84,7 +95,7 @@ public class SpiderChart {
 	public static String numberLocale;
 
 	/** */
-	protected static int d() {
+	public static int d() {
 		return 0;
 	}
 
@@ -119,7 +130,7 @@ public class SpiderChart {
 	public double bottomMargin = 0.125D;
 
 	/** */
-	protected Vector<Object> chartHotAreas = new Vector<>(0, 5);
+	public Vector<Object> chartHotAreas = new Vector<>(0, 5);
 
 	/** Spider Chart Image */
 	private SpiderChartImage chartImage = null;
@@ -299,7 +310,7 @@ public class SpiderChart {
 	}
 
 	/** */
-	protected void addFloationgObject(final IFloatingObject obj) {
+	public void addFloationgObject(final IFloatingObject obj) {
 		this.floatingObjects.addElement(obj);
 	}
 
@@ -769,7 +780,6 @@ public class SpiderChart {
 		for (int i = 0; i < this.targetZones.size(); i++) {
 			final TargetZone z = this.targetZones.elementAt(i);
 			z.chart = this;
-			z.effect3D = this.plotters[0].depth;
 		}
 	}
 
@@ -784,7 +794,7 @@ public class SpiderChart {
 	}
 
 	/** */
-	protected void placeFloatingObject(final IFloatingObject obj) {
+	public void placeFloatingObject(final IFloatingObject obj) {
 	}
 
 	/** */

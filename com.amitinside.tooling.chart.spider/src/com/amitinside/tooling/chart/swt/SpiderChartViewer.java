@@ -26,7 +26,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Slider;
 
 import com.amitinside.tooling.chart.SpiderChart;
-import com.amitinside.tooling.chart.SpiderChartAdapter;
+import com.amitinside.tooling.chart.listener.SpiderChartAdapter;
 
 public class SpiderChartViewer extends Composite {
 

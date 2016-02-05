@@ -13,12 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.amitinside.tooling.chart;
+package com.amitinside.tooling.chart.sequence;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Vector;
+
+import com.amitinside.tooling.chart.SpiderChart;
+import com.amitinside.tooling.chart.axis.SpiderChartAxis;
 
 public class DataSeq {
 
@@ -45,9 +48,9 @@ public class DataSeq {
 	/** */
 	public String valueFormat = "######.##";
 	/** */
-	Vector<Double> xData = new Vector<>(0, 5);
+	public Vector<Double> xData = new Vector<>(0, 5);
 	/** */
-	Vector<Double> yData = new Vector<>(0, 5);
+	public Vector<Double> yData = new Vector<>(0, 5);
 
 	/**
 	 * Constructor
@@ -110,7 +113,7 @@ public class DataSeq {
 	}
 
 	/** */
-	protected String doubleToString(final Double d) {
+	public String doubleToString(final Double d) {
 		if (this.valueFormat.compareTo("") == 0) {
 			return d.toString();
 		}

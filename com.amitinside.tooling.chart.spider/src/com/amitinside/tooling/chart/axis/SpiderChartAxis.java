@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.amitinside.tooling.chart;
+package com.amitinside.tooling.chart.axis;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -23,10 +23,17 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Vector;
 
+import com.amitinside.tooling.chart.Scale;
+import com.amitinside.tooling.chart.SpiderChart;
+import com.amitinside.tooling.chart.SpiderChartComponent;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartFont;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
+import com.amitinside.tooling.chart.label.SpiderChartLabel;
+import com.amitinside.tooling.chart.plotter.spider.SpiderChartPlotter;
+import com.amitinside.tooling.chart.style.FillStyle;
+import com.amitinside.tooling.chart.style.LineStyle;
 
 /**
  * Spider Chart Axis
@@ -120,7 +127,7 @@ public class SpiderChartAxis extends SpiderChartComponent {
 	public boolean logarithmicIntervals = false;
 
 	/** */
-	protected SpiderChartAxis mainAxis = null;
+	public SpiderChartAxis mainAxis = null;
 
 	/** */
 	private int maxTickLabelLength = 0;
@@ -141,7 +148,7 @@ public class SpiderChartAxis extends SpiderChartComponent {
 	protected int realPosition;
 
 	/** */
-	protected boolean rightAxis = false;
+	public boolean rightAxis = false;
 
 	/** */
 	public int rotateLabels = 0;

@@ -13,30 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.amitinside.tooling.chart;
+package com.amitinside.tooling.chart.api;
 
-import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
+import com.amitinside.tooling.chart.gc.Polygon;
 
-public interface ISpiderChartListener {
-
-	/** */
-	public static final int EVENT_AFTER_UPDATE = 1;
-	/** */
-	public static final int EVENT_BEFORE_UPDATE = 0;
-	/** */
-	public static final int EVENT_CHART_CLICKED = 6;
-	/** */
-	public static final int EVENT_ENTER_POINT = 2;
-	/** */
-	public static final int EVENT_LEAVE_POINT = 3;
-	/** */
-	public static final int EVENT_POINT_CLICKED = 5;
-	/** */
-	public static final int EVENT_TIP_UPDATE = 4;
+public interface IFloatingObject {
 
 	/** */
-	public abstract void chartEvent(SpiderChart paramChart, int paramInt);
+	public static final String layerId = "";
 
 	/** */
-	public abstract void paintUserExit(SpiderChart paramChart, SpiderChartGraphics paramChartGraphics);
+	public abstract Polygon getObjectBounds();
+
+	/** */
+	public abstract int getX();
+
+	/** */
+	public abstract int getY();
+
+	/** */
+	public abstract void setX(int paramInt);
+
+	/** */
+	public abstract void setY(int paramInt);
 }

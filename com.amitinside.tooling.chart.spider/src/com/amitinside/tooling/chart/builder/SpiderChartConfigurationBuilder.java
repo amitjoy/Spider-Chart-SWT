@@ -15,18 +15,18 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.builder;
 
-import static com.amitinside.tooling.chart.LineStyle.NORMAL_LINE;
+import static com.amitinside.tooling.chart.style.LineStyle.NORMAL_LINE;
 
 import java.util.function.Consumer;
 
-import com.amitinside.tooling.chart.FillStyle;
-import com.amitinside.tooling.chart.LineStyle;
-import com.amitinside.tooling.chart.SpiderChartLegend;
-import com.amitinside.tooling.chart.SpiderChartTitle;
-import com.amitinside.tooling.chart.SpiderPlotter;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartFont;
+import com.amitinside.tooling.chart.legend.SpiderChartLegend;
+import com.amitinside.tooling.chart.plotter.SpiderPlotter;
+import com.amitinside.tooling.chart.style.FillStyle;
+import com.amitinside.tooling.chart.style.LineStyle;
+import com.amitinside.tooling.chart.title.SpiderChartTitle;
 
 public class SpiderChartConfigurationBuilder {
 

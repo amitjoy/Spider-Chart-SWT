@@ -13,13 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.amitinside.tooling.chart;
+package com.amitinside.tooling.chart.plotter.spider;
 
 import java.util.Calendar;
 import java.util.Vector;
 
+import com.amitinside.tooling.chart.Scale;
+import com.amitinside.tooling.chart.SpiderChart;
+import com.amitinside.tooling.chart.SpiderChartComponent;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.gc.SpiderChartImage;
+import com.amitinside.tooling.chart.plotter.SpiderPlotter;
+import com.amitinside.tooling.chart.plotter.line.LinePlotter;
+import com.amitinside.tooling.chart.sequence.DataSeq;
+import com.amitinside.tooling.chart.style.FillStyle;
 
 /**
  * Base class used to create spider chart plotters
@@ -45,7 +52,7 @@ public class SpiderChartPlotter extends SpiderChartComponent {
 	protected int needsAxis = 2;
 
 	/** */
-	Vector<DataSeq> series = new Vector<>(0, 1);
+	public Vector<DataSeq> series = new Vector<>(0, 1);
 
 	/** */
 	public int visibleHeight = 0;
@@ -164,6 +171,10 @@ public class SpiderChartPlotter extends SpiderChartComponent {
 	}
 
 	/** */
+	protected void plot(final SpiderChartGraphics g, final DataSeq s, final int serieSec) {
+	}
+
+	/** */
 	public void plotBackground(final SpiderChartGraphics g, final int bw, final int bh, final int offsetX,
 			final int offsetY) {
 		if (this.back != null) {
@@ -209,10 +220,6 @@ public class SpiderChartPlotter extends SpiderChartComponent {
 				g.drawImage(this.backgroundImage, toCenterX + this.x, this.y + toCenterY);
 			}
 		}
-	}
-
-	/** */
-	protected void plot(final SpiderChartGraphics g, final DataSeq s, final int serieSec) {
 	}
 
 	/** */
