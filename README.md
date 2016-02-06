@@ -21,7 +21,7 @@ Check out the Sample Application in the project for detailed information.
 		final Supplier<ISpiderChartPlottable> iPhoneData = IPhone::new;
 		final Supplier<ISpiderChartPlottable> nexusData = Nexus::new;
 
-		viewer = SpiderChartBuilder.config(shell, settings -> {
+		final SpiderChartViewer viewer = SpiderChartBuilder.config(shell, settings -> {
 			// Add title to the Spider Chart
 			settings.title(title -> title.text = "Smartphone Comparison Scale").legend(legend -> {
 				legend.addItem(iPhoneData);
