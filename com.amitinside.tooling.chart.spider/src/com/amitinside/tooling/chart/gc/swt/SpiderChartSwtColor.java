@@ -71,20 +71,24 @@ public final class SpiderChartSwtColor extends SpiderChartColor {
 		return new SpiderChartSwtColor(Math.min(r, 255), Math.min(g, 255), Math.min(b, 255));
 	}
 
+	/** {@inheritDoc}} */
 	@Override
 	public int getBlue() {
 		return this.blue;
 	}
 
+	/** {@inheritDoc}} */
 	public Color getColor() {
 		return new Color(SwtGraphicsProvider.getDefaultDisplay(), this.red, this.green, this.blue);
 	}
 
+	/** {@inheritDoc}} */
 	@Override
 	public int getGreen() {
 		return this.green;
 	}
 
+	/** {@inheritDoc}} */
 	@Override
 	public int getRed() {
 		return this.red;
