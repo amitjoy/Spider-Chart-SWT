@@ -4,7 +4,7 @@ SWT Utility Library to generate Spider Chart Diagram. The library uses all new J
 
 ### How-To
 
-*In OSGi Environment:*
+*In OSGi Environment (Eclipse RCP):*
 
 Build the library using maven. You will get an OSGi bundle. You just have to install it in your Equinox runtime by just adding it to your RCP target platform.
 
