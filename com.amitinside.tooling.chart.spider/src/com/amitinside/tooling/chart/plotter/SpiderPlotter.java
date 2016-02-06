@@ -18,13 +18,12 @@ package com.amitinside.tooling.chart.plotter;
 import java.util.Calendar;
 import java.util.Vector;
 
-import com.amitinside.tooling.chart.Scale;
 import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.SpiderChartComponent;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.gc.SpiderChartImage;
 import com.amitinside.tooling.chart.plotter.line.LinePlotter;
-import com.amitinside.tooling.chart.plotter.spider.SpiderChartPlotter;
+import com.amitinside.tooling.chart.scale.SpiderChartScale;
 import com.amitinside.tooling.chart.sequence.DataSeq;
 import com.amitinside.tooling.chart.style.FillStyle;
 
@@ -39,7 +38,7 @@ public class SpiderPlotter extends SpiderChartComponent {
 	/** */
 	public FillStyle back = null;
 
-	/** Spider Chart Backgroud Image */
+	/** Spider Chart Background Image */
 	public SpiderChartImage backgroundImage;
 
 	/** */
@@ -61,21 +60,21 @@ public class SpiderPlotter extends SpiderChartComponent {
 	public int visibleWidth = 0;
 
 	/** */
-	public Scale XScale;
+	public SpiderChartScale XScale;
 
 	/** */
-	public Scale Y2Scale;
+	public SpiderChartScale Y2Scale;
 
 	/** */
-	public Scale YScale;
+	public SpiderChartScale YScale;
 
 	/** */
 	public void addSeq(final DataSeq s) {
-		this.replaceSerie(-1, s);
+		this.replaceSeq(-1, s);
 	}
 
 	/** */
-	private void calculateNewMax(final Scale s, final double m) {
+	private void calculateNewMax(final SpiderChartScale s, final double m) {
 		if (!s.exactMaxValue) {
 			s.max = m;
 			return;
@@ -92,7 +91,7 @@ public class SpiderPlotter extends SpiderChartComponent {
 	}
 
 	/** */
-	private void calculateNewMin(final Scale s, final double m) {
+	private void calculateNewMin(final SpiderChartScale s, final double m) {
 		if (!s.exactMinValue) {
 			s.min = m;
 			return;
@@ -109,8 +108,8 @@ public class SpiderPlotter extends SpiderChartComponent {
 	}
 
 	/** */
-	protected Scale getActiveXScale(final DataSeq s) {
-		Scale scale = this.XScale;
+	protected SpiderChartScale getActiveXScale(final DataSeq s) {
+		SpiderChartScale scale = this.XScale;
 		if (s.secondaryXAxis != null) {
 			scale = s.secondaryXAxis.scale;
 		}
@@ -118,8 +117,8 @@ public class SpiderPlotter extends SpiderChartComponent {
 	}
 
 	/** */
-	protected Scale getActiveYScale(final DataSeq s) {
-		Scale scale = this.YScale;
+	protected SpiderChartScale getActiveYScale(final DataSeq s) {
+		SpiderChartScale scale = this.YScale;
 		if (s.secondYAxis && (this.Y2Scale != null)) {
 			scale = this.Y2Scale;
 		} else if (s.secondaryYAxis != null) {
@@ -139,12 +138,12 @@ public class SpiderPlotter extends SpiderChartComponent {
 	}
 
 	/** */
-	public DataSeq getSerie(final int p) {
+	public DataSeq getSeq(final int p) {
 		return this.series.elementAt(p);
 	}
 
 	/** */
-	public int getSeriesCount() {
+	public int getSeqCount() {
 		return this.series.size();
 	}
 
@@ -223,8 +222,8 @@ public class SpiderPlotter extends SpiderChartComponent {
 	}
 
 	/** */
-	public void replaceSerie(final int p, final DataSeq s) {
-		final Scale tmpScaleX = this.getActiveXScale(s);
+	public void replaceSeq(final int p, final DataSeq s) {
+		final SpiderChartScale tmpScaleX = this.getActiveXScale(s);
 		this.getActiveYScale(s);
 		if (p >= this.series.size()) {
 			return;

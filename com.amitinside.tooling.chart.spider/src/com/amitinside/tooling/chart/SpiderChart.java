@@ -45,6 +45,12 @@ import com.amitinside.tooling.chart.title.SpiderChartTitle;
  */
 public class SpiderChart {
 
+	/**
+	 * Background Thread to refresh chart
+	 * 
+	 * @author AMIT KUMAR MONDAL
+	 *
+	 */
 	private class SpiderChartWorker implements Runnable {
 
 		/** */
@@ -448,9 +454,9 @@ public class SpiderChart {
 	public void dispose() {
 		for (int i = 0; i < this.plottersCount; i++) {
 			if (this.plotters[i] != null) {
-				for (int j = 0; j < this.plotters[i].getSeriesCount(); j++) {
-					if (this.plotters[i].getSerie(j) instanceof LineDataSeq) {
-						final LineDataSeq lSerie = (LineDataSeq) this.plotters[i].getSerie(j);
+				for (int j = 0; j < this.plotters[i].getSeqCount(); j++) {
+					if (this.plotters[i].getSeq(j) instanceof LineDataSeq) {
+						final LineDataSeq lSerie = (LineDataSeq) this.plotters[i].getSeq(j);
 						if (lSerie.icon != null) {
 							lSerie.icon.dispose();
 						}
@@ -541,8 +547,8 @@ public class SpiderChart {
 				if (plotter == null) {
 					break;
 				}
-				for (int k = 0; k < plotter.getSeriesCount(); k++) {
-					final DataSeq d = plotter.getSerie(k);
+				for (int k = 0; k < plotter.getSeqCount(); k++) {
+					final DataSeq d = plotter.getSeq(k);
 					for (int i = 0; i < d.hotAreas.size(); i++) {
 						if (((Polygon) d.hotAreas.elementAt(i)).contains(this.currentX + this.offsetX,
 								this.currentY + this.offsetY)) {

@@ -23,7 +23,6 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Vector;
 
-import com.amitinside.tooling.chart.Scale;
 import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.SpiderChartComponent;
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
@@ -32,6 +31,7 @@ import com.amitinside.tooling.chart.gc.SpiderChartFont;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.label.SpiderChartLabel;
 import com.amitinside.tooling.chart.plotter.SpiderPlotter;
+import com.amitinside.tooling.chart.scale.SpiderChartScale;
 import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.style.LineStyle;
 
@@ -130,7 +130,7 @@ public final class SpiderChartAxis extends SpiderChartComponent {
 	public int rotateLabels = 0;
 
 	/** */
-	public Scale scale;
+	public SpiderChartScale scale;
 
 	/** */
 	public String scaleLabelFormat = "";
@@ -175,7 +175,7 @@ public final class SpiderChartAxis extends SpiderChartComponent {
 	/**
 	 * Constructor
 	 */
-	public SpiderChartAxis(final int o, final Scale s) {
+	public SpiderChartAxis(final int o, final SpiderChartScale s) {
 		this.orientation = o;
 		this.scale = s;
 		if (o == 1) {

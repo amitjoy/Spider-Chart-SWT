@@ -15,11 +15,11 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.plotter.line;
 
-import com.amitinside.tooling.chart.Scale;
 import com.amitinside.tooling.chart.gc.Polygon;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.label.SpiderChartLabel;
 import com.amitinside.tooling.chart.plotter.SpiderPlotter;
+import com.amitinside.tooling.chart.scale.SpiderChartScale;
 import com.amitinside.tooling.chart.sequence.DataSeq;
 import com.amitinside.tooling.chart.sequence.LineDataSeq;
 
@@ -140,8 +140,8 @@ public final class LinePlotter extends SpiderPlotter {
 		int scY = 0;
 		boolean isNull = false;
 
-		final Scale tmpScaleY = super.getActiveYScale(s);
-		final Scale tmpScaleX = super.getActiveXScale(s);
+		final SpiderChartScale tmpScaleY = super.getActiveYScale(s);
+		final SpiderChartScale tmpScaleX = super.getActiveXScale(s);
 
 		double XValue;
 		int i;

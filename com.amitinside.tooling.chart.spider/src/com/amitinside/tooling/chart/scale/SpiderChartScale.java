@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.amitinside.tooling.chart;
+package com.amitinside.tooling.chart.scale;
 
-public final class Scale {
+public final class SpiderChartScale {
 
 	/** */
 	public boolean exactMaxValue = false;
@@ -40,11 +40,11 @@ public final class Scale {
 	public int screenMin;
 
 	/** Constructor */
-	public Scale() {
+	public SpiderChartScale() {
 	}
 
 	/** Constructor */
-	public Scale(final int ma, final int mi) {
+	public SpiderChartScale(final int ma, final int mi) {
 		this.max = ma;
 		this.min = mi;
 	}
