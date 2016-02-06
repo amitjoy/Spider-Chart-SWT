@@ -40,8 +40,8 @@ public final class Sample {
 				legend.addItem(nexusData);
 			}).plotter(plotter -> {
 				final AxesConfigurer configuration = new AxesConfigurer.Builder().addAxis("Battery", 5, 0)
-						.addAxis("Camera", 5, 0).addAxis("HHH", 5, 0).addAxis("Display", 5, 0).addAxis("Memory", 5, 0)
-						.addAxis("Brand", 5, 0).build();
+						.addAxis("Camera", 5, 0).addAxis("Display", 5, 0).addAxis("Memory", 5, 0).addAxis("Brand", 5, 0)
+						.build();
 				plotter.use(configuration);
 			});
 		}).viewer(chart -> {

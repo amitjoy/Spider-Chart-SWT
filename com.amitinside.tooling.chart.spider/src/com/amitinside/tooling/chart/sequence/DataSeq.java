@@ -137,42 +137,6 @@ public class DataSeq {
 	}
 
 	/** */
-	public void replaceXValueAt(final int index, final double newValue) {
-		if (index < this.xData.size()) {
-			final Vector<Double> tmp = new Vector<>();
-			for (int i = 0; i < this.xData.size(); i++) {
-				if (index == i) {
-					tmp.addElement(new Double(newValue));
-				} else {
-					tmp.addElement(this.xData.elementAt(i));
-				}
-			}
-			this.xData = tmp;
-		}
-	}
-
-	/** */
-	public void replaceXYValueAt(final int index, final double newValueX, final double newValueY) {
-		this.replaceXValueAt(index, newValueX);
-		this.replaceYValueAt(index, newValueY);
-	}
-
-	/** */
-	public void replaceYValueAt(final int index, final double newValue) {
-		if (index < this.yData.size()) {
-			final Vector<Double> tmp = new Vector<>();
-			for (int i = 0; i < this.yData.size(); i++) {
-				if (index == i) {
-					tmp.addElement(new Double(newValue));
-				} else {
-					tmp.addElement(this.yData.elementAt(i));
-				}
-			}
-			this.yData = tmp;
-		}
-	}
-
-	/** */
 	public void setDatax(final double[] x) {
 		for (int i = 0; i < x.length; i++) {
 			if (i < this.xData.size()) {
