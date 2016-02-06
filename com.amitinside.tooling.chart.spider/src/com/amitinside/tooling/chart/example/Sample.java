@@ -35,14 +35,14 @@ public final class Sample {
 		final Supplier<ISpiderChartPlottable> nexusData = Nexus::new;
 
 		viewer = SpiderChartBuilder.config(shell, settings -> {
-			settings.title(title -> title.text = "Smartphone Comparison Data").legend(legend -> {
+			settings.title(title -> title.text = "Smartphone Comparison Scale").legend(legend -> {
 				legend.addItem(iPhoneData);
 				legend.addItem(nexusData);
 			}).plotter(plotter -> {
-				final AxesConfigurer configurer = new AxesConfigurer.Builder().addAxis("Battery", 5, 0)
+				final AxesConfigurer configuration = new AxesConfigurer.Builder().addAxis("Battery", 5, 0)
 						.addAxis("Camera", 5, 0).addAxis("Display", 5, 0).addAxis("Memory", 5, 0).addAxis("Brand", 5, 0)
 						.build();
-				plotter.inject(configurer);
+				plotter.use(configuration);
 			});
 		}).viewer(chart -> {
 			chart.data(firstData -> firstData.inject(iPhoneData)).data(secondData -> secondData.inject(nexusData));

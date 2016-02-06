@@ -15,13 +15,17 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.builder;
 
+import static com.amitinside.tooling.chart.gc.SpiderChartColor.BLACK;
+import static com.amitinside.tooling.chart.gc.SpiderChartColor.BLUE;
+import static com.amitinside.tooling.chart.gc.SpiderChartColor.PALEGREEN;
+import static com.amitinside.tooling.chart.gc.SpiderChartColor.TELA;
+import static com.amitinside.tooling.chart.gc.SpiderChartColor.WHITE;
 import static com.amitinside.tooling.chart.style.LineStyle.NORMAL_LINE;
 import static java.util.Objects.requireNonNull;
 
 import java.util.function.Consumer;
 
 import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
-import com.amitinside.tooling.chart.gc.SpiderChartColor;
 import com.amitinside.tooling.chart.gc.SpiderChartFont;
 import com.amitinside.tooling.chart.legend.SpiderChartLegend;
 import com.amitinside.tooling.chart.plotter.spider.SpiderChartPlotter;
@@ -56,8 +60,8 @@ public final class SpiderChartConfigurationBuilder {
 	/** */
 	public SpiderChartConfigurationBuilder legend(final Consumer<SpiderChartLegend> legendBuilder) {
 		this.legend = new SpiderChartLegend();
-		this.legend.background = new FillStyle(SWTGraphicsSupplier.getColor(SpiderChartColor.WHITE));
-		this.legend.border = new LineStyle(1, SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK), NORMAL_LINE);
+		this.legend.background = new FillStyle(SWTGraphicsSupplier.getColor(WHITE));
+		this.legend.border = new LineStyle(1, SWTGraphicsSupplier.getColor(BLACK), NORMAL_LINE);
 		legendBuilder.accept(this.legend);
 		return this;
 	}
@@ -66,12 +70,11 @@ public final class SpiderChartConfigurationBuilder {
 	public SpiderChartConfigurationBuilder plotter(final Consumer<SpiderChartPlotter> plotter) {
 		requireNonNull(plotter);
 		this.plotter = new SpiderChartPlotter();
-		this.plotter.backStyle = new FillStyle(SWTGraphicsSupplier.getColor(SpiderChartColor.PALEGREEN));
+		this.plotter.backStyle = new FillStyle(SWTGraphicsSupplier.getColor(PALEGREEN));
 
-		this.plotter.gridStyle = new LineStyle(1, SWTGraphicsSupplier.getColor(SpiderChartColor.TELA),
-				LineStyle.DASHED_LINE);
+		this.plotter.gridStyle = new LineStyle(1, SWTGraphicsSupplier.getColor(TELA), NORMAL_LINE);
 		this.plotter.gridFont = SWTGraphicsSupplier.getFont("Arial", SpiderChartFont.PLAIN, 10);
-		this.plotter.gridFontColor = SWTGraphicsSupplier.getColor(SpiderChartColor.BLUE);
+		this.plotter.gridFontColor = SWTGraphicsSupplier.getColor(BLUE);
 		plotter.accept(this.plotter);
 		return this;
 	}

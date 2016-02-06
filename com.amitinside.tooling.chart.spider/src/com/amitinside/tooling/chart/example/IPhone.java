@@ -18,7 +18,7 @@ package com.amitinside.tooling.chart.example;
 import com.amitinside.tooling.chart.api.ISpiderChartPlottable;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 
-public class IPhone implements ISpiderChartPlottable {
+public final class IPhone implements ISpiderChartPlottable {
 
 	@Override
 	public String areaColor() {
@@ -32,7 +32,7 @@ public class IPhone implements ISpiderChartPlottable {
 
 	@Override
 	public double[] values() {
-		final double[] data = { 1, 2, 3, 4, 5 };
+		final double[] data = { 4, 3.5, 4, 4.6, 5 };
 		return data;
 	}
 

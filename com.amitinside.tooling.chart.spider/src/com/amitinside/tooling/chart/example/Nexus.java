@@ -18,7 +18,7 @@ package com.amitinside.tooling.chart.example;
 import com.amitinside.tooling.chart.api.ISpiderChartPlottable;
 import com.amitinside.tooling.chart.gc.SpiderChartColor;
 
-public class Nexus implements ISpiderChartPlottable {
+public final class Nexus implements ISpiderChartPlottable {
 
 	@Override
 	public String areaColor() {
@@ -32,7 +32,7 @@ public class Nexus implements ISpiderChartPlottable {
 
 	@Override
 	public double[] values() {
-		final double[] data = { 2, 3, 4, 4.2, 3 };
+		final double[] data = { 4, 3, 3, 4.1, 3 };
 		return data;
 	}
 

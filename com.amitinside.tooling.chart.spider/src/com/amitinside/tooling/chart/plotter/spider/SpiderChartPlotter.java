@@ -132,7 +132,7 @@ public final class SpiderChartPlotter extends SpiderPlotter {
 	}
 
 	/** */
-	public void inject(final AxesConfigurer configurer) {
+	public void use(final AxesConfigurer configurer) {
 		requireNonNull(configurer);
 
 		this.maxScaleFactors = configurer.maxScales();
