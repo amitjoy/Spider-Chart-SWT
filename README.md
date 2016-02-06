@@ -12,7 +12,7 @@ Build the library using maven. You will get an OSGi bundle. You just have to ins
 
 Build the library using maven and put the recently built jar to your application classpath.
 
-### Sample Code
+### Sample Usage Snippet
 
 Check out the Sample Application in the project for detailed information.
 
