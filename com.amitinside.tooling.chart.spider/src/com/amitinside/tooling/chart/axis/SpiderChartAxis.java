@@ -17,18 +17,15 @@ package com.amitinside.tooling.chart.axis;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 import java.util.Vector;
 
 import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.SpiderChartComponent;
-import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
-import com.amitinside.tooling.chart.gc.SpiderChartColor;
-import com.amitinside.tooling.chart.gc.SpiderChartFont;
-import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
+import com.amitinside.tooling.chart.gc.AbstractChartColor;
+import com.amitinside.tooling.chart.gc.AbstractChartFont;
+import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
+import com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier;
 import com.amitinside.tooling.chart.label.SpiderChartLabel;
 import com.amitinside.tooling.chart.plotter.SpiderPlotter;
 import com.amitinside.tooling.chart.scale.SpiderChartScale;
@@ -73,28 +70,16 @@ public final class SpiderChartAxis extends SpiderChartComponent {
 	public boolean bigTicksGrid = false;
 
 	/** */
-	public String dateLabelFormat = "dd-MMM-yyyy";
+	public AbstractChartColor DescColor = AbstractGraphicsSupplier.getColor(AbstractChartColor.BLACK);
 
 	/** */
-	public String dateStep = "d";
-
-	/** */
-	public boolean dateStepPerUnit = false;
-
-	/** */
-	public SpiderChartColor DescColor = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
-
-	/** */
-	public SpiderChartFont DescFont = SWTGraphicsSupplier.getFont("Verdana", SpiderChartFont.PLAIN, 10);
+	public AbstractChartFont DescFont = AbstractGraphicsSupplier.getFont("Verdana", AbstractChartFont.PLAIN, 10);
 
 	/** */
 	public FillStyle gridFillStyle = null;
 
 	/** */
 	public LineStyle gridStyle = null;
-
-	/** */
-	public Date initialDate = null;
 
 	/** */
 	public boolean IntegerScale = false;
@@ -145,7 +130,7 @@ public final class SpiderChartAxis extends SpiderChartComponent {
 	public boolean startWithBigTick = false;
 
 	/** */
-	public LineStyle style = new LineStyle(2.0F, SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK), 1);
+	public LineStyle style = new LineStyle(2.0F, AbstractGraphicsSupplier.getColor(AbstractChartColor.BLACK), 1);
 
 	/** */
 	protected Vector<SpiderChartAxisZone> targetZones = new Vector<>();
@@ -198,7 +183,7 @@ public final class SpiderChartAxis extends SpiderChartComponent {
 	}
 
 	/** */
-	public void draw(final SpiderChartGraphics g, final SpiderChartAxis peerAxis, final boolean drawForeGround,
+	public void draw(final AbstractChartGraphics g, final SpiderChartAxis peerAxis, final boolean drawForeGround,
 			final boolean drawGridBackground) {
 		double range = this.scale.max - this.scale.min;
 
@@ -305,10 +290,6 @@ public final class SpiderChartAxis extends SpiderChartComponent {
 		if (this.startWithBigTick) {
 			bigTickCount = this.bigTickInterval - 1;
 		}
-		Date tickDate = null;
-		if (this.initialDate != null) {
-			tickDate = this.initialDate;
-		}
 		double startValue = tickBase;
 		if (startValue == 0.0D) {
 			startValue = 1.0D;
@@ -400,9 +381,6 @@ public final class SpiderChartAxis extends SpiderChartComponent {
 							}
 							if (this.IntegerScale) {
 								txt = new Integer((int) i).toString();
-							}
-							if (tickDate != null) {
-								txt = new SimpleDateFormat(this.dateLabelFormat).format(tickDate);
 							}
 							SpiderChartLabel formattedlabel = null;
 							if (this.tickLabels != null) {
@@ -523,46 +501,13 @@ public final class SpiderChartAxis extends SpiderChartComponent {
 					i += usedTickInterval;
 
 					i = Math.rint(i * 100000.0D) / 100000.0D;
-					if (tickDate != null) {
-						int step = 1;
-						if (this.dateStep.length() > 1) {
-							step = new Integer(this.dateStep.substring(1, this.dateStep.length())).intValue();
-						}
-						if (this.dateStepPerUnit) {
-							step = (int) (step * usedTickInterval);
-						}
-						final Calendar c = Calendar.getInstance();
-						c.setTime(tickDate);
-						if (this.dateStep.toLowerCase().indexOf("d") == 0) {
-							c.add(5, step);
-						}
-						if (this.dateStep.toLowerCase().indexOf("m") == 0) {
-							c.add(2, step);
-						}
-						if (this.dateStep.toLowerCase().indexOf("w") == 0) {
-							c.add(5, step * 7);
-						}
-						if (this.dateStep.toLowerCase().indexOf("y") == 0) {
-							c.add(1, step);
-						}
-						if (this.dateStep.toLowerCase().indexOf("h") == 0) {
-							c.add(10, step);
-						}
-						if (this.dateStep.toLowerCase().indexOf("s") == 0) {
-							c.add(13, step);
-						}
-						if (this.dateStep.toLowerCase().indexOf("n") == 0) {
-							c.add(12, step);
-						}
-						tickDate = c.getTime();
-					}
 				}
 			}
 		}
 	}
 
 	/** */
-	protected void drawBackground(final SpiderChartGraphics g, final SpiderChartAxis peerAxis) {
+	protected void drawBackground(final AbstractChartGraphics g, final SpiderChartAxis peerAxis) {
 		this.maxTickLabelLength = 0;
 
 		final int tmpX = this.x;
@@ -610,7 +555,7 @@ public final class SpiderChartAxis extends SpiderChartComponent {
 	}
 
 	/** */
-	protected void drawForeground(final SpiderChartGraphics g, final SpiderChartAxis peerAxis) {
+	protected void drawForeground(final AbstractChartGraphics g, final SpiderChartAxis peerAxis) {
 		if (this.isMainAxis && !this.xscaleOnTop) {
 			for (int i = 0; i < this.additionalAxis.size(); i++) {
 				final SpiderChartAxis a = this.additionalAxis.elementAt(i);
@@ -621,7 +566,7 @@ public final class SpiderChartAxis extends SpiderChartComponent {
 	}
 
 	/** */
-	protected void drawGridBackground(final SpiderChartGraphics g, final SpiderChartAxis peerAxis) {
+	protected void drawGridBackground(final AbstractChartGraphics g, final SpiderChartAxis peerAxis) {
 		this.draw(g, peerAxis, false, true);
 	}
 
@@ -645,7 +590,7 @@ public final class SpiderChartAxis extends SpiderChartComponent {
 	}
 
 	/** */
-	protected void paintTargetZones(final SpiderChartGraphics g, final SpiderChartAxis peerAxis, final int position) {
+	protected void paintTargetZones(final AbstractChartGraphics g, final SpiderChartAxis peerAxis, final int position) {
 		for (int i = 0; i < this.targetZones.size(); i++) {
 			final SpiderChartAxisZone z = this.targetZones.elementAt(i);
 			z.chart = this.chart;

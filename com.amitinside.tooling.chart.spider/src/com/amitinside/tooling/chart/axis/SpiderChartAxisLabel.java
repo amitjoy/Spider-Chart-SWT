@@ -16,30 +16,30 @@
 package com.amitinside.tooling.chart.axis;
 
 import com.amitinside.tooling.chart.SpiderChartComponent;
-import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
-import com.amitinside.tooling.chart.gc.SpiderChartColor;
-import com.amitinside.tooling.chart.gc.SpiderChartFont;
-import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
+import com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier;
+import com.amitinside.tooling.chart.gc.AbstractChartColor;
+import com.amitinside.tooling.chart.gc.AbstractChartFont;
+import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 
 public final class SpiderChartAxisLabel extends SpiderChartComponent {
 
 	/** */
-	public final SpiderChartColor color;
+	public final AbstractChartColor color;
 	/** */
-	public SpiderChartFont font = SWTGraphicsSupplier.getFont("Verdana", SpiderChartFont.PLAIN, 14);
+	public AbstractChartFont font = AbstractGraphicsSupplier.getFont("Verdana", AbstractChartFont.PLAIN, 14);
 	/** */
 	public final String title;
 	/** */
 	public boolean vertical = false;
 
 	/** */
-	public SpiderChartAxisLabel(final String t, final SpiderChartColor c, final SpiderChartFont f) {
+	public SpiderChartAxisLabel(final String t, final AbstractChartColor c, final AbstractChartFont f) {
 		this.color = c;
 		this.title = t;
 		this.font = f;
 	}
 
 	/** */
-	protected void draw(final SpiderChartGraphics g) {
+	protected void draw(final AbstractChartGraphics g) {
 	}
 }

@@ -16,7 +16,7 @@
 package com.amitinside.tooling.chart.listener;
 
 import com.amitinside.tooling.chart.SpiderChart;
-import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
+import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 
 public class SpiderChartAdapter implements ISpiderChartListener {
 
@@ -27,6 +27,6 @@ public class SpiderChartAdapter implements ISpiderChartListener {
 
 	/** {@inheritDoc}} */
 	@Override
-	public void paintUserExit(final SpiderChart c, final SpiderChartGraphics g) {
+	public void paintUserExit(final SpiderChart c, final AbstractChartGraphics g) {
 	}
 }

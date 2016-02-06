@@ -24,20 +24,19 @@ public final class SwtGraphicsProvider {
 	private static Device display = null;
 
 	/** */
-	public static Device getDefaultDisplay() {
+	public static Device getDisplay() {
 		if (display == null) {
-			display = new Display();
+			display = Display.getCurrent();
 		}
 		return display;
 	}
 
 	/** */
-	public static void setDefaultDisplay(final Display d) {
-		display = d;
+	public static void startUIThread(final Runnable r) {
+		((Display) getDisplay()).syncExec(r);
 	}
 
-	/** */
-	public static void startUIThread(final Runnable r) {
-		((Display) getDefaultDisplay()).syncExec(r);
+	/** Constructor */
+	private SwtGraphicsProvider() {
 	}
 }

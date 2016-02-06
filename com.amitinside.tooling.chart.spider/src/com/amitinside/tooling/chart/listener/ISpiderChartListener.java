@@ -16,7 +16,7 @@
 package com.amitinside.tooling.chart.listener;
 
 import com.amitinside.tooling.chart.SpiderChart;
-import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
+import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 
 public interface ISpiderChartListener {
 
@@ -39,5 +39,5 @@ public interface ISpiderChartListener {
 	public abstract void chartEvent(SpiderChart paramChart, int paramInt);
 
 	/** */
-	public abstract void paintUserExit(SpiderChart paramChart, SpiderChartGraphics paramChartGraphics);
+	public abstract void paintUserExit(SpiderChart paramChart, AbstractChartGraphics paramChartGraphics);
 }

@@ -21,54 +21,51 @@ import com.amitinside.tooling.chart.gc.swt.SpiderChartSwtGraphics;
 import com.amitinside.tooling.chart.gc.swt.SpiderChartSwtImage;
 import com.amitinside.tooling.chart.gc.swt.SwtGraphicsProvider;
 
-public interface SWTGraphicsSupplier {
-
-	/** SWT Mode */
-	public static int DEFAULT_MODE = 1;
+public interface AbstractGraphicsSupplier {
 
 	/** */
-	public static SpiderChartImage createImage(final int w, final int h) {
+	public static AbstractChartImage createImage(final int w, final int h) {
 		return new SpiderChartSwtImage(w, h);
 	}
 
 	/** */
-	public static SpiderChartImage createTransparentImage(final int w, final int h,
-			final SpiderChartColor transparent) {
+	public static AbstractChartImage createTransparentImage(final int w, final int h,
+			final AbstractChartColor transparent) {
 		return new SpiderChartSwtImage(w, h, transparent);
 	}
 
 	/** */
-	public static SpiderChartColor getColor(final int red, final int green, final int blue) {
+	public static AbstractChartColor getColor(final int red, final int green, final int blue) {
 		return new SpiderChartSwtColor(red, green, blue);
 	}
 
 	/** */
-	public static SpiderChartColor getColor(final String c) {
+	public static AbstractChartColor getColor(final String c) {
 		return new SpiderChartSwtColor(c);
 	}
 
 	/** */
-	public static SpiderChartColor getColorFromObject(final Object o) {
+	public static AbstractChartColor getColorFromObject(final Object o) {
 		return new SpiderChartSwtColor(o);
 	}
 
 	/** */
-	public static SpiderChartFont getFont(final String c, final int style, final int size) {
+	public static AbstractChartFont getFont(final String c, final int style, final int size) {
 		return new SpiderChartSwtFont(c, style, size);
 	}
 
 	/** */
-	public static SpiderChartFont getFontFromObject(final Object o) {
+	public static AbstractChartFont getFontFromObject(final Object o) {
 		return new SpiderChartSwtFont(o);
 	}
 
 	/** */
-	public static SpiderChartGraphics getGraphics(final Object o) {
+	public static AbstractChartGraphics getGraphics(final Object o) {
 		return new SpiderChartSwtGraphics(o);
 	}
 
 	/** */
-	public static SpiderChartImage getImage(final Object o) {
+	public static AbstractChartImage getImage(final Object o) {
 		try {
 			return new SpiderChartSwtImage(o);
 		} catch (final Exception e) {
@@ -78,22 +75,7 @@ public interface SWTGraphicsSupplier {
 	}
 
 	/** */
-	public static SpiderChartImage getImageFromFile(final String file) {
-		try {
-			return new SpiderChartSwtImage(file);
-		} catch (final Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	/** */
-	public static int getMode() {
-		return DEFAULT_MODE;
-	}
-
-	/** */
-	public static void startUIThread(final Runnable r) {
+	public static void startUiThread(final Runnable r) {
 		SwtGraphicsProvider.startUIThread(r);
 	}
 }

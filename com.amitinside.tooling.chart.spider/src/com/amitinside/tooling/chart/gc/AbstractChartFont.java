@@ -13,15 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.amitinside.tooling.chart.constants;
+package com.amitinside.tooling.chart.gc;
 
-public interface IUnitConstants {
+public abstract class AbstractChartFont {
 
-	/** */
-	public static final int UNIT_PERCENTAGE = 1;
-	/** */
-	public static final int UNIT_PIXELS = 2;
-	/** */
-	public static final int UNIT_USER = 0;
+	public static int BOLD = 1;
+	public static int BOLD_ITALIC = 3;
+	public static int ITALIC = 2;
+	public static int PLAIN = 0;
 
 }

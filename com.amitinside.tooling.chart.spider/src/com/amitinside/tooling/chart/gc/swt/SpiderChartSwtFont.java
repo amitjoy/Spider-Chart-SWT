@@ -17,30 +17,30 @@ package com.amitinside.tooling.chart.gc.swt;
 
 import org.eclipse.swt.graphics.Font;
 
-import com.amitinside.tooling.chart.gc.SpiderChartFont;
+import com.amitinside.tooling.chart.gc.AbstractChartFont;
 
-public final class SpiderChartSwtFont extends SpiderChartFont {
+public final class SpiderChartSwtFont extends AbstractChartFont {
 
 	/** */
 	private String fontName = "";
 	/** */
 	private int fontSize = 10;
 	/** */
-	private int fontStyle = SpiderChartFont.PLAIN;
+	private int fontStyle = AbstractChartFont.PLAIN;
 
 	/** Constructor */
 	public SpiderChartSwtFont(final Object f) {
 		this.fontName = ((Font) f).getFontData()[0].getName();
 		final int s = ((Font) f).getFontData()[0].getStyle();
-		this.fontStyle = SpiderChartFont.PLAIN;
+		this.fontStyle = AbstractChartFont.PLAIN;
 		if ((s & 0x1) == 1) {
-			this.fontStyle = SpiderChartFont.BOLD;
+			this.fontStyle = AbstractChartFont.BOLD;
 		}
 		if ((s & 0x2) == 2) {
-			this.fontStyle = SpiderChartFont.ITALIC;
+			this.fontStyle = AbstractChartFont.ITALIC;
 		}
 		if ((s & 0x3) == 3) {
-			this.fontStyle = SpiderChartFont.BOLD_ITALIC;
+			this.fontStyle = AbstractChartFont.BOLD_ITALIC;
 		}
 		this.fontSize = ((Font) f).getFontData()[0].getHeight();
 	}
@@ -55,15 +55,15 @@ public final class SpiderChartSwtFont extends SpiderChartFont {
 	/** */
 	protected Font getFont() {
 		int s = 0;
-		if (this.fontStyle == SpiderChartFont.BOLD) {
+		if (this.fontStyle == AbstractChartFont.BOLD) {
 			s = 1;
 		}
-		if (this.fontStyle == SpiderChartFont.ITALIC) {
+		if (this.fontStyle == AbstractChartFont.ITALIC) {
 			s = 2;
 		}
-		if (this.fontStyle == SpiderChartFont.BOLD_ITALIC) {
+		if (this.fontStyle == AbstractChartFont.BOLD_ITALIC) {
 			s = 3;
 		}
-		return new Font(SwtGraphicsProvider.getDefaultDisplay(), this.fontName, this.fontSize, s);
+		return new Font(SwtGraphicsProvider.getDisplay(), this.fontName, this.fontSize, s);
 	}
 }

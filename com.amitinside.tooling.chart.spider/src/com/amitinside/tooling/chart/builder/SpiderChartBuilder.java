@@ -24,9 +24,8 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 
 import com.amitinside.tooling.chart.SpiderChart;
-import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
-import com.amitinside.tooling.chart.gc.SpiderChartColor;
-import com.amitinside.tooling.chart.gc.swt.SwtGraphicsProvider;
+import com.amitinside.tooling.chart.gc.AbstractChartColor;
+import com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier;
 import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.swt.SpiderChartViewer;
 
@@ -57,8 +56,6 @@ public final class SpiderChartBuilder {
 	/** Constructor */
 	public SpiderChartBuilder(final Composite parent) {
 		requireNonNull(parent);
-
-		SwtGraphicsProvider.setDefaultDisplay(parent.getShell().getDisplay());
 		this.chartViewer = new SpiderChartViewer(parent, SWT.NONE);
 		this.prepareChartViewer(parent);
 	}
@@ -82,8 +79,8 @@ public final class SpiderChartBuilder {
 
 		// Some chart related default configurations
 		this.chart = new SpiderChart(chartConfiguration.getTitle(), chartConfiguration.getPlotter());
-		this.chart.back = new FillStyle(SWTGraphicsSupplier.getColor(SpiderChartColor.YELLOW));
-		this.chart.backgroundCanvasColor = SpiderChartColor.ANTIQUEWHITE;
+		this.chart.back = new FillStyle(AbstractGraphicsSupplier.getColor(AbstractChartColor.YELLOW));
+		this.chart.backgroundCanvasColor = AbstractChartColor.ANTIQUEWHITE;
 		this.chart.back.gradientType = FillStyle.GRADIENT_VERTICAL;
 		this.chart.legend = chartConfiguration.getLegend();
 		this.chart.repaintAll = true;

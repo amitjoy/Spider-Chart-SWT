@@ -15,8 +15,8 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.style;
 
-import com.amitinside.tooling.chart.gc.SpiderChartColor;
-import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
+import com.amitinside.tooling.chart.gc.AbstractChartColor;
+import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 
 public final class LineStyle {
 
@@ -28,14 +28,14 @@ public final class LineStyle {
 	public static final int NORMAL_LINE = 1;
 
 	/** */
-	public static LineStyle of(final float w, final SpiderChartColor c, final int t) {
+	public static LineStyle of(final float w, final AbstractChartColor c, final int t) {
 		return new LineStyle(w, c, t);
 	}
 
 	/** */
 	public float alphaValue = 1.0F;
 	/** */
-	SpiderChartColor color;
+	AbstractChartColor color;
 
 	/** */
 	int lineType;
@@ -44,25 +44,25 @@ public final class LineStyle {
 	float lWidth;
 
 	/** */
-	public LineStyle(final float w, final SpiderChartColor c, final int t) {
+	public LineStyle(final float w, final AbstractChartColor c, final int t) {
 		this.lineType = t;
 		this.lWidth = w;
 		this.color = c;
 	}
 
 	/** */
-	public LineStyle(final float w, final SpiderChartColor c, final int t, final float alpha) {
+	public LineStyle(final float w, final AbstractChartColor c, final int t, final float alpha) {
 		this(w, c, t);
 	}
 
 	/** */
-	public void draw(final SpiderChartGraphics g, final int x1, final int y1, final int x2, final int y2) {
+	public void draw(final AbstractChartGraphics g, final int x1, final int y1, final int x2, final int y2) {
 		this.setGraphicsProperties(g);
 		g.drawLineWithStyle(x1, y1, x2, y2);
 	}
 
 	/** */
-	public void drawArc(final SpiderChartGraphics g, final int x, final int y, final int w, final int h, final int a1,
+	public void drawArc(final AbstractChartGraphics g, final int x, final int y, final int w, final int h, final int a1,
 			final int a2) {
 		this.setGraphicsProperties(g);
 
@@ -70,14 +70,14 @@ public final class LineStyle {
 	}
 
 	/** */
-	public void drawOpenPolygon(final SpiderChartGraphics g, final int[] x, final int[] y, final int c) {
+	public void drawOpenPolygon(final AbstractChartGraphics g, final int[] x, final int[] y, final int c) {
 		for (int i = 1; i < c; i++) {
 			this.draw(g, x[i - 1], y[i - 1], x[i], y[i]);
 		}
 	}
 
 	/** */
-	public void drawPolygon(final SpiderChartGraphics g, final int[] x, final int[] y, final int c) {
+	public void drawPolygon(final AbstractChartGraphics g, final int[] x, final int[] y, final int c) {
 		for (int i = 1; i < c; i++) {
 			this.draw(g, x[i - 1], y[i - 1], x[i], y[i]);
 		}
@@ -85,7 +85,7 @@ public final class LineStyle {
 	}
 
 	/** */
-	public void drawRect(final SpiderChartGraphics g, final int x1, final int y1, final int x2, final int y2) {
+	public void drawRect(final AbstractChartGraphics g, final int x1, final int y1, final int x2, final int y2) {
 		int iX = x1;
 		int iY = y1;
 		int w = x2 - x1;
@@ -103,7 +103,7 @@ public final class LineStyle {
 	}
 
 	/** */
-	public void drawRoundRect(final SpiderChartGraphics g, final int x1, final int y1, final int x2, final int y2) {
+	public void drawRoundRect(final AbstractChartGraphics g, final int x1, final int y1, final int x2, final int y2) {
 		int iX = x1;
 		int iY = y1;
 		int w = x2 - x1;
@@ -121,7 +121,7 @@ public final class LineStyle {
 	}
 
 	/** */
-	public SpiderChartColor getColor() {
+	public AbstractChartColor getColor() {
 		return this.color;
 	}
 
@@ -136,24 +136,24 @@ public final class LineStyle {
 	}
 
 	/** */
-	public void setColor(final SpiderChartColor c) {
+	public void setColor(final AbstractChartColor c) {
 		this.color = c;
 	}
 
 	/** */
-	protected void setGraphicsProperties(final SpiderChartGraphics g) {
+	protected void setGraphicsProperties(final AbstractChartGraphics g) {
 		g.setColor(this.color);
 		int tmp = (int) this.lWidth;
 		if ((tmp == 0) && (this.lWidth > 0.0F)) {
 			tmp = 1;
 		}
 		g.setLineWidth(tmp);
-		g.setLineStyle(SpiderChartGraphics.STROKE_NORMAL);
+		g.setLineStyle(AbstractChartGraphics.STROKE_NORMAL);
 		if (this.lineType == 2) {
-			g.setLineStyle(SpiderChartGraphics.STROKE_DASHED);
+			g.setLineStyle(AbstractChartGraphics.STROKE_DASHED);
 		}
 		if (this.lineType == 3) {
-			g.setLineStyle(SpiderChartGraphics.STROKE_DOTTED);
+			g.setLineStyle(AbstractChartGraphics.STROKE_DOTTED);
 		}
 	}
 

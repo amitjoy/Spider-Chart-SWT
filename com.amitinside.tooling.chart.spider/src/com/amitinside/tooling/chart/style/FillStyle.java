@@ -15,10 +15,10 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.style;
 
-import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
-import com.amitinside.tooling.chart.gc.SpiderChartColor;
-import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
-import com.amitinside.tooling.chart.gc.SpiderChartImage;
+import com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier;
+import com.amitinside.tooling.chart.gc.AbstractChartColor;
+import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
+import com.amitinside.tooling.chart.gc.AbstractChartImage;
 
 public final class FillStyle {
 
@@ -32,11 +32,11 @@ public final class FillStyle {
 	/** */
 	public float alphaValue = 1.0F;
 	/** */
-	SpiderChartColor color;
+	AbstractChartColor color;
 	/** Spider Chart Canvas Background Color */
-	public SpiderChartColor colorFrom = SWTGraphicsSupplier.getColor(SpiderChartColor.AZURE);
+	public AbstractChartColor colorFrom = AbstractGraphicsSupplier.getColor(AbstractChartColor.AZURE);
 	/** */
-	public SpiderChartColor colorUntil = SWTGraphicsSupplier.getColor(SpiderChartColor.WHITE);
+	public AbstractChartColor colorUntil = AbstractGraphicsSupplier.getColor(AbstractChartColor.WHITE);
 	/** */
 	private Object composite = null;
 	/** */
@@ -48,27 +48,27 @@ public final class FillStyle {
 	public int gradientType = NO_GRADIENT;
 
 	/** */
-	public SpiderChartImage textureImage = null;
+	public AbstractChartImage textureImage = null;
 
 	/** Constructor */
-	public FillStyle(final SpiderChartColor c) {
+	public FillStyle(final AbstractChartColor c) {
 		this.color = c;
 	}
 
 	/** Constructor */
-	public FillStyle(final SpiderChartColor c, final float f) {
+	public FillStyle(final AbstractChartColor c, final float f) {
 		this.color = c;
 		this.alphaValue = f;
 	}
 
 	/** Constructor */
-	public FillStyle(final SpiderChartImage i) {
+	public FillStyle(final AbstractChartImage i) {
 		this.textureImage = i;
-		this.color = SWTGraphicsSupplier.getColor(SpiderChartColor.WHITE);
+		this.color = AbstractGraphicsSupplier.getColor(AbstractChartColor.WHITE);
 	}
 
 	/** */
-	public void draw(final SpiderChartGraphics g, int x1, int y1, int x2, int y2) {
+	public void draw(final AbstractChartGraphics g, int x1, int y1, int x2, int y2) {
 		if (x1 > x2) {
 			final int xtmp = x2;
 			x2 = x1;
@@ -92,7 +92,7 @@ public final class FillStyle {
 	}
 
 	/** */
-	public void draw(final SpiderChartGraphics g, final String backgroundCanvasColor, int x1, int y1, int x2, int y2) {
+	public void draw(final AbstractChartGraphics g, final String backgroundCanvasColor, int x1, int y1, int x2, int y2) {
 		if (x1 > x2) {
 			final int xtmp = x2;
 			x2 = x1;
@@ -106,7 +106,7 @@ public final class FillStyle {
 		g.setTexture(this.textureImage);
 		g.setColor(this.color);
 		if (this.gradientType != NO_GRADIENT) {
-			this.colorFrom = SWTGraphicsSupplier.getColor(backgroundCanvasColor);
+			this.colorFrom = AbstractGraphicsSupplier.getColor(backgroundCanvasColor);
 			g.createFadeArea(this.colorFrom, this.colorUntil, x1, y1, x2 - x1, y2 - y1,
 					this.gradientType == GRADIENT_VERTICAL, this.gradientCyclic);
 		} else {
@@ -117,7 +117,7 @@ public final class FillStyle {
 	}
 
 	/** */
-	public void drawArc(final SpiderChartGraphics g, final int x, final int y, final int w, final int h, final int a1,
+	public void drawArc(final AbstractChartGraphics g, final int x, final int y, final int w, final int h, final int a1,
 			final int a2) {
 		g.setTexture(this.textureImage);
 		g.setColor(this.color);
@@ -127,7 +127,7 @@ public final class FillStyle {
 	}
 
 	/** */
-	public void drawPolygon(final SpiderChartGraphics g, final int[] x1, final int[] y1, final int num) {
+	public void drawPolygon(final AbstractChartGraphics g, final int[] x1, final int[] y1, final int num) {
 		g.setTexture(this.textureImage);
 		g.setColor(this.color);
 		this.setAlpha(g);
@@ -136,7 +136,7 @@ public final class FillStyle {
 	}
 
 	/** */
-	public void drawRoundRect(final SpiderChartGraphics g, final int x1, final int y1, final int x2, final int y2) {
+	public void drawRoundRect(final AbstractChartGraphics g, final int x1, final int y1, final int x2, final int y2) {
 		g.setTexture(this.textureImage);
 		g.setColor(this.color);
 		this.setAlpha(g);
@@ -145,12 +145,12 @@ public final class FillStyle {
 	}
 
 	/** */
-	public SpiderChartColor getColor() {
+	public AbstractChartColor getColor() {
 		return this.color;
 	}
 
 	/** */
-	private void resetAlpha(final SpiderChartGraphics g) {
+	private void resetAlpha(final AbstractChartGraphics g) {
 		if (this.composite != null) {
 			g.setAlphaComposite(this.composite);
 		}
@@ -158,7 +158,7 @@ public final class FillStyle {
 	}
 
 	/** */
-	private void setAlpha(final SpiderChartGraphics g) {
+	private void setAlpha(final AbstractChartGraphics g) {
 		if (this.alphaValue != 1.0F) {
 			this.composite = g.getAlphaComposite();
 			g.setAlpha(this.alphaValue);

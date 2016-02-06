@@ -15,7 +15,7 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.gc;
 
-public abstract class SpiderChartColor {
+public abstract class AbstractChartColor {
 
 	public static String ALICEBLUE = "ALICEBLUE";
 	public static String ANTIQUEWHITE = "ANTIQUEWHITE";
@@ -94,12 +94,12 @@ public abstract class SpiderChartColor {
 	public static String YELLOWGREEN = "YELLOWGREEN";
 
 	/** */
-	public SpiderChartColor brighter() {
+	public AbstractChartColor brighter() {
 		return null;
 	}
 
 	/** */
-	public SpiderChartColor darker() {
+	public AbstractChartColor darker() {
 		return null;
 	}
 

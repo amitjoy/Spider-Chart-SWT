@@ -16,7 +16,7 @@
 package com.amitinside.tooling.chart.axis;
 
 import com.amitinside.tooling.chart.SpiderChart;
-import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
+import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.style.LineStyle;
 
@@ -52,7 +52,7 @@ public class SpiderChartAxisZone {
 	}
 
 	/** */
-	protected void paint(final SpiderChartGraphics g, final SpiderChartAxis axis, final SpiderChartAxis peerAxis, final int axisPosition) {
+	protected void paint(final AbstractChartGraphics g, final SpiderChartAxis axis, final SpiderChartAxis peerAxis, final int axisPosition) {
 		if (this.positionStart != DISABLED) {
 			if (this.unitStart == 1) {
 				final double tmp = ((axis.scale.max - axis.scale.min) * this.positionStart) / 100.0D;

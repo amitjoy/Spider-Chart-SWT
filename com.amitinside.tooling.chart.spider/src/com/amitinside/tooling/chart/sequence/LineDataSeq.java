@@ -15,10 +15,10 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.sequence;
 
-import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
-import com.amitinside.tooling.chart.gc.SpiderChartColor;
-import com.amitinside.tooling.chart.gc.SpiderChartFont;
-import com.amitinside.tooling.chart.gc.SpiderChartImage;
+import com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier;
+import com.amitinside.tooling.chart.gc.AbstractChartColor;
+import com.amitinside.tooling.chart.gc.AbstractChartFont;
+import com.amitinside.tooling.chart.gc.AbstractChartImage;
 import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.style.LineStyle;
 
@@ -31,17 +31,17 @@ public final class LineDataSeq extends DataSeq {
 	/** */
 	public FillStyle fillStyle = null;
 	/** */
-	public SpiderChartImage icon = null;
+	public AbstractChartImage icon = null;
 	/** */
 	public int lineType = 0;
 	/** */
-	public SpiderChartColor pointColor = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
+	public AbstractChartColor pointColor = AbstractGraphicsSupplier.getColor(AbstractChartColor.BLACK);
 	/** */
 	public LineStyle style = null;
 	/** */
-	public SpiderChartColor valueColor = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
+	public AbstractChartColor valueColor = AbstractGraphicsSupplier.getColor(AbstractChartColor.BLACK);
 	/** */
-	public SpiderChartFont valueFont = null;
+	public AbstractChartFont valueFont = null;
 	/** */
 	public LineStyle vstyle = null;
 

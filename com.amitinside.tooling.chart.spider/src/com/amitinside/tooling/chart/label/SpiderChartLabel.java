@@ -17,9 +17,9 @@ package com.amitinside.tooling.chart.label;
 
 import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.api.IFloatingObject;
+import com.amitinside.tooling.chart.gc.AbstractChartColor;
+import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 import com.amitinside.tooling.chart.gc.Polygon;
-import com.amitinside.tooling.chart.gc.SpiderChartColor;
-import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.style.LineStyle;
 
@@ -80,7 +80,7 @@ public final class SpiderChartLabel implements IFloatingObject {
 	/** */
 	public int requiredWidth = 0;
 	/** */
-	protected int rotationAlign = SpiderChartGraphics.ROTATE_CENTER;
+	protected int rotationAlign = AbstractChartGraphics.ROTATE_CENTER;
 	/** */
 	@SuppressWarnings("unused")
 	private String sFormat = "";
@@ -134,12 +134,12 @@ public final class SpiderChartLabel implements IFloatingObject {
 	}
 
 	/** */
-	public void initialize(final SpiderChartGraphics g, final SpiderChart c) {
+	public void initialize(final AbstractChartGraphics g, final SpiderChart c) {
 		this.chart = c;
 	}
 
 	/** */
-	public void paint(final SpiderChartGraphics g, final int x, final int y, final int width, final int height) {
+	public void paint(final AbstractChartGraphics g, final int x, final int y, final int width, final int height) {
 		if (this.chart != null) {
 			this.chart.placeFloatingObject(this);
 		}
@@ -150,8 +150,8 @@ public final class SpiderChartLabel implements IFloatingObject {
 	}
 
 	/** */
-	protected void render(final SpiderChartGraphics g2) {
-		final SpiderChartGraphics g = g2;
+	protected void render(final AbstractChartGraphics g2) {
+		final AbstractChartGraphics g = g2;
 		if ((this.lineToAnchor != null)) {
 			if (this.anchorY > this.positionY) {
 				if (this.anchorX <= this.positionX) {
@@ -171,7 +171,7 @@ public final class SpiderChartLabel implements IFloatingObject {
 		int x = this.positionX;
 		int lineStart = 0;
 		if (this.background != null) {
-			final SpiderChartColor c = g.getColor();
+			final AbstractChartColor c = g.getColor();
 			if (this.borderShape == BORDER_RECT) {
 				this.background.draw(g, this.positionX, this.positionY, (this.positionX + this.requiredWidth) - 1,
 						(this.positionY + this.requiredHeight) - 1);
@@ -221,9 +221,6 @@ public final class SpiderChartLabel implements IFloatingObject {
 		this.clickableArea.addPoint((this.positionX + this.requiredWidth) - 1,
 				(this.positionY + this.requiredHeight) - 1);
 		this.clickableArea.addPoint((this.positionX + this.requiredWidth) - 1, this.positionY);
-		if (this.chart != null) {
-			this.chart.chartHotAreas.addElement(this);
-		}
 	}
 
 	/** {@inheritDoc}} */

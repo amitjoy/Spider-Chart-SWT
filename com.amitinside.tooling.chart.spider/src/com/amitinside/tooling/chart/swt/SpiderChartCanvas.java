@@ -25,8 +25,8 @@ import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 
 import com.amitinside.tooling.chart.SpiderChart;
-import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
-import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
+import com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier;
+import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 import com.amitinside.tooling.chart.listener.ISpiderChartListener;
 
 public final class SpiderChartCanvas extends Canvas implements ISpiderChartListener {
@@ -72,7 +72,7 @@ public final class SpiderChartCanvas extends Canvas implements ISpiderChartListe
 			this.redraw();
 		}
 		if (type == 1) {
-			SWTGraphicsSupplier.startUIThread(() -> {
+			AbstractGraphicsSupplier.startUiThread(() -> {
 				if (!SpiderChartCanvas.this.isDisposed()) {
 					SpiderChartCanvas.this.redraw();
 				}
@@ -103,7 +103,7 @@ public final class SpiderChartCanvas extends Canvas implements ISpiderChartListe
 	protected void paintChart(final PaintEvent e) {
 		try {
 			this.resizeChart();
-			final SpiderChartGraphics g = SWTGraphicsSupplier.getGraphics(e.gc);
+			final AbstractChartGraphics g = AbstractGraphicsSupplier.getGraphics(e.gc);
 			this.chart.paint(g);
 			g.dispose();
 		} catch (final Exception err) {
@@ -113,7 +113,7 @@ public final class SpiderChartCanvas extends Canvas implements ISpiderChartListe
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintUserExit(final SpiderChart c, final SpiderChartGraphics g) {
+	public void paintUserExit(final SpiderChart c, final AbstractChartGraphics g) {
 	}
 
 	/** */

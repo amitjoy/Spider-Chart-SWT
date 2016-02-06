@@ -16,13 +16,13 @@
 package com.amitinside.tooling.chart.example;
 
 import com.amitinside.tooling.chart.api.ISpiderChartPlottable;
-import com.amitinside.tooling.chart.gc.SpiderChartColor;
+import com.amitinside.tooling.chart.gc.AbstractChartColor;
 
 public final class IPhone implements ISpiderChartPlottable {
 
 	@Override
 	public String areaColor() {
-		return SpiderChartColor.DARKORCHID;
+		return AbstractChartColor.DARKORCHID;
 	}
 
 	@Override

@@ -21,10 +21,10 @@ import java.text.DecimalFormat;
 
 import com.amitinside.tooling.chart.builder.AxesConfigurer;
 import com.amitinside.tooling.chart.gc.Polygon;
-import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
-import com.amitinside.tooling.chart.gc.SpiderChartColor;
-import com.amitinside.tooling.chart.gc.SpiderChartFont;
-import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
+import com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier;
+import com.amitinside.tooling.chart.gc.AbstractChartColor;
+import com.amitinside.tooling.chart.gc.AbstractChartFont;
+import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 import com.amitinside.tooling.chart.plotter.SpiderPlotter;
 import com.amitinside.tooling.chart.sequence.DataSeq;
 import com.amitinside.tooling.chart.sequence.LineDataSeq;
@@ -46,18 +46,18 @@ public final class SpiderChartPlotter extends SpiderPlotter {
 	/**
 	 * Spider Chart Axes Factor Color
 	 */
-	public SpiderChartColor axisFactorColor = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
+	public AbstractChartColor axisFactorColor = AbstractGraphicsSupplier.getColor(AbstractChartColor.BLACK);
 
 	/**
 	 * Spider Chart Axis Factor Colors (in case you need to set different colors
 	 * for different axes)
 	 */
-	public SpiderChartColor[] axisFactorColors;
+	public AbstractChartColor[] axisFactorColors;
 
 	/**
 	 * Spider Chart Axes Factor Text Font
 	 */
-	public SpiderChartFont axisFactorFont = SWTGraphicsSupplier.getFont("Verdana", SpiderChartFont.PLAIN, 10);
+	public AbstractChartFont axisFactorFont = AbstractGraphicsSupplier.getFont("Verdana", AbstractChartFont.PLAIN, 10);
 
 	/**
 	 * Spider Chart Polygon Area Background Style
@@ -67,7 +67,7 @@ public final class SpiderChartPlotter extends SpiderPlotter {
 	/**
 	 * Spider Chart Border Style
 	 */
-	LineStyle border = new LineStyle(0.2F, SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK), 1);
+	LineStyle border = new LineStyle(0.2F, AbstractGraphicsSupplier.getColor(AbstractChartColor.BLACK), 1);
 
 	/**
 	 * Spider Chart Radius
@@ -82,12 +82,12 @@ public final class SpiderChartPlotter extends SpiderPlotter {
 	/**
 	 * Spider Chart Font for Grid Label
 	 */
-	public SpiderChartFont gridFont;
+	public AbstractChartFont gridFont;
 
 	/**
 	 * Spider Chart Font Color for Grid Label
 	 */
-	public SpiderChartColor gridFontColor = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
+	public AbstractChartColor gridFontColor = AbstractGraphicsSupplier.getColor(AbstractChartColor.BLACK);
 
 	/**
 	 * Spider Chart Grid Style
@@ -108,7 +108,7 @@ public final class SpiderChartPlotter extends SpiderPlotter {
 	public double[] minScaleFactors;
 
 	/** */
-	public SpiderChartColor[] pointColors = null;
+	public AbstractChartColor[] pointColors = null;
 
 	/** */
 	public double[] pointColorScale = null;
@@ -142,7 +142,7 @@ public final class SpiderChartPlotter extends SpiderPlotter {
 
 	/** {@inheritDoc}} **/
 	@Override
-	protected void plot(final SpiderChartGraphics g, final DataSeq s, final int serieSec) {
+	protected void plot(final AbstractChartGraphics g, final DataSeq s, final int serieSec) {
 		LineDataSeq p;
 		if (s instanceof LineDataSeq) {
 			p = (LineDataSeq) s;
@@ -290,7 +290,7 @@ public final class SpiderChartPlotter extends SpiderPlotter {
 			s.hotAreas.addElement(po);
 			double YValue;
 			if (p.drawPoint) {
-				SpiderChartColor c = p.pointColor;
+				AbstractChartColor c = p.pointColor;
 				YValue = ((Double) p.getElementY(i)).doubleValue();
 				if ((this.pointColors != null) && (this.pointColorScale != null)) {
 					if (this.pointColors.length > 0) {

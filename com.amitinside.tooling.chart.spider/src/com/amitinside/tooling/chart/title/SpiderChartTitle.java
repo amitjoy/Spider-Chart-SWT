@@ -16,17 +16,17 @@
 package com.amitinside.tooling.chart.title;
 
 import com.amitinside.tooling.chart.SpiderChartComponent;
-import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
-import com.amitinside.tooling.chart.gc.SpiderChartColor;
-import com.amitinside.tooling.chart.gc.SpiderChartFont;
-import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
+import com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier;
+import com.amitinside.tooling.chart.gc.AbstractChartColor;
+import com.amitinside.tooling.chart.gc.AbstractChartFont;
+import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 
 public final class SpiderChartTitle extends SpiderChartComponent {
 
 	/** Title Color */
-	public SpiderChartColor color = SWTGraphicsSupplier.getColor(SpiderChartColor.BLUE);
+	public AbstractChartColor color = AbstractGraphicsSupplier.getColor(AbstractChartColor.BLUE);
 	/** Title Font */
-	public SpiderChartFont font = SWTGraphicsSupplier.getFont("Verdana", SpiderChartFont.PLAIN, 14);
+	public AbstractChartFont font = AbstractGraphicsSupplier.getFont("Verdana", AbstractChartFont.PLAIN, 14);
 	/** Title Text */
 	public String text;
 
@@ -35,7 +35,7 @@ public final class SpiderChartTitle extends SpiderChartComponent {
 	}
 
 	/** */
-	public void draw(final SpiderChartGraphics g) {
+	public void draw(final AbstractChartGraphics g) {
 		g.setColor(this.color);
 		g.setFont(this.font);
 		final String[] txt = new String[3];

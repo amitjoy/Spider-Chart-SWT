@@ -16,13 +16,13 @@
 package com.amitinside.tooling.chart.example;
 
 import com.amitinside.tooling.chart.api.ISpiderChartPlottable;
-import com.amitinside.tooling.chart.gc.SpiderChartColor;
+import com.amitinside.tooling.chart.gc.AbstractChartColor;
 
 public final class Nexus implements ISpiderChartPlottable {
 
 	@Override
 	public String areaColor() {
-		return SpiderChartColor.OLIVE;
+		return AbstractChartColor.OLIVE;
 	}
 
 	@Override

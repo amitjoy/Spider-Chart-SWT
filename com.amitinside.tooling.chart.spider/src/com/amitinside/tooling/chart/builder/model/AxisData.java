@@ -17,8 +17,8 @@ package com.amitinside.tooling.chart.builder.model;
 
 import static com.amitinside.tooling.chart.style.LineStyle.NORMAL_LINE;
 
-import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
-import com.amitinside.tooling.chart.gc.SpiderChartFont;
+import com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier;
+import com.amitinside.tooling.chart.gc.AbstractChartFont;
 import com.amitinside.tooling.chart.sequence.LineDataSeq;
 import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.style.LineStyle;
@@ -35,10 +35,10 @@ public final class AxisData {
 
 	/** */
 	public void setData(final double[] dataValues, final String color) {
-		this.data = new LineDataSeq(dataValues, new LineStyle(2, SWTGraphicsSupplier.getColor(color), NORMAL_LINE));
+		this.data = new LineDataSeq(dataValues, new LineStyle(2, AbstractGraphicsSupplier.getColor(color), NORMAL_LINE));
 		this.data.drawPoint = true;
-		this.data.valueFont = SWTGraphicsSupplier.getFont("Verdana", SpiderChartFont.BOLD, 12);
-		this.data.fillStyle = new FillStyle(SWTGraphicsSupplier.getColor(color), 0.5f);
+		this.data.valueFont = AbstractGraphicsSupplier.getFont("Verdana", AbstractChartFont.BOLD, 12);
+		this.data.fillStyle = new FillStyle(AbstractGraphicsSupplier.getColor(color), 0.5f);
 	}
 
 }

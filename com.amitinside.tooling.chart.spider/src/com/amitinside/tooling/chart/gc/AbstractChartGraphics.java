@@ -15,7 +15,7 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.gc;
 
-public abstract class SpiderChartGraphics {
+public abstract class AbstractChartGraphics {
 
 	/** */
 	public static int ROTATE_CENTER = 0;
@@ -32,10 +32,10 @@ public abstract class SpiderChartGraphics {
 	/** */
 	protected int lineWidth = 1;
 	/** */
-	protected SpiderChartImage textureImage = null;
+	protected AbstractChartImage textureImage = null;
 
 	/** */
-	public void createFadeArea(final SpiderChartColor colorFrom, final SpiderChartColor colorUntil, final int x,
+	public void createFadeArea(final AbstractChartColor colorFrom, final AbstractChartColor colorUntil, final int x,
 			final int y, final int w, final int h, final boolean vertical, final boolean cyclic) {
 	}
 
@@ -48,11 +48,11 @@ public abstract class SpiderChartGraphics {
 	}
 
 	/** */
-	public void drawImage(final SpiderChartImage image, final int x, final int y) {
+	public void drawImage(final AbstractChartImage image, final int x, final int y) {
 	}
 
 	/** */
-	public void drawImage(final SpiderChartImage image, final int x1Dest, final int y1Dest, final int x2Dest,
+	public void drawImage(final AbstractChartImage image, final int x1Dest, final int y1Dest, final int x2Dest,
 			final int y2Dest, final int x1Source, final int y1Source, final int x2Source, final int y2Source) {
 	}
 
@@ -128,7 +128,7 @@ public abstract class SpiderChartGraphics {
 	}
 
 	/** */
-	public boolean drawRotatedText(final SpiderChartFont descFont, final SpiderChartColor descColor, final String txt,
+	public boolean drawRotatedText(final AbstractChartFont descFont, final AbstractChartColor descColor, final String txt,
 			final int angle, final int x, final int y, final boolean b) {
 		return false;
 	}
@@ -211,12 +211,12 @@ public abstract class SpiderChartGraphics {
 	}
 
 	/** */
-	public SpiderChartColor getColor() {
+	public AbstractChartColor getColor() {
 		return null;
 	}
 
 	/** */
-	public SpiderChartFont getFont() {
+	public AbstractChartFont getFont() {
 		return null;
 	}
 
@@ -226,12 +226,12 @@ public abstract class SpiderChartGraphics {
 	}
 
 	/** */
-	public int getFontHeight(final SpiderChartFont font) {
+	public int getFontHeight(final AbstractChartFont font) {
 		return 0;
 	}
 
 	/** */
-	public int getFontWidth(final SpiderChartFont font, final String s) {
+	public int getFontWidth(final AbstractChartFont font, final String s) {
 		return 0;
 	}
 
@@ -241,7 +241,7 @@ public abstract class SpiderChartGraphics {
 	}
 
 	/** */
-	public void paintRotatedImage(final SpiderChartImage srcImage, final int angle, final int x, final int y,
+	public void paintRotatedImage(final AbstractChartImage srcImage, final int angle, final int x, final int y,
 			final int alginment) {
 	}
 
@@ -254,11 +254,11 @@ public abstract class SpiderChartGraphics {
 	}
 
 	/** */
-	public void setColor(final SpiderChartColor color) {
+	public void setColor(final AbstractChartColor color) {
 	}
 
 	/** */
-	public void setFont(final SpiderChartFont font) {
+	public void setFont(final AbstractChartFont font) {
 	}
 
 	/** */
@@ -272,7 +272,7 @@ public abstract class SpiderChartGraphics {
 	}
 
 	/** */
-	public void setTexture(final SpiderChartImage image) {
+	public void setTexture(final AbstractChartImage image) {
 		this.textureImage = image;
 	}
 }

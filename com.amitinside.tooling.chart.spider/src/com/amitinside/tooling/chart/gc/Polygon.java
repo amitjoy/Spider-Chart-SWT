@@ -17,29 +17,27 @@ package com.amitinside.tooling.chart.gc;
 
 import java.util.Vector;
 
-public final class Polygon extends Vector<Point> {
+public final class Polygon {
 
-	/** */
-	private static final long serialVersionUID = 1L;
+	private final Vector<Point> points;
+
+	public Polygon() {
+		this.points = new Vector<>();
+	}
 
 	/** */
 	public void addPoint(final int x, final int y) {
-		super.addElement(new Point(x, y));
+		this.points.addElement(new Point(x, y));
 	}
 
 	/** */
 	public boolean contains(final int x, final int y) {
-		return this.contains1(x, y);
-	}
-
-	/** */
-	private boolean contains1(final int x, final int y) {
 		int i = 0;
 		int j = 0;
 		boolean c = false;
 
 		i = 0;
-		for (j = this.size() - 1; i < this.size(); j = i++) {
+		for (j = this.points.size() - 1; i < this.points.size(); j = i++) {
 			if (((this.getY(i) <= y) && (y < this.getY(j))) || ((this.getY(j) <= y) && (y < this.getY(i))
 					&& (x < ((((this.getX(j) - this.getX(i)) * (y - this.getY(i))) / (this.getY(j) - this.getY(i)))
 							+ this.getX(i))))) {
@@ -51,11 +49,11 @@ public final class Polygon extends Vector<Point> {
 
 	/** */
 	public int getX(final int i) {
-		return super.elementAt(i).x;
+		return this.points.elementAt(i).x;
 	}
 
 	/** */
 	public int getY(final int i) {
-		return super.elementAt(i).y;
+		return this.points.elementAt(i).y;
 	}
 }

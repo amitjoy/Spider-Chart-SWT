@@ -20,8 +20,8 @@ import java.util.Vector;
 
 import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.SpiderChartComponent;
-import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
-import com.amitinside.tooling.chart.gc.SpiderChartImage;
+import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
+import com.amitinside.tooling.chart.gc.AbstractChartImage;
 import com.amitinside.tooling.chart.scale.SpiderChartScale;
 import com.amitinside.tooling.chart.sequence.DataSeq;
 import com.amitinside.tooling.chart.style.FillStyle;
@@ -38,7 +38,7 @@ public class SpiderPlotter extends SpiderChartComponent {
 	public FillStyle back = null;
 
 	/** Spider Chart Background Image */
-	public SpiderChartImage backgroundImage;
+	public AbstractChartImage backgroundImage;
 
 	/** */
 	protected boolean combinable = true;
@@ -155,7 +155,7 @@ public class SpiderPlotter extends SpiderChartComponent {
 	}
 
 	/** */
-	public void plot(final SpiderChartGraphics g) {
+	public void plot(final AbstractChartGraphics g) {
 		for (int i = 0; i < this.seq.size(); i++) {
 			final DataSeq s = this.seq.elementAt(i);
 
@@ -164,11 +164,11 @@ public class SpiderPlotter extends SpiderChartComponent {
 	}
 
 	/** */
-	protected void plot(final SpiderChartGraphics g, final DataSeq s, final int serieSec) {
+	protected void plot(final AbstractChartGraphics g, final DataSeq s, final int serieSec) {
 	}
 
 	/** */
-	public void plotBackground(final SpiderChartGraphics g, final int bw, final int bh, final int offsetX,
+	public void plotBackground(final AbstractChartGraphics g, final int bw, final int bh, final int offsetX,
 			final int offsetY) {
 		if (this.back != null) {
 			final boolean D3 = false;

@@ -15,18 +15,18 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.legend;
 
-import static com.amitinside.tooling.chart.gc.SWTGraphicsSupplier.getColor;
+import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getColor;
 
 import java.util.Vector;
 import java.util.function.Supplier;
 
 import com.amitinside.tooling.chart.SpiderChartComponent;
 import com.amitinside.tooling.chart.api.ISpiderChartPlottable;
-import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
-import com.amitinside.tooling.chart.gc.SpiderChartColor;
-import com.amitinside.tooling.chart.gc.SpiderChartFont;
-import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
-import com.amitinside.tooling.chart.gc.SpiderChartImage;
+import com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier;
+import com.amitinside.tooling.chart.gc.AbstractChartColor;
+import com.amitinside.tooling.chart.gc.AbstractChartFont;
+import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
+import com.amitinside.tooling.chart.gc.AbstractChartImage;
 import com.amitinside.tooling.chart.label.SpiderChartLabel;
 import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.style.LineStyle;
@@ -40,10 +40,10 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 	public LineStyle border;
 
 	/** Legend Color */
-	public SpiderChartColor color = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
+	public AbstractChartColor color = AbstractGraphicsSupplier.getColor(AbstractChartColor.BLACK);
 
 	/** Legend Font */
-	public SpiderChartFont font = SWTGraphicsSupplier.getFont("Verdana", SpiderChartFont.PLAIN, 10);
+	public AbstractChartFont font = AbstractGraphicsSupplier.getFont("Verdana", AbstractChartFont.PLAIN, 10);
 
 	/** */
 	Vector<Object> items = new Vector<>(10, 10);
@@ -86,7 +86,7 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 	}
 
 	/** */
-	public void draw(final SpiderChartGraphics g) {
+	public void draw(final AbstractChartGraphics g) {
 		if ((this.legendLabel != null) && (this.legendLabel.length() > 0)) {
 			final SpiderChartLabel cl = new SpiderChartLabel(this.legendLabel, "", false, true);
 			cl.initialize(g, this.chart);
@@ -101,7 +101,7 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 	}
 
 	/** */
-	public void drawHorizontal(final SpiderChartGraphics g) {
+	public void drawHorizontal(final AbstractChartGraphics g) {
 		g.setFont(this.font);
 
 		int textWidth = 0;
@@ -132,9 +132,9 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 				w = 10;
 				h = 10;
 			}
-			if (o instanceof SpiderChartImage) {
-				w = ((SpiderChartImage) o).getWidth();
-				h = ((SpiderChartImage) o).getHeight();
+			if (o instanceof AbstractChartImage) {
+				w = ((AbstractChartImage) o).getWidth();
+				h = ((AbstractChartImage) o).getHeight();
 			}
 			if (w > iconWidth) {
 				iconWidth = w;
@@ -179,8 +179,8 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 		offset = 0;
 		for (int i = 1; i <= this.names.size(); i++) {
 			final Object icon = this.items.elementAt(i - 1);
-			if (icon instanceof SpiderChartImage) {
-				g.drawImage((SpiderChartImage) icon, toCenterX + this.x + offset, toCenterY + this.y);
+			if (icon instanceof AbstractChartImage) {
+				g.drawImage((AbstractChartImage) icon, toCenterX + this.x + offset, toCenterY + this.y);
 			}
 			if (icon instanceof LineStyle) {
 				final LineStyle l = (LineStyle) icon;
@@ -199,7 +199,7 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 	}
 
 	/** */
-	public void drawVertical(final SpiderChartGraphics g) {
+	public void drawVertical(final AbstractChartGraphics g) {
 		g.setFont(this.font);
 
 		int textWidth = 0;

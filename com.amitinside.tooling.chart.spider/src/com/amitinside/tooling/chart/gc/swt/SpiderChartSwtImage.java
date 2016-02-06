@@ -22,32 +22,32 @@ import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 
-import com.amitinside.tooling.chart.gc.SpiderChartColor;
-import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
-import com.amitinside.tooling.chart.gc.SpiderChartImage;
+import com.amitinside.tooling.chart.gc.AbstractChartColor;
+import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
+import com.amitinside.tooling.chart.gc.AbstractChartImage;
 
-public final class SpiderChartSwtImage extends SpiderChartImage {
+public final class SpiderChartSwtImage extends AbstractChartImage {
 
 	/** */
 	private Image image = null;
 	/** */
-	private SpiderChartColor transparentColor = null;
+	private AbstractChartColor transparentColor = null;
 
 	/** Constructor */
 	public SpiderChartSwtImage(final int w, final int h) {
-		this.image = new Image(SwtGraphicsProvider.getDefaultDisplay(), w, h);
+		this.image = new Image(SwtGraphicsProvider.getDisplay(), w, h);
 	}
 
 	/** Constructor */
-	public SpiderChartSwtImage(final int w, final int h, final SpiderChartColor transparent) {
+	public SpiderChartSwtImage(final int w, final int h, final AbstractChartColor transparent) {
 		this.transparentColor = transparent;
 		final Color trans = ((SpiderChartSwtColor) transparent).getColor();
-		final Image tmpImage = new Image(SwtGraphicsProvider.getDefaultDisplay(), w, h);
+		final Image tmpImage = new Image(SwtGraphicsProvider.getDisplay(), w, h);
 		final ImageData imageData = tmpImage.getImageData();
 		tmpImage.dispose();
 		imageData.transparentPixel = imageData.palette.getPixel(trans.getRGB());
 
-		this.image = new Image(SwtGraphicsProvider.getDefaultDisplay(), imageData);
+		this.image = new Image(SwtGraphicsProvider.getDisplay(), imageData);
 
 		final GC g = new GC(this.image);
 		g.setForeground(trans);
@@ -64,14 +64,14 @@ public final class SpiderChartSwtImage extends SpiderChartImage {
 			if (o instanceof String) {
 				final InputStream is = SpiderChartSwtImage.class.getClassLoader().getResourceAsStream((String) o);
 				if (is != null) {
-					this.image = new Image(SwtGraphicsProvider.getDefaultDisplay(), is);
+					this.image = new Image(SwtGraphicsProvider.getDisplay(), is);
 					return;
 				}
-				this.image = new Image(SwtGraphicsProvider.getDefaultDisplay(), (String) o);
+				this.image = new Image(SwtGraphicsProvider.getDisplay(), (String) o);
 			} else if (o instanceof Image) {
 				this.image = (Image) o;
 			} else if (o instanceof InputStream) {
-				this.image = new Image(SwtGraphicsProvider.getDefaultDisplay(), (InputStream) o);
+				this.image = new Image(SwtGraphicsProvider.getDisplay(), (InputStream) o);
 			} else {
 				throw new Exception("Class not supported");
 			}
@@ -102,7 +102,7 @@ public final class SpiderChartSwtImage extends SpiderChartImage {
 		} else {
 			return this;
 		}
-		final SpiderChartGraphics g = dest.getGraphics();
+		final AbstractChartGraphics g = dest.getGraphics();
 		g.drawImage(this, 0, 0);
 		g.dispose();
 
@@ -111,7 +111,7 @@ public final class SpiderChartSwtImage extends SpiderChartImage {
 
 	/** {@inheritDoc} */
 	@Override
-	public SpiderChartGraphics getGraphics() {
+	public AbstractChartGraphics getGraphics() {
 		final SpiderChartSwtGraphics g = new SpiderChartSwtGraphics(new GC(this.image));
 		g.srcImage = this.image;
 		return g;

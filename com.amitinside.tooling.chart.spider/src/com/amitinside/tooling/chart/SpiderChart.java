@@ -21,12 +21,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.amitinside.tooling.chart.api.IFloatingObject;
 import com.amitinside.tooling.chart.axis.SpiderChartAxis;
+import com.amitinside.tooling.chart.gc.AbstractChartColor;
+import com.amitinside.tooling.chart.gc.AbstractChartFont;
+import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
+import com.amitinside.tooling.chart.gc.AbstractChartImage;
+import com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.Polygon;
-import com.amitinside.tooling.chart.gc.SWTGraphicsSupplier;
-import com.amitinside.tooling.chart.gc.SpiderChartColor;
-import com.amitinside.tooling.chart.gc.SpiderChartFont;
-import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
-import com.amitinside.tooling.chart.gc.SpiderChartImage;
 import com.amitinside.tooling.chart.label.SpiderChartLabel;
 import com.amitinside.tooling.chart.legend.SpiderChartLegend;
 import com.amitinside.tooling.chart.listener.ISpiderChartListener;
@@ -46,7 +46,7 @@ import com.amitinside.tooling.chart.title.SpiderChartTitle;
 public final class SpiderChart {
 
 	/**
-	 * Background Thread to refresh chart
+	 * Background Worker Thread to refresh chart
 	 *
 	 * @author AMIT KUMAR MONDAL
 	 *
@@ -116,16 +116,16 @@ public final class SpiderChart {
 	public double axisMargin = 0.0625D;
 
 	/** */
-	public FillStyle back = new FillStyle(SWTGraphicsSupplier.getColor(SpiderChartColor.AQUA));
+	public FillStyle back = new FillStyle(AbstractGraphicsSupplier.getColor(AbstractChartColor.AQUA));
 
 	/** */
-	public String backgroundCanvasColor = SpiderChartColor.AQUA;
+	public String backgroundCanvasColor = AbstractChartColor.AQUA;
 
 	/** Spider Chart Back Image */
-	public SpiderChartImage backImage;
+	public AbstractChartImage backImage;
 
 	/** */
-	private SpiderChartImage backTmpImage = null;
+	private AbstractChartImage backTmpImage = null;
 
 	/**  */
 	public LineStyle border = null;
@@ -133,11 +133,8 @@ public final class SpiderChart {
 	/** */
 	public double bottomMargin = 0.125D;
 
-	/** */
-	public Vector<Object> chartHotAreas = new Vector<>(0, 5);
-
 	/** Spider Chart Image */
-	private SpiderChartImage chartImage = null;
+	private AbstractChartImage chartImage = null;
 
 	/** */
 	private final List<ISpiderChartListener> chartListeners = new CopyOnWriteArrayList<>();
@@ -147,9 +144,6 @@ public final class SpiderChart {
 
 	/** */
 	public double currentValueY;
-
-	/** */
-	public double currentValueY2;
 
 	/** */
 	public int currentX;
@@ -170,7 +164,7 @@ public final class SpiderChart {
 	public boolean doubleBuffering = true;
 
 	/** */
-	private SpiderChartImage finalImage = null;
+	private AbstractChartImage finalImage = null;
 
 	/** */
 	protected Vector<IFloatingObject> floatingObjects = new Vector<>(0, 5);
@@ -267,17 +261,14 @@ public final class SpiderChart {
 	@SuppressWarnings("unused")
 	private boolean stopped = false;
 
-	/** */
-	protected Vector<TargetZone> targetZones = new Vector<>();
-
 	/** Spider Chart Tip Background Color */
-	SpiderChartColor tipColor = SWTGraphicsSupplier.getColor(SpiderChartColor.YELLOW);
+	AbstractChartColor tipColor = AbstractGraphicsSupplier.getColor(AbstractChartColor.YELLOW);
 
 	/** Spider Chart Tip Font */
-	SpiderChartFont tipFont = SWTGraphicsSupplier.getFont("Serif", SpiderChartFont.PLAIN, 10);
+	AbstractChartFont tipFont = AbstractGraphicsSupplier.getFont("Serif", AbstractChartFont.PLAIN, 10);
 
 	/** Spider Chart Tip Font Color */
-	SpiderChartColor tipFontColor = SWTGraphicsSupplier.getColor(SpiderChartColor.BLACK);
+	AbstractChartColor tipFontColor = AbstractGraphicsSupplier.getColor(AbstractChartColor.BLACK);
 
 	/** Spider Chart Title */
 	public SpiderChartTitle title;
@@ -334,11 +325,6 @@ public final class SpiderChart {
 	/** */
 	public void addSeq(final DataSeq s) {
 		this.plotters[0].addSeq(s);
-	}
-
-	/** */
-	public void addTargetZone(final TargetZone zone) {
-		this.targetZones.addElement(zone);
 	}
 
 	/** */
@@ -479,7 +465,7 @@ public final class SpiderChart {
 	}
 
 	/** */
-	private void drawBackImage(final SpiderChartGraphics g) {
+	private void drawBackImage(final AbstractChartGraphics g) {
 		final int ImageW = this.backImage.getWidth();
 		final int ImageH = this.backImage.getHeight();
 		if ((ImageW == -1) || (ImageH == -1)) {
@@ -495,15 +481,6 @@ public final class SpiderChart {
 	/** */
 	public int getHeight() {
 		return this.height;
-	}
-
-	/** */
-	public TargetZone[] getTargetZones() {
-		final TargetZone[] a = new TargetZone[this.targetZones.size()];
-		for (int i = 0; i < a.length; i++) {
-			a[i] = this.targetZones.elementAt(i);
-		}
-		return a;
 	}
 
 	/** */
@@ -527,7 +504,6 @@ public final class SpiderChart {
 		}
 		this.currentValueX = 0.0D;
 		this.currentValueY = 0.0D;
-		this.currentValueY2 = 0.0D;
 
 		this.currentX = eX;
 		this.currentY = eY;
@@ -569,16 +545,6 @@ public final class SpiderChart {
 					}
 				}
 			}
-			if (this.selectedSerie == null) {
-				for (int i = 0; i < this.chartHotAreas.size(); i++) {
-					final SpiderChartLabel label = (SpiderChartLabel) this.chartHotAreas.elementAt(i);
-					if (label.clickableArea.contains(this.currentX + this.offsetX, this.currentY + this.offsetY)) {
-						this.selectedLabel = label;
-						break;
-					}
-				}
-
-			}
 			if ((Math.abs(this.currentX - this.cursorLastX) > 2) || (Math.abs(this.currentY - this.cursorLastY) > 2)) {
 				this.cursorLastX = this.currentX;
 				this.cursorLastY = this.currentY;
@@ -591,26 +557,25 @@ public final class SpiderChart {
 	}
 
 	/** */
-	public void paint(final SpiderChartGraphics pg) {
+	public void paint(final AbstractChartGraphics pg) {
 		this.floatingObjects.removeAllElements();
-		this.chartHotAreas.removeAllElements();
 
 		System.currentTimeMillis();
 		if ((this.plotters[0] == null) || (this.plottersCount <= 0)) {
-			pg.setColor(SWTGraphicsSupplier.getColor(SpiderChartColor.RED));
+			pg.setColor(AbstractGraphicsSupplier.getColor(AbstractChartColor.RED));
 			pg.drawText("Error: No plotters/series have been defined", 30, 30);
 			return;
 		}
 		for (int j = 0; j < this.plottersCount; j++) {
 			if ((this.plottersCount > 1) && !this.plotters[j].getCombinable()) {
-				pg.setColor(SWTGraphicsSupplier.getColor(SpiderChartColor.RED));
+				pg.setColor(AbstractGraphicsSupplier.getColor(AbstractChartColor.RED));
 				pg.drawText("Error: These plotters cannot be combined", 30, 30);
 				return;
 			}
 		}
-		SpiderChartGraphics gScroll = pg;
-		SpiderChartGraphics gBack = pg;
-		SpiderChartGraphics g = pg;
+		AbstractChartGraphics gScroll = pg;
+		AbstractChartGraphics gBack = pg;
+		AbstractChartGraphics g = pg;
 		if ((this.lastWidth != this.width) || (this.lastHeight != this.height)) {
 			this.repaintAll = true;
 			this.lastWidth = this.width;
@@ -640,7 +605,7 @@ public final class SpiderChart {
 				if (this.finalImage != null) {
 					this.finalImage.dispose();
 				}
-				this.finalImage = SWTGraphicsSupplier.createImage(this.getWidth(), this.getHeight());
+				this.finalImage = AbstractGraphicsSupplier.createImage(this.getWidth(), this.getHeight());
 			}
 		} catch (final Exception e) {
 		}
@@ -654,14 +619,14 @@ public final class SpiderChart {
 				if (this.chartImage != null) {
 					this.chartImage.dispose();
 				}
-				this.chartImage = SWTGraphicsSupplier.createImage(this.virtualWidth, this.virtualHeight);
+				this.chartImage = AbstractGraphicsSupplier.createImage(this.virtualWidth, this.virtualHeight);
 			}
 			gScroll = this.chartImage.getGraphics();
 			if (this.repaintAll || (this.backTmpImage == null)) {
 				if (this.backTmpImage != null) {
 					this.backTmpImage.dispose();
 				}
-				this.backTmpImage = SWTGraphicsSupplier.createImage(this.virtualWidth, this.virtualHeight);
+				this.backTmpImage = AbstractGraphicsSupplier.createImage(this.virtualWidth, this.virtualHeight);
 			}
 			gBack = this.backTmpImage.getGraphics();
 		}
@@ -703,7 +668,6 @@ public final class SpiderChart {
 		}
 		this.title.chart = this;
 		this.title.draw(g);
-		this.paintTargetZones(g, true);
 		if ((d() != 1) && (this.legend == null)) {
 			this.legend = new SpiderChartLegend();
 		}
@@ -737,8 +701,6 @@ public final class SpiderChart {
 				this.chartListeners.get(i).paintUserExit(this, g);
 			}
 		}
-		this.paintTargetZones(g, false);
-
 		this.paintNotes(g);
 
 		this.paintTips(g);
@@ -759,7 +721,7 @@ public final class SpiderChart {
 	}
 
 	/** */
-	private void paintNotes(final SpiderChartGraphics g) {
+	private void paintNotes(final AbstractChartGraphics g) {
 		if (g == null) {
 			return;
 		}
@@ -771,16 +733,7 @@ public final class SpiderChart {
 	}
 
 	/** */
-	protected void paintTargetZones(final SpiderChartGraphics g, final boolean back) {
-		g.setFont(SWTGraphicsSupplier.getFont("Verdana", SpiderChartFont.BOLD, 10));
-		for (int i = 0; i < this.targetZones.size(); i++) {
-			final TargetZone z = this.targetZones.elementAt(i);
-			z.chart = this;
-		}
-	}
-
-	/** */
-	private void paintTips(final SpiderChartGraphics g) {
+	private void paintTips(final AbstractChartGraphics g) {
 		// TODO (AKM) To be implemented properly: Tips Functionality
 		this.showingTip = false;
 
@@ -817,11 +770,6 @@ public final class SpiderChart {
 	}
 
 	/** */
-	public void removeTargetZones() {
-		this.targetZones.removeAllElements();
-	}
-
-	/** */
 	protected void resetChart(final SpiderChartTitle t, final SpiderChartPlotter p, final SpiderChartAxis X,
 			final SpiderChartAxis Y) {
 		this.plottersCount = 0;
@@ -833,9 +781,7 @@ public final class SpiderChart {
 		this.selectedSerie = null;
 		this.selectedSeriePoint = -1;
 		this.repaintAll = true;
-		this.removeTargetZones();
 		this.removeNotes();
-		this.chartHotAreas.removeAllElements();
 		this.floatingObjects.removeAllElements();
 
 		this.plotters[0] = p;
