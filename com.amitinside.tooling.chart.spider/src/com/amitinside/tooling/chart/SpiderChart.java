@@ -30,6 +30,7 @@ import com.amitinside.tooling.chart.gc.Polygon;
 import com.amitinside.tooling.chart.label.SpiderChartLabel;
 import com.amitinside.tooling.chart.legend.SpiderChartLegend;
 import com.amitinside.tooling.chart.listener.ISpiderChartListener;
+import com.amitinside.tooling.chart.plotter.AbstractPlotter;
 import com.amitinside.tooling.chart.plotter.spider.SpiderChartPlotter;
 import com.amitinside.tooling.chart.sequence.DataSeq;
 import com.amitinside.tooling.chart.sequence.LineDataSeq;
@@ -96,7 +97,7 @@ public final class SpiderChart {
 	public double axisMargin = 0.0625D;
 
 	/** */
-	public FillStyle back = new FillStyle(AbstractGraphicsSupplier.getColor(AbstractChartColor.AQUA));
+	public FillStyle backStyle = new FillStyle(AbstractGraphicsSupplier.getColor(AbstractChartColor.AQUA));
 
 	/** */
 	public String backgroundCanvasColor = AbstractChartColor.AQUA;
@@ -198,7 +199,7 @@ public final class SpiderChart {
 	private int originalVirtualWidth = -1;
 
 	/** */
-	public SpiderChartPlotter[] plotters = new SpiderChartPlotter[10];
+	public AbstractPlotter[] plotters = new SpiderChartPlotter[10];
 
 	/** */
 	private int plottersCount = 0;
@@ -230,9 +231,6 @@ public final class SpiderChart {
 	/** */
 	@SuppressWarnings("unused")
 	private boolean showingTip = false;
-
-	/** */
-	public boolean showPosition = false;
 
 	/** Show Tips on the Spider Chart Points */
 	public boolean showTips = false;
@@ -446,13 +444,13 @@ public final class SpiderChart {
 
 	/** */
 	private void drawBackImage(final AbstractChartGraphics g) {
-		final int ImageW = this.backImage.getWidth();
-		final int ImageH = this.backImage.getHeight();
-		if ((ImageW == -1) || (ImageH == -1)) {
+		final int imageW = this.backImage.getWidth();
+		final int imageH = this.backImage.getHeight();
+		if ((imageW == -1) || (imageH == -1)) {
 			return;
 		}
-		for (int j = 0; j <= this.virtualWidth; j += ImageW) {
-			for (int i = 0; i <= this.virtualHeight; i += ImageH) {
+		for (int j = 0; j <= this.virtualWidth; j += imageW) {
+			for (int i = 0; i <= this.virtualHeight; i += imageH) {
 				g.drawImage(this.backImage, j, i);
 			}
 		}
@@ -498,7 +496,7 @@ public final class SpiderChart {
 		this.selectedLabel = null;
 		this.selectedSeriePoint = -1;
 		if (this.activateSelection) {
-			for (final SpiderChartPlotter plotter : this.plotters) {
+			for (final AbstractPlotter plotter : this.plotters) {
 				if (plotter == null) {
 					break;
 				}
@@ -611,14 +609,14 @@ public final class SpiderChart {
 			gBack = this.backTmpImage.getGraphics();
 		}
 		if (this.repaintAll) {
-			if ((this.back != null) && (this.backgroundCanvasColor != null)) {
-				this.back.draw(gBack, this.backgroundCanvasColor, 0, 0, this.virtualWidth, this.virtualHeight);
+			if ((this.backStyle != null) && (this.backgroundCanvasColor != null)) {
+				this.backStyle.draw(gBack, this.backgroundCanvasColor, 0, 0, this.virtualWidth, this.virtualHeight);
 			}
 			if (this.backImage != null) {
 				this.drawBackImage(gBack);
 			}
 		}
-		if (this.withScroll && ((this.backImage != null) || (this.back != null))) {
+		if (this.withScroll && ((this.backImage != null) || (this.backStyle != null))) {
 			if (this.repaintAll) {
 				gScroll.drawImage(this.backTmpImage, 0, 0, this.virtualWidth, this.virtualHeight, 0, 0,
 						this.virtualWidth, this.virtualHeight);
@@ -757,7 +755,7 @@ public final class SpiderChart {
 		this.legend = null;
 		this.title = null;
 		this.border = null;
-		this.back = null;
+		this.backStyle = null;
 		this.selectedSerie = null;
 		this.selectedSeriePoint = -1;
 		this.repaintAll = true;

@@ -79,9 +79,9 @@ public final class SpiderChartBuilder {
 
 		// Some chart related default configurations
 		this.chart = new SpiderChart(chartConfiguration.getTitle(), chartConfiguration.getPlotter());
-		this.chart.back = new FillStyle(AbstractGraphicsSupplier.getColor(AbstractChartColor.YELLOW));
+		this.chart.backStyle = new FillStyle(AbstractGraphicsSupplier.getColor(AbstractChartColor.YELLOW));
 		this.chart.backgroundCanvasColor = AbstractChartColor.ANTIQUEWHITE;
-		this.chart.back.gradientType = FillStyle.GRADIENT_VERTICAL;
+		this.chart.backStyle.gradientType = FillStyle.GRADIENT_VERTICAL;
 		this.chart.legend = chartConfiguration.getLegend();
 		this.chart.repaintAll = true;
 		this.chart.showTips = true;
