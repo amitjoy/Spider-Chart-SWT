@@ -134,7 +134,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 
 	/** {@inheritDoc}} **/
 	@Override
-	protected void plot(final AbstractChartGraphics g, final DataSeq s, final int serieSec) {
+	protected void plot(final AbstractChartGraphics g, final DataSeq s, final int seqSec) {
 		LineDataSeq p;
 		if (s instanceof LineDataSeq) {
 			p = (LineDataSeq) s;
@@ -161,11 +161,11 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 		final int PieCenterX = toCenterX + this.x + (radi / 2);
 		final int PieCenterY = toCenterY + this.y + (radi / 2);
 		double angle;
-		if ((serieSec == 0) || (serieSec >= (this.seq.size() - 1))) {
-			if ((serieSec == 0) && (this.backStyle != null) && this.drawCircle) {
+		if ((seqSec == 0) || (seqSec >= (this.seq.size() - 1))) {
+			if ((seqSec == 0) && (this.backStyle != null) && this.drawCircle) {
 				this.backStyle.drawArc(g, toCenterX + this.x, toCenterY + this.y, radi, radi, 0, 360);
 			}
-			if ((serieSec == 0) && (this.backStyle != null) && !this.drawCircle) {
+			if ((seqSec == 0) && (this.backStyle != null) && !this.drawCircle) {
 				for (int i = 0; i < count; i++) {
 					angle = (360.0D / count) * i;
 
@@ -185,7 +185,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 				}
 				this.backStyle.drawPolygon(g, xs, ys, (int) count);
 			}
-			if ((serieSec == (this.seq.size() - 1)) && (this.border != null)) {
+			if ((seqSec == (this.seq.size() - 1)) && (this.border != null)) {
 				if (this.drawCircle) {
 					this.border.drawArc(g, toCenterX + this.x, toCenterY + this.y, radi, radi, 0, 360);
 				}
@@ -206,7 +206,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 					this.border.draw(g, PieCenterX, PieCenterY, PieCenterX + relativeX, PieCenterY + relativeY);
 				}
 			}
-			if ((serieSec == 0) && (this.axisFactorFont != null)) {
+			if ((seqSec == 0) && (this.axisFactorFont != null)) {
 				g.setFont(this.axisFactorFont);
 				for (int i = 0; i < count; i++) {
 					g.setColor(this.axisFactorColor);
@@ -357,10 +357,10 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 					xs[i] = PieCenterX + relativeX;
 					ys[i] = PieCenterY + relativeY;
 				}
-				if (serieSec >= (this.seq.size() - 1)) {
+				if (seqSec >= (this.seq.size() - 1)) {
 					this.gridStyle.drawPolygon(g, xs, ys, (int) count);
 				}
-				if ((serieSec >= (this.seq.size() - 1)) && (this.gridFont != null)) {
+				if ((seqSec >= (this.seq.size() - 1)) && (this.gridFont != null)) {
 					g.setColor(this.gridFontColor);
 					g.setFont(this.gridFont);
 

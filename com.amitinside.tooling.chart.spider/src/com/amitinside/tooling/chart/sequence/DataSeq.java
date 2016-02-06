@@ -136,12 +136,4 @@ public class DataSeq {
 		return this.xData.size();
 	}
 
-	/** */
-	public void setDatax(final double[] x) {
-		for (int i = 0; i < x.length; i++) {
-			if (i < this.xData.size()) {
-				this.xData.setElementAt(new Double(x[i]), i);
-			}
-		}
-	}
 }
