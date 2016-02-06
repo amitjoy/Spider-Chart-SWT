@@ -14,4 +14,27 @@ Build the library using maven and put the recently built jar to your application
 
 ### Sample Code
 
-Check out the Sample Application in the project.
+Check out the Sample Application in the project for detailed information.
+
+``` java
+final Supplier<ISpiderChartPlottable> iPhoneData = IPhone::new;
+		final Supplier<ISpiderChartPlottable> nexusData = Nexus::new;
+
+		viewer = SpiderChartBuilder.config(shell, settings -> {
+			settings.title(title -> title.text = "Smartphone Comparison Scale").legend(legend -> {
+				legend.addItem(iPhoneData);
+				legend.addItem(nexusData);
+			}).plotter(plotter -> {
+				final AxesConfigurer configuration = new AxesConfigurer.Builder().addAxis("Battery", 5, 0)
+						.addAxis("Camera", 5, 0).addAxis("Display", 5, 0).addAxis("Memory", 5, 0).addAxis("Brand", 5, 0)
+						.build();
+				plotter.use(configuration);
+			});
+		}).viewer(chart -> {
+			chart.data(firstData -> firstData.inject(iPhoneData)).data(secondData -> secondData.inject(nexusData));
+		});
+```
+
+### Sampe Output
+
+<img src="http://s8.postimg.org/708bj2jhh/Screen_Shot_2016_02_06_at_11_34_58_AM.png">
