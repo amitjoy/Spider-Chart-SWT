@@ -289,11 +289,6 @@ public final class SpiderChart {
 	}
 
 	/** */
-	public void addNote(final String note) {
-		this.notes.addElement(note);
-	}
-
-	/** */
 	public void addPlotter(final SpiderChartPlotter p) {
 		this.plotters[this.plottersCount] = p;
 		this.plotters[this.plottersCount].xScale = this.plotters[0].xScale;
@@ -362,10 +357,10 @@ public final class SpiderChart {
 	/** */
 	public void mouseClick() {
 		if (((this.selectedSeq != null) && (this.selectedSeqPoint >= 0)) || (this.selectedLabel != null)) {
-			this.triggerEvent(5);
+			this.triggerChartEvent(5);
 			return;
 		}
-		this.triggerEvent(6);
+		this.triggerChartEvent(6);
 	}
 
 	/** */
@@ -402,7 +397,7 @@ public final class SpiderChart {
 							if (previousSelectedObject == null) {
 								triggerEnter = true;
 							} else if ((previousSelectedObject != d) || (previousPoint != i)) {
-								this.triggerEvent(3);
+								this.triggerChartEvent(3);
 								triggerEnter = true;
 							}
 							this.selectedSeq = d;
@@ -410,7 +405,7 @@ public final class SpiderChart {
 							if (!triggerEnter) {
 								break;
 							}
-							this.triggerEvent(2);
+							this.triggerChartEvent(2);
 							break;
 						}
 					}
@@ -419,11 +414,11 @@ public final class SpiderChart {
 			if ((Math.abs(this.currentX - this.cursorLastX) > 2) || (Math.abs(this.currentY - this.cursorLastY) > 2)) {
 				this.cursorLastX = this.currentX;
 				this.cursorLastY = this.currentY;
-				this.triggerEvent(4);
+				this.triggerChartEvent(4);
 			}
 		}
 		if ((previousSelectedObject != null) && (this.selectedSeq == null) && (this.selectedLabel == null)) {
-			this.triggerEvent(3);
+			this.triggerChartEvent(3);
 		}
 	}
 
@@ -564,7 +559,6 @@ public final class SpiderChart {
 				this.chartListeners.get(i).onPaintUserExit(this, g);
 			}
 		}
-		this.paintNotes(g);
 
 		this.paintTips(g);
 		if (this.finalImage != null) {
@@ -580,18 +574,6 @@ public final class SpiderChart {
 		}
 		if (g != pg) {
 			g.dispose();
-		}
-	}
-
-	/** */
-	private void paintNotes(final AbstractChartGraphics g) {
-		if (g == null) {
-			return;
-		}
-		for (int i = 0; i < this.notes.size(); i++) {
-			final SpiderChartLabel label = new SpiderChartLabel(this.notes.elementAt(i), "", false, false);
-			label.initialize(g, this);
-			label.paint(g, 0, 0, 0, 0);
 		}
 	}
 
@@ -819,7 +801,6 @@ public final class SpiderChart {
 	/** */
 	public void startWorker() {
 		this.stopped = false;
-
 		this.deamon = new SpiderChartWorker();
 		this.deamon.chart = this;
 		new Thread(this.deamon).start();
@@ -835,7 +816,7 @@ public final class SpiderChart {
 	}
 
 	/** */
-	private void triggerEvent(final int event) {
+	private void triggerChartEvent(final int event) {
 		for (int i = 0; i < this.chartListeners.size(); i++) {
 			this.chartListeners.get(i).onChartEvent(this, event);
 		}
