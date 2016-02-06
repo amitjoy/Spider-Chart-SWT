@@ -42,9 +42,7 @@ public final class Nexus {
 ```
 
 ``` java
-// Create the objects of the classes implementing ISpiderChartPlottable
-// You have to implement 3 methods to provide area color, data points to be plotted
-// and legend name to be displayed
+// Create the objects of the annotated classes
 final Supplier<Object> iPhoneData = IPhone::new;
 final Supplier<Object> nexusData = Nexus::new;
 
