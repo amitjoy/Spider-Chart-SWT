@@ -27,7 +27,7 @@ import com.amitinside.tooling.chart.gc.AbstractChartFont;
 import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 import com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier;
 import com.amitinside.tooling.chart.label.SpiderChartLabel;
-import com.amitinside.tooling.chart.plotter.SpiderPlotter;
+import com.amitinside.tooling.chart.plotter.AbstractPlotter;
 import com.amitinside.tooling.chart.scale.SpiderChartScale;
 import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.style.LineStyle;
@@ -106,7 +106,7 @@ public final class SpiderChartAxis extends SpiderChartComponent {
 	public int orientation;
 
 	/** */
-	public SpiderPlotter plot;
+	public AbstractPlotter plot;
 
 	/** */
 	protected int realPosition;

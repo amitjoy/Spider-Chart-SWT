@@ -25,7 +25,7 @@ import com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
 import com.amitinside.tooling.chart.gc.AbstractChartFont;
 import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
-import com.amitinside.tooling.chart.plotter.SpiderPlotter;
+import com.amitinside.tooling.chart.plotter.AbstractPlotter;
 import com.amitinside.tooling.chart.sequence.DataSeq;
 import com.amitinside.tooling.chart.sequence.LineDataSeq;
 import com.amitinside.tooling.chart.style.FillStyle;
@@ -36,7 +36,7 @@ import com.amitinside.tooling.chart.style.LineStyle;
  *
  * @author AMIT KUMAR MONDAL
  */
-public final class SpiderChartPlotter extends SpiderPlotter {
+public final class SpiderChartPlotter extends AbstractPlotter {
 
 	/**
 	 * Spider Chart axes names

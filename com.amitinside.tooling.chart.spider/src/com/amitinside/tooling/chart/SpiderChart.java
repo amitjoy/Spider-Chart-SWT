@@ -51,7 +51,7 @@ public final class SpiderChart {
 	 * @author AMIT KUMAR MONDAL
 	 *
 	 */
-	private class SpiderChartWorker implements Runnable {
+	private final class SpiderChartWorker implements Runnable {
 
 		/** */
 		@SuppressWarnings("unused")
@@ -62,11 +62,6 @@ public final class SpiderChart {
 
 		/** Constructor */
 		private SpiderChartWorker() {
-		}
-
-		/** Constructor */
-		SpiderChartWorker(final Object object) {
-			this();
 		}
 
 		/** {@inheritDoc} */
@@ -86,22 +81,7 @@ public final class SpiderChart {
 	}
 
 	/** */
-	public static final int dnum = 10;
-	/** */
-	public static final int LAYOUT_LEGEND_BOTTOM = 2;
-	/** */
-	public static final int LAYOUT_LEGEND_RIGHT = 0;
-	/** */
-	public static final int LAYOUT_LEGEND_TOP = 1;
-	/** */
-	protected static final int MAX_SERIES = 50;
-	/** */
 	public static String numberLocale;
-
-	/** */
-	public static int d() {
-		return 0;
-	}
 
 	/** */
 	public boolean activateSelection = false;
@@ -668,7 +648,7 @@ public final class SpiderChart {
 		}
 		this.title.chart = this;
 		this.title.draw(g);
-		if ((d() != 1) && (this.legend == null)) {
+		if ((this.legend == null)) {
 			this.legend = new SpiderChartLegend();
 		}
 		if (this.legend != null) {
@@ -851,7 +831,7 @@ public final class SpiderChart {
 	public void startWorker() {
 		this.stopped = false;
 
-		this.deamon = new SpiderChartWorker(null);
+		this.deamon = new SpiderChartWorker();
 		this.deamon.chart = this;
 		new Thread(this.deamon).start();
 	}

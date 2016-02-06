@@ -15,10 +15,8 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.plotter;
 
-import java.util.Calendar;
 import java.util.Vector;
 
-import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.SpiderChartComponent;
 import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 import com.amitinside.tooling.chart.gc.AbstractChartImage;
@@ -32,10 +30,10 @@ import com.amitinside.tooling.chart.style.FillStyle;
  * @author AMIT KUMAR MONDAL
  *
  */
-public class SpiderPlotter extends SpiderChartComponent {
+public abstract class AbstractPlotter extends SpiderChartComponent {
 
 	/** */
-	public FillStyle back = null;
+	public FillStyle backgroundStyle = null;
 
 	/** Spider Chart Background Image */
 	public AbstractChartImage backgroundImage;
@@ -70,7 +68,7 @@ public class SpiderPlotter extends SpiderChartComponent {
 	}
 
 	/** */
-	private void calculateNewMax(final SpiderChartScale s, final double m) {
+	private void calculateMax(final SpiderChartScale s, final double m) {
 		if (!s.exactMaxValue) {
 			s.max = m;
 			return;
@@ -87,7 +85,7 @@ public class SpiderPlotter extends SpiderChartComponent {
 	}
 
 	/** */
-	private void calculateNewMin(final SpiderChartScale s, final double m) {
+	private void calculateMin(final SpiderChartScale s, final double m) {
 		if (!s.exactMinValue) {
 			s.min = m;
 			return;
@@ -170,7 +168,7 @@ public class SpiderPlotter extends SpiderChartComponent {
 	/** */
 	public void plotBackground(final AbstractChartGraphics g, final int bw, final int bh, final int offsetX,
 			final int offsetY) {
-		if (this.back != null) {
+		if (this.backgroundStyle != null) {
 			final boolean D3 = false;
 			if (D3) {
 				final int[] xs = new int[6];
@@ -193,9 +191,9 @@ public class SpiderPlotter extends SpiderChartComponent {
 				xs[5] = this.x + offsetX;
 				ys[5] = (this.y + offsetY + this.visibleHeight) - this.depth;
 
-				this.back.drawPolygon(g, xs, ys, 6);
+				this.backgroundStyle.drawPolygon(g, xs, ys, 6);
 			} else {
-				this.back.draw(g, this.x, this.y, this.x + bw, this.y + bh);
+				this.backgroundStyle.draw(g, this.x, this.y, this.x + bw, this.y + bh);
 			}
 		}
 		if (this.backgroundImage != null) {
@@ -222,8 +220,7 @@ public class SpiderPlotter extends SpiderChartComponent {
 		if (p >= this.seq.size()) {
 			return;
 		}
-		Calendar.getInstance().get(2);
-		if ((SpiderChart.d() != 1) && (this.seq.size() > 3)) {
+		if ((this.seq.size() > 3)) {
 			return;
 		}
 		if (p == -1) {
@@ -233,7 +230,7 @@ public class SpiderPlotter extends SpiderChartComponent {
 		}
 		final boolean fixedLimits = false;
 		final boolean cumulative = false;
-		if (!(this instanceof SpiderPlotter)) {
+		if (!(this instanceof AbstractPlotter)) {
 			for (int i = 0; i < s.getSize(); i++) {
 				if (s.getElementY(i) != null) {
 					final double XValue = ((Double) s.getElementX(i)).doubleValue();
@@ -251,17 +248,17 @@ public class SpiderPlotter extends SpiderChartComponent {
 						}
 					}
 					if (XValue >= tmpScaleX.max) {
-						this.calculateNewMax(tmpScaleX, XValue);
+						this.calculateMax(tmpScaleX, XValue);
 					}
 					if (XValue < tmpScaleX.min) {
-						this.calculateNewMin(tmpScaleX, XValue);
+						this.calculateMin(tmpScaleX, XValue);
 					}
 					if (!fixedLimits) {
 						if (YValue > this.yScale.max) {
-							this.calculateNewMax(this.yScale, YValue);
+							this.calculateMax(this.yScale, YValue);
 						}
 						if (YValue < this.yScale.min) {
-							this.calculateNewMin(this.yScale, YValue);
+							this.calculateMin(this.yScale, YValue);
 						}
 					}
 				}
