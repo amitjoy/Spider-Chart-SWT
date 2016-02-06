@@ -36,8 +36,8 @@ public interface ISpiderChartListener {
 	public static final int EVENT_TIP_UPDATE = 4;
 
 	/** */
-	public abstract void chartEvent(SpiderChart paramChart, int paramInt);
+	public abstract void onChartEvent(SpiderChart paramChart, int paramInt);
 
 	/** */
-	public abstract void paintUserExit(SpiderChart paramChart, AbstractChartGraphics paramChartGraphics);
+	public abstract void onPaintUserExit(SpiderChart paramChart, AbstractChartGraphics paramChartGraphics);
 }

@@ -15,6 +15,8 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.gc.swt;
 
+import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getImage;
+
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.GC;
@@ -23,7 +25,6 @@ import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.graphics.Rectangle;
 
-import com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
 import com.amitinside.tooling.chart.gc.AbstractChartFont;
 import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
@@ -154,8 +155,8 @@ public final class SpiderChartSwtGraphics extends AbstractChartGraphics {
 
 	/** {@inheritDoc} */
 	@Override
-	public boolean drawRotatedText(final AbstractChartFont descFont, final AbstractChartColor descColor, final String txt,
-			final int angle, final int x, final int y, final boolean b) {
+	public boolean drawRotatedText(final AbstractChartFont descFont, final AbstractChartColor descColor,
+			final String txt, final int angle, final int x, final int y, final boolean b) {
 		this.setFont(descFont);
 		this.setColor(descColor);
 
@@ -200,8 +201,8 @@ public final class SpiderChartSwtGraphics extends AbstractChartGraphics {
 		c.dispose();
 		f.dispose();
 
-		final AbstractChartImage tmpChartImage = AbstractGraphicsSupplier.getImage(tmpImage);
-		this.paintRotatedImage(tmpChartImage, angle, x - ((w - h) / 2), y + 4, AbstractChartGraphics.ROTATE_CENTER);
+		final AbstractChartImage tmpChartImage = getImage(tmpImage);
+		this.paintRotatedImage(tmpChartImage, angle, x - ((w - h) / 2), y + 4, ROTATE_CENTER);
 
 		tmpChartImage.dispose();
 		tmpImage.dispose();
@@ -370,7 +371,7 @@ public final class SpiderChartSwtGraphics extends AbstractChartGraphics {
 			}
 		}
 		final Image destImage = new Image(SwtGraphicsProvider.getDisplay(), destData);
-		if (alignment == AbstractChartGraphics.ROTATE_LEFTTOP) {
+		if (alignment == ROTATE_LEFTTOP) {
 			if (angle == 90) {
 				this.graphics.drawImage(destImage, x - (w - originalH), y);
 			} else if (angle == -90) {

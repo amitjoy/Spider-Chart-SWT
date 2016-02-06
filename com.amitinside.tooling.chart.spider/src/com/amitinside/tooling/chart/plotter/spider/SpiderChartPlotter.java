@@ -15,16 +15,19 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.plotter.spider;
 
+import static com.amitinside.tooling.chart.gc.AbstractChartColor.BLACK;
+import static com.amitinside.tooling.chart.gc.AbstractChartFont.PLAIN;
+import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getColor;
+import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getFont;
 import static java.util.Objects.requireNonNull;
 
 import java.text.DecimalFormat;
 
 import com.amitinside.tooling.chart.builder.AxesConfigurer;
-import com.amitinside.tooling.chart.gc.Polygon;
-import com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
 import com.amitinside.tooling.chart.gc.AbstractChartFont;
 import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
+import com.amitinside.tooling.chart.gc.Polygon;
 import com.amitinside.tooling.chart.plotter.AbstractPlotter;
 import com.amitinside.tooling.chart.sequence.DataSeq;
 import com.amitinside.tooling.chart.sequence.LineDataSeq;
@@ -46,7 +49,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 	/**
 	 * Spider Chart Axes Factor Color
 	 */
-	public AbstractChartColor axisFactorColor = AbstractGraphicsSupplier.getColor(AbstractChartColor.BLACK);
+	public AbstractChartColor axisFactorColor = getColor(BLACK);
 
 	/**
 	 * Spider Chart Axis Factor Colors (in case you need to set different colors
@@ -57,7 +60,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 	/**
 	 * Spider Chart Axes Factor Text Font
 	 */
-	public AbstractChartFont axisFactorFont = AbstractGraphicsSupplier.getFont("Verdana", AbstractChartFont.PLAIN, 10);
+	public AbstractChartFont axisFactorFont = getFont("Verdana", PLAIN, 10);
 
 	/**
 	 * Spider Chart Polygon Area Background Style
@@ -67,7 +70,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 	/**
 	 * Spider Chart Border Style
 	 */
-	LineStyle border = new LineStyle(0.2F, AbstractGraphicsSupplier.getColor(AbstractChartColor.BLACK), 1);
+	LineStyle border = new LineStyle(0.2F, getColor(BLACK), 1);
 
 	/**
 	 * Spider Chart Radius
@@ -87,7 +90,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 	/**
 	 * Spider Chart Font Color for Grid Label
 	 */
-	public AbstractChartColor gridFontColor = AbstractGraphicsSupplier.getColor(AbstractChartColor.BLACK);
+	public AbstractChartColor gridFontColor = getColor(BLACK);
 
 	/**
 	 * Spider Chart Grid Style
@@ -129,15 +132,6 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 	public SpiderChartPlotter() {
 		this.combinable = false;
 		this.needsAxis = 0;
-	}
-
-	/** */
-	public void use(final AxesConfigurer configurer) {
-		requireNonNull(configurer);
-
-		this.maxScaleFactors = configurer.maxScales();
-		this.minScaleFactors = configurer.minScales();
-		this.axesFactors = configurer.axesNames();
 	}
 
 	/** {@inheritDoc}} **/
@@ -239,8 +233,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 					final int relativeX = (int) (Cos * tmpradi);
 					relativeY *= -1;
 					if (this.axesFactors.length > i) {
-						g.drawText(this.axesFactors[i], (PieCenterX + relativeX) - correction,
-								PieCenterY + relativeY);
+						g.drawText(this.axesFactors[i], (PieCenterX + relativeX) - correction, PieCenterY + relativeY);
 					}
 				}
 			}
@@ -397,5 +390,14 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 				}
 			}
 		}
+	}
+
+	/** */
+	public void use(final AxesConfigurer configurer) {
+		requireNonNull(configurer);
+
+		this.maxScaleFactors = configurer.maxScales();
+		this.minScaleFactors = configurer.minScales();
+		this.axesFactors = configurer.axesNames();
 	}
 }

@@ -15,8 +15,10 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.axis;
 
+import static com.amitinside.tooling.chart.gc.AbstractChartFont.PLAIN;
+import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getFont;
+
 import com.amitinside.tooling.chart.SpiderChartComponent;
-import com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
 import com.amitinside.tooling.chart.gc.AbstractChartFont;
 import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
@@ -26,7 +28,7 @@ public final class SpiderChartAxisLabel extends SpiderChartComponent {
 	/** */
 	public final AbstractChartColor color;
 	/** */
-	public AbstractChartFont font = AbstractGraphicsSupplier.getFont("Verdana", AbstractChartFont.PLAIN, 14);
+	public AbstractChartFont font = getFont("Verdana", PLAIN, 14);
 	/** */
 	public final String title;
 	/** */

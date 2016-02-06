@@ -22,11 +22,11 @@ public class SpiderChartAdapter implements ISpiderChartListener {
 
 	/** {@inheritDoc}} */
 	@Override
-	public void chartEvent(final SpiderChart c, final int type) {
+	public void onChartEvent(final SpiderChart c, final int type) {
 	}
 
 	/** {@inheritDoc}} */
 	@Override
-	public void paintUserExit(final SpiderChart c, final AbstractChartGraphics g) {
+	public void onPaintUserExit(final SpiderChart c, final AbstractChartGraphics g) {
 	}
 }

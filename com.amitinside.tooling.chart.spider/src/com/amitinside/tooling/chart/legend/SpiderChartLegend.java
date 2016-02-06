@@ -15,14 +15,16 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.legend;
 
+import static com.amitinside.tooling.chart.gc.AbstractChartColor.BLACK;
+import static com.amitinside.tooling.chart.gc.AbstractChartFont.PLAIN;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getColor;
+import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getFont;
 
 import java.util.Vector;
 import java.util.function.Supplier;
 
 import com.amitinside.tooling.chart.SpiderChartComponent;
 import com.amitinside.tooling.chart.api.ISpiderChartPlottable;
-import com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
 import com.amitinside.tooling.chart.gc.AbstractChartFont;
 import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
@@ -40,10 +42,10 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 	public LineStyle border;
 
 	/** Legend Color */
-	public AbstractChartColor color = AbstractGraphicsSupplier.getColor(AbstractChartColor.BLACK);
+	public AbstractChartColor color = getColor(BLACK);
 
 	/** Legend Font */
-	public AbstractChartFont font = AbstractGraphicsSupplier.getFont("Verdana", AbstractChartFont.PLAIN, 10);
+	public AbstractChartFont font = getFont("Verdana", PLAIN, 10);
 
 	/** */
 	Vector<Object> items = new Vector<>(10, 10);

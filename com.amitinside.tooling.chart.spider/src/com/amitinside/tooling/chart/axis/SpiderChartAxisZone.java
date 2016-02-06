@@ -52,7 +52,8 @@ public class SpiderChartAxisZone {
 	}
 
 	/** */
-	protected void paint(final AbstractChartGraphics g, final SpiderChartAxis axis, final SpiderChartAxis peerAxis, final int axisPosition) {
+	protected void paint(final AbstractChartGraphics g, final SpiderChartAxis axis, final SpiderChartAxis peerAxis,
+			final int axisPosition) {
 		if (this.positionStart != DISABLED) {
 			if (this.unitStart == 1) {
 				final double tmp = ((axis.scale.max - axis.scale.min) * this.positionStart) / 100.0D;

@@ -15,6 +15,11 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.axis;
 
+import static com.amitinside.tooling.chart.gc.AbstractChartColor.BLACK;
+import static com.amitinside.tooling.chart.gc.AbstractChartFont.PLAIN;
+import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getColor;
+import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getFont;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -25,7 +30,6 @@ import com.amitinside.tooling.chart.SpiderChartComponent;
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
 import com.amitinside.tooling.chart.gc.AbstractChartFont;
 import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
-import com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier;
 import com.amitinside.tooling.chart.label.SpiderChartLabel;
 import com.amitinside.tooling.chart.plotter.AbstractPlotter;
 import com.amitinside.tooling.chart.scale.SpiderChartScale;
@@ -70,10 +74,10 @@ public final class SpiderChartAxis extends SpiderChartComponent {
 	public boolean bigTicksGrid = false;
 
 	/** */
-	public AbstractChartColor DescColor = AbstractGraphicsSupplier.getColor(AbstractChartColor.BLACK);
+	public AbstractChartColor DescColor = getColor(BLACK);
 
 	/** */
-	public AbstractChartFont DescFont = AbstractGraphicsSupplier.getFont("Verdana", AbstractChartFont.PLAIN, 10);
+	public AbstractChartFont DescFont = getFont("Verdana", PLAIN, 10);
 
 	/** */
 	public FillStyle gridFillStyle = null;
@@ -130,7 +134,7 @@ public final class SpiderChartAxis extends SpiderChartComponent {
 	public boolean startWithBigTick = false;
 
 	/** */
-	public LineStyle style = new LineStyle(2.0F, AbstractGraphicsSupplier.getColor(AbstractChartColor.BLACK), 1);
+	public LineStyle style = new LineStyle(2.0F, getColor(BLACK), 1);
 
 	/** */
 	protected Vector<SpiderChartAxisZone> targetZones = new Vector<>();

@@ -20,13 +20,14 @@ import static com.amitinside.tooling.chart.gc.AbstractChartColor.BLUE;
 import static com.amitinside.tooling.chart.gc.AbstractChartColor.PALEGREEN;
 import static com.amitinside.tooling.chart.gc.AbstractChartColor.TELA;
 import static com.amitinside.tooling.chart.gc.AbstractChartColor.WHITE;
+import static com.amitinside.tooling.chart.gc.AbstractChartFont.PLAIN;
+import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getColor;
+import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getFont;
 import static com.amitinside.tooling.chart.style.LineStyle.NORMAL_LINE;
 import static java.util.Objects.requireNonNull;
 
 import java.util.function.Consumer;
 
-import com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier;
-import com.amitinside.tooling.chart.gc.AbstractChartFont;
 import com.amitinside.tooling.chart.legend.SpiderChartLegend;
 import com.amitinside.tooling.chart.plotter.spider.SpiderChartPlotter;
 import com.amitinside.tooling.chart.style.FillStyle;
@@ -60,8 +61,8 @@ public final class SpiderChartConfigurationBuilder {
 	/** */
 	public SpiderChartConfigurationBuilder legend(final Consumer<SpiderChartLegend> legendBuilder) {
 		this.legend = new SpiderChartLegend();
-		this.legend.background = new FillStyle(AbstractGraphicsSupplier.getColor(WHITE));
-		this.legend.border = new LineStyle(1, AbstractGraphicsSupplier.getColor(BLACK), NORMAL_LINE);
+		this.legend.background = new FillStyle(getColor(WHITE));
+		this.legend.border = new LineStyle(1, getColor(BLACK), NORMAL_LINE);
 		legendBuilder.accept(this.legend);
 		return this;
 	}
@@ -70,11 +71,11 @@ public final class SpiderChartConfigurationBuilder {
 	public SpiderChartConfigurationBuilder plotter(final Consumer<SpiderChartPlotter> plotter) {
 		requireNonNull(plotter);
 		this.plotter = new SpiderChartPlotter();
-		this.plotter.backStyle = new FillStyle(AbstractGraphicsSupplier.getColor(PALEGREEN));
+		this.plotter.backStyle = new FillStyle(getColor(PALEGREEN));
 
-		this.plotter.gridStyle = new LineStyle(1, AbstractGraphicsSupplier.getColor(TELA), NORMAL_LINE);
-		this.plotter.gridFont = AbstractGraphicsSupplier.getFont("Arial", AbstractChartFont.PLAIN, 10);
-		this.plotter.gridFontColor = AbstractGraphicsSupplier.getColor(BLUE);
+		this.plotter.gridStyle = new LineStyle(1, getColor(TELA), NORMAL_LINE);
+		this.plotter.gridFont = getFont("Arial", PLAIN, 10);
+		this.plotter.gridFontColor = getColor(BLUE);
 		plotter.accept(this.plotter);
 		return this;
 	}

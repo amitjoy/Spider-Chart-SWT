@@ -15,6 +15,15 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart;
 
+import static com.amitinside.tooling.chart.gc.AbstractChartColor.AQUA;
+import static com.amitinside.tooling.chart.gc.AbstractChartColor.BLACK;
+import static com.amitinside.tooling.chart.gc.AbstractChartColor.RED;
+import static com.amitinside.tooling.chart.gc.AbstractChartColor.YELLOW;
+import static com.amitinside.tooling.chart.gc.AbstractChartFont.PLAIN;
+import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.createImage;
+import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getColor;
+import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getFont;
+
 import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -25,7 +34,6 @@ import com.amitinside.tooling.chart.gc.AbstractChartColor;
 import com.amitinside.tooling.chart.gc.AbstractChartFont;
 import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 import com.amitinside.tooling.chart.gc.AbstractChartImage;
-import com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.Polygon;
 import com.amitinside.tooling.chart.label.SpiderChartLabel;
 import com.amitinside.tooling.chart.legend.SpiderChartLegend;
@@ -91,19 +99,19 @@ public final class SpiderChart {
 	public boolean autoRebuild = true;
 
 	/** Auto Sizeable Property */
-	public boolean autoSize = true;
+	public boolean autoResize = true;
 
 	/** */
 	public double axisMargin = 0.0625D;
 
 	/** */
-	public FillStyle backStyle = new FillStyle(AbstractGraphicsSupplier.getColor(AbstractChartColor.AQUA));
-
-	/** */
-	public String backgroundCanvasColor = AbstractChartColor.AQUA;
+	public String backgroundCanvasColor = AQUA;
 
 	/** Spider Chart Back Image */
 	public AbstractChartImage backImage;
+
+	/** */
+	public FillStyle backStyle = new FillStyle(getColor(AQUA));
 
 	/** */
 	private AbstractChartImage backTmpImage = null;
@@ -205,9 +213,6 @@ public final class SpiderChart {
 	private int plottersCount = 0;
 
 	/** */
-	public String reloadFrom = "";
-
-	/** */
 	public boolean repaintAll = true;
 
 	/** */
@@ -228,10 +233,6 @@ public final class SpiderChart {
 	/** */
 	public int selectedSeriePoint = -1;
 
-	/** */
-	@SuppressWarnings("unused")
-	private boolean showingTip = false;
-
 	/** Show Tips on the Spider Chart Points */
 	public boolean showTips = false;
 
@@ -240,13 +241,13 @@ public final class SpiderChart {
 	private boolean stopped = false;
 
 	/** Spider Chart Tip Background Color */
-	AbstractChartColor tipColor = AbstractGraphicsSupplier.getColor(AbstractChartColor.YELLOW);
+	AbstractChartColor tipColor = getColor(YELLOW);
 
 	/** Spider Chart Tip Font */
-	AbstractChartFont tipFont = AbstractGraphicsSupplier.getFont("Serif", AbstractChartFont.PLAIN, 10);
+	AbstractChartFont tipFont = getFont("Serif", PLAIN, 10);
 
 	/** Spider Chart Tip Font Color */
-	AbstractChartColor tipFontColor = AbstractGraphicsSupplier.getColor(AbstractChartColor.BLACK);
+	AbstractChartColor tipFontColor = getColor(BLACK);
 
 	/** Spider Chart Title */
 	public SpiderChartTitle title;
@@ -303,114 +304,6 @@ public final class SpiderChart {
 	/** */
 	public void addSeq(final DataSeq s) {
 		this.plotters[0].addSeq(s);
-	}
-
-	/** */
-	private void autoSize() {
-		if (this.layout == 0) {
-			this.autoSize_LayoutRight();
-		}
-		if (this.layout == 1) {
-			this.autoSize_LayoutTop();
-		}
-		if (this.layout == 2) {
-			this.autoSize_LayoutBottom();
-		}
-	}
-
-	/** */
-	private void autoSize_LayoutBottom() {
-		final int myHeight = this.getHeight();
-		final int myWidth = this.getWidth();
-		if (this.virtualWidth < myWidth) {
-			this.virtualWidth = myWidth;
-		}
-		if (this.virtualHeight < myHeight) {
-			this.virtualHeight = myHeight;
-		}
-		this.plotters[0].visibleWidth = (int) (myWidth * (1.0D - (this.leftMargin + this.rightMargin)));
-		this.plotters[0].visibleHeight = (int) (myHeight
-				* (1.0D - (this.topMargin + this.bottomMargin + this.legendMargin)));
-
-		this.plotters[0].x = (int) (myWidth * this.leftMargin);
-		this.plotters[0].y = (int) (myHeight * this.topMargin);
-		this.plotters[0].width = this.virtualWidth - (myWidth - this.plotters[0].visibleWidth);
-		this.plotters[0].height = this.virtualHeight - (myHeight - this.plotters[0].visibleHeight);
-
-		this.title.x = 0;
-		this.title.y = 0;
-		this.title.height = (int) (myHeight * this.topMargin);
-		this.title.width = myWidth;
-		if (this.legend != null) {
-			this.legend.x = (int) (myWidth * this.leftMargin);
-			this.legend.width = (int) (myWidth * (1.0D - (this.leftMargin + this.leftMargin)));
-			this.legend.y = (int) (myHeight * (1.0D - this.legendMargin));
-			this.legend.height = (int) (myHeight * this.legendMargin);
-		}
-		this.setPlotterSize();
-	}
-
-	/** */
-	private void autoSize_LayoutRight() {
-		final int myHeight = this.getHeight();
-		final int myWidth = this.getWidth();
-		if (this.virtualWidth < myWidth) {
-			this.virtualWidth = myWidth;
-		}
-		if (this.virtualHeight < myHeight) {
-			this.virtualHeight = myHeight;
-		}
-		this.plotters[0].visibleWidth = (int) (myWidth * (1.0D - (this.legendMargin + this.leftMargin)));
-		this.plotters[0].visibleHeight = (int) (myHeight * (1.0D - (this.topMargin + this.bottomMargin)));
-
-		this.plotters[0].x = (int) (myWidth * this.leftMargin);
-		this.plotters[0].y = (int) (myHeight * this.topMargin);
-		this.plotters[0].width = this.virtualWidth - (myWidth - this.plotters[0].visibleWidth);
-		this.plotters[0].height = this.virtualHeight - (myHeight - this.plotters[0].visibleHeight);
-
-		this.title.x = 0;
-		this.title.y = 0;
-		this.title.height = (int) (myHeight * this.topMargin);
-		this.title.width = myWidth;
-		if (this.legend != null) {
-			this.legend.x = (int) (myWidth * (1.0D - this.legendMargin));
-			this.legend.width = (int) (myWidth * this.legendMargin);
-			this.legend.y = (int) (myHeight * this.topMargin);
-			this.legend.height = (int) (myHeight * 0.5D);
-		}
-		this.setPlotterSize();
-	}
-
-	/** */
-	private void autoSize_LayoutTop() {
-		final int myHeight = this.getHeight();
-		final int myWidth = this.getWidth();
-		if (this.virtualWidth < myWidth) {
-			this.virtualWidth = myWidth;
-		}
-		if (this.virtualHeight < myHeight) {
-			this.virtualHeight = myHeight;
-		}
-		this.plotters[0].visibleWidth = (int) (myWidth * (1.0D - (this.leftMargin + this.rightMargin)));
-		this.plotters[0].visibleHeight = (int) (myHeight
-				* (1.0D - (this.topMargin + this.legendMargin + this.bottomMargin)));
-
-		this.plotters[0].x = (int) (myWidth * this.leftMargin);
-		this.plotters[0].y = (int) (myHeight * (this.topMargin + this.legendMargin));
-		this.plotters[0].width = this.virtualWidth - (myWidth - this.plotters[0].visibleWidth);
-		this.plotters[0].height = this.virtualHeight - (myHeight - this.plotters[0].visibleHeight);
-
-		this.title.x = 0;
-		this.title.y = 0;
-		this.title.height = (int) (myHeight * this.topMargin);
-		this.title.width = myWidth;
-		if (this.legend != null) {
-			this.legend.x = (int) (myWidth * this.leftMargin);
-			this.legend.width = (int) (myWidth * (1.0D - (this.leftMargin + this.rightMargin)));
-			this.legend.y = (int) (myHeight * this.topMargin);
-			this.legend.height = (int) (myHeight * this.legendMargin);
-		}
-		this.setPlotterSize();
 	}
 
 	/** */
@@ -540,13 +433,13 @@ public final class SpiderChart {
 
 		System.currentTimeMillis();
 		if ((this.plotters[0] == null) || (this.plottersCount <= 0)) {
-			pg.setColor(AbstractGraphicsSupplier.getColor(AbstractChartColor.RED));
+			pg.setColor(getColor(RED));
 			pg.drawText("Error: No plotters/series have been defined", 30, 30);
 			return;
 		}
 		for (int j = 0; j < this.plottersCount; j++) {
 			if ((this.plottersCount > 1) && !this.plotters[j].getCombinable()) {
-				pg.setColor(AbstractGraphicsSupplier.getColor(AbstractChartColor.RED));
+				pg.setColor(getColor(RED));
 				pg.drawText("Error: These plotters cannot be combined", 30, 30);
 				return;
 			}
@@ -571,19 +464,19 @@ public final class SpiderChart {
 		if (this.repaintAlways) {
 			this.repaintAll = true;
 		}
-		if (this.autoSize) {
+		if (this.autoResize) {
 			if (!this.withScroll) {
 				this.virtualHeight = this.originalVirtualHeight;
 				this.virtualWidth = this.originalVirtualWidth;
 			}
-			this.autoSize();
+			this.resize();
 		}
 		try {
 			if (this.doubleBuffering && (this.repaintAll || (this.finalImage == null))) {
 				if (this.finalImage != null) {
 					this.finalImage.dispose();
 				}
-				this.finalImage = AbstractGraphicsSupplier.createImage(this.getWidth(), this.getHeight());
+				this.finalImage = createImage(this.getWidth(), this.getHeight());
 			}
 		} catch (final Exception e) {
 		}
@@ -597,14 +490,14 @@ public final class SpiderChart {
 				if (this.chartImage != null) {
 					this.chartImage.dispose();
 				}
-				this.chartImage = AbstractGraphicsSupplier.createImage(this.virtualWidth, this.virtualHeight);
+				this.chartImage = createImage(this.virtualWidth, this.virtualHeight);
 			}
 			gScroll = this.chartImage.getGraphics();
 			if (this.repaintAll || (this.backTmpImage == null)) {
 				if (this.backTmpImage != null) {
 					this.backTmpImage.dispose();
 				}
-				this.backTmpImage = AbstractGraphicsSupplier.createImage(this.virtualWidth, this.virtualHeight);
+				this.backTmpImage = createImage(this.virtualWidth, this.virtualHeight);
 			}
 			gBack = this.backTmpImage.getGraphics();
 		}
@@ -676,7 +569,7 @@ public final class SpiderChart {
 		}
 		if (this.chartListeners != null) {
 			for (int i = 0; i < this.chartListeners.size(); i++) {
-				this.chartListeners.get(i).paintUserExit(this, g);
+				this.chartListeners.get(i).onPaintUserExit(this, g);
 			}
 		}
 		this.paintNotes(g);
@@ -713,8 +606,6 @@ public final class SpiderChart {
 	/** */
 	private void paintTips(final AbstractChartGraphics g) {
 		// TODO (AKM) To be implemented properly: Tips Functionality
-		this.showingTip = false;
-
 		if (this.showTips && (this.selectedLabel != null)) {
 			this.selectedLabel.getTip();
 		}
@@ -790,6 +681,114 @@ public final class SpiderChart {
 	}
 
 	/** */
+	private void resize() {
+		if (this.layout == 0) {
+			this.resizeRightLayout();
+		}
+		if (this.layout == 1) {
+			this.resizeLayoutTop();
+		}
+		if (this.layout == 2) {
+			this.resizeBottomLayout();
+		}
+	}
+
+	/** */
+	private void resizeBottomLayout() {
+		final int myHeight = this.getHeight();
+		final int myWidth = this.getWidth();
+		if (this.virtualWidth < myWidth) {
+			this.virtualWidth = myWidth;
+		}
+		if (this.virtualHeight < myHeight) {
+			this.virtualHeight = myHeight;
+		}
+		this.plotters[0].visibleWidth = (int) (myWidth * (1.0D - (this.leftMargin + this.rightMargin)));
+		this.plotters[0].visibleHeight = (int) (myHeight
+				* (1.0D - (this.topMargin + this.bottomMargin + this.legendMargin)));
+
+		this.plotters[0].x = (int) (myWidth * this.leftMargin);
+		this.plotters[0].y = (int) (myHeight * this.topMargin);
+		this.plotters[0].width = this.virtualWidth - (myWidth - this.plotters[0].visibleWidth);
+		this.plotters[0].height = this.virtualHeight - (myHeight - this.plotters[0].visibleHeight);
+
+		this.title.x = 0;
+		this.title.y = 0;
+		this.title.height = (int) (myHeight * this.topMargin);
+		this.title.width = myWidth;
+		if (this.legend != null) {
+			this.legend.x = (int) (myWidth * this.leftMargin);
+			this.legend.width = (int) (myWidth * (1.0D - (this.leftMargin + this.leftMargin)));
+			this.legend.y = (int) (myHeight * (1.0D - this.legendMargin));
+			this.legend.height = (int) (myHeight * this.legendMargin);
+		}
+		this.setPlotterSize();
+	}
+
+	/** */
+	private void resizeLayoutTop() {
+		final int myHeight = this.getHeight();
+		final int myWidth = this.getWidth();
+		if (this.virtualWidth < myWidth) {
+			this.virtualWidth = myWidth;
+		}
+		if (this.virtualHeight < myHeight) {
+			this.virtualHeight = myHeight;
+		}
+		this.plotters[0].visibleWidth = (int) (myWidth * (1.0D - (this.leftMargin + this.rightMargin)));
+		this.plotters[0].visibleHeight = (int) (myHeight
+				* (1.0D - (this.topMargin + this.legendMargin + this.bottomMargin)));
+
+		this.plotters[0].x = (int) (myWidth * this.leftMargin);
+		this.plotters[0].y = (int) (myHeight * (this.topMargin + this.legendMargin));
+		this.plotters[0].width = this.virtualWidth - (myWidth - this.plotters[0].visibleWidth);
+		this.plotters[0].height = this.virtualHeight - (myHeight - this.plotters[0].visibleHeight);
+
+		this.title.x = 0;
+		this.title.y = 0;
+		this.title.height = (int) (myHeight * this.topMargin);
+		this.title.width = myWidth;
+		if (this.legend != null) {
+			this.legend.x = (int) (myWidth * this.leftMargin);
+			this.legend.width = (int) (myWidth * (1.0D - (this.leftMargin + this.rightMargin)));
+			this.legend.y = (int) (myHeight * this.topMargin);
+			this.legend.height = (int) (myHeight * this.legendMargin);
+		}
+		this.setPlotterSize();
+	}
+
+	/** */
+	private void resizeRightLayout() {
+		final int myHeight = this.getHeight();
+		final int myWidth = this.getWidth();
+		if (this.virtualWidth < myWidth) {
+			this.virtualWidth = myWidth;
+		}
+		if (this.virtualHeight < myHeight) {
+			this.virtualHeight = myHeight;
+		}
+		this.plotters[0].visibleWidth = (int) (myWidth * (1.0D - (this.legendMargin + this.leftMargin)));
+		this.plotters[0].visibleHeight = (int) (myHeight * (1.0D - (this.topMargin + this.bottomMargin)));
+
+		this.plotters[0].x = (int) (myWidth * this.leftMargin);
+		this.plotters[0].y = (int) (myHeight * this.topMargin);
+		this.plotters[0].width = this.virtualWidth - (myWidth - this.plotters[0].visibleWidth);
+		this.plotters[0].height = this.virtualHeight - (myHeight - this.plotters[0].visibleHeight);
+
+		this.title.x = 0;
+		this.title.y = 0;
+		this.title.height = (int) (myHeight * this.topMargin);
+		this.title.width = myWidth;
+		if (this.legend != null) {
+			this.legend.x = (int) (myWidth * (1.0D - this.legendMargin));
+			this.legend.width = (int) (myWidth * this.legendMargin);
+			this.legend.y = (int) (myHeight * this.topMargin);
+			this.legend.height = (int) (myHeight * 0.5D);
+		}
+		this.setPlotterSize();
+	}
+
+	/** */
 	public void setHeight(final int h) {
 		if (h > this.minimumHeight) {
 			this.height = h;
@@ -846,7 +845,7 @@ public final class SpiderChart {
 	/** */
 	private void triggerEvent(final int event) {
 		for (int i = 0; i < this.chartListeners.size(); i++) {
-			this.chartListeners.get(i).chartEvent(this, event);
+			this.chartListeners.get(i).onChartEvent(this, event);
 		}
 	}
 }

@@ -15,7 +15,10 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.style;
 
-import com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier;
+import static com.amitinside.tooling.chart.gc.AbstractChartColor.AZURE;
+import static com.amitinside.tooling.chart.gc.AbstractChartColor.WHITE;
+import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getColor;
+
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
 import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 import com.amitinside.tooling.chart.gc.AbstractChartImage;
@@ -34,9 +37,9 @@ public final class FillStyle {
 	/** */
 	AbstractChartColor color;
 	/** Spider Chart Canvas Background Color */
-	public AbstractChartColor colorFrom = AbstractGraphicsSupplier.getColor(AbstractChartColor.AZURE);
+	public AbstractChartColor colorFrom = getColor(AZURE);
 	/** */
-	public AbstractChartColor colorUntil = AbstractGraphicsSupplier.getColor(AbstractChartColor.WHITE);
+	public AbstractChartColor colorUntil = getColor(WHITE);
 	/** */
 	private Object composite = null;
 	/** */
@@ -64,7 +67,7 @@ public final class FillStyle {
 	/** Constructor */
 	public FillStyle(final AbstractChartImage i) {
 		this.textureImage = i;
-		this.color = AbstractGraphicsSupplier.getColor(AbstractChartColor.WHITE);
+		this.color = getColor(WHITE);
 	}
 
 	/** */
@@ -92,7 +95,8 @@ public final class FillStyle {
 	}
 
 	/** */
-	public void draw(final AbstractChartGraphics g, final String backgroundCanvasColor, int x1, int y1, int x2, int y2) {
+	public void draw(final AbstractChartGraphics g, final String backgroundCanvasColor, int x1, int y1, int x2,
+			int y2) {
 		if (x1 > x2) {
 			final int xtmp = x2;
 			x2 = x1;
@@ -106,7 +110,7 @@ public final class FillStyle {
 		g.setTexture(this.textureImage);
 		g.setColor(this.color);
 		if (this.gradientType != NO_GRADIENT) {
-			this.colorFrom = AbstractGraphicsSupplier.getColor(backgroundCanvasColor);
+			this.colorFrom = getColor(backgroundCanvasColor);
 			g.createFadeArea(this.colorFrom, this.colorUntil, x1, y1, x2 - x1, y2 - y1,
 					this.gradientType == GRADIENT_VERTICAL, this.gradientCyclic);
 		} else {
@@ -142,11 +146,6 @@ public final class FillStyle {
 		this.setAlpha(g);
 		g.fillRoundRect(x1, y1, x2 - x1, y2 - y1);
 		this.resetAlpha(g);
-	}
-
-	/** */
-	public AbstractChartColor getColor() {
-		return this.color;
 	}
 
 	/** */

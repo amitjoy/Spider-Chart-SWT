@@ -15,7 +15,9 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.sequence;
 
-import com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier;
+import static com.amitinside.tooling.chart.gc.AbstractChartColor.BLACK;
+import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getColor;
+
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
 import com.amitinside.tooling.chart.gc.AbstractChartFont;
 import com.amitinside.tooling.chart.gc.AbstractChartImage;
@@ -35,11 +37,11 @@ public final class LineDataSeq extends DataSeq {
 	/** */
 	public int lineType = 0;
 	/** */
-	public AbstractChartColor pointColor = AbstractGraphicsSupplier.getColor(AbstractChartColor.BLACK);
+	public AbstractChartColor pointColor = getColor(BLACK);
 	/** */
 	public LineStyle style = null;
 	/** */
-	public AbstractChartColor valueColor = AbstractGraphicsSupplier.getColor(AbstractChartColor.BLACK);
+	public AbstractChartColor valueColor = getColor(BLACK);
 	/** */
 	public AbstractChartFont valueFont = null;
 	/** */

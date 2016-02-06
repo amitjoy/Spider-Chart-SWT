@@ -26,21 +26,21 @@ public final class SpiderChartSwtFont extends AbstractChartFont {
 	/** */
 	private int fontSize = 10;
 	/** */
-	private int fontStyle = AbstractChartFont.PLAIN;
+	private int fontStyle = PLAIN;
 
 	/** Constructor */
 	public SpiderChartSwtFont(final Object f) {
 		this.fontName = ((Font) f).getFontData()[0].getName();
 		final int s = ((Font) f).getFontData()[0].getStyle();
-		this.fontStyle = AbstractChartFont.PLAIN;
+		this.fontStyle = PLAIN;
 		if ((s & 0x1) == 1) {
-			this.fontStyle = AbstractChartFont.BOLD;
+			this.fontStyle = BOLD;
 		}
 		if ((s & 0x2) == 2) {
-			this.fontStyle = AbstractChartFont.ITALIC;
+			this.fontStyle = ITALIC;
 		}
 		if ((s & 0x3) == 3) {
-			this.fontStyle = AbstractChartFont.BOLD_ITALIC;
+			this.fontStyle = BOLD_ITALIC;
 		}
 		this.fontSize = ((Font) f).getFontData()[0].getHeight();
 	}
@@ -55,13 +55,13 @@ public final class SpiderChartSwtFont extends AbstractChartFont {
 	/** */
 	protected Font getFont() {
 		int s = 0;
-		if (this.fontStyle == AbstractChartFont.BOLD) {
+		if (this.fontStyle == BOLD) {
 			s = 1;
 		}
-		if (this.fontStyle == AbstractChartFont.ITALIC) {
+		if (this.fontStyle == ITALIC) {
 			s = 2;
 		}
-		if (this.fontStyle == AbstractChartFont.BOLD_ITALIC) {
+		if (this.fontStyle == BOLD_ITALIC) {
 			s = 3;
 		}
 		return new Font(SwtGraphicsProvider.getDisplay(), this.fontName, this.fontSize, s);

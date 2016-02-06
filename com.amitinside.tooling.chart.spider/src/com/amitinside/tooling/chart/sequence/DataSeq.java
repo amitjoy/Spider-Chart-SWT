@@ -15,6 +15,8 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.sequence;
 
+import static java.text.NumberFormat.getNumberInstance;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -121,7 +123,7 @@ public class DataSeq {
 		if (SpiderChart.numberLocale == null) {
 			df = new DecimalFormat(this.valueFormat);
 		} else {
-			final NumberFormat nf = NumberFormat.getNumberInstance(new Locale(SpiderChart.numberLocale, ""));
+			final NumberFormat nf = getNumberInstance(new Locale(SpiderChart.numberLocale, ""));
 			df = (DecimalFormat) nf;
 
 			df.applyPattern(this.valueFormat);

@@ -15,6 +15,8 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.gc.swt;
 
+import static com.amitinside.tooling.chart.gc.swt.SwtGraphicsProvider.getDisplay;
+
 import java.io.InputStream;
 
 import org.eclipse.swt.graphics.Color;
@@ -35,7 +37,7 @@ public final class SpiderChartSwtImage extends AbstractChartImage {
 
 	/** Constructor */
 	public SpiderChartSwtImage(final int w, final int h) {
-		this.image = new Image(SwtGraphicsProvider.getDisplay(), w, h);
+		this.image = new Image(getDisplay(), w, h);
 	}
 
 	/** Constructor */
@@ -47,7 +49,7 @@ public final class SpiderChartSwtImage extends AbstractChartImage {
 		tmpImage.dispose();
 		imageData.transparentPixel = imageData.palette.getPixel(trans.getRGB());
 
-		this.image = new Image(SwtGraphicsProvider.getDisplay(), imageData);
+		this.image = new Image(getDisplay(), imageData);
 
 		final GC g = new GC(this.image);
 		g.setForeground(trans);
@@ -64,14 +66,14 @@ public final class SpiderChartSwtImage extends AbstractChartImage {
 			if (o instanceof String) {
 				final InputStream is = SpiderChartSwtImage.class.getClassLoader().getResourceAsStream((String) o);
 				if (is != null) {
-					this.image = new Image(SwtGraphicsProvider.getDisplay(), is);
+					this.image = new Image(getDisplay(), is);
 					return;
 				}
-				this.image = new Image(SwtGraphicsProvider.getDisplay(), (String) o);
+				this.image = new Image(getDisplay(), (String) o);
 			} else if (o instanceof Image) {
 				this.image = (Image) o;
 			} else if (o instanceof InputStream) {
-				this.image = new Image(SwtGraphicsProvider.getDisplay(), (InputStream) o);
+				this.image = new Image(getDisplay(), (InputStream) o);
 			} else {
 				throw new Exception("Class not supported");
 			}

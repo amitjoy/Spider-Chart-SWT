@@ -101,167 +101,167 @@ public final class SpiderChartSwtColor extends AbstractChartColor {
 			this.setRGB(0, 0, 0);
 			return;
 		}
-		if (c.compareTo(AbstractChartColor.RED) == 0) {
+		if (c.compareTo(RED) == 0) {
 			this.setRGB(255, 0, 0);
-		} else if (c.compareTo(AbstractChartColor.BLACK) == 0) {
+		} else if (c.compareTo(BLACK) == 0) {
 			this.setRGB(0, 0, 0);
-		} else if (c.compareTo(AbstractChartColor.BLUE) == 0) {
+		} else if (c.compareTo(BLUE) == 0) {
 			this.setRGB(0, 0, 255);
-		} else if (c.compareTo(AbstractChartColor.CYAN) == 0) {
+		} else if (c.compareTo(CYAN) == 0) {
 			this.setRGB(0, 255, 255);
-		} else if (c.compareTo(AbstractChartColor.DARKGRAY) == 0) {
+		} else if (c.compareTo(DARKGRAY) == 0) {
 			this.setRGB(70, 70, 70);
-		} else if (c.compareTo(AbstractChartColor.GRAY) == 0) {
+		} else if (c.compareTo(GRAY) == 0) {
 			this.setRGB(128, 128, 128);
-		} else if (c.compareTo(AbstractChartColor.GREEN) == 0) {
+		} else if (c.compareTo(GREEN) == 0) {
 			this.setRGB(0, 255, 0);
-		} else if (c.compareTo(AbstractChartColor.LIGHTGRAY) == 0) {
+		} else if (c.compareTo(LIGHTGRAY) == 0) {
 			this.setRGB(192, 192, 192);
-		} else if (c.compareTo(AbstractChartColor.MAGENTA) == 0) {
+		} else if (c.compareTo(MAGENTA) == 0) {
 			this.setRGB(255, 0, 128);
-		} else if (c.compareTo(AbstractChartColor.ORANGE) == 0) {
+		} else if (c.compareTo(ORANGE) == 0) {
 			this.setRGB(255, 128, 0);
-		} else if (c.compareTo(AbstractChartColor.PINK) == 0) {
+		} else if (c.compareTo(PINK) == 0) {
 			this.setRGB(255, 0, 255);
-		} else if (c.compareTo(AbstractChartColor.WHITE) == 0) {
+		} else if (c.compareTo(WHITE) == 0) {
 			this.setRGB(255, 255, 255);
-		} else if (c.compareTo(AbstractChartColor.YELLOW) == 0) {
+		} else if (c.compareTo(YELLOW) == 0) {
 			this.setRGB(255, 255, 0);
-		} else if (c.compareTo(AbstractChartColor.LIME) == 0) {
+		} else if (c.compareTo(LIME) == 0) {
 			this.setRGB(65280);
-		} else if (c.compareTo(AbstractChartColor.OLIVE) == 0) {
+		} else if (c.compareTo(OLIVE) == 0) {
 			this.setRGB(8421376);
-		} else if (c.compareTo(AbstractChartColor.MAROON) == 0) {
+		} else if (c.compareTo(MAROON) == 0) {
 			this.setRGB(8388608);
-		} else if (c.compareTo(AbstractChartColor.NAVY) == 0) {
+		} else if (c.compareTo(NAVY) == 0) {
 			this.setRGB(128);
-		} else if (c.compareTo(AbstractChartColor.PURPLE) == 0) {
+		} else if (c.compareTo(PURPLE) == 0) {
 			this.setRGB(8388736);
-		} else if (c.compareTo(AbstractChartColor.TELA) == 0) {
+		} else if (c.compareTo(TELA) == 0) {
 			this.setRGB(32896);
-		} else if (c.compareTo(AbstractChartColor.FUCHSIA) == 0) {
+		} else if (c.compareTo(FUCHSIA) == 0) {
 			this.setRGB(16711935);
-		} else if (c.compareTo(AbstractChartColor.AQUA) == 0) {
+		} else if (c.compareTo(AQUA) == 0) {
 			this.setRGB(65535);
-		} else if (c.compareTo(AbstractChartColor.ALICEBLUE) == 0) {
+		} else if (c.compareTo(ALICEBLUE) == 0) {
 			this.setRGB(15792383);
-		} else if (c.compareTo(AbstractChartColor.ANTIQUEWHITE) == 0) {
+		} else if (c.compareTo(ANTIQUEWHITE) == 0) {
 			this.setRGB(16444375);
-		} else if (c.compareTo(AbstractChartColor.AQUAMARINE) == 0) {
+		} else if (c.compareTo(AQUAMARINE) == 0) {
 			this.setRGB(8388564);
-		} else if (c.compareTo(AbstractChartColor.AZURE) == 0) {
+		} else if (c.compareTo(AZURE) == 0) {
 			this.setRGB(15794175);
-		} else if (c.compareTo(AbstractChartColor.BEIGE) == 0) {
+		} else if (c.compareTo(BEIGE) == 0) {
 			this.setRGB(16119260);
-		} else if (c.compareTo(AbstractChartColor.BLUEVIOLET) == 0) {
+		} else if (c.compareTo(BLUEVIOLET) == 0) {
 			this.setRGB(9055202);
-		} else if (c.compareTo(AbstractChartColor.BROWN) == 0) {
+		} else if (c.compareTo(BROWN) == 0) {
 			this.setRGB(10824234);
-		} else if (c.compareTo(AbstractChartColor.BORLYWOOD) == 0) {
+		} else if (c.compareTo(BORLYWOOD) == 0) {
 			this.setRGB(14596231);
-		} else if (c.compareTo(AbstractChartColor.CORAL) == 0) {
+		} else if (c.compareTo(CORAL) == 0) {
 			this.setRGB(16744272);
-		} else if (c.compareTo(AbstractChartColor.CYAN) == 0) {
+		} else if (c.compareTo(CYAN) == 0) {
 			this.setRGB(65535);
-		} else if (c.compareTo(AbstractChartColor.DARKGOLGENROD) == 0) {
+		} else if (c.compareTo(DARKGOLGENROD) == 0) {
 			this.setRGB(12092939);
-		} else if (c.compareTo(AbstractChartColor.DARKGREEN) == 0) {
+		} else if (c.compareTo(DARKGREEN) == 0) {
 			this.setRGB(25600);
-		} else if (c.compareTo(AbstractChartColor.DARKOLIVEGREEN) == 0) {
+		} else if (c.compareTo(DARKOLIVEGREEN) == 0) {
 			this.setRGB(5597999);
-		} else if (c.compareTo(AbstractChartColor.DARKORANGE) == 0) {
+		} else if (c.compareTo(DARKORANGE) == 0) {
 			this.setRGB(16747520);
-		} else if (c.compareTo(AbstractChartColor.DARKORCHID) == 0) {
+		} else if (c.compareTo(DARKORCHID) == 0) {
 			this.setRGB(10040012);
-		} else if (c.compareTo(AbstractChartColor.DARKSALMON) == 0) {
+		} else if (c.compareTo(DARKSALMON) == 0) {
 			this.setRGB(15308410);
-		} else if (c.compareTo(AbstractChartColor.DARKTURQUOISE) == 0) {
+		} else if (c.compareTo(DARKTURQUOISE) == 0) {
 			this.setRGB(52945);
-		} else if (c.compareTo(AbstractChartColor.DARKVIOLET) == 0) {
+		} else if (c.compareTo(DARKVIOLET) == 0) {
 			this.setRGB(9699539);
-		} else if (c.compareTo(AbstractChartColor.DEEPPINK) == 0) {
+		} else if (c.compareTo(DEEPPINK) == 0) {
 			this.setRGB(16716947);
-		} else if (c.compareTo(AbstractChartColor.DEEPSKYBLUE) == 0) {
+		} else if (c.compareTo(DEEPSKYBLUE) == 0) {
 			this.setRGB(49151);
-		} else if (c.compareTo(AbstractChartColor.FORESTGREEN) == 0) {
+		} else if (c.compareTo(FORESTGREEN) == 0) {
 			this.setRGB(2263842);
-		} else if (c.compareTo(AbstractChartColor.GOLD) == 0) {
+		} else if (c.compareTo(GOLD) == 0) {
 			this.setRGB(16766720);
-		} else if (c.compareTo(AbstractChartColor.GOLDENROD) == 0) {
+		} else if (c.compareTo(GOLDENROD) == 0) {
 			this.setRGB(14329120);
-		} else if (c.compareTo(AbstractChartColor.GREENYELLOW) == 0) {
+		} else if (c.compareTo(GREENYELLOW) == 0) {
 			this.setRGB(11403055);
-		} else if (c.compareTo(AbstractChartColor.HOTPINK) == 0) {
+		} else if (c.compareTo(HOTPINK) == 0) {
 			this.setRGB(16738740);
-		} else if (c.compareTo(AbstractChartColor.INDIANRED) == 0) {
+		} else if (c.compareTo(INDIANRED) == 0) {
 			this.setRGB(13458524);
-		} else if (c.compareTo(AbstractChartColor.IVORY) == 0) {
+		} else if (c.compareTo(IVORY) == 0) {
 			this.setRGB(16777200);
-		} else if (c.compareTo(AbstractChartColor.KHALI) == 0) {
+		} else if (c.compareTo(KHALI) == 0) {
 			this.setRGB(15787660);
-		} else if (c.compareTo(AbstractChartColor.LAVENDER) == 0) {
+		} else if (c.compareTo(LAVENDER) == 0) {
 			this.setRGB(15132410);
-		} else if (c.compareTo(AbstractChartColor.LAWNGREEN) == 0) {
+		} else if (c.compareTo(LAWNGREEN) == 0) {
 			this.setRGB(8190976);
-		} else if (c.compareTo(AbstractChartColor.LIGHTBLUE) == 0) {
+		} else if (c.compareTo(LIGHTBLUE) == 0) {
 			this.setRGB(11393254);
-		} else if (c.compareTo(AbstractChartColor.LIGHTCORAL) == 0) {
+		} else if (c.compareTo(LIGHTCORAL) == 0) {
 			this.setRGB(15761536);
-		} else if (c.compareTo(AbstractChartColor.LIGHTCYAN) == 0) {
+		} else if (c.compareTo(LIGHTCYAN) == 0) {
 			this.setRGB(14745599);
-		} else if (c.compareTo(AbstractChartColor.LIGHTGRAY) == 0) {
+		} else if (c.compareTo(LIGHTGRAY) == 0) {
 			this.setRGB(13882323);
-		} else if (c.compareTo(AbstractChartColor.LIGHTPINK) == 0) {
+		} else if (c.compareTo(LIGHTPINK) == 0) {
 			this.setRGB(16758465);
-		} else if (c.compareTo(AbstractChartColor.LIGHTSALMON) == 0) {
+		} else if (c.compareTo(LIGHTSALMON) == 0) {
 			this.setRGB(16752762);
-		} else if (c.compareTo(AbstractChartColor.LIGHTSKYBLUE) == 0) {
+		} else if (c.compareTo(LIGHTSKYBLUE) == 0) {
 			this.setRGB(8900346);
-		} else if (c.compareTo(AbstractChartColor.LIGHTYELLOW) == 0) {
+		} else if (c.compareTo(LIGHTYELLOW) == 0) {
 			this.setRGB(16777184);
-		} else if (c.compareTo(AbstractChartColor.LIMEGREEN) == 0) {
+		} else if (c.compareTo(LIMEGREEN) == 0) {
 			this.setRGB(3329330);
-		} else if (c.compareTo(AbstractChartColor.MAGENTA) == 0) {
+		} else if (c.compareTo(MAGENTA) == 0) {
 			this.setRGB(16711935);
-		} else if (c.compareTo(AbstractChartColor.MEDIUMBLUE) == 0) {
+		} else if (c.compareTo(MEDIUMBLUE) == 0) {
 			this.setRGB(205);
-		} else if (c.compareTo(AbstractChartColor.MEDIUMPURPLE) == 0) {
+		} else if (c.compareTo(MEDIUMPURPLE) == 0) {
 			this.setRGB(9662683);
-		} else if (c.compareTo(AbstractChartColor.MIDNIGHTBLUE) == 0) {
+		} else if (c.compareTo(MIDNIGHTBLUE) == 0) {
 			this.setRGB(1644912);
-		} else if (c.compareTo(AbstractChartColor.ORANGE) == 0) {
+		} else if (c.compareTo(ORANGE) == 0) {
 			this.setRGB(16753920);
-		} else if (c.compareTo(AbstractChartColor.ORANGERED) == 0) {
+		} else if (c.compareTo(ORANGERED) == 0) {
 			this.setRGB(16729344);
-		} else if (c.compareTo(AbstractChartColor.ORCHID) == 0) {
+		} else if (c.compareTo(ORCHID) == 0) {
 			this.setRGB(14315734);
-		} else if (c.compareTo(AbstractChartColor.PALEGREEN) == 0) {
+		} else if (c.compareTo(PALEGREEN) == 0) {
 			this.setRGB(10025880);
-		} else if (c.compareTo(AbstractChartColor.PALETURQUOISE) == 0) {
+		} else if (c.compareTo(PALETURQUOISE) == 0) {
 			this.setRGB(11529966);
-		} else if (c.compareTo(AbstractChartColor.PALEVIOLETRED) == 0) {
+		} else if (c.compareTo(PALEVIOLETRED) == 0) {
 			this.setRGB(14381203);
-		} else if (c.compareTo(AbstractChartColor.PINK) == 0) {
+		} else if (c.compareTo(PINK) == 0) {
 			this.setRGB(16761035);
-		} else if (c.compareTo(AbstractChartColor.PLUM) == 0) {
+		} else if (c.compareTo(PLUM) == 0) {
 			this.setRGB(14524637);
-		} else if (c.compareTo(AbstractChartColor.PURPLE) == 0) {
+		} else if (c.compareTo(PURPLE) == 0) {
 			this.setRGB(10494192);
-		} else if (c.compareTo(AbstractChartColor.SALMON) == 0) {
+		} else if (c.compareTo(SALMON) == 0) {
 			this.setRGB(16416882);
-		} else if (c.compareTo(AbstractChartColor.SEAGREEN) == 0) {
+		} else if (c.compareTo(SEAGREEN) == 0) {
 			this.setRGB(3050327);
-		} else if (c.compareTo(AbstractChartColor.SIENNA) == 0) {
+		} else if (c.compareTo(SIENNA) == 0) {
 			this.setRGB(10506797);
-		} else if (c.compareTo(AbstractChartColor.SKYBLUE) == 0) {
+		} else if (c.compareTo(SKYBLUE) == 0) {
 			this.setRGB(8900331);
-		} else if (c.compareTo(AbstractChartColor.SPRINGGREEN) == 0) {
+		} else if (c.compareTo(SPRINGGREEN) == 0) {
 			this.setRGB(65407);
-		} else if (c.compareTo(AbstractChartColor.TURQUOISE) == 0) {
+		} else if (c.compareTo(TURQUOISE) == 0) {
 			this.setRGB(4251856);
-		} else if (c.compareTo(AbstractChartColor.VIOLET) == 0) {
+		} else if (c.compareTo(VIOLET) == 0) {
 			this.setRGB(15631086);
-		} else if (c.compareTo(AbstractChartColor.YELLOWGREEN) == 0) {
+		} else if (c.compareTo(YELLOWGREEN) == 0) {
 			this.setRGB(10145074);
 		} else {
 			try {

@@ -15,6 +15,9 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.swt;
 
+import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getGraphics;
+import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.startUiThread;
+
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.events.ControlListener;
 import org.eclipse.swt.events.MouseAdapter;
@@ -25,7 +28,6 @@ import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 
 import com.amitinside.tooling.chart.SpiderChart;
-import com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier;
 import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 import com.amitinside.tooling.chart.listener.ISpiderChartListener;
 
@@ -65,21 +67,6 @@ public final class SpiderChartCanvas extends Canvas implements ISpiderChartListe
 		});
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public void chartEvent(final SpiderChart c, final int type) {
-		if (type == 4) {
-			this.redraw();
-		}
-		if (type == 1) {
-			AbstractGraphicsSupplier.startUiThread(() -> {
-				if (!SpiderChartCanvas.this.isDisposed()) {
-					SpiderChartCanvas.this.redraw();
-				}
-			});
-		}
-	}
-
 	/** */
 	public SpiderChart getChart() {
 		return this.chart;
@@ -99,21 +86,36 @@ public final class SpiderChartCanvas extends Canvas implements ISpiderChartListe
 		}
 	}
 
-	/** */
-	protected void paintChart(final PaintEvent e) {
-		try {
-			this.resizeChart();
-			final AbstractChartGraphics g = AbstractGraphicsSupplier.getGraphics(e.gc);
-			this.chart.paint(g);
-			g.dispose();
-		} catch (final Exception err) {
-			err.printStackTrace();
+	/** {@inheritDoc} */
+	@Override
+	public void onChartEvent(final SpiderChart c, final int type) {
+		if (type == 4) {
+			this.redraw();
+		}
+		if (type == 1) {
+			startUiThread(() -> {
+				if (!SpiderChartCanvas.this.isDisposed()) {
+					SpiderChartCanvas.this.redraw();
+				}
+			});
 		}
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void paintUserExit(final SpiderChart c, final AbstractChartGraphics g) {
+	public void onPaintUserExit(final SpiderChart c, final AbstractChartGraphics g) {
+	}
+
+	/** */
+	protected void paintChart(final PaintEvent e) {
+		try {
+			this.resizeChart();
+			final AbstractChartGraphics g = getGraphics(e.gc);
+			this.chart.paint(g);
+			g.dispose();
+		} catch (final Exception err) {
+			err.printStackTrace();
+		}
 	}
 
 	/** */

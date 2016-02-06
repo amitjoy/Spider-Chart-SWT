@@ -15,6 +15,10 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.style;
 
+import static com.amitinside.tooling.chart.gc.AbstractChartGraphics.STROKE_DASHED;
+import static com.amitinside.tooling.chart.gc.AbstractChartGraphics.STROKE_DOTTED;
+import static com.amitinside.tooling.chart.gc.AbstractChartGraphics.STROKE_NORMAL;
+
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
 import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 
@@ -148,12 +152,12 @@ public final class LineStyle {
 			tmp = 1;
 		}
 		g.setLineWidth(tmp);
-		g.setLineStyle(AbstractChartGraphics.STROKE_NORMAL);
+		g.setLineStyle(STROKE_NORMAL);
 		if (this.lineType == 2) {
-			g.setLineStyle(AbstractChartGraphics.STROKE_DASHED);
+			g.setLineStyle(STROKE_DASHED);
 		}
 		if (this.lineType == 3) {
-			g.setLineStyle(AbstractChartGraphics.STROKE_DOTTED);
+			g.setLineStyle(STROKE_DOTTED);
 		}
 	}
 
