@@ -15,15 +15,43 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.api;
 
+import com.amitinside.tooling.chart.gc.AbstractChartColor;
+
+/**
+ * Every class object that needs to be plotted in Spider Chart must implement
+ * this interface
+ * 
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public interface ISpiderChartPlottable {
 
-	/** Spider Chart Area Color */
+	/**
+	 * Spider Chart Area Color
+	 *
+	 * @return color the name of the color
+	 * @see AbstractChartColor
+	 * @throws NullPointerException
+	 *             if null is returned
+	 */
 	public abstract String areaColor();
 
-	/** Spider Chart Legend Text */
+	/**
+	 * Spider Chart Legend Text
+	 *
+	 * @return name name of the legend to be used
+	 * @throws NullPointerException
+	 *             if null is returned
+	 */
 	public abstract String legend();
 
-	/** Spider Chart Axis Values in Order */
+	/**
+	 * Spider Chart Axis Values in Order
+	 *
+	 * @return values data points to be used in order of axis configuration
+	 * @throws NullPointerException
+	 *             if null is returned
+	 */
 	public abstract double[] values();
 
 }

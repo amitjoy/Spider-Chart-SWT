@@ -228,10 +228,10 @@ public final class SpiderChart {
 	public SpiderChartLabel selectedLabel = null;
 
 	/** */
-	public DataSeq selectedSerie = null;
+	public DataSeq selectedSeq = null;
 
 	/** */
-	public int selectedSeriePoint = -1;
+	public int selectedSeqPoint = -1;
 
 	/** Show Tips on the Spider Chart Points */
 	public boolean showTips = false;
@@ -312,9 +312,9 @@ public final class SpiderChart {
 			if (this.plotters[i] != null) {
 				for (int j = 0; j < this.plotters[i].getSeqCount(); j++) {
 					if (this.plotters[i].getSeq(j) instanceof LineDataSeq) {
-						final LineDataSeq lSerie = (LineDataSeq) this.plotters[i].getSeq(j);
-						if (lSerie.icon != null) {
-							lSerie.icon.dispose();
+						final LineDataSeq lseq = (LineDataSeq) this.plotters[i].getSeq(j);
+						if (lseq.icon != null) {
+							lseq.icon.dispose();
 						}
 					}
 				}
@@ -361,7 +361,7 @@ public final class SpiderChart {
 
 	/** */
 	public void mouseClick() {
-		if (((this.selectedSerie != null) && (this.selectedSeriePoint >= 0)) || (this.selectedLabel != null)) {
+		if (((this.selectedSeq != null) && (this.selectedSeqPoint >= 0)) || (this.selectedLabel != null)) {
 			this.triggerEvent(5);
 			return;
 		}
@@ -379,15 +379,15 @@ public final class SpiderChart {
 		this.currentX = eX;
 		this.currentY = eY;
 
-		Object previousSelectedObject = this.selectedSerie;
-		final int previousPoint = this.selectedSeriePoint;
+		Object previousSelectedObject = this.selectedSeq;
+		final int previousPoint = this.selectedSeqPoint;
 
-		if ((this.selectedSerie == null) && (this.selectedLabel != null)) {
+		if ((this.selectedSeq == null) && (this.selectedLabel != null)) {
 			previousSelectedObject = this.selectedLabel;
 		}
-		this.selectedSerie = null;
+		this.selectedSeq = null;
 		this.selectedLabel = null;
-		this.selectedSeriePoint = -1;
+		this.selectedSeqPoint = -1;
 		if (this.activateSelection) {
 			for (final AbstractPlotter plotter : this.plotters) {
 				if (plotter == null) {
@@ -405,8 +405,8 @@ public final class SpiderChart {
 								this.triggerEvent(3);
 								triggerEnter = true;
 							}
-							this.selectedSerie = d;
-							this.selectedSeriePoint = i;
+							this.selectedSeq = d;
+							this.selectedSeqPoint = i;
 							if (!triggerEnter) {
 								break;
 							}
@@ -422,7 +422,7 @@ public final class SpiderChart {
 				this.triggerEvent(4);
 			}
 		}
-		if ((previousSelectedObject != null) && (this.selectedSerie == null) && (this.selectedLabel == null)) {
+		if ((previousSelectedObject != null) && (this.selectedSeq == null) && (this.selectedLabel == null)) {
 			this.triggerEvent(3);
 		}
 	}
@@ -431,18 +431,10 @@ public final class SpiderChart {
 	public void paint(final AbstractChartGraphics pg) {
 		this.floatingObjects.removeAllElements();
 
-		System.currentTimeMillis();
 		if ((this.plotters[0] == null) || (this.plottersCount <= 0)) {
 			pg.setColor(getColor(RED));
-			pg.drawText("Error: No plotters/series have been defined", 30, 30);
+			pg.drawText("Error: No plotters/sequences have been defined", 30, 30);
 			return;
-		}
-		for (int j = 0; j < this.plottersCount; j++) {
-			if ((this.plottersCount > 1) && !this.plotters[j].getCombinable()) {
-				pg.setColor(getColor(RED));
-				pg.drawText("Error: These plotters cannot be combined", 30, 30);
-				return;
-			}
 		}
 		AbstractChartGraphics gScroll = pg;
 		AbstractChartGraphics gBack = pg;
@@ -647,8 +639,8 @@ public final class SpiderChart {
 		this.title = null;
 		this.border = null;
 		this.backStyle = null;
-		this.selectedSerie = null;
-		this.selectedSeriePoint = -1;
+		this.selectedSeq = null;
+		this.selectedSeqPoint = -1;
 		this.repaintAll = true;
 		this.removeNotes();
 		this.floatingObjects.removeAllElements();

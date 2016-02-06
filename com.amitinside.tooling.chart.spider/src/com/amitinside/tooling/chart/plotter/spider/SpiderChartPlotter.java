@@ -130,8 +130,6 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 	 * Constructor
 	 */
 	public SpiderChartPlotter() {
-		this.combinable = false;
-		this.needsAxis = 0;
 	}
 
 	/** {@inheritDoc}} **/

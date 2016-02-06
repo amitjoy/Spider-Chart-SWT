@@ -42,7 +42,6 @@ public final class SpiderChartBuilder {
 			final Consumer<SpiderChartConfigurationBuilder> settings) {
 		requireNonNull(parent);
 		requireNonNull(settings);
-
 		chartConfiguration = new SpiderChartConfigurationBuilder();
 		settings.accept(chartConfiguration);
 		chartViewerBuilder = new SpiderChartBuilder(parent);
@@ -85,7 +84,6 @@ public final class SpiderChartBuilder {
 		this.chart.backStyle.gradientType = FillStyle.GRADIENT_VERTICAL;
 		this.chart.legend = chartConfiguration.getLegend();
 		this.chart.repaintAll = true;
-		this.chart.showTips = true;
 		this.chart.activateSelection = true;
 	}
 

@@ -72,7 +72,6 @@ public final class SpiderChartConfigurationBuilder {
 		requireNonNull(plotter);
 		this.plotter = new SpiderChartPlotter();
 		this.plotter.backStyle = new FillStyle(getColor(PALEGREEN));
-
 		this.plotter.gridStyle = new LineStyle(1, getColor(TELA), NORMAL_LINE);
 		this.plotter.gridFont = getFont("Arial", PLAIN, 10);
 		this.plotter.gridFontColor = getColor(BLUE);

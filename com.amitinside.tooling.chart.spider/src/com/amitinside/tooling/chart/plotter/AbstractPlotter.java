@@ -32,20 +32,14 @@ import com.amitinside.tooling.chart.style.FillStyle;
  */
 public abstract class AbstractPlotter extends SpiderChartComponent {
 
-	/** */
-	public FillStyle backgroundStyle = null;
-
 	/** Spider Chart Background Image */
 	public AbstractChartImage backgroundImage;
 
 	/** */
-	protected boolean combinable = true;
+	public FillStyle backgroundStyle = null;
 
 	/** */
 	public int depth = 0;
-
-	/** */
-	protected int needsAxis = 2;
 
 	/** */
 	public Vector<DataSeq> seq = new Vector<>(0, 1);
@@ -117,16 +111,6 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 			scale = s.secondaryYAxis.scale;
 		}
 		return scale;
-	}
-
-	/** */
-	public boolean getCombinable() {
-		return this.combinable;
-	}
-
-	/** */
-	public int getNeedsAxis() {
-		return this.needsAxis;
 	}
 
 	/** */
