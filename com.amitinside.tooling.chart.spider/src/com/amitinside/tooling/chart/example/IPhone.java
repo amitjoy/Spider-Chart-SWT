@@ -20,7 +20,7 @@ import static com.amitinside.tooling.chart.gc.AbstractChartColor.DARKORCHID;
 import com.amitinside.tooling.chart.api.annotations.DataPoints;
 import com.amitinside.tooling.chart.api.annotations.SpiderChartPlot;
 
-@SpiderChartPlot(name = "iPhone", areaColor = DARKORCHID)
+@SpiderChartPlot(name = "iPhone 6", areaColor = DARKORCHID)
 public final class IPhone {
 
 	@DataPoints

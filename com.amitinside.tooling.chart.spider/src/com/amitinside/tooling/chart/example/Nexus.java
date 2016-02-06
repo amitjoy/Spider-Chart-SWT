@@ -20,7 +20,7 @@ import static com.amitinside.tooling.chart.gc.AbstractChartColor.OLIVE;
 import com.amitinside.tooling.chart.api.annotations.DataPoints;
 import com.amitinside.tooling.chart.api.annotations.SpiderChartPlot;
 
-@SpiderChartPlot(name = "Nexus", areaColor = OLIVE)
+@SpiderChartPlot(name = "Nexus 6", areaColor = OLIVE)
 public final class Nexus {
 
 	@DataPoints
