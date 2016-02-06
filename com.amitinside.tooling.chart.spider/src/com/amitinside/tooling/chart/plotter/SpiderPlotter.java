@@ -22,7 +22,6 @@ import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.SpiderChartComponent;
 import com.amitinside.tooling.chart.gc.SpiderChartGraphics;
 import com.amitinside.tooling.chart.gc.SpiderChartImage;
-import com.amitinside.tooling.chart.plotter.line.LinePlotter;
 import com.amitinside.tooling.chart.scale.SpiderChartScale;
 import com.amitinside.tooling.chart.sequence.DataSeq;
 import com.amitinside.tooling.chart.style.FillStyle;
@@ -237,10 +236,7 @@ public class SpiderPlotter extends SpiderChartComponent {
 		} else {
 			this.series.setElementAt(s, p);
 		}
-		boolean fixedLimits = false;
-		if (this instanceof LinePlotter) {
-			fixedLimits = ((LinePlotter) this).fixedLimits;
-		}
+		final boolean fixedLimits = false;
 		final boolean cumulative = false;
 		if (!(this instanceof SpiderPlotter)) {
 			for (int i = 0; i < s.getSize(); i++) {
