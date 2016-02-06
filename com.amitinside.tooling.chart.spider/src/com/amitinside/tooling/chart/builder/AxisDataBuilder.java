@@ -15,13 +15,14 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.builder;
 
+import static com.amitinside.tooling.chart.api.annotations.processor.SpiderChartAnnotationProcessor.getAreaColor;
+import static com.amitinside.tooling.chart.api.annotations.processor.SpiderChartAnnotationProcessor.getDataPoints;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Optional;
 import java.util.function.Supplier;
 
 import com.amitinside.tooling.chart.SpiderChart;
-import com.amitinside.tooling.chart.api.ISpiderChartPlottable;
 import com.amitinside.tooling.chart.builder.model.AxisData;
 
 public final class AxisDataBuilder {
@@ -45,10 +46,11 @@ public final class AxisDataBuilder {
 	}
 
 	/** */
-	public void inject(final Supplier<ISpiderChartPlottable> drawableData) {
+	public void inject(final Supplier<Object> drawableData) {
 		requireNonNull(drawableData);
-		final Optional<double[]> values = Optional.of(drawableData.get().values());
-		final Optional<String> areaColor = Optional.of(drawableData.get().areaColor());
+		final Object data = drawableData.get();
+		final Optional<double[]> values = Optional.of(getDataPoints(data));
+		final Optional<String> areaColor = Optional.of(getAreaColor(data));
 
 		this.data.setData(values.orElseGet(() -> new double[] { 0 }), areaColor.orElse("RED"));
 		this.done();

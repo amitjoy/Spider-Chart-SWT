@@ -60,7 +60,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 	/**
 	 * Spider Chart Axes Factor Text Font
 	 */
-	public AbstractChartFont axisFactorFont = getFont("Verdana", PLAIN, 10);
+	public AbstractChartFont axisFactorFont = getFont("Verdana", PLAIN, 11);
 
 	/**
 	 * Spider Chart Polygon Area Background Style
@@ -393,7 +393,6 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 	/** */
 	public void use(final AxesConfigurer configurer) {
 		requireNonNull(configurer);
-
 		this.maxScaleFactors = configurer.maxScales();
 		this.minScaleFactors = configurer.minScales();
 		this.axesFactors = configurer.axesNames();

@@ -13,20 +13,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.amitinside.tooling.chart.example;
-
-import static com.amitinside.tooling.chart.gc.AbstractChartColor.OLIVE;
-
-import com.amitinside.tooling.chart.api.annotations.DataPoints;
-import com.amitinside.tooling.chart.api.annotations.SpiderChartPlot;
-
-@SpiderChartPlot(name = "Nexus", areaColor = OLIVE)
-public final class Nexus {
-
-	@DataPoints
-	public double[] dataPoints() {
-		final double[] data = { 4, 3, 3, 4.1, 3 };
-		return data;
-	}
-
-}
+package com.amitinside.tooling.chart.api.annotations;

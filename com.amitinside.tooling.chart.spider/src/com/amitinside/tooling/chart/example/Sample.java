@@ -21,7 +21,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
-import com.amitinside.tooling.chart.api.ISpiderChartPlottable;
 import com.amitinside.tooling.chart.builder.AxesConfigurer;
 import com.amitinside.tooling.chart.builder.SpiderChartBuilder;
 import com.amitinside.tooling.chart.swt.SpiderChartViewer;
@@ -31,8 +30,8 @@ public final class Sample {
 	private static SpiderChartViewer viewer;
 
 	private static void buildSpiderChart(final Shell shell) {
-		final Supplier<ISpiderChartPlottable> iPhoneData = IPhone::new;
-		final Supplier<ISpiderChartPlottable> nexusData = Nexus::new;
+		final Supplier<Object> iPhoneData = IPhone::new;
+		final Supplier<Object> nexusData = Nexus::new;
 
 		viewer = SpiderChartBuilder.config(shell, settings -> {
 			settings.title(title -> title.text = "Smartphone Comparison Scale").legend(legend -> {

@@ -13,45 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.amitinside.tooling.chart.api;
+package com.amitinside.tooling.chart.api.annotations;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
 
 /**
- * Every class object that needs to be plotted in Spider Chart must implement
- * this interface
- * 
- * @author AMIT KUMAR MONDAL
+ * Used to annotate POJO contributing to Spider Chart Data
  *
+ * @author AMIT KUMAR MONDAL
  */
-public interface ISpiderChartPlottable {
+@Retention(RetentionPolicy.RUNTIME)
+@Target(value = ElementType.TYPE)
+public @interface SpiderChartPlot {
 
 	/**
 	 * Spider Chart Area Color
 	 *
 	 * @return color the name of the color
 	 * @see AbstractChartColor
-	 * @throws NullPointerException
-	 *             if null is returned
 	 */
-	public abstract String areaColor();
+	String areaColor();
 
 	/**
 	 * Spider Chart Legend Text
 	 *
 	 * @return name name of the legend to be used
-	 * @throws NullPointerException
-	 *             if null is returned
 	 */
-	public abstract String legend();
-
-	/**
-	 * Spider Chart Axis Values in Order
-	 *
-	 * @return values data points to be used in order of axis configuration
-	 * @throws NullPointerException
-	 *             if null is returned
-	 */
-	public abstract double[] values();
+	String name();
 
 }

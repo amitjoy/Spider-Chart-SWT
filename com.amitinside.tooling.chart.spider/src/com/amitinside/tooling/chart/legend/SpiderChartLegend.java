@@ -15,16 +15,18 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.legend;
 
+import static com.amitinside.tooling.chart.api.annotations.processor.SpiderChartAnnotationProcessor.getAreaColor;
+import static com.amitinside.tooling.chart.api.annotations.processor.SpiderChartAnnotationProcessor.getLegend;
 import static com.amitinside.tooling.chart.gc.AbstractChartColor.BLACK;
 import static com.amitinside.tooling.chart.gc.AbstractChartFont.PLAIN;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getColor;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getFont;
+import static com.amitinside.tooling.chart.style.LineStyle.NORMAL_LINE;
 
 import java.util.Vector;
 import java.util.function.Supplier;
 
 import com.amitinside.tooling.chart.SpiderChartComponent;
-import com.amitinside.tooling.chart.api.ISpiderChartPlottable;
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
 import com.amitinside.tooling.chart.gc.AbstractChartFont;
 import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
@@ -82,9 +84,10 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 	}
 
 	/** */
-	public void addItem(final Supplier<ISpiderChartPlottable> pojo) {
-		final LineStyle ls = LineStyle.of(1, getColor(pojo.get().areaColor()), LineStyle.NORMAL_LINE);
-		this.addItem(pojo.get().legend(), ls);
+	public void addItem(final Supplier<Object> pojo) {
+		final Object data = pojo.get();
+		final LineStyle ls = LineStyle.of(1, getColor(getAreaColor(data)), NORMAL_LINE);
+		this.addItem(getLegend(data), ls);
 	}
 
 	/** */

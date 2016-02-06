@@ -13,20 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.amitinside.tooling.chart.example;
+package com.amitinside.tooling.chart.api.annotations;
 
-import static com.amitinside.tooling.chart.gc.AbstractChartColor.OLIVE;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-import com.amitinside.tooling.chart.api.annotations.DataPoints;
-import com.amitinside.tooling.chart.api.annotations.SpiderChartPlot;
-
-@SpiderChartPlot(name = "Nexus", areaColor = OLIVE)
-public final class Nexus {
-
-	@DataPoints
-	public double[] dataPoints() {
-		final double[] data = { 4, 3, 3, 4.1, 3 };
-		return data;
-	}
+/**
+ * Used to annotate POJO's method returning primitive array of double values
+ * contributing to Spider Chart Data
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(value = ElementType.METHOD)
+public @interface DataPoints {
 
 }

@@ -15,23 +15,16 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.example;
 
-import com.amitinside.tooling.chart.api.ISpiderChartPlottable;
-import com.amitinside.tooling.chart.gc.AbstractChartColor;
+import static com.amitinside.tooling.chart.gc.AbstractChartColor.DARKORCHID;
 
-public final class IPhone implements ISpiderChartPlottable {
+import com.amitinside.tooling.chart.api.annotations.DataPoints;
+import com.amitinside.tooling.chart.api.annotations.SpiderChartPlot;
 
-	@Override
-	public String areaColor() {
-		return AbstractChartColor.DARKORCHID;
-	}
+@SpiderChartPlot(name = "iPhone", areaColor = DARKORCHID)
+public final class IPhone {
 
-	@Override
-	public String legend() {
-		return "iPhone";
-	}
-
-	@Override
-	public double[] values() {
+	@DataPoints
+	public double[] dataPoints() {
 		final double[] data = { 4, 3.5, 4, 4.6, 5 };
 		return data;
 	}
