@@ -18,6 +18,8 @@ Check out the Sample Application in the project for detailed information.
 
 ``` java
 		// Create the objects of the classes implementing ISpiderChartPlottable
+		// You have to implement 3 methods to provide area color, data points to be plotted 
+		// and legend name to be displayed
 		final Supplier<ISpiderChartPlottable> iPhoneData = IPhone::new;
 		final Supplier<ISpiderChartPlottable> nexusData = Nexus::new;
 
@@ -38,6 +40,6 @@ Check out the Sample Application in the project for detailed information.
 		});
 ```
 
-### Sampe Output
+### Sample Output
 
 <img src="http://s8.postimg.org/708bj2jhh/Screen_Shot_2016_02_06_at_11_34_58_AM.png">
