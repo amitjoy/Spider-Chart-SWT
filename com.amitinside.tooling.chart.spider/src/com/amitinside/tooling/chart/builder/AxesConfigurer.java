@@ -52,9 +52,19 @@ public final class AxesConfigurer {
 	}
 
 	/** */
+	private static double[] toDoublePrimitiveArray(final Double[] wrappedArray) {
+		final double[] array = new double[wrappedArray.length];
+		for (int i = 0; i < wrappedArray.length; i++) {
+			array[i] = wrappedArray[i].intValue();
+		}
+		return array;
+	}
+
+	/** */
 	private final List<Double> maxScales;
 	/** */
 	private final List<Double> minScales;
+
 	/** */
 	private final List<String> scalesNames;
 
@@ -75,22 +85,13 @@ public final class AxesConfigurer {
 	/** */
 	public double[] maxScales() {
 		final Double[] maxScales = new Double[this.maxScales.size()];
-		return this.toDoublePrimitiveArray(this.maxScales.toArray(maxScales));
+		return toDoublePrimitiveArray(this.maxScales.toArray(maxScales));
 	}
 
 	/** */
 	public double[] minScales() {
 		final Double[] minScales = new Double[this.minScales.size()];
-		return this.toDoublePrimitiveArray(this.minScales.toArray(minScales));
-	}
-
-	/** */
-	private double[] toDoublePrimitiveArray(final Double[] wrappedArray) {
-		final double[] array = new double[wrappedArray.length];
-		for (int i = 0; i < wrappedArray.length; i++) {
-			array[i] = wrappedArray[i].intValue();
-		}
-		return array;
+		return toDoublePrimitiveArray(this.minScales.toArray(minScales));
 	}
 
 }

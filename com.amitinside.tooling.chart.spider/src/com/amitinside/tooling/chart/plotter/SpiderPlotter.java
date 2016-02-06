@@ -50,7 +50,7 @@ public class SpiderPlotter extends SpiderChartComponent {
 	protected int needsAxis = 2;
 
 	/** */
-	public Vector<DataSeq> series = new Vector<>(0, 1);
+	public Vector<DataSeq> seq = new Vector<>(0, 1);
 
 	/** */
 	public int visibleHeight = 0;
@@ -59,13 +59,10 @@ public class SpiderPlotter extends SpiderChartComponent {
 	public int visibleWidth = 0;
 
 	/** */
-	public SpiderChartScale XScale;
+	public SpiderChartScale xScale;
 
 	/** */
-	public SpiderChartScale Y2Scale;
-
-	/** */
-	public SpiderChartScale YScale;
+	public SpiderChartScale yScale;
 
 	/** */
 	public void addSeq(final DataSeq s) {
@@ -108,7 +105,7 @@ public class SpiderPlotter extends SpiderChartComponent {
 
 	/** */
 	protected SpiderChartScale getActiveXScale(final DataSeq s) {
-		SpiderChartScale scale = this.XScale;
+		SpiderChartScale scale = this.xScale;
 		if (s.secondaryXAxis != null) {
 			scale = s.secondaryXAxis.scale;
 		}
@@ -117,10 +114,8 @@ public class SpiderPlotter extends SpiderChartComponent {
 
 	/** */
 	protected SpiderChartScale getActiveYScale(final DataSeq s) {
-		SpiderChartScale scale = this.YScale;
-		if (s.secondYAxis && (this.Y2Scale != null)) {
-			scale = this.Y2Scale;
-		} else if (s.secondaryYAxis != null) {
+		SpiderChartScale scale = this.yScale;
+		if (s.secondaryYAxis != null) {
 			scale = s.secondaryYAxis.scale;
 		}
 		return scale;
@@ -138,12 +133,12 @@ public class SpiderPlotter extends SpiderChartComponent {
 
 	/** */
 	public DataSeq getSeq(final int p) {
-		return this.series.elementAt(p);
+		return this.seq.elementAt(p);
 	}
 
 	/** */
 	public int getSeqCount() {
-		return this.series.size();
+		return this.seq.size();
 	}
 
 	/** */
@@ -161,8 +156,8 @@ public class SpiderPlotter extends SpiderChartComponent {
 
 	/** */
 	public void plot(final SpiderChartGraphics g) {
-		for (int i = 0; i < this.series.size(); i++) {
-			final DataSeq s = this.series.elementAt(i);
+		for (int i = 0; i < this.seq.size(); i++) {
+			final DataSeq s = this.seq.elementAt(i);
 
 			this.plot(g, s, i);
 		}
@@ -224,17 +219,17 @@ public class SpiderPlotter extends SpiderChartComponent {
 	public void replaceSeq(final int p, final DataSeq s) {
 		final SpiderChartScale tmpScaleX = this.getActiveXScale(s);
 		this.getActiveYScale(s);
-		if (p >= this.series.size()) {
+		if (p >= this.seq.size()) {
 			return;
 		}
 		Calendar.getInstance().get(2);
-		if ((SpiderChart.d() != 1) && (this.series.size() > 3)) {
+		if ((SpiderChart.d() != 1) && (this.seq.size() > 3)) {
 			return;
 		}
 		if (p == -1) {
-			this.series.addElement(s);
+			this.seq.addElement(s);
 		} else {
-			this.series.setElementAt(s, p);
+			this.seq.setElementAt(s, p);
 		}
 		final boolean fixedLimits = false;
 		final boolean cumulative = false;
@@ -245,8 +240,8 @@ public class SpiderPlotter extends SpiderChartComponent {
 					double YValue = ((Double) s.getElementY(i)).doubleValue();
 					if (cumulative) {
 						YValue = 0.0D;
-						for (int si = 0; si < this.series.size(); si++) {
-							final DataSeq ser = this.series.elementAt(si);
+						for (int si = 0; si < this.seq.size(); si++) {
+							final DataSeq ser = this.seq.elementAt(si);
 							if (this.inSameSubChart(ser, s) && (ser.getSize() > i)) {
 								if (ser.getElementY(i) != null) {
 									final double d = ((Double) ser.getElementY(i)).doubleValue();
@@ -262,20 +257,11 @@ public class SpiderPlotter extends SpiderChartComponent {
 						this.calculateNewMin(tmpScaleX, XValue);
 					}
 					if (!fixedLimits) {
-						if (s.secondYAxis && (this.Y2Scale != null)) {
-							if (YValue > this.Y2Scale.max) {
-								this.calculateNewMax(this.Y2Scale, YValue);
-							}
-							if (YValue < this.Y2Scale.min) {
-								this.calculateNewMin(this.Y2Scale, YValue);
-							}
-						} else {
-							if (YValue > this.YScale.max) {
-								this.calculateNewMax(this.YScale, YValue);
-							}
-							if (YValue < this.YScale.min) {
-								this.calculateNewMin(this.YScale, YValue);
-							}
+						if (YValue > this.yScale.max) {
+							this.calculateNewMax(this.yScale, YValue);
+						}
+						if (YValue < this.yScale.min) {
+							this.calculateNewMin(this.yScale, YValue);
 						}
 					}
 				}
@@ -284,9 +270,9 @@ public class SpiderPlotter extends SpiderChartComponent {
 	}
 
 	/** */
-	public void setSerie(final int p, final DataSeq s) {
-		if (p < this.series.size()) {
-			this.series.setElementAt(s, p);
+	public void setSeq(final int p, final DataSeq s) {
+		if (p < this.seq.size()) {
+			this.seq.setElementAt(s, p);
 		}
 	}
 }

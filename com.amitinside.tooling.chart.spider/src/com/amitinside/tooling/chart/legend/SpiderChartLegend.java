@@ -52,10 +52,10 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 	public String legendLabel = "";
 
 	/** Legend Margin */
-	public int legendMargin = 8;
+	public int legendMargin = 10;
 
 	/** Legend Offset Used to position the legend on vertical basis */
-	public int legendOffset = 200;
+	public int legendOffset = 250;
 
 	/** */
 	Vector<String> names = new Vector<>(10, 10);
