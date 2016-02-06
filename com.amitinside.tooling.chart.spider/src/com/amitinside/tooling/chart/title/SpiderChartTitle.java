@@ -51,7 +51,7 @@ public final class SpiderChartTitle extends SpiderChartComponent {
 				if (toCenterY < 0) {
 					toCenterY = 0;
 				}
-				g.drawString(txt[i], this.x + toCenterX, this.y + toCenterY + (g.getFontHeight() * (i + 1)));
+				g.drawText(txt[i], this.x + toCenterX, this.y + toCenterY + (g.getFontHeight() * (i + 1)));
 			}
 		}
 	}

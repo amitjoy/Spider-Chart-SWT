@@ -185,7 +185,7 @@ public abstract class SpiderChartGraphics {
 	}
 
 	/** */
-	public void drawString(final String s, final int x, final int y) {
+	public void drawText(final String s, final int x, final int y) {
 	}
 
 	/** */

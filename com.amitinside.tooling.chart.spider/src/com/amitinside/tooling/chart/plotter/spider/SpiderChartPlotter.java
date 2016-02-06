@@ -239,7 +239,7 @@ public final class SpiderChartPlotter extends SpiderPlotter {
 					final int relativeX = (int) (Cos * tmpradi);
 					relativeY *= -1;
 					if (this.axesFactors.length > i) {
-						g.drawString(this.axesFactors[i], (PieCenterX + relativeX) - correction,
+						g.drawText(this.axesFactors[i], (PieCenterX + relativeX) - correction,
 								PieCenterY + relativeY);
 					}
 				}
@@ -329,7 +329,7 @@ public final class SpiderChartPlotter extends SpiderPlotter {
 				if ((p.dataLabels != null) && (p.dataLabels.length > i)) {
 					txt = p.dataLabels[i];
 				}
-				g.drawString(txt, xs[i] + 7, ys[i]);
+				g.drawText(txt, xs[i] + 7, ys[i]);
 			}
 		}
 		if (this.gridStyle != null) {
@@ -389,10 +389,10 @@ public final class SpiderChartPlotter extends SpiderPlotter {
 					// TODO (AKM) To be implemented different scales for axes
 					if (this.markScalesOnEveryAxis) {
 						for (int i = 0; i < xs.length; i++) {
-							g.drawString("" + v, xs[i] - 3 - g.getFontWidth("" + v), ys[i]);
+							g.drawText("" + v, xs[i] - 3 - g.getFontWidth("" + v), ys[i]);
 						}
 					} else {
-						g.drawString("" + v, xs[0] - 3 - g.getFontWidth("" + v), ys[0]);
+						g.drawText("" + v, xs[0] - 3 - g.getFontWidth("" + v), ys[0]);
 					}
 				}
 			}

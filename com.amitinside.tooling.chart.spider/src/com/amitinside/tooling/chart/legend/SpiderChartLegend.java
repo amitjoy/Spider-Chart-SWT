@@ -55,7 +55,7 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 	public int legendMargin = 8;
 
 	/** Legend Offset Used to position the legend on vertical basis */
-	public final int LegendOffset = 200;
+	public int legendOffset = 200;
 
 	/** */
 	Vector<String> names = new Vector<>(10, 10);
@@ -172,7 +172,7 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 		int offset = 0;
 		for (int i = 1; i <= this.names.size(); i++) {
 			g.setColor(this.color);
-			g.drawString(this.names.elementAt(i - 1), toCenterX + offset + iconWidth + iconSeparator + this.x,
+			g.drawText(this.names.elementAt(i - 1), toCenterX + offset + iconWidth + iconSeparator + this.x,
 					toCenterY + this.y + itemHeight);
 			offset = offset + iconWidth + iconSeparator + textWidth + textSeparator;
 		}
@@ -251,24 +251,25 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 		final int y2 = legendY2 + this.legendMargin;
 
 		if (this.background != null) {
-			this.background.draw(g, x1, y1 + this.LegendOffset, x2, y2 + this.LegendOffset);
+			this.background.draw(g, x1, y1 + this.legendOffset, x2, y2 + this.legendOffset);
 		}
 		if (this.border != null) {
-			this.border.drawRect(g, x1, y1 + this.LegendOffset, x2, y2 + this.LegendOffset);
+			this.border.drawRect(g, x1, y1 + this.legendOffset, x2, y2 + this.legendOffset);
 		}
 		for (int i = 1; i <= this.names.size(); i++) {
 			g.setColor(this.color);
-			g.drawString(this.names.elementAt(i - 1), toCenterX + iconWidth + this.x,
-					toCenterY + this.y + (i * itemHeight) + this.LegendOffset);
+			g.drawText(this.names.elementAt(i - 1), toCenterX + iconWidth + this.x,
+					toCenterY + this.y + (i * itemHeight) + this.legendOffset);
 		}
 		for (int i = 1; i <= this.names.size(); i++) {
 			final Object icon = this.items.elementAt(i - 1);
 			if (icon instanceof LineStyle) {
 				final LineStyle l = (LineStyle) icon;
+				l.setWidth(10);
 				l.draw(g, toCenterX + this.x,
-						toCenterY + this.y + (iconHeight / 2) + (((i - 1) * itemHeight) + this.LegendOffset),
+						toCenterY + this.y + (iconHeight / 2) + (((i - 1) * itemHeight) + this.legendOffset),
 						(toCenterX + this.x + iconWidth) - 2,
-						toCenterY + this.y + (iconHeight / 2) + ((i - 1) * itemHeight) + this.LegendOffset);
+						toCenterY + this.y + (iconHeight / 2) + ((i - 1) * itemHeight) + this.legendOffset);
 			}
 		}
 	}

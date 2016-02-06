@@ -211,7 +211,7 @@ public final class SpiderChartSwtGraphics extends SpiderChartGraphics {
 
 	/** {@inheritDoc} */
 	@Override
-	public void drawString(final String s, final int x, final int y) {
+	public void drawText(final String s, final int x, final int y) {
 		this.graphics.drawString(s, x, y - this.graphics.getFontMetrics().getHeight(), true);
 	}
 

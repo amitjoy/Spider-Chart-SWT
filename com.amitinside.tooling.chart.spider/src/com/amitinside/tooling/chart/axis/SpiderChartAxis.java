@@ -489,14 +489,14 @@ public final class SpiderChartAxis extends SpiderChartComponent {
 									lbly = v;
 									if (((lbly - this.offset) >= this.y)
 											&& ((lbly - this.offset) <= (this.visibleSize + this.y))) {
-										g.drawString(txts[0], lblx, lbly - this.offset);
+										g.drawText(txts[0], lblx, lbly - this.offset);
 									}
 									for (int h = 1; h < txts.length; h++) {
 										final int lblw1 = g.getFontWidth(null, txts[h]);
 										lblx = (this.x + this.width) - tickLength - lblw1;
 										if (((lbly - this.offset) >= this.y)
 												&& ((lbly - this.offset) <= (this.visibleSize + this.y))) {
-											g.drawString(txts[h], lblx, (lbly - this.offset) + (lblh * h));
+											g.drawText(txts[h], lblx, (lbly - this.offset) + (lblh * h));
 										}
 									}
 								} else {
@@ -504,14 +504,14 @@ public final class SpiderChartAxis extends SpiderChartComponent {
 									lbly = this.realPosition + tickLength + lblh;
 									if (((v - this.offset) >= this.x)
 											&& ((v - this.offset) <= (this.visibleSize + this.x))) {
-										g.drawString(txts[0], lblx - this.offset, lbly);
+										g.drawText(txts[0], lblx - this.offset, lbly);
 									}
 									for (int h = 1; h < txts.length; h++) {
 										final int lblw1 = g.getFontWidth(null, txts[h]);
 										lblx = v - (lblw1 / 2);
 										if (((v - this.offset) >= this.x)
 												&& ((v - this.offset) <= (this.visibleSize + this.x))) {
-											g.drawString(txts[h], lblx - this.offset, lbly + (lblh * h));
+											g.drawText(txts[h], lblx - this.offset, lbly + (lblh * h));
 										}
 									}
 								}

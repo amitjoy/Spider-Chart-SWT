@@ -599,13 +599,13 @@ public class SpiderChart {
 		System.currentTimeMillis();
 		if ((this.plotters[0] == null) || (this.plottersCount <= 0)) {
 			pg.setColor(SWTGraphicsSupplier.getColor(SpiderChartColor.RED));
-			pg.drawString("Error: No plotters/series have been defined", 30, 30);
+			pg.drawText("Error: No plotters/series have been defined", 30, 30);
 			return;
 		}
 		for (int j = 0; j < this.plottersCount; j++) {
 			if ((this.plottersCount > 1) && !this.plotters[j].getCombinable()) {
 				pg.setColor(SWTGraphicsSupplier.getColor(SpiderChartColor.RED));
-				pg.drawString("Error: These plotters cannot be combined", 30, 30);
+				pg.drawText("Error: These plotters cannot be combined", 30, 30);
 				return;
 			}
 		}
