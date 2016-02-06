@@ -23,7 +23,6 @@ import java.util.Locale;
 import java.util.Vector;
 
 import com.amitinside.tooling.chart.SpiderChart;
-import com.amitinside.tooling.chart.axis.SpiderChartAxis;
 
 public class DataSeq {
 
@@ -39,10 +38,6 @@ public class DataSeq {
 	public String name = "";
 	/** */
 	public double nullValue = -9.0D;
-	/** */
-	public SpiderChartAxis secondaryXAxis = null;
-	/** */
-	public SpiderChartAxis secondaryYAxis = null;
 	/** */
 	public boolean secondYAxis = false;
 	/** */

@@ -97,19 +97,13 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 
 	/** */
 	protected SpiderChartScale getActiveXScale(final DataSeq s) {
-		SpiderChartScale scale = this.xScale;
-		if (s.secondaryXAxis != null) {
-			scale = s.secondaryXAxis.scale;
-		}
+		final SpiderChartScale scale = this.xScale;
 		return scale;
 	}
 
 	/** */
 	protected SpiderChartScale getActiveYScale(final DataSeq s) {
-		SpiderChartScale scale = this.yScale;
-		if (s.secondaryYAxis != null) {
-			scale = s.secondaryYAxis.scale;
-		}
+		final SpiderChartScale scale = this.yScale;
 		return scale;
 	}
 
@@ -121,19 +115,6 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 	/** */
 	public int getSeqCount() {
 		return this.seq.size();
-	}
-
-	/** */
-	protected boolean inSameSubChart(final DataSeq tmpSerie, final DataSeq s) {
-		boolean usingStackAxis = false;
-		if ((s.secondaryYAxis != null) && s.secondaryYAxis.mainAxis.stackAdditionalAxis) {
-			usingStackAxis = true;
-		}
-		if ((tmpSerie.secondaryYAxis != null) && tmpSerie.secondaryYAxis.mainAxis.stackAdditionalAxis) {
-			usingStackAxis = true;
-		}
-		return (tmpSerie.secondaryXAxis == s.secondaryXAxis)
-				&& ((tmpSerie.secondaryYAxis == s.secondaryYAxis) || !usingStackAxis);
 	}
 
 	/** */
@@ -223,12 +204,6 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 						YValue = 0.0D;
 						for (int si = 0; si < this.seq.size(); si++) {
 							final DataSeq ser = this.seq.elementAt(si);
-							if (this.inSameSubChart(ser, s) && (ser.getSize() > i)) {
-								if (ser.getElementY(i) != null) {
-									final double d = ((Double) ser.getElementY(i)).doubleValue();
-									YValue += d;
-								}
-							}
 						}
 					}
 					if (XValue >= tmpScaleX.max) {
