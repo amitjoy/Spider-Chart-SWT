@@ -121,7 +121,6 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 	public void plot(final AbstractChartGraphics g) {
 		for (int i = 0; i < this.seq.size(); i++) {
 			final DataSeq s = this.seq.elementAt(i);
-
 			this.plot(g, s, i);
 		}
 	}
@@ -134,32 +133,7 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 	public void plotBackground(final AbstractChartGraphics g, final int bw, final int bh, final int offsetX,
 			final int offsetY) {
 		if (this.backgroundStyle != null) {
-			final boolean D3 = false;
-			if (D3) {
-				final int[] xs = new int[6];
-				final int[] ys = new int[6];
-				xs[0] = this.x + offsetX;
-				ys[0] = this.y + offsetY;
-
-				xs[1] = this.x + offsetX + this.depth;
-				ys[1] = (this.y + offsetY) - this.depth;
-
-				xs[2] = this.x + offsetX + this.visibleWidth;
-				ys[2] = (this.y + offsetY) - this.depth;
-
-				xs[3] = this.x + offsetX + this.visibleWidth;
-				ys[3] = (this.y + offsetY + this.visibleHeight) - this.depth - this.depth;
-
-				xs[4] = (this.x + offsetX + this.visibleWidth) - this.depth;
-				ys[4] = (this.y + offsetY + this.visibleHeight) - this.depth;
-
-				xs[5] = this.x + offsetX;
-				ys[5] = (this.y + offsetY + this.visibleHeight) - this.depth;
-
-				this.backgroundStyle.drawPolygon(g, xs, ys, 6);
-			} else {
-				this.backgroundStyle.draw(g, this.x, this.y, this.x + bw, this.y + bh);
-			}
+			this.backgroundStyle.draw(g, this.x, this.y, this.x + bw, this.y + bh);
 		}
 		if (this.backgroundImage != null) {
 			final int w = this.backgroundImage.getWidth();

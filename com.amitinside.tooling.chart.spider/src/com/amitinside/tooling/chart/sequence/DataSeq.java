@@ -31,15 +31,9 @@ public class DataSeq {
 	/** */
 	public Vector<Object> hotAreas = new Vector<>(0, 5);
 	/** */
-	public String[] htmlLinks = new String[0];
-	/** */
 	public String labelTemplate = "";
 	/** */
 	public String name = "";
-	/** */
-	public double nullValue = -9.0D;
-	/** */
-	public boolean secondYAxis = false;
 	/** */
 	public String[] tips = new String[0];
 	/** */
