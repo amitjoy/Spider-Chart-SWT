@@ -130,7 +130,6 @@ public final class SpiderChartCanvas extends Canvas implements ISpiderChartListe
 			this.chart.removeChartListener(this);
 		}
 		this.chart = c;
-
 		this.chart.addChartListener(this);
 	}
 }

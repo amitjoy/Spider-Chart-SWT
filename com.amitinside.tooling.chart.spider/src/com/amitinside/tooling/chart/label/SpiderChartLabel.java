@@ -15,6 +15,8 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.label;
 
+import static com.amitinside.tooling.chart.gc.AbstractChartGraphics.ROTATE_CENTER;
+
 import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.api.IFloatingObject;
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
@@ -80,7 +82,7 @@ public final class SpiderChartLabel implements IFloatingObject {
 	/** */
 	public int requiredWidth = 0;
 	/** */
-	protected int rotationAlign = AbstractChartGraphics.ROTATE_CENTER;
+	protected int rotationAlign = ROTATE_CENTER;
 	/** */
 	@SuppressWarnings("unused")
 	private String sFormat = "";

@@ -15,11 +15,12 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.gc;
 
+import static com.amitinside.tooling.chart.gc.swt.SwtGraphicsProvider.startUIThread;
+
 import com.amitinside.tooling.chart.gc.swt.SpiderChartSwtColor;
 import com.amitinside.tooling.chart.gc.swt.SpiderChartSwtFont;
 import com.amitinside.tooling.chart.gc.swt.SpiderChartSwtGraphics;
 import com.amitinside.tooling.chart.gc.swt.SpiderChartSwtImage;
-import com.amitinside.tooling.chart.gc.swt.SwtGraphicsProvider;
 
 public interface AbstractGraphicsSupplier {
 
@@ -76,6 +77,6 @@ public interface AbstractGraphicsSupplier {
 
 	/** */
 	public static void startUiThread(final Runnable r) {
-		SwtGraphicsProvider.startUIThread(r);
+		startUIThread(r);
 	}
 }
