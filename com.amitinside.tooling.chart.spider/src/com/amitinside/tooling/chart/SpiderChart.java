@@ -23,6 +23,11 @@ import static com.amitinside.tooling.chart.gc.AbstractChartFont.PLAIN;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.createImage;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getColor;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getFont;
+import static com.amitinside.tooling.chart.listener.ISpiderChartListener.EVENT_CHART_CLICKED;
+import static com.amitinside.tooling.chart.listener.ISpiderChartListener.EVENT_ENTER_POINT;
+import static com.amitinside.tooling.chart.listener.ISpiderChartListener.EVENT_LEAVE_POINT;
+import static com.amitinside.tooling.chart.listener.ISpiderChartListener.EVENT_POINT_CLICKED;
+import static com.amitinside.tooling.chart.listener.ISpiderChartListener.EVENT_TIP_UPDATE;
 
 import java.util.List;
 import java.util.Vector;
@@ -169,9 +174,6 @@ public final class SpiderChart {
 
 	/** */
 	private int lastWidth = -1;
-
-	/** */
-	public int layout = 0;
 
 	/** Chart Left Margin */
 	public double leftMargin = 0.125D;
@@ -354,10 +356,10 @@ public final class SpiderChart {
 	/** */
 	public void mouseClick() {
 		if (((this.selectedSeq != null) && (this.selectedSeqPoint >= 0)) || (this.selectedLabel != null)) {
-			this.triggerChartEvent(5);
+			this.triggerChartEvent(EVENT_POINT_CLICKED);
 			return;
 		}
-		this.triggerChartEvent(6);
+		this.triggerChartEvent(EVENT_CHART_CLICKED);
 	}
 
 	/** */
@@ -394,7 +396,7 @@ public final class SpiderChart {
 							if (previousSelectedObject == null) {
 								triggerEnter = true;
 							} else if ((previousSelectedObject != d) || (previousPoint != i)) {
-								this.triggerChartEvent(3);
+								this.triggerChartEvent(EVENT_LEAVE_POINT);
 								triggerEnter = true;
 							}
 							this.selectedSeq = d;
@@ -402,7 +404,7 @@ public final class SpiderChart {
 							if (!triggerEnter) {
 								break;
 							}
-							this.triggerChartEvent(2);
+							this.triggerChartEvent(EVENT_ENTER_POINT);
 							break;
 						}
 					}
@@ -411,11 +413,11 @@ public final class SpiderChart {
 			if ((Math.abs(this.currentX - this.cursorLastX) > 2) || (Math.abs(this.currentY - this.cursorLastY) > 2)) {
 				this.cursorLastX = this.currentX;
 				this.cursorLastY = this.currentY;
-				this.triggerChartEvent(4);
+				this.triggerChartEvent(EVENT_TIP_UPDATE);
 			}
 		}
 		if ((previousSelectedObject != null) && (this.selectedSeq == null) && (this.selectedLabel == null)) {
-			this.triggerChartEvent(3);
+			this.triggerChartEvent(EVENT_LEAVE_POINT);
 		}
 	}
 
@@ -425,7 +427,7 @@ public final class SpiderChart {
 
 		if ((this.plotters[0] == null) || (this.plottersCount <= 0)) {
 			pg.setColor(getColor(RED));
-			pg.drawText("Error: No plotters/sequences have been defined", 30, 30);
+			pg.drawText("No plotters have been found", 30, 30);
 			return;
 		}
 		AbstractChartGraphics gScroll = pg;
@@ -648,79 +650,7 @@ public final class SpiderChart {
 
 	/** */
 	private void resize() {
-		if (this.layout == 0) {
-			this.resizeRightLayout();
-		}
-		if (this.layout == 1) {
-			this.resizeLayoutTop();
-		}
-		if (this.layout == 2) {
-			this.resizeBottomLayout();
-		}
-	}
-
-	/** */
-	private void resizeBottomLayout() {
-		final int myHeight = this.getHeight();
-		final int myWidth = this.getWidth();
-		if (this.virtualWidth < myWidth) {
-			this.virtualWidth = myWidth;
-		}
-		if (this.virtualHeight < myHeight) {
-			this.virtualHeight = myHeight;
-		}
-		this.plotters[0].visibleWidth = (int) (myWidth * (1.0D - (this.leftMargin + this.rightMargin)));
-		this.plotters[0].visibleHeight = (int) (myHeight
-				* (1.0D - (this.topMargin + this.bottomMargin + this.legendMargin)));
-
-		this.plotters[0].x = (int) (myWidth * this.leftMargin);
-		this.plotters[0].y = (int) (myHeight * this.topMargin);
-		this.plotters[0].width = this.virtualWidth - (myWidth - this.plotters[0].visibleWidth);
-		this.plotters[0].height = this.virtualHeight - (myHeight - this.plotters[0].visibleHeight);
-
-		this.title.x = 0;
-		this.title.y = 0;
-		this.title.height = (int) (myHeight * this.topMargin);
-		this.title.width = myWidth;
-		if (this.legend != null) {
-			this.legend.x = (int) (myWidth * this.leftMargin);
-			this.legend.width = (int) (myWidth * (1.0D - (this.leftMargin + this.leftMargin)));
-			this.legend.y = (int) (myHeight * (1.0D - this.legendMargin));
-			this.legend.height = (int) (myHeight * this.legendMargin);
-		}
-		this.setPlotterSize();
-	}
-
-	/** */
-	private void resizeLayoutTop() {
-		final int myHeight = this.getHeight();
-		final int myWidth = this.getWidth();
-		if (this.virtualWidth < myWidth) {
-			this.virtualWidth = myWidth;
-		}
-		if (this.virtualHeight < myHeight) {
-			this.virtualHeight = myHeight;
-		}
-		this.plotters[0].visibleWidth = (int) (myWidth * (1.0D - (this.leftMargin + this.rightMargin)));
-		this.plotters[0].visibleHeight = (int) (myHeight
-				* (1.0D - (this.topMargin + this.legendMargin + this.bottomMargin)));
-
-		this.plotters[0].x = (int) (myWidth * this.leftMargin);
-		this.plotters[0].y = (int) (myHeight * (this.topMargin + this.legendMargin));
-		this.plotters[0].width = this.virtualWidth - (myWidth - this.plotters[0].visibleWidth);
-		this.plotters[0].height = this.virtualHeight - (myHeight - this.plotters[0].visibleHeight);
-
-		this.title.x = 0;
-		this.title.y = 0;
-		this.title.height = (int) (myHeight * this.topMargin);
-		this.title.width = myWidth;
-		if (this.legend != null) {
-			this.legend.x = (int) (myWidth * this.leftMargin);
-			this.legend.width = (int) (myWidth * (1.0D - (this.leftMargin + this.rightMargin)));
-			this.legend.y = (int) (myHeight * this.topMargin);
-			this.legend.height = (int) (myHeight * this.legendMargin);
-		}
-		this.setPlotterSize();
+		this.resizeRightLayout();
 	}
 
 	/** */
