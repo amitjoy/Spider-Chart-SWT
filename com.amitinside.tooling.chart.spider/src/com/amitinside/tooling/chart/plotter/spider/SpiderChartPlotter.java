@@ -135,11 +135,9 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 	/** {@inheritDoc}} **/
 	@Override
 	protected void plot(final AbstractChartGraphics g, final DataSeq s, final int seqSec) {
-		LineDataSeq p;
+		LineDataSeq p = null;
 		if (s instanceof LineDataSeq) {
 			p = (LineDataSeq) s;
-		} else {
-			return;
 		}
 		s.hotAreas.removeAllElements();
 
@@ -225,10 +223,10 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 						correction = g.getFontWidth(this.axesFactors[i]);
 					}
 					final double radian = 0.01745277777777778D * angle;
-					final double Sin = Math.sin(radian);
-					final double Cos = Math.cos(radian);
-					int relativeY = (int) (Sin * tmpradi);
-					final int relativeX = (int) (Cos * tmpradi);
+					final double sin = Math.sin(radian);
+					final double cos = Math.cos(radian);
+					int relativeY = (int) (sin * tmpradi);
+					final int relativeX = (int) (cos * tmpradi);
 					relativeY *= -1;
 					if (this.axesFactors.length > i) {
 						g.drawText(this.axesFactors[i], (PieCenterX + relativeX) - correction, PieCenterY + relativeY);
@@ -373,8 +371,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 						v = "" + (int) tickValue;
 					}
 					if (this.scalingLabelFormat.length() > 0) {
-						DecimalFormat df = null;
-						df = new DecimalFormat(this.scalingLabelFormat);
+						final DecimalFormat df = new DecimalFormat(this.scalingLabelFormat);
 						v = df.format(new Double(tickValue));
 					}
 					// TODO (AKM) To be implemented different scales for axes

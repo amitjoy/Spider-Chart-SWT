@@ -34,7 +34,6 @@ import java.util.Vector;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.amitinside.tooling.chart.api.IFloatingObject;
-import com.amitinside.tooling.chart.axis.SpiderChartAxis;
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
 import com.amitinside.tooling.chart.gc.AbstractChartFont;
 import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
@@ -274,7 +273,7 @@ public final class SpiderChart {
 
 	/** Constructor */
 	public SpiderChart(final SpiderChartTitle t, final SpiderChartPlotter p) {
-		this.resetChart(t, p, null, null);
+		this.resetChart(t, p);
 	}
 
 	/** */
@@ -608,8 +607,7 @@ public final class SpiderChart {
 	}
 
 	/** */
-	protected void resetChart(final SpiderChartTitle t, final SpiderChartPlotter p, final SpiderChartAxis X,
-			final SpiderChartAxis Y) {
+	protected void resetChart(final SpiderChartTitle t, final SpiderChartPlotter p) {
 		this.plottersCount = 0;
 		this.plotters = new SpiderChartPlotter[10];
 		this.legend = null;
@@ -622,30 +620,12 @@ public final class SpiderChart {
 		this.floatingObjects.removeAllElements();
 
 		this.plotters[0] = p;
-		if ((X != null) && (this.plotters[0] != null)) {
-			this.plotters[0].xScale = X.scale;
-			X.plot = this.plotters[0];
-		}
-		if ((Y != null) && (this.plotters[0] != null)) {
-			this.plotters[0].yScale = Y.scale;
-			Y.plot = this.plotters[0];
-		}
 		this.title = t;
 		if (this.title == null) {
 			this.title = new SpiderChartTitle();
 			this.title.text = "";
 		}
 		this.plottersCount = 1;
-	}
-
-	/** */
-	public void resetSize() {
-		if (this.originalVirtualHeight > -1) {
-			this.virtualHeight = this.originalVirtualHeight;
-		}
-		if (this.originalVirtualWidth > -1) {
-			this.virtualWidth = this.originalVirtualWidth;
-		}
 	}
 
 	/** */
