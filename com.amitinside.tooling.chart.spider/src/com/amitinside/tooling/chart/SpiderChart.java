@@ -192,9 +192,6 @@ public final class SpiderChart {
 	public long msecs = 2000L;
 
 	/** */
-	protected Vector<String> notes = new Vector<>();
-
-	/** */
 	public int offsetX = 0;
 
 	/** */
@@ -466,6 +463,7 @@ public final class SpiderChart {
 				this.finalImage = createImage(this.getWidth(), this.getHeight());
 			}
 		} catch (final Exception e) {
+			e.printStackTrace();
 		}
 		if (this.finalImage != null) {
 			g = this.finalImage.getGraphics();
@@ -600,12 +598,7 @@ public final class SpiderChart {
 	}
 
 	/** */
-	public void removeNotes() {
-		this.notes.removeAllElements();
-	}
-
-	/** */
-	public void removePlotters() {
+	public void removeChartPlotters() {
 		for (int i = 0; i < this.plottersCount; i++) {
 			this.plotters[i] = null;
 		}
@@ -624,7 +617,6 @@ public final class SpiderChart {
 		this.selectedSeq = null;
 		this.selectedSeqPoint = -1;
 		this.repaintAll = true;
-		this.removeNotes();
 		this.floatingObjects.removeAllElements();
 
 		this.plotters[0] = p;
