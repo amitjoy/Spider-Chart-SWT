@@ -11,4 +11,4 @@ before_install:
   - "sh -e /etc/init.d/xvfb start"
   - "cd com.amitinside.tooling.chart.spider"
   
-mvn clean package eclipse:eclipse -D eclipse.pde install -DskipTests=true -Darguments=-DskipTests
+install: mvn clean package eclipse:eclipse -D eclipse.pde install -DskipTests=true -Darguments=-DskipTests
