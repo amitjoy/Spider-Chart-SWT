@@ -348,6 +348,11 @@ public final class SpiderChart {
 	}
 
 	/** */
+	public SpiderChartPlotter getSpiderPlotter() {
+		return (SpiderChartPlotter) this.plotters[0];
+	}
+
+	/** */
 	public int getWidth() {
 		return this.width;
 	}

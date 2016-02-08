@@ -19,6 +19,8 @@ import static com.amitinside.tooling.chart.api.annotations.processor.SpiderChart
 import static com.amitinside.tooling.chart.api.annotations.processor.SpiderChartAnnotationProcessor.getDataPoints;
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -28,9 +30,13 @@ import com.amitinside.tooling.chart.builder.model.AxisData;
 public final class AxisDataBuilder {
 
 	/** */
-	private final SpiderChart chart;
+	private final List<AxisData> axesData = new ArrayList<>();
+
 	/** */
 	private final AxisData axisData;
+
+	/** */
+	private final SpiderChart chart;
 
 	/** Constructor */
 	public AxisDataBuilder(final SpiderChart chart) {
@@ -53,6 +59,7 @@ public final class AxisDataBuilder {
 		final Optional<String> areaColor = Optional.of(getAreaColor(data));
 
 		this.axisData.setData(values.orElseGet(() -> new double[] { 0 }), areaColor.orElse("RED"));
+		this.axesData.add(this.axisData);
 		this.done();
 	}
 

@@ -15,8 +15,12 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.sequence;
 
+import static com.amitinside.tooling.chart.api.annotations.processor.SpiderChartAnnotationProcessor.getAreaColor;
 import static com.amitinside.tooling.chart.gc.AbstractChartColor.BLACK;
+import static com.amitinside.tooling.chart.gc.AbstractChartFont.BOLD;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getColor;
+import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getFont;
+import static com.amitinside.tooling.chart.style.LineStyle.NORMAL_LINE;
 
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
 import com.amitinside.tooling.chart.gc.AbstractChartFont;
@@ -28,6 +32,26 @@ public final class LineDataSeq extends DataSeq {
 
 	/** */
 	public static int startingXValue = 0;
+
+	/**
+	 * Static Factory to create instance of {@link LineDataSeq}
+	 */
+	public static LineDataSeq of(final double[] values, final LineStyle style) {
+		return new LineDataSeq(values, style);
+	}
+
+	/**
+	 * Static Factory to create instance of {@link LineDataSeq}
+	 */
+	public static LineDataSeq of(final double[] values, final Object oldObjectToCopyData) {
+		final LineDataSeq seq = new LineDataSeq(values,
+				new LineStyle(2, getColor(getAreaColor(oldObjectToCopyData)), NORMAL_LINE));
+		seq.valueFont = getFont("Verdana", BOLD, 12);
+		seq.fillStyle = new FillStyle(getColor(getAreaColor(oldObjectToCopyData)), 0.5f);
+		seq.drawPoint = true;
+		return seq;
+	}
+
 	/** */
 	public boolean drawPoint = false;
 	/** */
@@ -44,6 +68,7 @@ public final class LineDataSeq extends DataSeq {
 	public AbstractChartColor valueColor = getColor(BLACK);
 	/** */
 	public AbstractChartFont valueFont = null;
+
 	/** */
 	public LineStyle vstyle = null;
 

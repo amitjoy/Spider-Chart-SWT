@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.amitinside.tooling.chart.builder.AxesConfigurer;
 import com.amitinside.tooling.chart.builder.SpiderChartBuilder;
+import com.amitinside.tooling.chart.sequence.LineDataSeq;
 import com.amitinside.tooling.chart.swt.SpiderChartViewer;
 
 public final class Sample {
@@ -46,6 +47,19 @@ public final class Sample {
 		}).viewer(chart -> {
 			chart.data(firstData -> firstData.inject(iPhoneData)).data(secondData -> secondData.inject(nexusData));
 		});
+
+		// changing values in runtime
+		final LineDataSeq seq = LineDataSeq.of(new double[] { 2.0, 2, 4, 2, 3 }, iPhoneData.get());
+		viewer.getChart().getSpiderPlotter().setSeq(0, seq);
+
+		// changing axes in runtime
+		final AxesConfigurer configuration = new AxesConfigurer.Builder().addAxis("Battery", 5, 0).addAxis("c", 5, 0)
+				.addAxis("Display", 5, 0).addAxis("Memory", 5, 0).addAxis("Brand", 5, 0).build();
+
+		final LineDataSeq seq2 = LineDataSeq.of(new double[] { 2.0, 1, 4, 2, 3 }, nexusData.get());
+		viewer.getChart().getSpiderPlotter().setSeq(1, seq2);
+
+		viewer.getChart().getSpiderPlotter().use(configuration);
 	}
 
 	public static void main(final String[] args) {
