@@ -1,5 +1,12 @@
+sudo: false
+
 language: java
 
-install: true
+branches:
+  only:
+    - master
+
+install: mvn --quiet install -Ptravis
+script: mvn --quiet verify -Ptravis
 
 before_install: cd com.amitinside.tooling.chart.spider
