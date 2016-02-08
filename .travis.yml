@@ -11,6 +11,6 @@ before_install:
   - "sh -e /etc/init.d/xvfb start"
   - "cd com.amitinside.tooling.chart.spider"
   
-install: mvn --quiet install -Ptravis
+install: true
 
 script: mvn --quiet verify -Ptravis
