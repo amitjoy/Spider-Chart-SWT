@@ -5,10 +5,11 @@ language: java
 branches:
   only:
     - master
+
+env:
+    - MAVEN_OPTS="-Xms2048m -Xmx=2048m"
     
 before_install:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - "cd com.amitinside.tooling.chart.spider"
+    - "cd com.amitinside.tooling.chart.spider"
   
-install: mvn clean package eclipse:eclipse -D eclipse.pde install -DskipTests=true -Darguments=-DskipTests
+install: true
