@@ -1,12 +1,16 @@
-sudo: false
+sudo: required
 
 language: java
 
 branches:
   only:
     - master
-
+    
+before_install:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - "cd com.amitinside.tooling.chart.spider"
+  
 install: mvn --quiet install -Ptravis
-script: mvn --quiet verify -Ptravis
 
-before_install: cd com.amitinside.tooling.chart.spider
+script: mvn --quiet verify -Ptravis
