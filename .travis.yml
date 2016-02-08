@@ -12,5 +12,3 @@ before_install:
   - "cd com.amitinside.tooling.chart.spider"
   
 install: true
-
-script: mvn --quiet verify -Ptravis
