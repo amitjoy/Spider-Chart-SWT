@@ -36,11 +36,11 @@ public final class SpiderChartViewer extends Composite {
 	/** */
 	public boolean allowZoom = true;
 	/** */
-	SpiderChartCanvas canvas = null;
+	private SpiderChartCanvas canvas = null;
 	/** */
 	public boolean changePointer = true;
 	/** */
-	SpiderChartAdapter chartAdapter = new SpiderChartAdapter() {
+	private final SpiderChartAdapter chartAdapter = new SpiderChartAdapter() {
 		/** {@inheritDoc} */
 		@Override
 		public void onChartEvent(final SpiderChart c, final int type) {
@@ -57,7 +57,7 @@ public final class SpiderChartViewer extends Composite {
 	/** */
 	private Cursor defaultCursor = null;
 	/** */
-	Slider hSlider = null;
+	private Slider hSlider = null;
 	/** */
 	private int lastHeight = 0;
 	/** */
@@ -77,7 +77,7 @@ public final class SpiderChartViewer extends Composite {
 	/** */
 	private final int scrollBarWidth = 18;
 	/** */
-	Slider vSlider = null;
+	private Slider vSlider = null;
 	/** */
 	private Label zoom;
 	/** */

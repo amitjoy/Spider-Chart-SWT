@@ -50,7 +50,7 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 	public AbstractChartFont font = getFont("Verdana", PLAIN, 10);
 
 	/** */
-	Vector<Object> items = new Vector<>(10, 10);
+	private final Vector<Object> items = new Vector<>(10, 10);
 
 	/** Legend Label */
 	public String legendLabel = "";
@@ -62,7 +62,7 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 	public int legendOffset = 250;
 
 	/** */
-	Vector<String> names = new Vector<>(10, 10);
+	private final Vector<String> names = new Vector<>(10, 10);
 
 	/** Legend Title */
 	public String title = null;

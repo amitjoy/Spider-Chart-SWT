@@ -39,7 +39,7 @@ public final class LineStyle {
 	/** */
 	public float alphaValue = 1.0F;
 	/** */
-	AbstractChartColor color;
+	private AbstractChartColor color;
 
 	/** */
 	int lineType;

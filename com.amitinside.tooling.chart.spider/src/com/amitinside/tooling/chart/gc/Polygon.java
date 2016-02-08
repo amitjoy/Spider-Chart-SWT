@@ -19,8 +19,12 @@ import java.util.Vector;
 
 public final class Polygon {
 
+	/** */
 	private final Vector<Point> points;
 
+	/**
+	 * Constructor
+	 */
 	public Polygon() {
 		this.points = new Vector<>();
 	}

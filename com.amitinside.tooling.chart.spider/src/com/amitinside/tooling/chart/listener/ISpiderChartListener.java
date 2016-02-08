@@ -20,19 +20,19 @@ import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 
 public interface ISpiderChartListener {
 
-	/** */
-	public static final int EVENT_AFTER_UPDATE = 1;
-	/** */
-	public static final int EVENT_BEFORE_UPDATE = 0;
-	/** */
+	/** To be fired on clicking on chart canvas */
 	public static final int EVENT_CHART_CLICKED = 6;
-	/** */
+
+	/** To be fired on selecting data point */
 	public static final int EVENT_ENTER_POINT = 2;
-	/** */
+
+	/** To be fired on leaving data point */
 	public static final int EVENT_LEAVE_POINT = 3;
-	/** */
+
+	/** To be fired on clicking on data point */
 	public static final int EVENT_POINT_CLICKED = 5;
-	/** */
+
+	/** To be fired on tip shell update */
 	public static final int EVENT_TIP_UPDATE = 4;
 
 	/** */

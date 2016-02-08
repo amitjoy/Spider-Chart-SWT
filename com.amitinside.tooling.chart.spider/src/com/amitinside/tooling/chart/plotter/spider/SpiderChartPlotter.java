@@ -70,7 +70,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 	/**
 	 * Spider Chart Border Style
 	 */
-	LineStyle border = new LineStyle(0.2F, getColor(BLACK), 1);
+	public LineStyle border = new LineStyle(0.2F, getColor(BLACK), 1);
 
 	/**
 	 * Spider Chart Radius

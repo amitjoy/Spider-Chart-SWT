@@ -60,13 +60,9 @@ public final class SpiderChartLabel implements IFloatingObject {
 	/** */
 	protected boolean ignorePosition = false;
 	/** */
-	int lineCount = 0;
-	/** */
-	int[] lineHeights = new int[100];
-	/** */
 	protected LineStyle lineToAnchor = null;
 	/** */
-	int[] lineWidths = new int[100];
+	private final int[] lineWidths = new int[100];
 	/** */
 	protected int marginX = 2;
 	/** */
