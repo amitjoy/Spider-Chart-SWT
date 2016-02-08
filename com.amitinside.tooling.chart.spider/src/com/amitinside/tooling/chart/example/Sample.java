@@ -62,6 +62,7 @@ public final class Sample {
 			}
 		}
 		viewer.getChart().stopWorker();
+		viewer.getChart().dispose();
 		display.dispose();
 	}
 

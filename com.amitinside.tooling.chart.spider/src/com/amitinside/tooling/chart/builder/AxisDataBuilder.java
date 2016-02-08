@@ -30,19 +30,19 @@ public final class AxisDataBuilder {
 	/** */
 	private final SpiderChart chart;
 	/** */
-	private final AxisData data;
+	private final AxisData axisData;
 
 	/** Constructor */
 	public AxisDataBuilder(final SpiderChart chart) {
 		requireNonNull(chart);
 
-		this.data = new AxisData();
+		this.axisData = new AxisData();
 		this.chart = chart;
 	}
 
 	/** */
 	private void done() {
-		this.chart.addSeq(this.data.getData());
+		this.chart.addSeq(this.axisData.getData());
 	}
 
 	/** */
@@ -52,7 +52,7 @@ public final class AxisDataBuilder {
 		final Optional<double[]> values = Optional.of(getDataPoints(data));
 		final Optional<String> areaColor = Optional.of(getAreaColor(data));
 
-		this.data.setData(values.orElseGet(() -> new double[] { 0 }), areaColor.orElse("RED"));
+		this.axisData.setData(values.orElseGet(() -> new double[] { 0 }), areaColor.orElse("RED"));
 		this.done();
 	}
 

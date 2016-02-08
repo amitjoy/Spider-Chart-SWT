@@ -17,6 +17,7 @@ package com.amitinside.tooling.chart.swt;
 
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getGraphics;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.startUiThread;
+import static org.eclipse.swt.SWT.CTRL;
 
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.events.ControlListener;
@@ -38,7 +39,7 @@ public final class SpiderChartCanvas extends Canvas implements ISpiderChartListe
 
 	/** Constructor */
 	public SpiderChartCanvas(final Composite parent, final int style) {
-		super(parent, style | 0x40000);
+		super(parent, style | CTRL);
 
 		this.addPaintListener(e -> SpiderChartCanvas.this.paintChart(e));
 		final MouseMoveListener mouseMove = e -> SpiderChartCanvas.this.mouseMoved(e);
