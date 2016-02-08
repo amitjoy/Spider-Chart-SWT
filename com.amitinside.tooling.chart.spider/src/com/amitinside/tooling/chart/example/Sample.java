@@ -15,7 +15,6 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.example;
 
-import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 import org.eclipse.swt.SWT;
@@ -50,12 +49,6 @@ public final class Sample {
 		});
 
 		Display.getDefault().asyncExec(() -> {
-			// Wait for 2 second and change the plot in runtime
-			try {
-				TimeUnit.SECONDS.sleep(2);
-			} catch (final Exception e) {
-				e.printStackTrace();
-			}
 			// changing values in runtime
 			final LineDataSeq seq = LineDataSeq.of(new double[] { 2.0, 4.2, 4.1, 2.8, 3.7, 4.1 }, iPhoneData.get());
 			viewer.getChart().getSpiderPlotter().setSeq(0, seq);
