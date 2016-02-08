@@ -1,4 +1,6 @@
 language: java
+
 jdk:
   - oraclejdk
+
 before_install: cd com.amitinside.tooling.chart.spider
