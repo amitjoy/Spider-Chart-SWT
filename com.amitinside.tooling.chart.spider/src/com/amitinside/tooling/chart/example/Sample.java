@@ -15,6 +15,7 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.example;
 
+import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 import org.eclipse.swt.SWT;
@@ -48,18 +49,27 @@ public final class Sample {
 			chart.data(firstData -> firstData.inject(iPhoneData)).data(secondData -> secondData.inject(nexusData));
 		});
 
-		// changing values in runtime
-		final LineDataSeq seq = LineDataSeq.of(new double[] { 2.0, 2, 4, 2, 3 }, iPhoneData.get());
-		viewer.getChart().getSpiderPlotter().setSeq(0, seq);
+		Display.getDefault().asyncExec(() -> {
+			// Wait for 2 second and change the data points
+			try {
+				TimeUnit.SECONDS.sleep(2);
+			} catch (final Exception e) {
+				e.printStackTrace();
+			}
+			// changing values in runtime
+			final LineDataSeq seq = LineDataSeq.of(new double[] { 2.0, 2, 4, 2, 3 }, iPhoneData.get());
+			viewer.getChart().getSpiderPlotter().setSeq(0, seq);
 
-		// changing axes in runtime
-		final AxesConfigurer configuration = new AxesConfigurer.Builder().addAxis("Battery", 5, 0).addAxis("c", 5, 0)
-				.addAxis("Display", 5, 0).addAxis("Memory", 5, 0).addAxis("Brand", 5, 0).build();
+			// changing axes in runtime
+			final AxesConfigurer configuration = new AxesConfigurer.Builder().addAxis("Battery", 5, 0)
+					.addAxis("c", 5, 0).addAxis("Display", 5, 0).addAxis("Memory", 5, 0).addAxis("Brand", 5, 0).build();
 
-		final LineDataSeq seq2 = LineDataSeq.of(new double[] { 2.0, 1, 4, 2, 3 }, nexusData.get());
-		viewer.getChart().getSpiderPlotter().setSeq(1, seq2);
+			final LineDataSeq seq2 = LineDataSeq.of(new double[] { 2.0, 1, 4, 2, 3 }, nexusData.get());
+			viewer.getChart().getSpiderPlotter().setSeq(1, seq2);
 
-		viewer.getChart().getSpiderPlotter().use(configuration);
+			viewer.getChart().getSpiderPlotter().use(configuration);
+			viewer.redraw();
+		});
 	}
 
 	public static void main(final String[] args) {
