@@ -322,21 +322,33 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 			}
 		}
 		if (this.gridStyle != null) {
-			double min = 0.0D;
-			double max = 100.0D;
+			final double maxValues[] = new double[xs.length];
+			final double minValues[] = new double[20];
 			if (this.minScaleFactors.length >= 1) {
-				min = this.minScaleFactors[0];
+				for (int j = 0; j < xs.length; j++) {
+					minValues[j] = this.minScaleFactors[j];
+				}
 			}
 			if (this.maxScaleFactors.length >= 1) {
-				max = this.maxScaleFactors[0];
+				for (int j = 0; j < xs.length; j++) {
+					maxValues[j] = this.maxScaleFactors[j];
+				}
 			}
 			final int tickInterval = 100 / this.scalingDivisions;
-			final double tickIntervalAbs = (max - min) / this.scalingDivisions;
+			final double[] tickIntervalAbsValues = new double[xs.length];
+
+			for (int j = 0; j < xs.length; j++) {
+				tickIntervalAbsValues[j] = (maxValues[j] - minValues[j]) / this.scalingDivisions;
+			}
+
 			int tickAt = 0;
-			double tickAtAbs = 0.0D;
+			final double[] tickAtAbsValues = new double[xs.length];
 			for (int j = 0; j < this.scalingDivisions; j++) {
 				tickAt += tickInterval;
-				tickAtAbs += tickIntervalAbs;
+				for (int k = 0; k < xs.length; k++) {
+					tickAtAbsValues[k] += tickIntervalAbsValues[k];
+				}
+
 				for (int i = 0; i < count; i++) {
 					angle = (360.0D / count) * i;
 
@@ -362,26 +374,26 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 					g.setColor(this.gridFontColor);
 					g.setFont(this.gridFont);
 
-					final double tickValue = tickAtAbs;
+					final double[] tickValues = new double[xs.length];
+					final String[] values = new String[xs.length];
+					for (int i = 0; i < tickValues.length; i++) {
+						tickValues[i] = tickAtAbsValues[i];
+						values[i] = "" + tickValues[i];
 
-					String v = "";
-					v = "" + tickValue;
+						if (this.scalingLabelFormat.length() > 0) {
+							final DecimalFormat df = new DecimalFormat(this.scalingLabelFormat);
+							values[i] = df.format(new Double(tickValues[i]));
+						}
+					}
 
-					if (tickValue == (int) tickValue) {
-						v = "" + (int) tickValue;
-					}
-					if (this.scalingLabelFormat.length() > 0) {
-						final DecimalFormat df = new DecimalFormat(this.scalingLabelFormat);
-						v = df.format(new Double(tickValue));
-					}
-					// TODO (AKM) To be implemented different scales for axes
 					if (this.markScalesOnEveryAxis) {
-						for (int i = 0; i < xs.length; i++) {
-							g.drawText("" + v, xs[i] - 3 - g.getFontWidth("" + v), ys[i]);
+						for (int k = 0; k < xs.length; k++) {
+							g.drawText("" + values[k], xs[k] - 3 - g.getFontWidth("" + values[k]), ys[k]);
 						}
 					} else {
-						g.drawText("" + v, xs[0] - 3 - g.getFontWidth("" + v), ys[0]);
+						g.drawText("" + values[0], xs[0] - 3 - g.getFontWidth("" + values[0]), ys[0]);
 					}
+
 				}
 			}
 		}

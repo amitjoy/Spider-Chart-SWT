@@ -50,18 +50,21 @@ public final class Sample {
 
 		Display.getDefault().asyncExec(() -> {
 			// changing values in runtime
-			final LineDataSeq iPhoneDataSequence = LineDataSeq.of(new double[] { 2.0, 4.2, 4.1, 2.8, 3.7, 4.1 }, iPhoneData.get());
+			final LineDataSeq iPhoneDataSequence = LineDataSeq.of(new double[] { 2.0, 4.2, 4.1, 2.8, 3.7, 4.1 },
+					iPhoneData.get());
 			viewer.getChart().getSpiderPlotter().setSeq(0, iPhoneDataSequence);
 
 			// changing axes in runtime
 			final AxesConfigurer configuration = new AxesConfigurer.Builder().addAxis("Battery", 5, 0)
-					.addAxis("Screen", 5, 0).addAxis("Display", 5, 0).addAxis("Memory", 5, 0).addAxis("Sound", 5, 0)
+					.addAxis("Screen", 5, 0).addAxis("Display", 5, 0).addAxis("Memory", 50, 0).addAxis("Sound", 5, 0)
 					.addAxis("Brand", 5, 0).build();
 
-			final LineDataSeq nexusDataSequence = LineDataSeq.of(new double[] { 3.4, 3.6, 3.8, 2.2, 2.4, 3.3 }, nexusData.get());
+			final LineDataSeq nexusDataSequence = LineDataSeq.of(new double[] { 3.4, 3.6, 3.8, 12.2, 2.4, 3.3 },
+					nexusData.get());
 			viewer.getChart().getSpiderPlotter().setSeq(1, nexusDataSequence);
 
 			viewer.getChart().getSpiderPlotter().use(configuration);
+			viewer.getChart().getSpiderPlotter().markScalesOnEveryAxis = true;
 		});
 	}
 
