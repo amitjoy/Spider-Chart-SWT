@@ -133,12 +133,6 @@ public final class SpiderChart {
 	private final List<ISpiderChartListener> chartListeners = new CopyOnWriteArrayList<>();
 
 	/** */
-	public double currentValueX;
-
-	/** */
-	public double currentValueY;
-
-	/** */
 	public int currentX;
 
 	/** */
@@ -371,8 +365,6 @@ public final class SpiderChart {
 		if (this.plotters[0] == null) {
 			return;
 		}
-		this.currentValueX = 0.0D;
-		this.currentValueY = 0.0D;
 
 		this.currentX = eX;
 		this.currentY = eY;
@@ -623,7 +615,6 @@ public final class SpiderChart {
 		this.selectedSeqPoint = -1;
 		this.repaintAll = true;
 		this.floatingObjects.removeAllElements();
-
 		this.plotters[0] = p;
 		this.title = t;
 		if (this.title == null) {
@@ -635,11 +626,6 @@ public final class SpiderChart {
 
 	/** */
 	private void resize() {
-		this.resizeRightLayout();
-	}
-
-	/** */
-	private void resizeRightLayout() {
 		final int myHeight = this.getHeight();
 		final int myWidth = this.getWidth();
 		if (this.virtualWidth < myWidth) {

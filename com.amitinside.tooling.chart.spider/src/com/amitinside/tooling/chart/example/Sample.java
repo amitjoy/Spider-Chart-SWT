@@ -62,7 +62,7 @@ public final class Sample {
 			final LineDataSeq nexusDataSequence = LineDataSeq.of(new double[] { 3.4, 3.6, 3.8, 12.2, 2.4, 3.3 },
 					nexusData.get());
 			viewer.getChart().getSpiderPlotter().setSeq(1, nexusDataSequence);
-
+			viewer.getChart().showTips = true;
 			viewer.getChart().getSpiderPlotter().use(configuration);
 			viewer.getChart().getSpiderPlotter().markScalesOnEveryAxis = true;
 		});

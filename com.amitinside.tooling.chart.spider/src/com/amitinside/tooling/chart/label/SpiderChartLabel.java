@@ -56,8 +56,6 @@ public final class SpiderChartLabel implements IFloatingObject {
 	/** */
 	public Polygon clickableArea = null;
 	/** */
-	protected String clickInfo = "";
-	/** */
 	protected boolean ignorePosition = false;
 	/** */
 	protected LineStyle lineToAnchor = null;
@@ -91,11 +89,6 @@ public final class SpiderChartLabel implements IFloatingObject {
 			pformat = pvalue;
 		}
 		this.sFormat = pformat;
-	}
-
-	/** */
-	public String getClickInfo() {
-		return this.clickInfo;
 	}
 
 	/** */
@@ -148,21 +141,21 @@ public final class SpiderChartLabel implements IFloatingObject {
 	}
 
 	/** */
-	protected void render(final AbstractChartGraphics g2) {
-		final AbstractChartGraphics g = g2;
+	protected void render(final AbstractChartGraphics graphics) {
+		final AbstractChartGraphics g = graphics;
 		if ((this.lineToAnchor != null)) {
 			if (this.anchorY > this.positionY) {
 				if (this.anchorX <= this.positionX) {
-					this.lineToAnchor.draw(g2, this.anchorX, this.anchorY, this.positionX,
+					this.lineToAnchor.draw(graphics, this.anchorX, this.anchorY, this.positionX,
 							(this.positionY + this.requiredHeight) - 1);
 				} else {
-					this.lineToAnchor.draw(g2, this.anchorX, this.anchorY, this.positionX + this.requiredWidth,
+					this.lineToAnchor.draw(graphics, this.anchorX, this.anchorY, this.positionX + this.requiredWidth,
 							(this.positionY + this.requiredHeight) - 1);
 				}
 			} else if (this.anchorX <= this.positionX) {
-				this.lineToAnchor.draw(g2, this.anchorX, this.anchorY, this.positionX, this.positionY);
+				this.lineToAnchor.draw(graphics, this.anchorX, this.anchorY, this.positionX, this.positionY);
 			} else {
-				this.lineToAnchor.draw(g2, this.anchorX, this.anchorY, this.positionX + this.requiredWidth,
+				this.lineToAnchor.draw(graphics, this.anchorX, this.anchorY, this.positionX + this.requiredWidth,
 						this.positionY);
 			}
 		}
@@ -212,7 +205,6 @@ public final class SpiderChartLabel implements IFloatingObject {
 						(int) ((this.requiredHeight + (this.requiredHeight * 0.3D)) - 1.0D), 0, 360);
 			}
 		}
-		this.clickableArea = null;
 		this.clickableArea = new Polygon();
 		this.clickableArea.addPoint(this.positionX, this.positionY);
 		this.clickableArea.addPoint(this.positionX, (this.positionY + this.requiredHeight) - 1);

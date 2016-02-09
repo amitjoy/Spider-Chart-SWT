@@ -275,7 +275,6 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 			po.addPoint(xs[i] - 3, ys[i] + 3);
 			po.addPoint(xs[i] + 3, ys[i] + 3);
 			po.addPoint(xs[i] + 3, ys[i] - 3);
-
 			s.hotAreas.addElement(po);
 			double YValue;
 			if (p.drawPoint) {
