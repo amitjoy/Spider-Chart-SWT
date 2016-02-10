@@ -381,6 +381,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 
 						if (this.scalingLabelFormat.length() > 0) {
 							final DecimalFormat df = new DecimalFormat(this.scalingLabelFormat);
+							// TODO Add multiple scaling label format
 							values[i] = df.format(new Double(tickValues[i]));
 						}
 					}
