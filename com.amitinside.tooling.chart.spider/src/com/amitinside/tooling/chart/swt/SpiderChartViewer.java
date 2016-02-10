@@ -17,6 +17,9 @@ package com.amitinside.tooling.chart.swt;
 
 import static org.eclipse.swt.SWT.CURSOR_ARROW;
 import static org.eclipse.swt.SWT.CURSOR_HAND;
+import static org.eclipse.swt.SWT.HORIZONTAL;
+import static org.eclipse.swt.SWT.NONE;
+import static org.eclipse.swt.SWT.VERTICAL;
 
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.events.ControlListener;
@@ -93,25 +96,22 @@ public final class SpiderChartViewer extends Composite {
 	public SpiderChartViewer(final Composite parent, final int style) {
 		super(parent, style);
 
-		this.canvas = new SpiderChartCanvas(this, 0);
-		this.hSlider = new Slider(this, 256);
-		this.vSlider = new Slider(this, 512);
+		this.canvas = new SpiderChartCanvas(this, NONE);
+		this.hSlider = new Slider(this, HORIZONTAL);
+		this.vSlider = new Slider(this, VERTICAL);
 		this.canvas.setFocus();
 
-		this.zoomPanel = new Composite(this, 0);
+		this.zoomPanel = new Composite(this, NONE);
 		this.zoomPanel.setSize(90, this.scrollBarWidth);
-		this.zoomInButton = new Button(this.zoomPanel, 0);
+		this.zoomInButton = new Button(this.zoomPanel, NONE);
 		this.zoomInButton.setLocation(0, 0);
+		this.zoomInButton.setText("Maximize");
 
-		// TODO (AKM) To be implemented properly : ZOOM Functionality
-		// this.plusZoom.setImage(new Image(getDisplay(), getClass()
-		// .getClassLoader().getResourceAsStream("plus.bmp")));
 		this.zoomInButton.setSize(25, this.scrollBarWidth);
-		this.zoomOutButton = new Button(this.zoomPanel, 0);
+		this.zoomOutButton = new Button(this.zoomPanel, NONE);
 		this.zoomOutButton.setLocation(26, 0);
 		this.zoomOutButton.setSize(25, this.scrollBarWidth);
-		// this.minusZoom.setImage(new Image(getDisplay(), getClass()
-		// .getClassLoader().getResourceAsStream("minus.bmp")));
+		this.zoomOutButton.setText("Minimize");
 		this.zoom = new Label(this.zoomPanel, 16777216);
 		this.zoom.setLocation(52, 0);
 		this.zoom.setSize(38, this.scrollBarWidth);
