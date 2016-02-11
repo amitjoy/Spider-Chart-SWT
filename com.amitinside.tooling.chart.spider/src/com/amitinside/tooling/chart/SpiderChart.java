@@ -33,13 +33,13 @@ import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import com.amitinside.tooling.chart.api.IFloatingObject;
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
 import com.amitinside.tooling.chart.gc.AbstractChartFont;
 import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 import com.amitinside.tooling.chart.gc.AbstractChartImage;
 import com.amitinside.tooling.chart.gc.Polygon;
 import com.amitinside.tooling.chart.label.SpiderChartLabel;
+import com.amitinside.tooling.chart.label.api.IFloatingObject;
 import com.amitinside.tooling.chart.legend.SpiderChartLegend;
 import com.amitinside.tooling.chart.listener.ISpiderChartListener;
 import com.amitinside.tooling.chart.plotter.AbstractPlotter;

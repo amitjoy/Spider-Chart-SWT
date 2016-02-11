@@ -18,10 +18,10 @@ package com.amitinside.tooling.chart.label;
 import static com.amitinside.tooling.chart.gc.AbstractChartGraphics.ROTATE_CENTER;
 
 import com.amitinside.tooling.chart.SpiderChart;
-import com.amitinside.tooling.chart.api.IFloatingObject;
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
 import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 import com.amitinside.tooling.chart.gc.Polygon;
+import com.amitinside.tooling.chart.label.api.IFloatingObject;
 import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.style.LineStyle;
 
