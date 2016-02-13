@@ -214,9 +214,6 @@ public final class SpiderChart {
 	public double rightMargin = 0.125D;
 
 	/** */
-	public double secondYAxisMargin = 0.0D;
-
-	/** */
 	public SpiderChartLabel selectedLabel = null;
 
 	/** */
