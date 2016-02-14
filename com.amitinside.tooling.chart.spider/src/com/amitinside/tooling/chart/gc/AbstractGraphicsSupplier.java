@@ -22,7 +22,7 @@ import com.amitinside.tooling.chart.gc.swt.SpiderChartSwtFont;
 import com.amitinside.tooling.chart.gc.swt.SpiderChartSwtGraphics;
 import com.amitinside.tooling.chart.gc.swt.SpiderChartSwtImage;
 
-public interface AbstractGraphicsSupplier {
+public final class AbstractGraphicsSupplier {
 
 	/** */
 	public static AbstractChartImage createImage(final int w, final int h) {
@@ -78,5 +78,11 @@ public interface AbstractGraphicsSupplier {
 	/** */
 	public static void startUiThread(final Runnable r) {
 		startUIThread(r);
+	}
+
+	/**
+	 * Constructor
+	 */
+	private AbstractGraphicsSupplier() {
 	}
 }

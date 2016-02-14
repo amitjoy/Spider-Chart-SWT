@@ -31,7 +31,7 @@ public final class SpiderChartScale {
 			5.0D, 10.0D, 25.0D, 50.0D, 100.0D, 250.0D, 500.0D, 1000.0D, 5000.0D, 10000.0D, 50000.0D, 100000.0D,
 			500000.0D, 1000000.0D };
 	/** */
-	public boolean reverse = false;
+	public boolean reverse = true;
 	/** */
 	public int screenMax;
 	/** */
@@ -44,9 +44,9 @@ public final class SpiderChartScale {
 	}
 
 	/** Constructor */
-	public SpiderChartScale(final int ma, final int mi) {
-		this.max = ma;
-		this.min = mi;
+	public SpiderChartScale(final int max, final int min) {
+		this.max = max;
+		this.min = min;
 	}
 
 	/** */

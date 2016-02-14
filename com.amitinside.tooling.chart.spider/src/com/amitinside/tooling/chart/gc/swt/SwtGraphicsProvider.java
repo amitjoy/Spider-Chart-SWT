@@ -24,7 +24,7 @@ public final class SwtGraphicsProvider {
 	private static Device display = null;
 
 	/** */
-	public static Device getDisplay() {
+	public synchronized static Device getDisplay() {
 		if (display == null) {
 			display = Display.getCurrent();
 		}
