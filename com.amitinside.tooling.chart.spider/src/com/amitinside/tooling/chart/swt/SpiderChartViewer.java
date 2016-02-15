@@ -214,15 +214,15 @@ public final class SpiderChartViewer extends Composite {
 		// TODO Need to refactor horizontal scrolling
 		int newBase = 0;
 		final int newValue = this.hSlider.getSelection();
-		if ((newValue + this.canvas.getChart().getWidth()) < this.canvas.getChart().virtualWidth) {
+		if ((newValue + this.canvas.getChart().getWidth()) < this.canvas.getChart().getVirtualWidth()) {
 			newBase = newValue;
 		} else {
-			newBase = this.canvas.getChart().virtualWidth - this.canvas.getChart().getWidth();
+			newBase = this.canvas.getChart().getVirtualWidth() - this.canvas.getChart().getWidth();
 		}
 		if (newBase < 0) {
 			newBase = 0;
 		}
-		this.canvas.getChart().offsetX = newBase;
+		this.canvas.getChart().setOffsetX(newBase);
 		this.canvas.redraw();
 	}
 
@@ -232,23 +232,23 @@ public final class SpiderChartViewer extends Composite {
 		int hSliderHeight = 0;
 		int vSliderWidth = 0;
 
-		if (this.canvas.getChart().virtualWidth > 0) {
+		if (this.canvas.getChart().getVirtualWidth() > 0) {
 			hSliderHeight = this.scrollBarWidth;
 		}
-		if (this.canvas.getChart().virtualHeight > 0) {
+		if (this.canvas.getChart().getVirtualHeight() > 0) {
 			vSliderWidth = this.scrollBarWidth;
 		}
 		this.canvas.setSize(this.getSize().x - vSliderWidth, this.getSize().y - hSliderHeight);
 
 		this.canvas.setLocation(0, 0);
-		if (this.allowZoom
-				&& ((this.canvas.getChart().virtualHeight > 0) || (this.canvas.getChart().virtualWidth > 0))) {
+		if (this.allowZoom && ((this.canvas.getChart().getVirtualHeight() > 0)
+				|| (this.canvas.getChart().getVirtualWidth() > 0))) {
 			this.zoomPanel.setVisible(true);
 			this.zoomPanel.setLocation(0, this.canvas.getSize().y);
 		} else {
 			this.zoomPanel.setVisible(false);
 		}
-		if (this.canvas.getChart().virtualWidth > 0) {
+		if (this.canvas.getChart().getVirtualWidth() > 0) {
 			if (this.allowZoom) {
 				this.hSlider.setLocation(this.zoomPanel.getSize().x, this.canvas.getSize().y);
 				this.hSlider.setSize(this.getSize().x - vSliderWidth - this.zoomPanel.getSize().x, hSliderHeight);
@@ -257,15 +257,15 @@ public final class SpiderChartViewer extends Composite {
 				this.hSlider.setLocation(0, this.canvas.getSize().y);
 			}
 			this.hSlider.setVisible(true);
-			this.canvas.getChart().withScroll = true;
+			this.canvas.getChart().setWithScroll(true);
 		} else {
 			this.hSlider.setVisible(false);
 		}
-		if (this.canvas.getChart().virtualHeight > 0) {
+		if (this.canvas.getChart().getVirtualWidth() > 0) {
 			this.vSlider.setSize(vSliderWidth, this.getSize().y - hSliderHeight);
 			this.vSlider.setLocation(this.canvas.getSize().x, 0);
 			this.vSlider.setVisible(true);
-			this.canvas.getChart().withScroll = true;
+			this.canvas.getChart().setWithScroll(true);
 		} else {
 			this.vSlider.setVisible(false);
 		}
@@ -290,8 +290,8 @@ public final class SpiderChartViewer extends Composite {
 		}
 		this.canvas.setChart(c);
 
-		this.originalHeight = this.canvas.getChart().virtualHeight;
-		this.originalWidth = this.canvas.getChart().virtualWidth;
+		this.originalHeight = this.canvas.getChart().getVirtualHeight();
+		this.originalWidth = this.canvas.getChart().getVirtualWidth();
 
 		this.resetChart();
 		this.placeZoomControls();
@@ -303,24 +303,24 @@ public final class SpiderChartViewer extends Composite {
 
 	/** */
 	private void updateSize() {
-		this.canvas.getChart().repaintAll = true;
+		this.canvas.getChart().setRepaintAll(true);
 		if ((this.lastWidth != this.getSize().x) || (this.lastHeight != this.getSize().y)
 				|| (this.lastZoom != this.currentZoom)) {
 			this.canvas.getChart().setSize(this.getSize().x, this.getSize().y);
 			this.lastWidth = this.getSize().x;
 			this.lastHeight = this.getSize().y;
 			this.lastZoom = this.currentZoom;
-			if (this.canvas.getChart().withScroll) {
+			if (this.canvas.getChart().isWithScroll()) {
 				if (this.allowZoom) {
 					if (this.originalHeight > 0) {
-						this.canvas.getChart().virtualHeight = (this.originalHeight * this.currentZoom) / 100;
+						this.canvas.getChart().setVirtualHeight((this.originalHeight * this.currentZoom) / 100);
 					} else {
-						this.canvas.getChart().virtualHeight = 0;
+						this.canvas.getChart().setVirtualHeight(0);
 					}
 					if (this.originalWidth > 0) {
-						this.canvas.getChart().virtualWidth = (this.originalWidth * this.currentZoom) / 100;
+						this.canvas.getChart().setVirtualWidth((this.originalWidth * this.currentZoom) / 100);
 					} else {
-						this.canvas.getChart().virtualWidth = 0;
+						this.canvas.getChart().setVirtualWidth(0);
 					}
 				}
 				int w = 1 + this.getSize().x;
@@ -331,7 +331,7 @@ public final class SpiderChartViewer extends Composite {
 				if (this.originalWidth > 0) {
 					h -= this.hSlider.getSize().y;
 				}
-				this.canvas.getChart().repaintAll = true;
+				this.canvas.getChart().setRepaintAll(true);
 
 				this.canvas.getChart().setSize(w, h);
 			}
@@ -343,15 +343,15 @@ public final class SpiderChartViewer extends Composite {
 		// TODO Need to refactor vertical scrolling
 		int newBase = 0;
 		final int newValue = this.vSlider.getSelection();
-		if ((newValue + this.canvas.getChart().getHeight()) < this.canvas.getChart().virtualHeight) {
+		if ((newValue + this.canvas.getChart().getHeight()) < this.canvas.getChart().getVirtualHeight()) {
 			newBase = newValue;
 		} else {
-			newBase = this.canvas.getChart().virtualHeight - this.canvas.getChart().getHeight();
+			newBase = this.canvas.getChart().getVirtualHeight() - this.canvas.getChart().getHeight();
 		}
 		if (newBase < 0) {
 			newBase = 0;
 		}
-		this.canvas.getChart().offsetY = newBase;
+		this.canvas.getChart().setOffsetY(newBase);
 		this.canvas.redraw();
 	}
 

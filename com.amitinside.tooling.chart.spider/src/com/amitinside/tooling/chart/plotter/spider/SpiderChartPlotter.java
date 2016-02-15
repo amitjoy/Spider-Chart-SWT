@@ -140,9 +140,9 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 		if (s instanceof LineDataSeq) {
 			p = (LineDataSeq) s;
 		}
-		s.hotAreas.removeAllElements();
+		s.getHotAreas().removeAllElements();
 
-		final double count = p.yData.size();
+		final double count = p.getyData().size();
 
 		final int[] xs = new int[(int) count];
 		final int[] ys = new int[(int) count];
@@ -276,7 +276,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 			po.addPoint(xs[i] - 3, ys[i] + 3);
 			po.addPoint(xs[i] + 3, ys[i] + 3);
 			po.addPoint(xs[i] + 3, ys[i] - 3);
-			s.hotAreas.addElement(po);
+			s.getHotAreas().addElement(po);
 			double YValue;
 			if (p.drawPoint) {
 				AbstractChartColor c = p.pointColor;
@@ -312,11 +312,11 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 				if (YValue == (int) YValue) {
 					txt = new Integer((int) YValue).toString();
 				}
-				if (p.labelTemplate.length() > 0) {
-					txt = p.labelTemplate;
+				if (p.getLabelTemplate().length() > 0) {
+					txt = p.getLabelTemplate();
 				}
-				if ((p.dataLabels != null) && (p.dataLabels.length > i)) {
-					txt = p.dataLabels[i];
+				if ((p.getDataLabels() != null) && (p.getDataLabels().length > i)) {
+					txt = p.getDataLabels()[i];
 				}
 				g.drawText(txt, xs[i] + 7, ys[i]);
 			}
