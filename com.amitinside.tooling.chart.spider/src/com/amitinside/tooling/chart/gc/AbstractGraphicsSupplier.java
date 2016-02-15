@@ -51,8 +51,8 @@ public final class AbstractGraphicsSupplier {
 	}
 
 	/** */
-	public static AbstractChartFont getFont(final String c, final int style, final int size) {
-		return new SpiderChartSwtFont(c, style, size);
+	public static AbstractChartFont getFont(final Fonts fonts, final int style, final int size) {
+		return new SpiderChartSwtFont(fonts.getFontName(), style, size);
 	}
 
 	/** */

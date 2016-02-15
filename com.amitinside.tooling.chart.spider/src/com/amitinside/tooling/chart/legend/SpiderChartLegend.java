@@ -21,6 +21,7 @@ import static com.amitinside.tooling.chart.gc.AbstractChartColor.BLACK;
 import static com.amitinside.tooling.chart.gc.AbstractChartFont.PLAIN;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getColor;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getFont;
+import static com.amitinside.tooling.chart.gc.Fonts.VERDANA;
 import static com.amitinside.tooling.chart.style.LineStyle.NORMAL_LINE;
 
 import java.util.Vector;
@@ -47,7 +48,7 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 	public AbstractChartColor color = getColor(BLACK);
 
 	/** Legend Font */
-	public AbstractChartFont font = getFont("Verdana", PLAIN, 10);
+	public AbstractChartFont font = getFont(VERDANA, PLAIN, 10);
 
 	/** */
 	private final Vector<Object> items = new Vector<>(10, 10);

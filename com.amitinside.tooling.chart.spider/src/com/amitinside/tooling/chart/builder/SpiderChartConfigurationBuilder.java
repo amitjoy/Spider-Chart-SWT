@@ -23,6 +23,7 @@ import static com.amitinside.tooling.chart.gc.AbstractChartColor.WHITE;
 import static com.amitinside.tooling.chart.gc.AbstractChartFont.PLAIN;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getColor;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getFont;
+import static com.amitinside.tooling.chart.gc.Fonts.ARIAL;
 import static com.amitinside.tooling.chart.style.LineStyle.NORMAL_LINE;
 import static java.util.Objects.requireNonNull;
 
@@ -73,7 +74,7 @@ public final class SpiderChartConfigurationBuilder {
 		this.plotter = new SpiderChartPlotter();
 		this.plotter.backStyle = new FillStyle(getColor(PALEGREEN));
 		this.plotter.gridStyle = new LineStyle(1, getColor(TELA), NORMAL_LINE);
-		this.plotter.gridFont = getFont("Arial", PLAIN, 10);
+		this.plotter.gridFont = getFont(ARIAL, PLAIN, 10);
 		this.plotter.gridFontColor = getColor(BLUE);
 		plotter.accept(this.plotter);
 		return this;

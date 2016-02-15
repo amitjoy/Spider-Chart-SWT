@@ -20,6 +20,7 @@ import static com.amitinside.tooling.chart.gc.AbstractChartColor.BLACK;
 import static com.amitinside.tooling.chart.gc.AbstractChartFont.BOLD;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getColor;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getFont;
+import static com.amitinside.tooling.chart.gc.Fonts.VERDANA;
 import static com.amitinside.tooling.chart.style.LineStyle.NORMAL_LINE;
 
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
@@ -46,7 +47,7 @@ public final class LineDataSeq extends DataSeq {
 	public static LineDataSeq of(final double[] values, final Object oldObjectToCopyData) {
 		final LineDataSeq seq = new LineDataSeq(values,
 				new LineStyle(2, getColor(getAreaColor(oldObjectToCopyData)), NORMAL_LINE));
-		seq.valueFont = getFont("Verdana", BOLD, 12);
+		seq.valueFont = getFont(VERDANA, BOLD, 12);
 		seq.fillStyle = new FillStyle(getColor(getAreaColor(oldObjectToCopyData)), 0.5f);
 		seq.drawPoint = true;
 		return seq;

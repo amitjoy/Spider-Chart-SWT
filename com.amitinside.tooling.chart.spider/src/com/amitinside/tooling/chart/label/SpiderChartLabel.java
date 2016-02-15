@@ -129,8 +129,6 @@ public final class SpiderChartLabel implements IFloatingObject {
 	public void paint(final AbstractChartGraphics g, final int x, final int y, final int width, final int height) {
 		if (this.chart != null) {
 			this.chart.placeFloatingObject(this);
-		}
-		if (this.chart != null) {
 			this.chart.addFloationgObject(this);
 		}
 		this.render(g);

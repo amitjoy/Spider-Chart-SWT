@@ -23,6 +23,7 @@ import static com.amitinside.tooling.chart.gc.AbstractChartFont.PLAIN;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.createImage;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getColor;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getFont;
+import static com.amitinside.tooling.chart.gc.Fonts.SERIF;
 import static com.amitinside.tooling.chart.listener.ISpiderChartListener.EVENT_CHART_CLICKED;
 import static com.amitinside.tooling.chart.listener.ISpiderChartListener.EVENT_ENTER_POINT;
 import static com.amitinside.tooling.chart.listener.ISpiderChartListener.EVENT_LEAVE_POINT;
@@ -233,7 +234,7 @@ public final class SpiderChart {
 	AbstractChartColor tipColor = getColor(YELLOW);
 
 	/** Spider Chart Tip Font */
-	AbstractChartFont tipFont = getFont("Serif", PLAIN, 10);
+	AbstractChartFont tipFont = getFont(SERIF, PLAIN, 10);
 
 	/** Spider Chart Tip Font Color */
 	AbstractChartColor tipFontColor = getColor(BLACK);

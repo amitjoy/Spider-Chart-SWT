@@ -13,27 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.amitinside.tooling.chart.label.api;
+package com.amitinside.tooling.chart.gc;
 
-import com.amitinside.tooling.chart.gc.Polygon;
-
-public interface IFloatingObject {
-
-	/** */
-	public static final String LAYER_ID = "";
+public enum Fonts {
+	ARIAL("Arial"), SERIF("Serif"), VERDANA("Verdana");
 
 	/** */
-	public abstract Polygon getObjectBounds();
+	private final String fontName;
 
-	/** */
-	public abstract int getX();
+	/**
+	 * Constructor
+	 */
+	Fonts(final String name) {
+		this.fontName = name;
+	}
 
-	/** */
-	public abstract int getY();
-
-	/** */
-	public abstract void setX(int paramInt);
-
-	/** */
-	public abstract void setY(int paramInt);
+	/**
+	 * Retrieves font text
+	 *
+	 * @return
+	 */
+	public String getFontName() {
+		return this.fontName;
+	}
 }

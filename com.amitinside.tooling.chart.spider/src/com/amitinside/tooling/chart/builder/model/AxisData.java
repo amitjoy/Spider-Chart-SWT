@@ -18,6 +18,7 @@ package com.amitinside.tooling.chart.builder.model;
 import static com.amitinside.tooling.chart.gc.AbstractChartFont.BOLD;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getColor;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getFont;
+import static com.amitinside.tooling.chart.gc.Fonts.VERDANA;
 import static com.amitinside.tooling.chart.style.LineStyle.NORMAL_LINE;
 
 import com.amitinside.tooling.chart.sequence.LineDataSeq;
@@ -38,7 +39,7 @@ public final class AxisData {
 	public void setData(final double[] dataValues, final String color) {
 		this.data = new LineDataSeq(dataValues, new LineStyle(2, getColor(color), NORMAL_LINE));
 		this.data.drawPoint = true;
-		this.data.valueFont = getFont("Verdana", BOLD, 12);
+		this.data.valueFont = getFont(VERDANA, BOLD, 12);
 		this.data.fillStyle = new FillStyle(getColor(color), 0.5f);
 	}
 

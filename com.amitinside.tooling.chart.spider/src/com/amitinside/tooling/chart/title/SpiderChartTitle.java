@@ -19,6 +19,7 @@ import static com.amitinside.tooling.chart.gc.AbstractChartColor.BLUE;
 import static com.amitinside.tooling.chart.gc.AbstractChartFont.PLAIN;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getColor;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getFont;
+import static com.amitinside.tooling.chart.gc.Fonts.VERDANA;
 
 import com.amitinside.tooling.chart.SpiderChartComponent;
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
@@ -30,7 +31,7 @@ public final class SpiderChartTitle extends SpiderChartComponent {
 	/** Title Color */
 	public AbstractChartColor color = getColor(BLUE);
 	/** Title Font */
-	public AbstractChartFont font = getFont("Verdana", PLAIN, 14);
+	public AbstractChartFont font = getFont(VERDANA, PLAIN, 14);
 	/** Title Text */
 	public String text;
 

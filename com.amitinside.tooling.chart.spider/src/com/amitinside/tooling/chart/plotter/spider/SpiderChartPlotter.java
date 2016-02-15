@@ -19,6 +19,7 @@ import static com.amitinside.tooling.chart.gc.AbstractChartColor.BLACK;
 import static com.amitinside.tooling.chart.gc.AbstractChartFont.PLAIN;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getColor;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getFont;
+import static com.amitinside.tooling.chart.gc.Fonts.VERDANA;
 import static java.util.Objects.requireNonNull;
 
 import java.text.DecimalFormat;
@@ -60,7 +61,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 	/**
 	 * Spider Chart Axes Factor Text Font
 	 */
-	public AbstractChartFont axisFactorFont = getFont("Verdana", PLAIN, 11);
+	public AbstractChartFont axisFactorFont = getFont(VERDANA, PLAIN, 11);
 
 	/**
 	 * Spider Chart Polygon Area Background Style
