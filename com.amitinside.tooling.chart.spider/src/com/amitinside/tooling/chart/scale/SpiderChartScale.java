@@ -31,8 +31,6 @@ public final class SpiderChartScale {
 			5.0D, 10.0D, 25.0D, 50.0D, 100.0D, 250.0D, 500.0D, 1000.0D, 5000.0D, 10000.0D, 50000.0D, 100000.0D,
 			500000.0D, 1000000.0D };
 	/** */
-	public boolean reverse = false;
-	/** */
 	public int screenMax;
 	/** */
 	public int screenMaxMargin;
@@ -45,23 +43,4 @@ public final class SpiderChartScale {
 		this.min = min;
 	}
 
-	/** */
-	public double getValue(int c) {
-		if (!this.reverse) {
-			c -= this.screenMin;
-		} else {
-			c = this.screenMax - c;
-		}
-		double range = this.max - this.min;
-		if ((this.min < 0.0D) && (this.max < 0.0D)) {
-			range = (this.min - this.max) * -1.0D;
-		}
-		double i = this.screenMaxMargin - this.screenMin;
-
-		i = (c * range) / i;
-
-		i += this.min;
-
-		return i;
-	}
 }
