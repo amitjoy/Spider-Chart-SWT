@@ -18,7 +18,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.amitinside</groupId>
 	<artifactId>com.amitinside.tooling.chart.spider</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>Spider Chart in SWT</name>
 	<description>Easy to use Spider Chart in SWT</description>
 	<packaging>bundle</packaging>
