@@ -37,11 +37,11 @@ import com.amitinside.tooling.chart.listener.SpiderChartAdapter;
 public final class SpiderChartViewer extends Composite {
 
 	/** */
-	public boolean allowZoom = true;
+	private boolean allowZoom = true;
 	/** */
 	private SpiderChartCanvas canvas = null;
 	/** */
-	public boolean changePointer = true;
+	private boolean changePointer = true;
 	/** */
 	private final SpiderChartAdapter chartAdapter = new SpiderChartAdapter() {
 		/** {@inheritDoc} */
@@ -56,7 +56,7 @@ public final class SpiderChartViewer extends Composite {
 		}
 	};
 	/** */
-	public int currentZoom = 100;
+	private int currentZoom = 100;
 	/** */
 	private Cursor defaultCursor = null;
 	/** */
@@ -68,9 +68,9 @@ public final class SpiderChartViewer extends Composite {
 	/** */
 	private int lastZoom = 0;
 	/** Maximum Zoom for Spider Chart */
-	public int maxZoom = 200;
+	private int maxZoom = 200;
 	/** Minimum Zoom for Spider Chart */
-	public int minZoom = 50;
+	private int minZoom = 50;
 	/** */
 	private int originalHeight = -1;
 	/** */
@@ -86,9 +86,11 @@ public final class SpiderChartViewer extends Composite {
 	/** */
 	private Button zoomInButton;
 	/** */
-	public int zoomIncrement = 25;
+	private int zoomIncrement = 25;
+
 	/** */
 	private Button zoomOutButton;
+
 	/** */
 	private Composite zoomPanel;
 
@@ -204,9 +206,89 @@ public final class SpiderChartViewer extends Composite {
 		}
 	}
 
+	public SpiderChartCanvas getCanvas() {
+		return this.canvas;
+	}
+
 	/** */
 	public SpiderChart getChart() {
 		return this.canvas.getChart();
+	}
+
+	public SpiderChartAdapter getChartAdapter() {
+		return this.chartAdapter;
+	}
+
+	public int getCurrentZoom() {
+		return this.currentZoom;
+	}
+
+	public Cursor getDefaultCursor() {
+		return this.defaultCursor;
+	}
+
+	public Slider gethSlider() {
+		return this.hSlider;
+	}
+
+	public int getLastHeight() {
+		return this.lastHeight;
+	}
+
+	public int getLastWidth() {
+		return this.lastWidth;
+	}
+
+	public int getLastZoom() {
+		return this.lastZoom;
+	}
+
+	public int getMaxZoom() {
+		return this.maxZoom;
+	}
+
+	public int getMinZoom() {
+		return this.minZoom;
+	}
+
+	public int getOriginalHeight() {
+		return this.originalHeight;
+	}
+
+	public int getOriginalWidth() {
+		return this.originalWidth;
+	}
+
+	public Cursor getPointCursor() {
+		return this.pointCursor;
+	}
+
+	public int getScrollBarWidth() {
+		return this.scrollBarWidth;
+	}
+
+	public Slider getvSlider() {
+		return this.vSlider;
+	}
+
+	public Label getZoom() {
+		return this.zoom;
+	}
+
+	public Button getZoomInButton() {
+		return this.zoomInButton;
+	}
+
+	public int getZoomIncrement() {
+		return this.zoomIncrement;
+	}
+
+	public Button getZoomOutButton() {
+		return this.zoomOutButton;
+	}
+
+	public Composite getZoomPanel() {
+		return this.zoomPanel;
 	}
 
 	/** */
@@ -224,6 +306,14 @@ public final class SpiderChartViewer extends Composite {
 		}
 		this.canvas.getChart().setOffsetX(newBase);
 		this.canvas.redraw();
+	}
+
+	public boolean isAllowZoom() {
+		return this.allowZoom;
+	}
+
+	public boolean isChangePointer() {
+		return this.changePointer;
 	}
 
 	/** */
@@ -283,6 +373,18 @@ public final class SpiderChartViewer extends Composite {
 		this.lastZoom = 0;
 	}
 
+	public void setAllowZoom(final boolean allowZoom) {
+		this.allowZoom = allowZoom;
+	}
+
+	public void setCanvas(final SpiderChartCanvas canvas) {
+		this.canvas = canvas;
+	}
+
+	public void setChangePointer(final boolean changePointer) {
+		this.changePointer = changePointer;
+	}
+
 	/** */
 	public void setChart(final SpiderChart c) {
 		if (this.canvas.getChart() != null) {
@@ -299,6 +401,74 @@ public final class SpiderChartViewer extends Composite {
 		if (this.changePointer) {
 			this.canvas.getChart().addChartListener(this.chartAdapter);
 		}
+	}
+
+	public void setCurrentZoom(final int currentZoom) {
+		this.currentZoom = currentZoom;
+	}
+
+	public void setDefaultCursor(final Cursor defaultCursor) {
+		this.defaultCursor = defaultCursor;
+	}
+
+	public void sethSlider(final Slider hSlider) {
+		this.hSlider = hSlider;
+	}
+
+	public void setLastHeight(final int lastHeight) {
+		this.lastHeight = lastHeight;
+	}
+
+	public void setLastWidth(final int lastWidth) {
+		this.lastWidth = lastWidth;
+	}
+
+	public void setLastZoom(final int lastZoom) {
+		this.lastZoom = lastZoom;
+	}
+
+	public void setMaxZoom(final int maxZoom) {
+		this.maxZoom = maxZoom;
+	}
+
+	public void setMinZoom(final int minZoom) {
+		this.minZoom = minZoom;
+	}
+
+	public void setOriginalHeight(final int originalHeight) {
+		this.originalHeight = originalHeight;
+	}
+
+	public void setOriginalWidth(final int originalWidth) {
+		this.originalWidth = originalWidth;
+	}
+
+	public void setPointCursor(final Cursor pointCursor) {
+		this.pointCursor = pointCursor;
+	}
+
+	public void setvSlider(final Slider vSlider) {
+		this.vSlider = vSlider;
+	}
+
+	public void setZoom(final Label zoom) {
+		this.zoom = zoom;
+	}
+
+	public void setZoomInButton(final Button zoomInButton) {
+		this.zoomInButton = zoomInButton;
+	}
+
+	public void setZoomIncrement(final int zoomIncrement) {
+		this.zoomIncrement = zoomIncrement;
+	}
+
+	public void setZoomOutButton(final Button zoomOutButton) {
+		this.zoomOutButton = zoomOutButton;
+	}
+
+	public void setZoomPanel(final Composite zoomPanel) {
+		this.zoomPanel = zoomPanel;
 	}
 
 	/** */

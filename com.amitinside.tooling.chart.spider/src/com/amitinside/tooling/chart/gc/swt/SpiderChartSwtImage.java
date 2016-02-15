@@ -115,7 +115,7 @@ public final class SpiderChartSwtImage extends AbstractChartImage {
 	@Override
 	public AbstractChartGraphics getGraphics() {
 		final SpiderChartSwtGraphics g = new SpiderChartSwtGraphics(new GC(this.image));
-		g.srcImage = this.image;
+		g.setSrcImage(this.image);
 		return g;
 	}
 

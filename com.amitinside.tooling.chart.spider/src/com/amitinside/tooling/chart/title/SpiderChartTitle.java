@@ -29,11 +29,11 @@ import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 public final class SpiderChartTitle extends SpiderChartComponent {
 
 	/** Title Color */
-	public AbstractChartColor color = getColor(BLUE);
+	private AbstractChartColor color = getColor(BLUE);
 	/** Title Font */
-	public AbstractChartFont font = getFont(VERDANA, PLAIN, 14);
+	private AbstractChartFont font = getFont(VERDANA, PLAIN, 14);
 	/** Title Text */
-	public String text;
+	private String text;
 
 	/** Constructor */
 	public SpiderChartTitle() {
@@ -59,5 +59,29 @@ public final class SpiderChartTitle extends SpiderChartComponent {
 				g.drawText(txt[i], this.x + toCenterX, this.y + toCenterY + (g.getFontHeight() * (i + 1)));
 			}
 		}
+	}
+
+	public AbstractChartColor getChartColor() {
+		return this.color;
+	}
+
+	public AbstractChartFont getChartFont() {
+		return this.font;
+	}
+
+	public String getText() {
+		return this.text;
+	}
+
+	public void setColor(final AbstractChartColor color) {
+		this.color = color;
+	}
+
+	public void setFont(final AbstractChartFont font) {
+		this.font = font;
+	}
+
+	public void setText(final String text) {
+		this.text = text;
 	}
 }

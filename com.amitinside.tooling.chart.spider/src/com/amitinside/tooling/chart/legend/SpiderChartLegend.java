@@ -39,37 +39,37 @@ import com.amitinside.tooling.chart.style.LineStyle;
 public final class SpiderChartLegend extends SpiderChartComponent {
 
 	/** Legend Background Style */
-	public FillStyle background;
+	private FillStyle background;
 
 	/** Legend Border Line Style */
-	public LineStyle border;
+	private LineStyle border;
 
 	/** Legend Color */
-	public AbstractChartColor color = getColor(BLACK);
+	private AbstractChartColor color = getColor(BLACK);
 
 	/** Legend Font */
-	public AbstractChartFont font = getFont(VERDANA, PLAIN, 10);
+	private AbstractChartFont font = getFont(VERDANA, PLAIN, 10);
 
 	/** */
 	private final Vector<Object> items = new Vector<>(10, 10);
 
 	/** Legend Label */
-	public String legendLabel = "";
+	private String legendLabel = "";
 
 	/** Legend Margin */
-	public int legendMargin = 10;
+	private int legendMargin = 10;
 
 	/** Legend Offset Used to position the legend on vertical basis */
-	public int legendOffset = 250;
+	private int legendOffset = 250;
 
 	/** */
 	private final Vector<String> names = new Vector<>(10, 10);
 
 	/** Legend Title */
-	public String title = null;
+	private String title = null;
 
 	/** */
-	public boolean verticalLayout = true;
+	private boolean verticalLayout = true;
 
 	/** Constructor */
 	public SpiderChartLegend() {
@@ -278,5 +278,85 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 						toCenterY + this.y + (iconHeight / 2) + ((i - 1) * itemHeight) + this.legendOffset);
 			}
 		}
+	}
+
+	public FillStyle getBackground() {
+		return this.background;
+	}
+
+	public LineStyle getBorder() {
+		return this.border;
+	}
+
+	public AbstractChartColor getChartColor() {
+		return this.color;
+	}
+
+	public AbstractChartFont getChartFont() {
+		return this.font;
+	}
+
+	public Vector<Object> getItems() {
+		return this.items;
+	}
+
+	public String getLegendLabel() {
+		return this.legendLabel;
+	}
+
+	public int getLegendMargin() {
+		return this.legendMargin;
+	}
+
+	public int getLegendOffset() {
+		return this.legendOffset;
+	}
+
+	public Vector<String> getNames() {
+		return this.names;
+	}
+
+	public String getTitle() {
+		return this.title;
+	}
+
+	public boolean isVerticalLayout() {
+		return this.verticalLayout;
+	}
+
+	public void setBackground(final FillStyle background) {
+		this.background = background;
+	}
+
+	public void setBorder(final LineStyle border) {
+		this.border = border;
+	}
+
+	public void setColor(final AbstractChartColor color) {
+		this.color = color;
+	}
+
+	public void setFont(final AbstractChartFont font) {
+		this.font = font;
+	}
+
+	public void setLegendLabel(final String legendLabel) {
+		this.legendLabel = legendLabel;
+	}
+
+	public void setLegendMargin(final int legendMargin) {
+		this.legendMargin = legendMargin;
+	}
+
+	public void setLegendOffset(final int legendOffset) {
+		this.legendOffset = legendOffset;
+	}
+
+	public void setTitle(final String title) {
+		this.title = title;
+	}
+
+	public void setVerticalLayout(final boolean verticalLayout) {
+		this.verticalLayout = verticalLayout;
 	}
 }

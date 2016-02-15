@@ -822,7 +822,7 @@ public final class SpiderChart {
 		this.title = t;
 		if (this.title == null) {
 			this.title = new SpiderChartTitle();
-			this.title.text = "";
+			this.title.setText("");
 		}
 		this.plottersCount = 1;
 	}

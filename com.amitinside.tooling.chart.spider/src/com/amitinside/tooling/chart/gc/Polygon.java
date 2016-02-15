@@ -53,11 +53,11 @@ public final class Polygon {
 
 	/** */
 	public int getX(final int i) {
-		return this.points.elementAt(i).x;
+		return this.points.elementAt(i).getX();
 	}
 
 	/** */
 	public int getY(final int i) {
-		return this.points.elementAt(i).y;
+		return this.points.elementAt(i).getY();
 	}
 }
