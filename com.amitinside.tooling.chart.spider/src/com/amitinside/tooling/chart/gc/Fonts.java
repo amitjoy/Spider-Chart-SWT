@@ -24,7 +24,7 @@ public enum Fonts {
 	/**
 	 * Constructor
 	 */
-	Fonts(final String name) {
+	private Fonts(final String name) {
 		this.fontName = name;
 	}
 
