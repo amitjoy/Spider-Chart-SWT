@@ -74,8 +74,8 @@ public final class SpiderChartBuilder {
 		this.chartViewer.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true, true));
 		this.chartViewer.setBounds(parent.getShell().getClientArea().x, parent.getShell().getClientArea().y,
 				parent.getShell().getClientArea().width, parent.getShell().getClientArea().height - 10);
-		this.chartViewer.changePointer = true;
-		this.chartViewer.allowZoom = true;
+		this.chartViewer.setChangePointer(true);
+		this.chartViewer.setAllowZoom(true);
 
 		// Some chart related default configurations
 		this.chart = new SpiderChart(chartConfiguration.getTitle(), chartConfiguration.getPlotter());

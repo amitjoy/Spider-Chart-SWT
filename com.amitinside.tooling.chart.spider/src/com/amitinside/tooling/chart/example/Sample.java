@@ -35,7 +35,7 @@ public final class Sample {
 		final Supplier<Object> nexusData = Nexus::new;
 
 		viewer = SpiderChartBuilder.config(shell, settings -> {
-			settings.title(title -> title.text = "Smartphone Comparison Scale").legend(legend -> {
+			settings.title(title -> title.setText("Smartphone Comparison Scale")).legend(legend -> {
 				legend.addItem(iPhoneData);
 				legend.addItem(nexusData);
 			}).plotter(plotter -> {

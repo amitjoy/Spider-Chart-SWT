@@ -62,8 +62,8 @@ public final class SpiderChartConfigurationBuilder {
 	/** */
 	public SpiderChartConfigurationBuilder legend(final Consumer<SpiderChartLegend> legendBuilder) {
 		this.legend = new SpiderChartLegend();
-		this.legend.background = new FillStyle(getColor(WHITE));
-		this.legend.border = new LineStyle(1, getColor(BLACK), NORMAL_LINE);
+		this.legend.setBackground(new FillStyle(getColor(WHITE)));
+		this.legend.setBorder(new LineStyle(1, getColor(BLACK), NORMAL_LINE));
 		legendBuilder.accept(this.legend);
 		return this;
 	}

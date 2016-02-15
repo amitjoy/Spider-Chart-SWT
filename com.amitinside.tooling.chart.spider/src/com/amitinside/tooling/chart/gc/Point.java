@@ -18,13 +18,21 @@ package com.amitinside.tooling.chart.gc;
 public final class Point {
 
 	/** */
-	public final int x;
+	private final int x;
 	/** */
-	public final int y;
+	private final int y;
 
 	/** Constructor */
 	public Point(final int x1, final int y1) {
 		this.x = x1;
 		this.y = y1;
+	}
+
+	public int getX() {
+		return this.x;
+	}
+
+	public int getY() {
+		return this.y;
 	}
 }

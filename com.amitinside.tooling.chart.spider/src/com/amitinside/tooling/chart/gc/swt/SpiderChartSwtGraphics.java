@@ -32,7 +32,7 @@ import com.amitinside.tooling.chart.gc.AbstractChartImage;
 
 public final class SpiderChartSwtGraphics extends AbstractChartGraphics {
 	/** */
-	protected float alphaValue = 1.0F;
+	private float alphaValue = 1.0F;
 	/** */
 	private Color currentColor;
 	/** */
@@ -40,9 +40,9 @@ public final class SpiderChartSwtGraphics extends AbstractChartGraphics {
 	/** */
 	private GC graphics;
 	/** */
-	protected Image imageForTransparentFilling = null;
+	private Image imageForTransparentFilling = null;
 	/** */
-	protected Image srcImage;
+	private Image srcImage;
 	/** */
 	private Color transparent = null;
 
@@ -252,10 +252,22 @@ public final class SpiderChartSwtGraphics extends AbstractChartGraphics {
 		return new Float(this.alphaValue);
 	}
 
+	public float getAlphaValue() {
+		return this.alphaValue;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public AbstractChartColor getColor() {
 		return new SpiderChartSwtColor(this.currentColor);
+	}
+
+	public Color getCurrentColor() {
+		return this.currentColor;
+	}
+
+	public Font getCurrentFont() {
+		return this.currentFont;
 	}
 
 	/** {@inheritDoc} */
@@ -331,6 +343,22 @@ public final class SpiderChartSwtGraphics extends AbstractChartGraphics {
 		g.setBackground(this.currentColor);
 
 		return g;
+	}
+
+	public GC getGraphics() {
+		return this.graphics;
+	}
+
+	public Image getImageForTransparentFilling() {
+		return this.imageForTransparentFilling;
+	}
+
+	public Image getSrcImage() {
+		return this.srcImage;
+	}
+
+	public Color getTransparent() {
+		return this.transparent;
 	}
 
 	/** {@inheritDoc} */
@@ -449,6 +477,10 @@ public final class SpiderChartSwtGraphics extends AbstractChartGraphics {
 		}
 	}
 
+	public void setAlphaValue(final float alphaValue) {
+		this.alphaValue = alphaValue;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public void setColor(final AbstractChartColor color) {
@@ -459,6 +491,14 @@ public final class SpiderChartSwtGraphics extends AbstractChartGraphics {
 		this.graphics.setBackground(this.currentColor);
 	}
 
+	public void setCurrentColor(final Color currentColor) {
+		this.currentColor = currentColor;
+	}
+
+	public void setCurrentFont(final Font currentFont) {
+		this.currentFont = currentFont;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public void setFont(final AbstractChartFont font) {
@@ -466,6 +506,14 @@ public final class SpiderChartSwtGraphics extends AbstractChartGraphics {
 		this.currentFont = ((SpiderChartSwtFont) font).getFont();
 
 		this.graphics.setFont(this.currentFont);
+	}
+
+	public void setGraphics(final GC graphics) {
+		this.graphics = graphics;
+	}
+
+	public void setImageForTransparentFilling(final Image imageForTransparentFilling) {
+		this.imageForTransparentFilling = imageForTransparentFilling;
 	}
 
 	/** {@inheritDoc} */
@@ -478,5 +526,13 @@ public final class SpiderChartSwtGraphics extends AbstractChartGraphics {
 	@Override
 	public void setLineWidth(final int w) {
 		super.setLineWidth(w);
+	}
+
+	public void setSrcImage(final Image srcImage) {
+		this.srcImage = srcImage;
+	}
+
+	public void setTransparent(final Color transparent) {
+		this.transparent = transparent;
 	}
 }
