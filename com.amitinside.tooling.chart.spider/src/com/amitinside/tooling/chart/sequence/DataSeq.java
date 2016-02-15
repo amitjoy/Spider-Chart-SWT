@@ -27,21 +27,21 @@ import com.amitinside.tooling.chart.SpiderChart;
 public class DataSeq {
 
 	/** */
-	public String[] dataLabels;
+	private String[] dataLabels;
 	/** */
-	public Vector<Object> hotAreas = new Vector<>(0, 5);
+	private Vector<Object> hotAreas = new Vector<>(0, 5);
 	/** */
-	public String labelTemplate = "";
+	private String labelTemplate = "";
 	/** */
-	public String name = "";
+	private String name = "";
 	/** */
-	public String[] tips = new String[0];
+	private String[] tips = new String[0];
 	/** */
-	public String valueFormat = "######.##";
+	private String valueFormat = "######.##";
 	/** */
-	public Vector<Double> xData = new Vector<>(0, 5);
+	private Vector<Double> xData = new Vector<>(0, 5);
 	/** */
-	public Vector<Double> yData = new Vector<>(0, 5);
+	private Vector<Double> yData = new Vector<>(0, 5);
 
 	/**
 	 * Constructor
@@ -109,16 +109,20 @@ public class DataSeq {
 			return d.toString();
 		}
 		DecimalFormat df = null;
-		if (SpiderChart.numberLocale == null) {
+		if (SpiderChart.getNumberLocale() == null) {
 			df = new DecimalFormat(this.valueFormat);
 		} else {
-			final NumberFormat nf = getNumberInstance(new Locale(SpiderChart.numberLocale, ""));
+			final NumberFormat nf = getNumberInstance(new Locale(SpiderChart.getNumberLocale(), ""));
 			df = (DecimalFormat) nf;
 
 			df.applyPattern(this.valueFormat);
 		}
 		df = new DecimalFormat(this.valueFormat);
 		return df.format(d.doubleValue());
+	}
+
+	public String[] getDataLabels() {
+		return this.dataLabels;
 	}
 
 	/** */
@@ -131,9 +135,69 @@ public class DataSeq {
 		return this.yData.elementAt(i);
 	}
 
+	public Vector<Object> getHotAreas() {
+		return this.hotAreas;
+	}
+
+	public String getLabelTemplate() {
+		return this.labelTemplate;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
 	/** */
 	public int getSize() {
 		return this.xData.size();
+	}
+
+	public String[] getTips() {
+		return this.tips;
+	}
+
+	public String getValueFormat() {
+		return this.valueFormat;
+	}
+
+	public Vector<Double> getxData() {
+		return this.xData;
+	}
+
+	public Vector<Double> getyData() {
+		return this.yData;
+	}
+
+	public void setDataLabels(final String[] dataLabels) {
+		this.dataLabels = dataLabels;
+	}
+
+	public void setHotAreas(final Vector<Object> hotAreas) {
+		this.hotAreas = hotAreas;
+	}
+
+	public void setLabelTemplate(final String labelTemplate) {
+		this.labelTemplate = labelTemplate;
+	}
+
+	public void setName(final String name) {
+		this.name = name;
+	}
+
+	public void setTips(final String[] tips) {
+		this.tips = tips;
+	}
+
+	public void setValueFormat(final String valueFormat) {
+		this.valueFormat = valueFormat;
+	}
+
+	public void setxData(final Vector<Double> xData) {
+		this.xData = xData;
+	}
+
+	public void setyData(final Vector<Double> yData) {
+		this.yData = yData;
 	}
 
 }
