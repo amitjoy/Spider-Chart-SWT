@@ -299,8 +299,8 @@ public final class SpiderChart {
 				for (int j = 0; j < this.plotters[i].getSeqCount(); j++) {
 					if (this.plotters[i].getSeq(j) instanceof LineDataSeq) {
 						final LineDataSeq lseq = (LineDataSeq) this.plotters[i].getSeq(j);
-						if (lseq.icon != null) {
-							lseq.icon.dispose();
+						if (lseq.getIcon() != null) {
+							lseq.getIcon().dispose();
 						}
 					}
 				}

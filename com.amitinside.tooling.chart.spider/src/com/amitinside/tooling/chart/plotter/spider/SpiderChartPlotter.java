@@ -264,11 +264,11 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 			xs[i] = PieCenterX + relativeX;
 			ys[i] = PieCenterY + relativeY;
 		}
-		if (p.style != null) {
-			p.style.drawPolygon(g, xs, ys, (int) count);
+		if (p.getStyle() != null) {
+			p.getStyle().drawPolygon(g, xs, ys, (int) count);
 		}
-		if (p.fillStyle != null) {
-			p.fillStyle.drawPolygon(g, xs, ys, (int) count);
+		if (p.getFillStyle() != null) {
+			p.getFillStyle().drawPolygon(g, xs, ys, (int) count);
 		}
 		for (int i = 0; i < count; i++) {
 			final Polygon po = new Polygon();
@@ -278,8 +278,8 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 			po.addPoint(xs[i] + 3, ys[i] - 3);
 			s.getHotAreas().addElement(po);
 			double YValue;
-			if (p.drawPoint) {
-				AbstractChartColor c = p.pointColor;
+			if (p.isDrawPoint()) {
+				AbstractChartColor c = p.getPointColor();
 				YValue = ((Double) p.getElementY(i)).doubleValue();
 				if ((this.pointColors != null) && (this.pointColorScale != null)) {
 					if (this.pointColors.length > 0) {
@@ -295,15 +295,15 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 					}
 				}
 				g.setColor(c);
-				if (p.icon == null) {
+				if (p.getIcon() == null) {
 					g.fillRect(xs[i] - 3, ys[i] - 3, 6, 6);
 				} else {
-					g.drawImage(p.icon, xs[i] - 4, ys[i] - 4);
+					g.drawImage(p.getIcon(), xs[i] - 4, ys[i] - 4);
 				}
 			}
-			if (p.valueFont != null) {
-				g.setColor(p.valueColor);
-				g.setFont(p.valueFont);
+			if (p.getValueFont() != null) {
+				g.setColor(p.getValueColor());
+				g.setFont(p.getValueFont());
 
 				YValue = ((Double) p.getElementY(i)).doubleValue();
 
