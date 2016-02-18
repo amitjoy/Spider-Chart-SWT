@@ -704,19 +704,19 @@ public final class SpiderChart {
 					this.getWidth() + this.offsetX, this.getHeight() + this.offsetY);
 		}
 		if (this.plotters[0].xScale != null) {
-			this.plotters[0].xScale.screenMax = this.plotters[0].x + this.plotters[0].width;
-			this.plotters[0].xScale.screenMaxMargin = (int) (this.plotters[0].xScale.screenMax
-					* (1.0D - this.axisMargin));
+			this.plotters[0].xScale.setScreenMax(this.plotters[0].x + this.plotters[0].width);
+			this.plotters[0].xScale
+					.setScreenMaxMargin((int) (this.plotters[0].xScale.getScreenMax() * (1.0D - this.axisMargin)));
 			if (this.fullXAxis) {
-				this.plotters[0].xScale.screenMaxMargin = this.plotters[0].xScale.screenMax;
+				this.plotters[0].xScale.setScreenMaxMargin(this.plotters[0].xScale.getScreenMax());
 			}
-			this.plotters[0].xScale.screenMin = this.plotters[0].x;
+			this.plotters[0].xScale.setScreenMin(this.plotters[0].x);
 		}
 		if (this.plotters[0].yScale != null) {
-			this.plotters[0].yScale.screenMax = this.plotters[0].y + this.plotters[0].height;
-			this.plotters[0].yScale.screenMaxMargin = (int) (this.plotters[0].yScale.screenMax
-					* (1.0D - this.axisMargin));
-			this.plotters[0].yScale.screenMin = this.plotters[0].y;
+			this.plotters[0].yScale.setScreenMax(this.plotters[0].y + this.plotters[0].height);
+			this.plotters[0].yScale
+					.setScreenMaxMargin((int) (this.plotters[0].yScale.getScreenMax() * (1.0D - this.axisMargin)));
+			this.plotters[0].yScale.setScreenMin(this.plotters[0].y);
 		}
 		if (this.repaintAll) {
 			final int plotterBackWidth = this.plotters[0].width;
