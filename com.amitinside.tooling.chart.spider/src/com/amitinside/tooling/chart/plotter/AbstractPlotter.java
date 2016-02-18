@@ -63,14 +63,15 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 
 	/** */
 	private void calculateMax(final SpiderChartScale s, final double m) {
-		if (!s.exactMaxValue) {
-			s.max = m;
+		if (!s.isExactMaxValue()) {
+			s.setMax(m);
 			return;
 		}
-		if ((s.preferred_MaxMin_values != null) && (s.preferred_MaxMin_values.length > 0)) {
-			for (final double preferred_MaxMin_value : s.preferred_MaxMin_values) {
+		final double[] value = s.getPreferred_MaxMin_values();
+		if ((value != null) && (value.length > 0)) {
+			for (final double preferred_MaxMin_value : value) {
 				if (preferred_MaxMin_value >= m) {
-					s.max = preferred_MaxMin_value;
+					s.setMax(preferred_MaxMin_value);
 
 					break;
 				}
@@ -80,14 +81,15 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 
 	/** */
 	private void calculateMin(final SpiderChartScale s, final double m) {
-		if (!s.exactMinValue) {
-			s.min = m;
+		if (!s.isExactMinValue()) {
+			s.setMin(m);
 			return;
 		}
-		if ((s.preferred_MaxMin_values != null) && (s.preferred_MaxMin_values.length > 0)) {
-			for (int j = s.preferred_MaxMin_values.length - 1; j > 0; j--) {
-				if (s.preferred_MaxMin_values[j] <= m) {
-					s.min = s.preferred_MaxMin_values[j];
+		final double[] value = s.getPreferred_MaxMin_values();
+		if ((value != null) && (value.length > 0)) {
+			for (int j = value.length - 1; j > 0; j--) {
+				if (value[j] <= m) {
+					s.setMin(value[j]);
 
 					break;
 				}
@@ -180,17 +182,17 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 							final DataSeq ser = this.seq.elementAt(si);
 						}
 					}
-					if (XValue >= tmpScaleX.max) {
+					if (XValue >= tmpScaleX.getMax()) {
 						this.calculateMax(tmpScaleX, XValue);
 					}
-					if (XValue < tmpScaleX.min) {
+					if (XValue < tmpScaleX.getMin()) {
 						this.calculateMin(tmpScaleX, XValue);
 					}
 					if (!fixedLimits) {
-						if (YValue > this.yScale.max) {
+						if (YValue > this.yScale.getMax()) {
 							this.calculateMax(this.yScale, YValue);
 						}
-						if (YValue < this.yScale.min) {
+						if (YValue < this.yScale.getMin()) {
 							this.calculateMin(this.yScale, YValue);
 						}
 					}
