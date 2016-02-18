@@ -37,20 +37,20 @@ public final class LineStyle {
 	}
 
 	/** */
-	public float alphaValue = 1.0F;
+	private float alphaValue = 1.0F;
 	/** */
 	private AbstractChartColor color;
 
 	/** */
-	int lineType;
+	private int lineType;
 
 	/** */
-	float lWidth;
+	private float lineWidth;
 
 	/** */
 	public LineStyle(final float w, final AbstractChartColor c, final int t) {
 		this.lineType = t;
-		this.lWidth = w;
+		this.lineWidth = w;
 		this.color = c;
 	}
 
@@ -124,9 +124,30 @@ public final class LineStyle {
 		g.drawRoundedRect(iX, iY, w, h);
 	}
 
+	/**
+	 * @return the alphaValue
+	 */
+	public float getAlphaValue() {
+		return this.alphaValue;
+	}
+
 	/** */
 	public AbstractChartColor getColor() {
 		return this.color;
+	}
+
+	/**
+	 * @return the lineType
+	 */
+	public int getLineType() {
+		return this.lineType;
+	}
+
+	/**
+	 * @return the lWidth
+	 */
+	public float getlWidth() {
+		return this.lineWidth;
 	}
 
 	/** */
@@ -136,7 +157,15 @@ public final class LineStyle {
 
 	/** */
 	public float getWidth() {
-		return this.lWidth;
+		return this.lineWidth;
+	}
+
+	/**
+	 * @param alphaValue
+	 *            the alphaValue to set
+	 */
+	public void setAlphaValue(final float alphaValue) {
+		this.alphaValue = alphaValue;
 	}
 
 	/** */
@@ -147,8 +176,8 @@ public final class LineStyle {
 	/** */
 	protected void setGraphicsProperties(final AbstractChartGraphics g) {
 		g.setColor(this.color);
-		int tmp = (int) this.lWidth;
-		if ((tmp == 0) && (this.lWidth > 0.0F)) {
+		int tmp = (int) this.lineWidth;
+		if ((tmp == 0) && (this.lineWidth > 0.0F)) {
 			tmp = 1;
 		}
 		g.setLineWidth(tmp);
@@ -161,6 +190,22 @@ public final class LineStyle {
 		}
 	}
 
+	/**
+	 * @param lineType
+	 *            the lineType to set
+	 */
+	public void setLineType(final int lineType) {
+		this.lineType = lineType;
+	}
+
+	/**
+	 * @param lWidth
+	 *            the lWidth to set
+	 */
+	public void setlWidth(final float lWidth) {
+		this.lineWidth = lWidth;
+	}
+
 	/** */
 	public void setType(final int t) {
 		this.lineType = t;
@@ -168,6 +213,6 @@ public final class LineStyle {
 
 	/** */
 	public void setWidth(final float f) {
-		this.lWidth = f;
+		this.lineWidth = f;
 	}
 }

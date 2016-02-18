@@ -45,92 +45,218 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 	/**
 	 * Spider Chart axes names
 	 */
-	public String[] axesFactors;
+	private String[] axesFactors;
 
 	/**
 	 * Spider Chart Axes Factor Color
 	 */
-	public AbstractChartColor axisFactorColor = getColor(BLACK);
+	private AbstractChartColor axisFactorColor = getColor(BLACK);
 
 	/**
 	 * Spider Chart Axis Factor Colors (in case you need to set different colors
 	 * for different axes)
 	 */
-	public AbstractChartColor[] axisFactorColors;
+	private AbstractChartColor[] axisFactorColors;
 
 	/**
 	 * Spider Chart Axes Factor Text Font
 	 */
-	public AbstractChartFont axisFactorFont = getFont(VERDANA, PLAIN, 11);
+	private AbstractChartFont axisFactorFont = getFont(VERDANA, PLAIN, 11);
 
 	/**
 	 * Spider Chart Polygon Area Background Style
 	 */
-	public FillStyle backStyle;
+	private FillStyle backStyle;
 
 	/**
 	 * Spider Chart Border Style
 	 */
-	public LineStyle border = new LineStyle(0.2F, getColor(BLACK), 1);
+	private LineStyle border = new LineStyle(0.2F, getColor(BLACK), 1);
 
 	/**
 	 * Spider Chart Radius
 	 */
-	public double chartRadius = 0.9D;
+	private double chartRadius = 0.9D;
 
 	/**
 	 * Spider Chart would be surrounded by an enclosing circle
 	 */
-	public boolean drawCircle = false;
+	private boolean drawCircle = false;
 
 	/**
 	 * Spider Chart Font for Grid Label
 	 */
-	public AbstractChartFont gridFont;
+	private AbstractChartFont gridFont;
 
 	/**
 	 * Spider Chart Font Color for Grid Label
 	 */
-	public AbstractChartColor gridFontColor = getColor(BLACK);
+	private AbstractChartColor gridFontColor = getColor(BLACK);
 
 	/**
 	 * Spider Chart Grid Style
 	 */
-	public LineStyle gridStyle;
+	private LineStyle gridStyle;
 
 	/** Mark Scales on Every Axis */
-	public boolean markScalesOnEveryAxis = false;
+	private boolean markScalesOnEveryAxis = false;
 
 	/**
 	 * Spider Chart Scaling Factors (Maximum Values)
 	 */
-	public double[] maxScaleFactors;
+	private double[] maxScaleFactors;
 
 	/**
 	 * Spider Chart Scaling Factors (Minimum Values)
 	 */
-	public double[] minScaleFactors;
+	private double[] minScaleFactors;
 
 	/** */
-	public AbstractChartColor[] pointColors = null;
+	private AbstractChartColor[] pointColors = null;
 
 	/** */
-	public double[] pointColorScale = null;
+	private double[] pointColorScale = null;
 
 	/**
 	 * Spider Chart Scaling Divisions
 	 */
-	public int scalingDivisions = 5;
+	private int scalingDivisions = 5;
 
 	/**
 	 * Spider Chart Scaling Label Format
 	 */
-	public String scalingLabelFormat = "#.#";
+	private String scalingLabelFormat = "#.#";
 
 	/**
 	 * Constructor
 	 */
 	public SpiderChartPlotter() {
+	}
+
+	/**
+	 * @return the axesFactors
+	 */
+	public String[] getAxesFactors() {
+		return this.axesFactors;
+	}
+
+	/**
+	 * @return the axisFactorColor
+	 */
+	public AbstractChartColor getAxisFactorColor() {
+		return this.axisFactorColor;
+	}
+
+	/**
+	 * @return the axisFactorColors
+	 */
+	public AbstractChartColor[] getAxisFactorColors() {
+		return this.axisFactorColors;
+	}
+
+	/**
+	 * @return the axisFactorFont
+	 */
+	public AbstractChartFont getAxisFactorFont() {
+		return this.axisFactorFont;
+	}
+
+	/**
+	 * @return the backStyle
+	 */
+	public FillStyle getBackStyle() {
+		return this.backStyle;
+	}
+
+	/**
+	 * @return the border
+	 */
+	public LineStyle getBorder() {
+		return this.border;
+	}
+
+	/**
+	 * @return the chartRadius
+	 */
+	public double getChartRadius() {
+		return this.chartRadius;
+	}
+
+	/**
+	 * @return the gridFont
+	 */
+	public AbstractChartFont getGridFont() {
+		return this.gridFont;
+	}
+
+	/**
+	 * @return the gridFontColor
+	 */
+	public AbstractChartColor getGridFontColor() {
+		return this.gridFontColor;
+	}
+
+	/**
+	 * @return the gridStyle
+	 */
+	public LineStyle getGridStyle() {
+		return this.gridStyle;
+	}
+
+	/**
+	 * @return the maxScaleFactors
+	 */
+	public double[] getMaxScaleFactors() {
+		return this.maxScaleFactors;
+	}
+
+	/**
+	 * @return the minScaleFactors
+	 */
+	public double[] getMinScaleFactors() {
+		return this.minScaleFactors;
+	}
+
+	/**
+	 * @return the pointColors
+	 */
+	public AbstractChartColor[] getPointColors() {
+		return this.pointColors;
+	}
+
+	/**
+	 * @return the pointColorScale
+	 */
+	public double[] getPointColorScale() {
+		return this.pointColorScale;
+	}
+
+	/**
+	 * @return the scalingDivisions
+	 */
+	public int getScalingDivisions() {
+		return this.scalingDivisions;
+	}
+
+	/**
+	 * @return the scalingLabelFormat
+	 */
+	public String getScalingLabelFormat() {
+		return this.scalingLabelFormat;
+	}
+
+	/**
+	 * @return the drawCircle
+	 */
+	public boolean isDrawCircle() {
+		return this.drawCircle;
+	}
+
+	/**
+	 * @return the markScalesOnEveryAxis
+	 */
+	public boolean isMarkScalesOnEveryAxis() {
+		return this.markScalesOnEveryAxis;
 	}
 
 	/** {@inheritDoc}} **/
@@ -398,6 +524,150 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 				}
 			}
 		}
+	}
+
+	/**
+	 * @param axesFactors
+	 *            the axesFactors to set
+	 */
+	public void setAxesFactors(final String[] axesFactors) {
+		this.axesFactors = axesFactors;
+	}
+
+	/**
+	 * @param axisFactorColor
+	 *            the axisFactorColor to set
+	 */
+	public void setAxisFactorColor(final AbstractChartColor axisFactorColor) {
+		this.axisFactorColor = axisFactorColor;
+	}
+
+	/**
+	 * @param axisFactorColors
+	 *            the axisFactorColors to set
+	 */
+	public void setAxisFactorColors(final AbstractChartColor[] axisFactorColors) {
+		this.axisFactorColors = axisFactorColors;
+	}
+
+	/**
+	 * @param axisFactorFont
+	 *            the axisFactorFont to set
+	 */
+	public void setAxisFactorFont(final AbstractChartFont axisFactorFont) {
+		this.axisFactorFont = axisFactorFont;
+	}
+
+	/**
+	 * @param backStyle
+	 *            the backStyle to set
+	 */
+	public void setBackStyle(final FillStyle backStyle) {
+		this.backStyle = backStyle;
+	}
+
+	/**
+	 * @param border
+	 *            the border to set
+	 */
+	public void setBorder(final LineStyle border) {
+		this.border = border;
+	}
+
+	/**
+	 * @param chartRadius
+	 *            the chartRadius to set
+	 */
+	public void setChartRadius(final double chartRadius) {
+		this.chartRadius = chartRadius;
+	}
+
+	/**
+	 * @param drawCircle
+	 *            the drawCircle to set
+	 */
+	public void setDrawCircle(final boolean drawCircle) {
+		this.drawCircle = drawCircle;
+	}
+
+	/**
+	 * @param gridFont
+	 *            the gridFont to set
+	 */
+	public void setGridFont(final AbstractChartFont gridFont) {
+		this.gridFont = gridFont;
+	}
+
+	/**
+	 * @param gridFontColor
+	 *            the gridFontColor to set
+	 */
+	public void setGridFontColor(final AbstractChartColor gridFontColor) {
+		this.gridFontColor = gridFontColor;
+	}
+
+	/**
+	 * @param gridStyle
+	 *            the gridStyle to set
+	 */
+	public void setGridStyle(final LineStyle gridStyle) {
+		this.gridStyle = gridStyle;
+	}
+
+	/**
+	 * @param markScalesOnEveryAxis
+	 *            the markScalesOnEveryAxis to set
+	 */
+	public void setMarkScalesOnEveryAxis(final boolean markScalesOnEveryAxis) {
+		this.markScalesOnEveryAxis = markScalesOnEveryAxis;
+	}
+
+	/**
+	 * @param maxScaleFactors
+	 *            the maxScaleFactors to set
+	 */
+	public void setMaxScaleFactors(final double[] maxScaleFactors) {
+		this.maxScaleFactors = maxScaleFactors;
+	}
+
+	/**
+	 * @param minScaleFactors
+	 *            the minScaleFactors to set
+	 */
+	public void setMinScaleFactors(final double[] minScaleFactors) {
+		this.minScaleFactors = minScaleFactors;
+	}
+
+	/**
+	 * @param pointColors
+	 *            the pointColors to set
+	 */
+	public void setPointColors(final AbstractChartColor[] pointColors) {
+		this.pointColors = pointColors;
+	}
+
+	/**
+	 * @param pointColorScale
+	 *            the pointColorScale to set
+	 */
+	public void setPointColorScale(final double[] pointColorScale) {
+		this.pointColorScale = pointColorScale;
+	}
+
+	/**
+	 * @param scalingDivisions
+	 *            the scalingDivisions to set
+	 */
+	public void setScalingDivisions(final int scalingDivisions) {
+		this.scalingDivisions = scalingDivisions;
+	}
+
+	/**
+	 * @param scalingLabelFormat
+	 *            the scalingLabelFormat to set
+	 */
+	public void setScalingLabelFormat(final String scalingLabelFormat) {
+		this.scalingLabelFormat = scalingLabelFormat;
 	}
 
 	/** */
