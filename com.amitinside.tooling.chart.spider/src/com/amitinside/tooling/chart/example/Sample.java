@@ -64,7 +64,7 @@ public final class Sample {
 			viewer.getChart().getSpiderPlotter().setSeq(1, nexusDataSequence);
 			viewer.getChart().setShowTips(true);
 			viewer.getChart().getSpiderPlotter().use(configuration);
-			viewer.getChart().getSpiderPlotter().markScalesOnEveryAxis = true;
+			viewer.getChart().getSpiderPlotter().setMarkScalesOnEveryAxis(true);
 		});
 	}
 
