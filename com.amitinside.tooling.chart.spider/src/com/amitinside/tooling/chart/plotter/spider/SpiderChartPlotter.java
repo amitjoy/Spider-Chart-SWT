@@ -286,7 +286,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 		final int PieCenterX = toCenterX + this.x + (radi / 2);
 		final int PieCenterY = toCenterY + this.y + (radi / 2);
 		double angle;
-		if ((seqSec == 0) || (seqSec >= (this.seq.size() - 1))) {
+		if ((seqSec == 0) || (seqSec >= (this.getSeq().size() - 1))) {
 			if ((seqSec == 0) && (this.backStyle != null) && this.drawCircle) {
 				this.backStyle.drawArc(g, toCenterX + this.x, toCenterY + this.y, radi, radi, 0, 360);
 			}
@@ -310,7 +310,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 				}
 				this.backStyle.drawPolygon(g, xs, ys, (int) count);
 			}
-			if ((seqSec == (this.seq.size() - 1)) && (this.border != null)) {
+			if ((seqSec == (this.getSeq().size() - 1)) && (this.border != null)) {
 				if (this.drawCircle) {
 					this.border.drawArc(g, toCenterX + this.x, toCenterY + this.y, radi, radi, 0, 360);
 				}
@@ -493,10 +493,10 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 					xs[i] = PieCenterX + relativeX;
 					ys[i] = PieCenterY + relativeY;
 				}
-				if (seqSec >= (this.seq.size() - 1)) {
+				if (seqSec >= (this.getSeq().size() - 1)) {
 					this.gridStyle.drawPolygon(g, xs, ys, (int) count);
 				}
-				if ((seqSec >= (this.seq.size() - 1)) && (this.gridFont != null)) {
+				if ((seqSec >= (this.getSeq().size() - 1)) && (this.gridFont != null)) {
 					g.setColor(this.gridFontColor);
 					g.setFont(this.gridFont);
 

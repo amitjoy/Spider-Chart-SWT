@@ -33,28 +33,28 @@ import com.amitinside.tooling.chart.style.FillStyle;
 public abstract class AbstractPlotter extends SpiderChartComponent {
 
 	/** Spider Chart Background Image */
-	public AbstractChartImage backgroundImage;
+	private AbstractChartImage backgroundImage;
 
 	/** */
-	public FillStyle backgroundStyle = null;
+	private FillStyle backgroundStyle = null;
 
 	/** */
-	public int depth = 0;
+	private int depth = 0;
 
 	/** */
-	public Vector<DataSeq> seq = new Vector<>(0, 1);
+	private Vector<DataSeq> seq = new Vector<>(0, 1);
 
 	/** */
-	public int visibleHeight = 0;
+	private int visibleHeight = 0;
 
 	/** */
-	public int visibleWidth = 0;
+	private int visibleWidth = 0;
 
 	/** */
-	public SpiderChartScale xScale;
+	private SpiderChartScale xScale;
 
 	/** */
-	public SpiderChartScale yScale;
+	private SpiderChartScale yScale;
 
 	/** */
 	public void addSeq(final DataSeq s) {
@@ -109,6 +109,34 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 		return scale;
 	}
 
+	/**
+	 * @return the backgroundImage
+	 */
+	public AbstractChartImage getBackgroundImage() {
+		return this.backgroundImage;
+	}
+
+	/**
+	 * @return the backgroundStyle
+	 */
+	public FillStyle getBackgroundStyle() {
+		return this.backgroundStyle;
+	}
+
+	/**
+	 * @return the depth
+	 */
+	public int getDepth() {
+		return this.depth;
+	}
+
+	/**
+	 * @return the seq
+	 */
+	public Vector<DataSeq> getSeq() {
+		return this.seq;
+	}
+
 	/** */
 	public DataSeq getSeq(final int p) {
 		return this.seq.elementAt(p);
@@ -117,6 +145,34 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 	/** */
 	public int getSeqCount() {
 		return this.seq.size();
+	}
+
+	/**
+	 * @return the visibleHeight
+	 */
+	public int getVisibleHeight() {
+		return this.visibleHeight;
+	}
+
+	/**
+	 * @return the visibleWidth
+	 */
+	public int getVisibleWidth() {
+		return this.visibleWidth;
+	}
+
+	/**
+	 * @return the xScale
+	 */
+	public SpiderChartScale getxScale() {
+		return this.xScale;
+	}
+
+	/**
+	 * @return the yScale
+	 */
+	public SpiderChartScale getyScale() {
+		return this.yScale;
 	}
 
 	/** */
@@ -201,10 +257,74 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 		}
 	}
 
+	/**
+	 * @param backgroundImage
+	 *            the backgroundImage to set
+	 */
+	public void setBackgroundImage(final AbstractChartImage backgroundImage) {
+		this.backgroundImage = backgroundImage;
+	}
+
+	/**
+	 * @param backgroundStyle
+	 *            the backgroundStyle to set
+	 */
+	public void setBackgroundStyle(final FillStyle backgroundStyle) {
+		this.backgroundStyle = backgroundStyle;
+	}
+
+	/**
+	 * @param depth
+	 *            the depth to set
+	 */
+	public void setDepth(final int depth) {
+		this.depth = depth;
+	}
+
 	/** */
 	public void setSeq(final int p, final DataSeq s) {
 		if (p < this.seq.size()) {
 			this.seq.setElementAt(s, p);
 		}
+	}
+
+	/**
+	 * @param seq
+	 *            the seq to set
+	 */
+	public void setSeq(final Vector<DataSeq> seq) {
+		this.seq = seq;
+	}
+
+	/**
+	 * @param visibleHeight
+	 *            the visibleHeight to set
+	 */
+	public void setVisibleHeight(final int visibleHeight) {
+		this.visibleHeight = visibleHeight;
+	}
+
+	/**
+	 * @param visibleWidth
+	 *            the visibleWidth to set
+	 */
+	public void setVisibleWidth(final int visibleWidth) {
+		this.visibleWidth = visibleWidth;
+	}
+
+	/**
+	 * @param xScale
+	 *            the xScale to set
+	 */
+	public void setxScale(final SpiderChartScale xScale) {
+		this.xScale = xScale;
+	}
+
+	/**
+	 * @param yScale
+	 *            the yScale to set
+	 */
+	public void setyScale(final SpiderChartScale yScale) {
+		this.yScale = yScale;
 	}
 }
