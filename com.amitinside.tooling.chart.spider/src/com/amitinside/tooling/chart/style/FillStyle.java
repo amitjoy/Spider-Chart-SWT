@@ -26,32 +26,27 @@ import com.amitinside.tooling.chart.gc.AbstractChartImage;
 public final class FillStyle {
 
 	/** */
-	public static int GRADIENT_HORIZONTAL = 1;
+	public static final int GRADIENT_HORIZONTAL = 1;
 	/** */
-	public static int GRADIENT_VERTICAL = 2;
+	public static final int GRADIENT_VERTICAL = 2;
 	/** */
-	public static int NO_GRADIENT = 0;
-
+	public static final int NO_GRADIENT = 0;
 	/** */
-	public float alphaValue = 1.0F;
+	private float alphaValue = 1.0F;
 	/** */
-	AbstractChartColor color;
+	private final AbstractChartColor color;
 	/** Spider Chart Canvas Background Color */
-	public AbstractChartColor colorFrom = getColor(AZURE);
+	private AbstractChartColor colorFrom = getColor(AZURE);
 	/** */
-	public AbstractChartColor colorUntil = getColor(WHITE);
+	private final AbstractChartColor colorUntil = getColor(WHITE);
 	/** */
 	private Object composite = null;
 	/** */
-	public Object fillPatern = null;
+	private final boolean gradientCyclic = false;
 	/** */
-	public boolean gradientCyclic = false;
-
+	private int gradientType = NO_GRADIENT;
 	/** */
-	public int gradientType = NO_GRADIENT;
-
-	/** */
-	public AbstractChartImage textureImage = null;
+	private AbstractChartImage textureImage = null;
 
 	/** Constructor */
 	public FillStyle(final AbstractChartColor c) {
@@ -148,6 +143,13 @@ public final class FillStyle {
 		this.resetAlpha(g);
 	}
 
+	/**
+	 * @return the gradientType
+	 */
+	public int getGradientType() {
+		return this.gradientType;
+	}
+
 	/** */
 	private void resetAlpha(final AbstractChartGraphics g) {
 		if (this.composite != null) {
@@ -162,6 +164,14 @@ public final class FillStyle {
 			this.composite = g.getAlphaComposite();
 			g.setAlpha(this.alphaValue);
 		}
+	}
+
+	/**
+	 * @param gradientType
+	 *            the gradientType to set
+	 */
+	public void setGradientType(final int gradientType) {
+		this.gradientType = gradientType;
 	}
 
 	/** {@inheritDoc}} */
