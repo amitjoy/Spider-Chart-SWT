@@ -18,6 +18,7 @@ package com.amitinside.tooling.chart.builder;
 import static com.amitinside.tooling.chart.gc.AbstractChartColor.ANTIQUEWHITE;
 import static com.amitinside.tooling.chart.gc.AbstractChartColor.YELLOW;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getColor;
+import static com.amitinside.tooling.chart.style.FillStyle.GRADIENT_VERTICAL;
 import static java.util.Objects.requireNonNull;
 
 import java.util.function.Consumer;
@@ -81,7 +82,7 @@ public final class SpiderChartBuilder {
 		this.chart = new SpiderChart(chartConfiguration.getTitle(), chartConfiguration.getPlotter());
 		this.chart.setBackStyle(new FillStyle(getColor(YELLOW)));
 		this.chart.setBackgroundCanvasColor(ANTIQUEWHITE);
-		this.chart.getBackStyle().gradientType = FillStyle.GRADIENT_VERTICAL;
+		this.chart.getBackStyle().setGradientType(GRADIENT_VERTICAL);
 		this.chart.setLegend(chartConfiguration.getLegend());
 		this.chart.setRepaintAll(true);
 		this.chart.setActivateSelection(true);
