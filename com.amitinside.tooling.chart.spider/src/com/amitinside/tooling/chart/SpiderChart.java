@@ -282,8 +282,8 @@ public final class SpiderChart {
 	/** */
 	public void addPlotter(final SpiderChartPlotter p) {
 		this.plotters[this.plottersCount] = p;
-		this.plotters[this.plottersCount].xScale = this.plotters[0].xScale;
-		this.plotters[this.plottersCount].yScale = this.plotters[0].yScale;
+		this.plotters[this.plottersCount].setxScale(this.plotters[0].getxScale());
+		this.plotters[this.plottersCount].setyScale(this.plotters[0].getyScale());
 		this.plottersCount += 1;
 	}
 
@@ -703,20 +703,20 @@ public final class SpiderChart {
 			g.drawImage(this.backTmpImage, 0, 0, this.getWidth(), this.getHeight(), this.offsetX, this.offsetY,
 					this.getWidth() + this.offsetX, this.getHeight() + this.offsetY);
 		}
-		if (this.plotters[0].xScale != null) {
-			this.plotters[0].xScale.setScreenMax(this.plotters[0].x + this.plotters[0].width);
-			this.plotters[0].xScale
-					.setScreenMaxMargin((int) (this.plotters[0].xScale.getScreenMax() * (1.0D - this.axisMargin)));
+		if (this.plotters[0].getxScale() != null) {
+			this.plotters[0].getxScale().setScreenMax(this.plotters[0].x + this.plotters[0].width);
+			this.plotters[0].getxScale()
+					.setScreenMaxMargin((int) (this.plotters[0].getxScale().getScreenMax() * (1.0D - this.axisMargin)));
 			if (this.fullXAxis) {
-				this.plotters[0].xScale.setScreenMaxMargin(this.plotters[0].xScale.getScreenMax());
+				this.plotters[0].getxScale().setScreenMaxMargin(this.plotters[0].getxScale().getScreenMax());
 			}
-			this.plotters[0].xScale.setScreenMin(this.plotters[0].x);
+			this.plotters[0].getxScale().setScreenMin(this.plotters[0].x);
 		}
-		if (this.plotters[0].yScale != null) {
-			this.plotters[0].yScale.setScreenMax(this.plotters[0].y + this.plotters[0].height);
-			this.plotters[0].yScale
-					.setScreenMaxMargin((int) (this.plotters[0].yScale.getScreenMax() * (1.0D - this.axisMargin)));
-			this.plotters[0].yScale.setScreenMin(this.plotters[0].y);
+		if (this.plotters[0].getyScale() != null) {
+			this.plotters[0].getyScale().setScreenMax(this.plotters[0].y + this.plotters[0].height);
+			this.plotters[0].getyScale()
+					.setScreenMaxMargin((int) (this.plotters[0].getyScale().getScreenMax() * (1.0D - this.axisMargin)));
+			this.plotters[0].getyScale().setScreenMin(this.plotters[0].y);
 		}
 		if (this.repaintAll) {
 			final int plotterBackWidth = this.plotters[0].width;
@@ -744,11 +744,11 @@ public final class SpiderChart {
 		if (this.chartImage != null) {
 			final int x1 = this.plotters[0].x;
 
-			final int x2 = this.plotters[0].x + this.plotters[0].visibleWidth;
+			final int x2 = this.plotters[0].x + this.plotters[0].getVisibleWidth();
 
-			final int y1 = this.plotters[0].y - this.plotters[0].depth;
+			final int y1 = this.plotters[0].y - this.plotters[0].getDepth();
 
-			final int y2 = (this.plotters[0].y - this.plotters[0].depth) + this.plotters[0].visibleHeight;
+			final int y2 = (this.plotters[0].y - this.plotters[0].getDepth()) + this.plotters[0].getVisibleHeight();
 
 			g.drawImage(this.chartImage, x1, y1, x2, y2, x1 + this.offsetX, y1 + this.offsetY, x2 + this.offsetX,
 					y2 + this.offsetY);
@@ -837,13 +837,13 @@ public final class SpiderChart {
 		if (this.virtualHeight < myHeight) {
 			this.virtualHeight = myHeight;
 		}
-		this.plotters[0].visibleWidth = (int) (myWidth * (1.0D - (this.legendMargin + this.leftMargin)));
-		this.plotters[0].visibleHeight = (int) (myHeight * (1.0D - (this.topMargin + this.bottomMargin)));
+		this.plotters[0].setVisibleWidth((int) (myWidth * (1.0D - (this.legendMargin + this.leftMargin))));
+		this.plotters[0].setVisibleHeight((int) (myHeight * (1.0D - (this.topMargin + this.bottomMargin))));
 
 		this.plotters[0].x = (int) (myWidth * this.leftMargin);
 		this.plotters[0].y = (int) (myHeight * this.topMargin);
-		this.plotters[0].width = this.virtualWidth - (myWidth - this.plotters[0].visibleWidth);
-		this.plotters[0].height = this.virtualHeight - (myHeight - this.plotters[0].visibleHeight);
+		this.plotters[0].width = this.virtualWidth - (myWidth - this.plotters[0].getVisibleWidth());
+		this.plotters[0].height = this.virtualHeight - (myHeight - this.plotters[0].getVisibleHeight());
 
 		this.title.x = 0;
 		this.title.y = 0;
