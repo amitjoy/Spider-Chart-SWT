@@ -37,14 +37,14 @@ public final class LineDataSeq extends DataSeq {
 	/**
 	 * Static Factory to create instance of {@link LineDataSeq}
 	 */
-	public static LineDataSeq of(final double[] values, final LineStyle style) {
+	public static LineDataSeq of(final LineStyle style, final double... values) {
 		return new LineDataSeq(values, style);
 	}
 
 	/**
 	 * Static Factory to create instance of {@link LineDataSeq}
 	 */
-	public static LineDataSeq of(final double[] values, final Object oldObjectToCopyData) {
+	public static LineDataSeq of(final Object oldObjectToCopyData, final double... values) {
 		final LineDataSeq seq = new LineDataSeq(values,
 				new LineStyle(2, getColor(getAreaColor(oldObjectToCopyData)), NORMAL_LINE));
 		seq.valueFont = getFont(VERDANA, BOLD, 12);
