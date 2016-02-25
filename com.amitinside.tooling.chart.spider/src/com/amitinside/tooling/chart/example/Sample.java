@@ -28,6 +28,10 @@ import com.amitinside.tooling.chart.swt.SpiderChartViewer;
 
 public final class Sample {
 
+	private enum sampleEnum {
+		BOLLO, BOLLO1, BOLLO2, HELLO, HELLO1, HELLO2;
+	}
+
 	private static SpiderChartViewer viewer;
 
 	private static void buildSpiderChart(final Shell shell) {
@@ -50,8 +54,7 @@ public final class Sample {
 
 		Display.getDefault().asyncExec(() -> {
 			// changing values in runtime
-			final LineDataSeq iPhoneDataSequence = LineDataSeq.of(new double[] { 2.0, 4.2, 4.1, 2.8, 3.7, 4.1 },
-					iPhoneData.get());
+			final LineDataSeq iPhoneDataSequence = LineDataSeq.of(iPhoneData.get(), 2.0, 4.2, 4.1, 2.8, 3.7, 4.1);
 			viewer.getChart().getSpiderPlotter().setSeq(0, iPhoneDataSequence);
 
 			// changing axes in runtime
@@ -59,8 +62,7 @@ public final class Sample {
 					.addAxis("Screen", 5, 0).addAxis("Display", 5, 0).addAxis("Memory", 50, 0).addAxis("Sound", 5, 0)
 					.addAxis("Brand", 5, 0).build();
 
-			final LineDataSeq nexusDataSequence = LineDataSeq.of(new double[] { 3.4, 3.6, 3.8, 12.2, 2.4, 3.3 },
-					nexusData.get());
+			final LineDataSeq nexusDataSequence = LineDataSeq.of(nexusData.get(), sampleEnum.class);
 			viewer.getChart().getSpiderPlotter().setSeq(1, nexusDataSequence);
 			viewer.getChart().setShowTips(true);
 			viewer.getChart().getSpiderPlotter().use(configuration);
