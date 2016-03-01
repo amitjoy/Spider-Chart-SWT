@@ -16,6 +16,7 @@
 package com.amitinside.tooling.chart.builder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public final class AxesConfigurer {
@@ -34,6 +35,20 @@ public final class AxesConfigurer {
 			this.maxScales = new ArrayList<>();
 			this.minScales = new ArrayList<>();
 			this.scalesNames = new ArrayList<>();
+		}
+
+		/** */
+		public <E extends Enum<E>> Builder addAxis(final String name, final Class<E> value) {
+			final double[] doubleValues = new double[value.getEnumConstants().length];
+			int i = 0;
+			for (final Enum<E> enumVal : value.getEnumConstants()) {
+				doubleValues[i++] = enumVal.ordinal();
+			}
+			Arrays.sort(doubleValues);
+			this.maxScales.add(doubleValues[doubleValues.length - 1]);
+			this.minScales.add(doubleValues[0]);
+			this.scalesNames.add(name);
+			return this;
 		}
 
 		/** */

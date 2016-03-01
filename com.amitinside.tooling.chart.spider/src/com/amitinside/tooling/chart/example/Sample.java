@@ -28,7 +28,7 @@ import com.amitinside.tooling.chart.swt.SpiderChartViewer;
 
 public final class Sample {
 
-	private enum sampleEnum {
+	private enum SampleEnum {
 		BOLLO, BOLLO1, BOLLO2, HELLO, HELLO1, HELLO2;
 	}
 
@@ -51,6 +51,7 @@ public final class Sample {
 		}).viewer(chart -> {
 			chart.data(firstData -> firstData.inject(iPhoneData)).data(secondData -> secondData.inject(nexusData));
 		});
+		viewer.getChart().getSpiderPlotter().setScalingLabelFormat("#.#", "#.#", "#.#", "#.#", "#.#");
 
 		Display.getDefault().asyncExec(() -> {
 			// changing values in runtime
@@ -60,13 +61,15 @@ public final class Sample {
 			// changing axes in runtime
 			final AxesConfigurer configuration = new AxesConfigurer.Builder().addAxis("Battery", 5, 0)
 					.addAxis("Screen", 5, 0).addAxis("Display", 5, 0).addAxis("Memory", 50, 0).addAxis("Sound", 5, 0)
-					.addAxis("Brand", 5, 0).build();
+					.addAxis("Brand", SampleEnum.class).build();
 
-			final LineDataSeq nexusDataSequence = LineDataSeq.of(nexusData.get(), sampleEnum.class);
+			final LineDataSeq nexusDataSequence = LineDataSeq.of(nexusData.get(), 2.4, 3.2, 2.1, 3.8, 1.7, 1.1);
 			viewer.getChart().getSpiderPlotter().setSeq(1, nexusDataSequence);
 			viewer.getChart().setShowTips(true);
 			viewer.getChart().getSpiderPlotter().use(configuration);
 			viewer.getChart().getSpiderPlotter().setMarkScalesOnEveryAxis(true);
+			viewer.getChart().getSpiderPlotter().setScalingLabelFormat("#.#", "#.#", "#.#", "#.#", "#.#",
+					SampleEnum.class);
 		});
 	}
 

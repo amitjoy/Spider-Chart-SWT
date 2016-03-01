@@ -22,7 +22,10 @@ import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getFont;
 import static com.amitinside.tooling.chart.gc.Fonts.VERDANA;
 import static java.util.Objects.requireNonNull;
 
+import java.lang.reflect.Array;
 import java.text.DecimalFormat;
+import java.util.Arrays;
+import java.util.List;
 
 import com.amitinside.tooling.chart.builder.AxesConfigurer;
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
@@ -41,6 +44,34 @@ import com.amitinside.tooling.chart.style.LineStyle;
  * @author AMIT KUMAR MONDAL
  */
 public final class SpiderChartPlotter extends AbstractPlotter {
+
+	private enum SampleEnum {
+		BOLLO, BOLLO1, BOLLO2, HELLO, HELLO1;
+	}
+
+	public static <T> T[] concatenate(final T[] a, final T[] b) {
+		final int aLen = a.length;
+		final int bLen = b.length;
+
+		@SuppressWarnings("unchecked")
+		final T[] c = (T[]) Array.newInstance(a.getClass().getComponentType(), aLen + bLen);
+		System.arraycopy(a, 0, c, 0, aLen);
+		System.arraycopy(b, 0, c, aLen, bLen);
+
+		return c;
+	}
+
+	/**
+	 * Returns the array of string represented constants of any Enum
+	 */
+	private static <E extends Enum<E>> List<String> populateValues(final Class<E> value) {
+		final String[] constants = new String[value.getEnumConstants().length];
+		int i = 0;
+		for (final Enum<E> enumVal : value.getEnumConstants()) {
+			constants[i++] = enumVal.name();
+		}
+		return Arrays.asList(constants);
+	}
 
 	/**
 	 * Spider Chart axes names
@@ -125,7 +156,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 	/**
 	 * Spider Chart Scaling Label Format
 	 */
-	private String scalingLabelFormat = "#.#";
+	private Object[] scalingLabelFormat;
 
 	/**
 	 * Constructor
@@ -241,7 +272,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 	/**
 	 * @return the scalingLabelFormat
 	 */
-	public String getScalingLabelFormat() {
+	public Object[] getScalingLabelFormat() {
 		return this.scalingLabelFormat;
 	}
 
@@ -469,12 +500,12 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 
 			int tickAt = 0;
 			final double[] tickAtAbsValues = new double[xs.length];
+			int kl = 0;
 			for (int j = 0; j < this.scalingDivisions; j++) {
 				tickAt += tickInterval;
 				for (int k = 0; k < xs.length; k++) {
 					tickAtAbsValues[k] += tickIntervalAbsValues[k];
 				}
-
 				for (int i = 0; i < count; i++) {
 					angle = (360.0D / count) * i;
 
@@ -502,14 +533,25 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 
 					final double[] tickValues = new double[xs.length];
 					final String[] values = new String[xs.length];
+					final List<String> enumConsts = populateValues(SampleEnum.class);
 					for (int i = 0; i < tickValues.length; i++) {
 						tickValues[i] = tickAtAbsValues[i];
 						values[i] = "" + tickValues[i];
 
-						if (this.scalingLabelFormat.length() > 0) {
-							final DecimalFormat df = new DecimalFormat(this.scalingLabelFormat);
+						if (this.scalingLabelFormat.length > 0) {
+							final Object scalingLabel = this.scalingLabelFormat[i];
+							DecimalFormat df = null;
+							if (scalingLabel instanceof String) {
+								df = new DecimalFormat((String) this.scalingLabelFormat[i]);
+								values[i] = df.format(new Double(tickValues[i]));
+							}
+							if (scalingLabel instanceof Class<?>) {
+								try {
+									values[i] = enumConsts.get(kl++);
+								} catch (final Exception e) {
+								}
+							}
 							// TODO Add multiple scaling label format
-							values[i] = df.format(new Double(tickValues[i]));
 						}
 					}
 
@@ -666,8 +708,8 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 	 * @param scalingLabelFormat
 	 *            the scalingLabelFormat to set
 	 */
-	public void setScalingLabelFormat(final String scalingLabelFormat) {
-		this.scalingLabelFormat = scalingLabelFormat;
+	public void setScalingLabelFormat(final Object... scalingLabelFormat) {
+		this.scalingLabelFormat = Arrays.asList(scalingLabelFormat).toArray();
 	}
 
 	/** */
