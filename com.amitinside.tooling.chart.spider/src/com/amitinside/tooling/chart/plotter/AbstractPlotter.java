@@ -15,7 +15,8 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.plotter;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.amitinside.tooling.chart.SpiderChartComponent;
 import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
@@ -42,7 +43,7 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 	private int depth = 0;
 
 	/** */
-	private Vector<DataSeq> seq = new Vector<>(0, 1);
+	private List<DataSeq> seq = new ArrayList<>();
 
 	/** */
 	private int visibleHeight = 0;
@@ -133,13 +134,13 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 	/**
 	 * @return the seq
 	 */
-	public Vector<DataSeq> getSeq() {
+	public List<DataSeq> getSeq() {
 		return this.seq;
 	}
 
 	/** */
 	public DataSeq getSeq(final int p) {
-		return this.seq.elementAt(p);
+		return this.seq.get(p);
 	}
 
 	/** */
@@ -178,7 +179,7 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 	/** */
 	public void plot(final AbstractChartGraphics g) {
 		for (int i = 0; i < this.seq.size(); i++) {
-			final DataSeq s = this.seq.elementAt(i);
+			final DataSeq s = this.seq.get(i);
 			this.plot(g, s, i);
 		}
 	}
@@ -221,9 +222,9 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 			return;
 		}
 		if (p == -1) {
-			this.seq.addElement(s);
+			this.seq.add(s);
 		} else {
-			this.seq.setElementAt(s, p);
+			this.seq.set(p, s);
 		}
 		final boolean fixedLimits = false;
 		final boolean cumulative = false;
@@ -235,7 +236,7 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 					if (cumulative) {
 						YValue = 0.0D;
 						for (int si = 0; si < this.seq.size(); si++) {
-							final DataSeq ser = this.seq.elementAt(si);
+							final DataSeq ser = this.seq.get(si);
 						}
 					}
 					if (XValue >= tmpScaleX.getMax()) {
@@ -284,7 +285,7 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 	/** */
 	public void setSeq(final int p, final DataSeq s) {
 		if (p < this.seq.size()) {
-			this.seq.setElementAt(s, p);
+			this.seq.set(p, s);
 		}
 	}
 
@@ -292,7 +293,7 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 	 * @param seq
 	 *            the seq to set
 	 */
-	public void setSeq(final Vector<DataSeq> seq) {
+	public void setSeq(final List<DataSeq> seq) {
 		this.seq = seq;
 	}
 

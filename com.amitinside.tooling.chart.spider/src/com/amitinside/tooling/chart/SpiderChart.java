@@ -30,8 +30,8 @@ import static com.amitinside.tooling.chart.listener.ISpiderChartListener.EVENT_L
 import static com.amitinside.tooling.chart.listener.ISpiderChartListener.EVENT_POINT_CLICKED;
 import static com.amitinside.tooling.chart.listener.ISpiderChartListener.EVENT_TIP_UPDATE;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
@@ -163,7 +163,7 @@ public final class SpiderChart {
 	private AbstractChartImage finalImage = null;
 
 	/** */
-	private final Vector<IFloatingObject> floatingObjects = new Vector<>(0, 5);
+	private final List<IFloatingObject> floatingObjects = new ArrayList<>();
 
 	/** */
 	private final boolean fullXAxis = false;
@@ -276,7 +276,7 @@ public final class SpiderChart {
 
 	/** */
 	public void addFloationgObject(final IFloatingObject obj) {
-		this.floatingObjects.addElement(obj);
+		this.floatingObjects.add(obj);
 	}
 
 	/** */
@@ -395,7 +395,7 @@ public final class SpiderChart {
 		return this.finalImage;
 	}
 
-	public Vector<IFloatingObject> getFloatingObjects() {
+	public List<IFloatingObject> getFloatingObjects() {
 		return this.floatingObjects;
 	}
 
@@ -589,7 +589,7 @@ public final class SpiderChart {
 				for (int k = 0; k < plotter.getSeqCount(); k++) {
 					final DataSeq d = plotter.getSeq(k);
 					for (int i = 0; i < d.getHotAreas().size(); i++) {
-						if (((Polygon) d.getHotAreas().elementAt(i)).contains(this.currentX + this.offsetX,
+						if (((Polygon) d.getHotAreas().get(i)).contains(this.currentX + this.offsetX,
 								this.currentY + this.offsetY)) {
 							boolean triggerEnter = false;
 							if (previousSelectedObject == null) {
@@ -622,7 +622,7 @@ public final class SpiderChart {
 
 	/** */
 	public void paint(final AbstractChartGraphics pg) {
-		this.floatingObjects.removeAllElements();
+		this.floatingObjects.clear();
 
 		if ((this.plotters[0] == null) || (this.plottersCount <= 0)) {
 			pg.setColor(getColor(RED));
@@ -817,7 +817,7 @@ public final class SpiderChart {
 		this.selectedSeq = null;
 		this.selectedSeqPoint = -1;
 		this.repaintAll = true;
-		this.floatingObjects.removeAllElements();
+		this.floatingObjects.clear();
 		this.plotters[0] = p;
 		this.title = t;
 		if (this.title == null) {
