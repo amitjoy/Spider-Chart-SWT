@@ -20,7 +20,7 @@ import static com.amitinside.tooling.chart.gc.AbstractChartFont.PLAIN;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getColor;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getFont;
 import static com.amitinside.tooling.chart.gc.Fonts.VERDANA;
-import static com.amitinside.tooling.chart.util.SpiderUtil.enumConstants;
+import static com.amitinside.tooling.chart.util.ChartUtil.enumConstants;
 import static java.util.Objects.requireNonNull;
 
 import java.text.DecimalFormat;

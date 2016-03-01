@@ -15,7 +15,7 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.builder;
 
-import static com.amitinside.tooling.chart.util.SpiderUtil.toDoublePrimitiveArray;
+import static com.amitinside.tooling.chart.util.ChartUtil.toDoublePrimitiveArray;
 
 import java.util.ArrayList;
 import java.util.Arrays;

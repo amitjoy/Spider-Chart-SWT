@@ -18,7 +18,7 @@ package com.amitinside.tooling.chart.util;
 import java.util.Arrays;
 import java.util.List;
 
-public final class SpiderUtil {
+public final class ChartUtil {
 
 	/**
 	 * Returns the array of string represented constants of any Enum
@@ -61,8 +61,7 @@ public final class SpiderUtil {
 	/**
 	 * Constructor
 	 */
-	private SpiderUtil() {
-
+	private ChartUtil() {
 	}
 
 }
