@@ -55,6 +55,7 @@ public final class AxesConfigurer {
 
 		/** */
 		public Builder addAxis(final String name, final double maxScale, final double minScale) {
+			// TODO Automatically define the Scaling Label Format
 			this.maxScales.add(maxScale);
 			this.minScales.add(minScale);
 			this.scalesNames.add(name);
