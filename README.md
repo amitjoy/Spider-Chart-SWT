@@ -44,7 +44,9 @@ public final class Nexus {
 ```
 
 ``` java
-private enum Brand {
+public final class Sample {
+
+	private enum Brand {
 		COMMUNAL, INTERNATIONAL, LOCAL, OUT_OF_MARKET, STANDARD
 	}
 
@@ -93,6 +95,28 @@ private enum Brand {
 			viewer.getChart().getSpiderPlotter().setScalingLabelFormat("#.#", "#.#", "#.#", "#.#", "#.#", Brand.class);
 		});
 	}
+
+	public static void main(final String[] args) {
+		final Display display = new Display();
+		final Shell shell = new Shell(display, SWT.DIALOG_TRIM);
+		shell.setSize(800, 750);
+
+		buildSpiderChart(shell);
+		shell.open();
+
+		while (!shell.isDisposed()) {
+			if (!display.readAndDispatch()) {
+				display.sleep();
+			}
+		}
+
+		viewer.getChart().stopWorker();
+		viewer.getChart().dispose();
+
+		display.dispose();
+	}
+
+}
 ```
 
 
