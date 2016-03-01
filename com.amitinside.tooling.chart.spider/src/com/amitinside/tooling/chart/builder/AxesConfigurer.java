@@ -15,7 +15,7 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.builder;
 
-import static com.amitinside.tooling.chart.util.SpiderUtil.toDoublePrimitiveArray;
+import static com.amitinside.tooling.chart.util.ChartUtil.toDoublePrimitiveArray;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,6 +55,7 @@ public final class AxesConfigurer {
 
 		/** */
 		public Builder addAxis(final String name, final double maxScale, final double minScale) {
+			// TODO Automatically define the Scaling Label Format
 			this.maxScales.add(maxScale);
 			this.minScales.add(minScale);
 			this.scalesNames.add(name);
