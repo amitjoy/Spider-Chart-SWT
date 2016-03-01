@@ -20,9 +20,11 @@ import static com.amitinside.tooling.chart.gc.AbstractChartFont.PLAIN;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getColor;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getFont;
 import static com.amitinside.tooling.chart.gc.Fonts.VERDANA;
+import static com.amitinside.tooling.chart.util.SpiderUtil.enumConstants;
 import static java.util.Objects.requireNonNull;
 
 import java.text.DecimalFormat;
+import java.util.Arrays;
 
 import com.amitinside.tooling.chart.builder.AxesConfigurer;
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
@@ -125,7 +127,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 	/**
 	 * Spider Chart Scaling Label Format
 	 */
-	private String scalingLabelFormat = "#.#";
+	private Object[] scalingLabelFormat;
 
 	/**
 	 * Constructor
@@ -241,7 +243,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 	/**
 	 * @return the scalingLabelFormat
 	 */
-	public String getScalingLabelFormat() {
+	public Object[] getScalingLabelFormat() {
 		return this.scalingLabelFormat;
 	}
 
@@ -260,6 +262,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 	}
 
 	/** {@inheritDoc}} **/
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	protected void plot(final AbstractChartGraphics g, final DataSeq s, final int seqSec) {
 		LineDataSeq p = null;
@@ -396,6 +399,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 		if (p.getFillStyle() != null) {
 			p.getFillStyle().drawPolygon(g, xs, ys, (int) count);
 		}
+		int kl = 0;
 		for (int i = 0; i < count; i++) {
 			final Polygon po = new Polygon();
 			po.addPoint(xs[i] - 3, ys[i] - 3);
@@ -474,7 +478,6 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 				for (int k = 0; k < xs.length; k++) {
 					tickAtAbsValues[k] += tickIntervalAbsValues[k];
 				}
-
 				for (int i = 0; i < count; i++) {
 					angle = (360.0D / count) * i;
 
@@ -502,14 +505,26 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 
 					final double[] tickValues = new double[xs.length];
 					final String[] values = new String[xs.length];
+
 					for (int i = 0; i < tickValues.length; i++) {
 						tickValues[i] = tickAtAbsValues[i];
 						values[i] = "" + tickValues[i];
 
-						if (this.scalingLabelFormat.length() > 0) {
-							final DecimalFormat df = new DecimalFormat(this.scalingLabelFormat);
-							// TODO Add multiple scaling label format
-							values[i] = df.format(new Double(tickValues[i]));
+						if (this.scalingLabelFormat.length > 0) {
+							final Object scalingLabel = this.scalingLabelFormat[i];
+							DecimalFormat df = null;
+							if (scalingLabel instanceof String) {
+								df = new DecimalFormat((String) this.scalingLabelFormat[i]);
+								values[i] = df.format(new Double(tickValues[i]));
+							}
+							if (scalingLabel instanceof Class<?>) {
+								if (((Class<?>) scalingLabel).isEnum()) {
+									try {
+										values[i] = (String) enumConstants((Class<Enum>) scalingLabel).get(kl++);
+									} catch (final Exception e) {
+									}
+								}
+							}
 						}
 					}
 
@@ -666,8 +681,8 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 	 * @param scalingLabelFormat
 	 *            the scalingLabelFormat to set
 	 */
-	public void setScalingLabelFormat(final String scalingLabelFormat) {
-		this.scalingLabelFormat = scalingLabelFormat;
+	public void setScalingLabelFormat(final Object... scalingLabelFormat) {
+		this.scalingLabelFormat = Arrays.asList(scalingLabelFormat).toArray();
 	}
 
 	/** */

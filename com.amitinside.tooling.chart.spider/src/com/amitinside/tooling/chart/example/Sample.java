@@ -28,8 +28,8 @@ import com.amitinside.tooling.chart.swt.SpiderChartViewer;
 
 public final class Sample {
 
-	private enum sampleEnum {
-		BOLLO, BOLLO1, BOLLO2, HELLO, HELLO1, HELLO2;
+	private enum Brand {
+		COMMUNAL, INTERNATIONAL, LOCAL, OUT_OF_MARKET, STANDARD
 	}
 
 	private static SpiderChartViewer viewer;
@@ -51,22 +51,26 @@ public final class Sample {
 		}).viewer(chart -> {
 			chart.data(firstData -> firstData.inject(iPhoneData)).data(secondData -> secondData.inject(nexusData));
 		});
+		viewer.getChart().getSpiderPlotter().setScalingLabelFormat("#.#", "#.#", "#.#", "#.#", "#.#");
 
 		Display.getDefault().asyncExec(() -> {
 			// changing values in runtime
-			final LineDataSeq iPhoneDataSequence = LineDataSeq.of(iPhoneData.get(), 2.0, 4.2, 4.1, 2.8, 3.7, 4.1);
+			final LineDataSeq iPhoneDataSequence = LineDataSeq.of(iPhoneData.get(), 2.0, 4.2, 4.1, 42.8, 3.7,
+					Brand.INTERNATIONAL); // 5
 			viewer.getChart().getSpiderPlotter().setSeq(0, iPhoneDataSequence);
 
 			// changing axes in runtime
 			final AxesConfigurer configuration = new AxesConfigurer.Builder().addAxis("Battery", 5, 0)
 					.addAxis("Screen", 5, 0).addAxis("Display", 5, 0).addAxis("Memory", 50, 0).addAxis("Sound", 5, 0)
-					.addAxis("Brand", 5, 0).build();
+					.addAxis("Brand", Brand.class).build();
 
-			final LineDataSeq nexusDataSequence = LineDataSeq.of(nexusData.get(), sampleEnum.class);
+			final LineDataSeq nexusDataSequence = LineDataSeq.of(nexusData.get(), 2.4, 3.2, 2.1, 23.8, 1.7,
+					Brand.LOCAL); // 2
 			viewer.getChart().getSpiderPlotter().setSeq(1, nexusDataSequence);
 			viewer.getChart().setShowTips(true);
 			viewer.getChart().getSpiderPlotter().use(configuration);
 			viewer.getChart().getSpiderPlotter().setMarkScalesOnEveryAxis(true);
+			viewer.getChart().getSpiderPlotter().setScalingLabelFormat("#.#", "#.#", "#.#", "#.#", "#.#", Brand.class);
 		});
 	}
 

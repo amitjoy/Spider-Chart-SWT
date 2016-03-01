@@ -22,6 +22,7 @@ import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getColor;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getFont;
 import static com.amitinside.tooling.chart.gc.Fonts.VERDANA;
 import static com.amitinside.tooling.chart.style.LineStyle.NORMAL_LINE;
+import static com.amitinside.tooling.chart.util.SpiderUtil.wrapValues;
 
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
 import com.amitinside.tooling.chart.gc.AbstractChartFont;
@@ -44,25 +45,9 @@ public final class LineDataSeq extends DataSeq {
 	/**
 	 * Static Factory to create instance of {@link LineDataSeq}
 	 */
-	public static <E extends Enum<E>> LineDataSeq of(final Object oldObjectToCopyData, final Class<E> value) {
-		final double[] doubleValues = new double[value.getEnumConstants().length];
-		int i = 0;
-		for (final Enum<E> enumVal : value.getEnumConstants()) {
-			doubleValues[i++] = enumVal.ordinal();
-		}
-		final LineDataSeq seq = new LineDataSeq(doubleValues,
-				new LineStyle(2, getColor(getAreaColor(oldObjectToCopyData)), NORMAL_LINE));
-		seq.valueFont = getFont(VERDANA, BOLD, 12);
-		seq.fillStyle = new FillStyle(getColor(getAreaColor(oldObjectToCopyData)), 0.5f);
-		seq.drawPoint = true;
-		return seq;
-	}
-
-	/**
-	 * Static Factory to create instance of {@link LineDataSeq}
-	 */
-	public static LineDataSeq of(final Object oldObjectToCopyData, final double... values) {
-		final LineDataSeq seq = new LineDataSeq(values,
+	public static <E extends Enum<E>> LineDataSeq of(final Object oldObjectToCopyData, final Object... values) {
+		final double[] wrappedValues = wrapValues(values);
+		final LineDataSeq seq = new LineDataSeq(wrappedValues,
 				new LineStyle(2, getColor(getAreaColor(oldObjectToCopyData)), NORMAL_LINE));
 		seq.valueFont = getFont(VERDANA, BOLD, 12);
 		seq.fillStyle = new FillStyle(getColor(getAreaColor(oldObjectToCopyData)), 0.5f);
