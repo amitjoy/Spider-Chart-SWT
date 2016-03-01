@@ -47,7 +47,7 @@ public final class AxesConfigurer {
 				doubleValues[i++] = enumVal.ordinal();
 			}
 			Arrays.sort(doubleValues);
-			this.maxScales.add(doubleValues[doubleValues.length - 1]);
+			this.maxScales.add(doubleValues[doubleValues.length - 1] + 1);
 			this.minScales.add(doubleValues[0]);
 			this.scalesNames.add(name);
 			return this;

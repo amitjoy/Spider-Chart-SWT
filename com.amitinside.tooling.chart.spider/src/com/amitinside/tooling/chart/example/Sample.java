@@ -29,7 +29,7 @@ import com.amitinside.tooling.chart.swt.SpiderChartViewer;
 public final class Sample {
 
 	private enum SampleEnum {
-		BOLLO, BOLLO1, BOLLO2, HELLO, HELLO1, HELLO2;
+		BOLLO, BOLLO1, BOLLO2, HELLO, HELLO1;
 	}
 
 	private static SpiderChartViewer viewer;
@@ -56,7 +56,7 @@ public final class Sample {
 		Display.getDefault().asyncExec(() -> {
 			// changing values in runtime
 			final LineDataSeq iPhoneDataSequence = LineDataSeq.of(iPhoneData.get(), 2.0, 4.2, 4.1, 42.8, 3.7,
-					SampleEnum.HELLO2);
+					SampleEnum.HELLO1); // 5
 			viewer.getChart().getSpiderPlotter().setSeq(0, iPhoneDataSequence);
 
 			// changing axes in runtime
@@ -65,7 +65,7 @@ public final class Sample {
 					.addAxis("Brand", SampleEnum.class).build();
 
 			final LineDataSeq nexusDataSequence = LineDataSeq.of(nexusData.get(), 2.4, 3.2, 2.1, 23.8, 1.7,
-					SampleEnum.BOLLO);
+					SampleEnum.BOLLO1); // 2
 			viewer.getChart().getSpiderPlotter().setSeq(1, nexusDataSequence);
 			viewer.getChart().setShowTips(true);
 			viewer.getChart().getSpiderPlotter().use(configuration);

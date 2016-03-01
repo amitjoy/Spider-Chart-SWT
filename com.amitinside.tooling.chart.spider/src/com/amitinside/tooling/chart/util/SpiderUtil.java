@@ -52,7 +52,7 @@ public final class SpiderUtil {
 			}
 			if (value instanceof Enum<?>) {
 				final Enum<?> enumConst = (Enum<?>) value;
-				wrappedValues[i++] = enumConst.ordinal();
+				wrappedValues[i++] = enumConst.ordinal() + 1;
 			}
 		}
 		return wrappedValues;
