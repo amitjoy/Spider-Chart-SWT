@@ -44,28 +44,58 @@ public final class Nexus {
 ```
 
 ``` java
-// Create the objects of the annotated classes
-final Supplier<Object> iPhoneData = IPhone::new;
-final Supplier<Object> nexusData = Nexus::new;
+private enum Brand {
+		COMMUNAL, INTERNATIONAL, LOCAL, OUT_OF_MARKET, STANDARD
+	}
 
-final SpiderChartViewer viewer = SpiderChartBuilder.config(shell, settings -> {
-    // Add title and legends to the Spider Chart
-    settings.title(title -> title.text = "Smartphone Comparison Scale").legend(legend -> {
-        legend.addItem(iPhoneData);
-        legend.addItem(nexusData);
-    }).plotter(plotter -> {
-        // Add the Axes (name, maximum scale, minimum scale)
-        final AxesConfigurer configuration = new AxesConfigurer.Builder().addAxis("Battery", 5, 0)
-                .addAxis("Camera", 5, 0).addAxis("Display", 5, 0).addAxis("Memory", 5, 0).addAxis("Brand", 5, 0).build();
-        plotter.use(configuration);
-    });
-}).viewer(chart -> {
-    // Add the different data objects
-    chart.data(firstData -> firstData.inject(iPhoneData)).data(secondData -> secondData.inject(nexusData));
-});
+	private static SpiderChartViewer viewer;
+
+	private static void buildSpiderChart(final Shell shell) {
+		final Supplier<Object> iPhoneData = IPhone::new;
+		final Supplier<Object> nexusData = Nexus::new;
+
+		viewer = SpiderChartBuilder.config(shell, settings -> {
+			settings.title(title -> title.setText("Smartphone Comparison Scale")).legend(legend -> {
+				legend.addItem(iPhoneData);
+				legend.addItem(nexusData);
+			}).plotter(plotter -> {
+				final AxesConfigurer configuration = new AxesConfigurer.Builder().addAxis("Battery", 5, 0)
+						.addAxis("Camera", 5, 0).addAxis("Display", 5, 0).addAxis("Memory", 5, 0).addAxis("Brand", 5, 0)
+						.build();
+				plotter.use(configuration);
+			});
+		}).viewer(chart -> {
+			chart.data(firstData -> firstData.inject(iPhoneData)).data(secondData -> secondData.inject(nexusData));
+		});
+
+		viewer.getChart().getSpiderPlotter().setScalingLabelFormat("#.#", "#.#", "#.#", "#.#", "#.#");
+
+		// Updating the chart with new parameters
+		Display.getDefault().asyncExec(() -> {
+			// changing values in runtime
+			final LineDataSeq iPhoneDataSequence = LineDataSeq.of(iPhoneData.get(), 2.0, 4.2, 4.1, 42.8, 3.7,
+					Brand.INTERNATIONAL);
+			// Set the first sequence
+			viewer.getChart().getSpiderPlotter().setSeq(0, iPhoneDataSequence);
+
+			// changing axes in runtime
+			final AxesConfigurer configuration = new AxesConfigurer.Builder().addAxis("Battery", 5, 0)
+					.addAxis("Screen", 5, 0).addAxis("Display", 5, 0).addAxis("Memory", 50, 0).addAxis("Sound", 5, 0)
+					.addAxis("Brand", Brand.class).build();
+
+			final LineDataSeq nexusDataSequence = LineDataSeq.of(nexusData.get(), 2.4, 3.2, 2.1, 23.8, 1.7,
+					Brand.LOCAL);
+
+			// Set the second sequence
+			viewer.getChart().getSpiderPlotter().setSeq(1, nexusDataSequence);
+			viewer.getChart().getSpiderPlotter().use(configuration);
+			viewer.getChart().getSpiderPlotter().setMarkScalesOnEveryAxis(true);
+			viewer.getChart().getSpiderPlotter().setScalingLabelFormat("#.#", "#.#", "#.#", "#.#", "#.#", Brand.class);
+		});
+	}
 ```
 
 
 ### Sample Output
 
-<img src="http://s10.postimg.org/h5j8mqb61/Screen_Shot_2016_02_07_at_12_19_09_AM.png">
+<img src="http://s12.postimg.org/89clddb2l/Screen_Shot_2016_03_02_at_12_03_24_AM.png">
