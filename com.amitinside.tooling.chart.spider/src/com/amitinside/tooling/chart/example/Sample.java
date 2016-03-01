@@ -55,7 +55,7 @@ public final class Sample {
 
 		Display.getDefault().asyncExec(() -> {
 			// changing values in runtime
-			final LineDataSeq iPhoneDataSequence = LineDataSeq.of(iPhoneData.get(), 2.0, 4.2, 4.1, 2.8, 3.7, 4.1);
+			final LineDataSeq iPhoneDataSequence = LineDataSeq.of(iPhoneData.get(), 2.0, 4.2, 4.1, 2.8, 3.7, 1.1);
 			viewer.getChart().getSpiderPlotter().setSeq(0, iPhoneDataSequence);
 
 			// changing axes in runtime
@@ -63,7 +63,8 @@ public final class Sample {
 					.addAxis("Screen", 5, 0).addAxis("Display", 5, 0).addAxis("Memory", 50, 0).addAxis("Sound", 5, 0)
 					.addAxis("Brand", SampleEnum.class).build();
 
-			final LineDataSeq nexusDataSequence = LineDataSeq.of(nexusData.get(), 2.4, 3.2, 2.1, 3.8, 1.7, 1.1);
+			final LineDataSeq nexusDataSequence = LineDataSeq.of(nexusData.get(), 2.4, 3.2, 2.1, 3.8, 1.7,
+					SampleEnum.BOLLO);
 			viewer.getChart().getSpiderPlotter().setSeq(1, nexusDataSequence);
 			viewer.getChart().setShowTips(true);
 			viewer.getChart().getSpiderPlotter().use(configuration);

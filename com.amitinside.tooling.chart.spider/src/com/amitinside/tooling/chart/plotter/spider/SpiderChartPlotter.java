@@ -20,11 +20,11 @@ import static com.amitinside.tooling.chart.gc.AbstractChartFont.PLAIN;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getColor;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getFont;
 import static com.amitinside.tooling.chart.gc.Fonts.VERDANA;
+import static com.amitinside.tooling.chart.util.SpiderUtil.enumConstants;
 import static java.util.Objects.requireNonNull;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
-import java.util.List;
 
 import com.amitinside.tooling.chart.builder.AxesConfigurer;
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
@@ -43,18 +43,6 @@ import com.amitinside.tooling.chart.style.LineStyle;
  * @author AMIT KUMAR MONDAL
  */
 public final class SpiderChartPlotter extends AbstractPlotter {
-
-	/**
-	 * Returns the array of string represented constants of any Enum
-	 */
-	private static <E extends Enum<E>> List<String> enumConstants(final Class<E> value) {
-		final String[] constants = new String[value.getEnumConstants().length];
-		int i = 0;
-		for (final Enum<E> enumVal : value.getEnumConstants()) {
-			constants[i++] = enumVal.name();
-		}
-		return Arrays.asList(constants);
-	}
 
 	/**
 	 * Spider Chart axes names

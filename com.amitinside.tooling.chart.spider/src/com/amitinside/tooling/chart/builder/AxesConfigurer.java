@@ -15,6 +15,8 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.builder;
 
+import static com.amitinside.tooling.chart.util.SpiderUtil.toDoublePrimitiveArray;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -64,15 +66,6 @@ public final class AxesConfigurer {
 			return new AxesConfigurer(this.maxScales, this.minScales, this.scalesNames);
 		}
 
-	}
-
-	/** */
-	private static double[] toDoublePrimitiveArray(final Double[] wrappedArray) {
-		final double[] array = new double[wrappedArray.length];
-		for (int i = 0; i < wrappedArray.length; i++) {
-			array[i] = wrappedArray[i].intValue();
-		}
-		return array;
 	}
 
 	/** */

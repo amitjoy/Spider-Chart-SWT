@@ -22,6 +22,7 @@ import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getColor;
 import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getFont;
 import static com.amitinside.tooling.chart.gc.Fonts.VERDANA;
 import static com.amitinside.tooling.chart.style.LineStyle.NORMAL_LINE;
+import static com.amitinside.tooling.chart.util.SpiderUtil.wrapValues;
 
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
 import com.amitinside.tooling.chart.gc.AbstractChartFont;
@@ -44,8 +45,9 @@ public final class LineDataSeq extends DataSeq {
 	/**
 	 * Static Factory to create instance of {@link LineDataSeq}
 	 */
-	public static LineDataSeq of(final Object oldObjectToCopyData, final double... values) {
-		final LineDataSeq seq = new LineDataSeq(values,
+	public static <E extends Enum<E>> LineDataSeq of(final Object oldObjectToCopyData, final Object... values) {
+		final double[] wrappedValues = wrapValues(values);
+		final LineDataSeq seq = new LineDataSeq(wrappedValues,
 				new LineStyle(2, getColor(getAreaColor(oldObjectToCopyData)), NORMAL_LINE));
 		seq.valueFont = getFont(VERDANA, BOLD, 12);
 		seq.fillStyle = new FillStyle(getColor(getAreaColor(oldObjectToCopyData)), 0.5f);
