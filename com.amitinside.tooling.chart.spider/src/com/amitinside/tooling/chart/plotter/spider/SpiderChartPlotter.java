@@ -22,7 +22,6 @@ import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getFont;
 import static com.amitinside.tooling.chart.gc.Fonts.VERDANA;
 import static java.util.Objects.requireNonNull;
 
-import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
@@ -45,26 +44,10 @@ import com.amitinside.tooling.chart.style.LineStyle;
  */
 public final class SpiderChartPlotter extends AbstractPlotter {
 
-	private enum SampleEnum {
-		BOLLO, BOLLO1, BOLLO2, HELLO, HELLO1;
-	}
-
-	public static <T> T[] concatenate(final T[] a, final T[] b) {
-		final int aLen = a.length;
-		final int bLen = b.length;
-
-		@SuppressWarnings("unchecked")
-		final T[] c = (T[]) Array.newInstance(a.getClass().getComponentType(), aLen + bLen);
-		System.arraycopy(a, 0, c, 0, aLen);
-		System.arraycopy(b, 0, c, aLen, bLen);
-
-		return c;
-	}
-
 	/**
 	 * Returns the array of string represented constants of any Enum
 	 */
-	private static <E extends Enum<E>> List<String> populateValues(final Class<E> value) {
+	private static <E extends Enum<E>> List<String> enumConstants(final Class<E> value) {
 		final String[] constants = new String[value.getEnumConstants().length];
 		int i = 0;
 		for (final Enum<E> enumVal : value.getEnumConstants()) {
@@ -291,6 +274,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 	}
 
 	/** {@inheritDoc}} **/
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	protected void plot(final AbstractChartGraphics g, final DataSeq s, final int seqSec) {
 		LineDataSeq p = null;
@@ -427,6 +411,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 		if (p.getFillStyle() != null) {
 			p.getFillStyle().drawPolygon(g, xs, ys, (int) count);
 		}
+		int kl = 0;
 		for (int i = 0; i < count; i++) {
 			final Polygon po = new Polygon();
 			po.addPoint(xs[i] - 3, ys[i] - 3);
@@ -500,7 +485,6 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 
 			int tickAt = 0;
 			final double[] tickAtAbsValues = new double[xs.length];
-			int kl = 0;
 			for (int j = 0; j < this.scalingDivisions; j++) {
 				tickAt += tickInterval;
 				for (int k = 0; k < xs.length; k++) {
@@ -533,7 +517,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 
 					final double[] tickValues = new double[xs.length];
 					final String[] values = new String[xs.length];
-					final List<String> enumConsts = populateValues(SampleEnum.class);
+
 					for (int i = 0; i < tickValues.length; i++) {
 						tickValues[i] = tickAtAbsValues[i];
 						values[i] = "" + tickValues[i];
@@ -546,12 +530,13 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 								values[i] = df.format(new Double(tickValues[i]));
 							}
 							if (scalingLabel instanceof Class<?>) {
-								try {
-									values[i] = enumConsts.get(kl++);
-								} catch (final Exception e) {
+								if (((Class<?>) scalingLabel).isEnum()) {
+									try {
+										values[i] = (String) enumConstants((Class<Enum>) scalingLabel).get(kl++);
+									} catch (final Exception e) {
+									}
 								}
 							}
-							// TODO Add multiple scaling label format
 						}
 					}
 
