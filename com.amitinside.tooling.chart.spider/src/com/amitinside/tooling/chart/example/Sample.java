@@ -51,12 +51,13 @@ public final class Sample {
 		}).viewer(chart -> {
 			chart.data(firstData -> firstData.inject(iPhoneData)).data(secondData -> secondData.inject(nexusData));
 		});
+
 		viewer.getChart().getSpiderPlotter().setScalingLabelFormat("#.#", "#.#", "#.#", "#.#", "#.#");
 
 		Display.getDefault().asyncExec(() -> {
 			// changing values in runtime
 			final LineDataSeq iPhoneDataSequence = LineDataSeq.of(iPhoneData.get(), 2.0, 4.2, 4.1, 42.8, 3.7,
-					Brand.INTERNATIONAL); // 5
+					Brand.INTERNATIONAL);
 			viewer.getChart().getSpiderPlotter().setSeq(0, iPhoneDataSequence);
 
 			// changing axes in runtime
@@ -65,9 +66,9 @@ public final class Sample {
 					.addAxis("Brand", Brand.class).build();
 
 			final LineDataSeq nexusDataSequence = LineDataSeq.of(nexusData.get(), 2.4, 3.2, 2.1, 23.8, 1.7,
-					Brand.LOCAL); // 2
+					Brand.LOCAL);
+
 			viewer.getChart().getSpiderPlotter().setSeq(1, nexusDataSequence);
-			viewer.getChart().setShowTips(true);
 			viewer.getChart().getSpiderPlotter().use(configuration);
 			viewer.getChart().getSpiderPlotter().setMarkScalesOnEveryAxis(true);
 			viewer.getChart().getSpiderPlotter().setScalingLabelFormat("#.#", "#.#", "#.#", "#.#", "#.#", Brand.class);
@@ -87,8 +88,10 @@ public final class Sample {
 				display.sleep();
 			}
 		}
+
 		viewer.getChart().stopWorker();
 		viewer.getChart().dispose();
+
 		display.dispose();
 	}
 
