@@ -19,8 +19,9 @@ import static java.text.NumberFormat.getNumberInstance;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
-import java.util.Vector;
 
 import com.amitinside.tooling.chart.SpiderChart;
 
@@ -29,7 +30,7 @@ public class DataSeq {
 	/** */
 	private String[] dataLabels;
 	/** */
-	private Vector<Object> hotAreas = new Vector<>(0, 5);
+	private List<Object> hotAreas = new ArrayList<>();
 	/** */
 	private String labelTemplate = "";
 	/** */
@@ -39,9 +40,9 @@ public class DataSeq {
 	/** */
 	private String valueFormat = "######.##";
 	/** */
-	private Vector<Double> xData = new Vector<>(0, 5);
+	private List<Double> xData = new ArrayList<>();
 	/** */
-	private Vector<Double> yData = new Vector<>(0, 5);
+	private List<Double> yData = new ArrayList<>();
 
 	/**
 	 * Constructor
@@ -99,8 +100,8 @@ public class DataSeq {
 
 	/** Constructor */
 	public void addData(final Object x, final Object y) {
-		this.xData.addElement((Double) x);
-		this.yData.addElement((Double) y);
+		this.xData.add((Double) x);
+		this.yData.add((Double) y);
 	}
 
 	/** */
@@ -127,15 +128,15 @@ public class DataSeq {
 
 	/** */
 	public Object getElementX(final int i) {
-		return this.xData.elementAt(i);
+		return this.xData.get(i);
 	}
 
 	/** */
 	public Object getElementY(final int i) {
-		return this.yData.elementAt(i);
+		return this.yData.get(i);
 	}
 
-	public Vector<Object> getHotAreas() {
+	public List<Object> getHotAreas() {
 		return this.hotAreas;
 	}
 
@@ -160,11 +161,11 @@ public class DataSeq {
 		return this.valueFormat;
 	}
 
-	public Vector<Double> getxData() {
+	public List<Double> getxData() {
 		return this.xData;
 	}
 
-	public Vector<Double> getyData() {
+	public List<Double> getyData() {
 		return this.yData;
 	}
 
@@ -172,7 +173,7 @@ public class DataSeq {
 		this.dataLabels = dataLabels;
 	}
 
-	public void setHotAreas(final Vector<Object> hotAreas) {
+	public void setHotAreas(final List<Object> hotAreas) {
 		this.hotAreas = hotAreas;
 	}
 
@@ -192,11 +193,11 @@ public class DataSeq {
 		this.valueFormat = valueFormat;
 	}
 
-	public void setxData(final Vector<Double> xData) {
+	public void setxData(final List<Double> xData) {
 		this.xData = xData;
 	}
 
-	public void setyData(final Vector<Double> yData) {
+	public void setyData(final List<Double> yData) {
 		this.yData = yData;
 	}
 

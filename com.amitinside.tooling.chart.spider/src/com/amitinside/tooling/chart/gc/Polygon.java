@@ -15,23 +15,24 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.gc;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class Polygon {
 
 	/** */
-	private final Vector<Point> points;
+	private final List<Point> points;
 
 	/**
 	 * Constructor
 	 */
 	public Polygon() {
-		this.points = new Vector<>();
+		this.points = new ArrayList<>();
 	}
 
 	/** */
 	public void addPoint(final int x, final int y) {
-		this.points.addElement(new Point(x, y));
+		this.points.add(new Point(x, y));
 	}
 
 	/** */
@@ -53,11 +54,11 @@ public final class Polygon {
 
 	/** */
 	public int getX(final int i) {
-		return this.points.elementAt(i).getX();
+		return this.points.get(i).getX();
 	}
 
 	/** */
 	public int getY(final int i) {
-		return this.points.elementAt(i).getY();
+		return this.points.get(i).getY();
 	}
 }

@@ -269,7 +269,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 		if (s instanceof LineDataSeq) {
 			p = (LineDataSeq) s;
 		}
-		s.getHotAreas().removeAllElements();
+		s.getHotAreas().clear();
 
 		final double count = p.getyData().size();
 
@@ -406,7 +406,7 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 			po.addPoint(xs[i] - 3, ys[i] + 3);
 			po.addPoint(xs[i] + 3, ys[i] + 3);
 			po.addPoint(xs[i] + 3, ys[i] - 3);
-			s.getHotAreas().addElement(po);
+			s.getHotAreas().add(po);
 			double YValue;
 			if (p.isDrawPoint()) {
 				AbstractChartColor c = p.getPointColor();

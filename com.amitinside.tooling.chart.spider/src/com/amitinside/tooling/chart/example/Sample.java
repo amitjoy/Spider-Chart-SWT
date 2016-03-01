@@ -54,10 +54,12 @@ public final class Sample {
 
 		viewer.getChart().getSpiderPlotter().setScalingLabelFormat("#.#", "#.#", "#.#", "#.#", "#.#");
 
+		// Updating the chart with new parameters
 		Display.getDefault().asyncExec(() -> {
 			// changing values in runtime
 			final LineDataSeq iPhoneDataSequence = LineDataSeq.of(iPhoneData.get(), 2.0, 4.2, 4.1, 42.8, 3.7,
 					Brand.INTERNATIONAL);
+			// Set the first sequence
 			viewer.getChart().getSpiderPlotter().setSeq(0, iPhoneDataSequence);
 
 			// changing axes in runtime
@@ -68,6 +70,7 @@ public final class Sample {
 			final LineDataSeq nexusDataSequence = LineDataSeq.of(nexusData.get(), 2.4, 3.2, 2.1, 23.8, 1.7,
 					Brand.LOCAL);
 
+			// Set the second sequence
 			viewer.getChart().getSpiderPlotter().setSeq(1, nexusDataSequence);
 			viewer.getChart().getSpiderPlotter().use(configuration);
 			viewer.getChart().getSpiderPlotter().setMarkScalesOnEveryAxis(true);

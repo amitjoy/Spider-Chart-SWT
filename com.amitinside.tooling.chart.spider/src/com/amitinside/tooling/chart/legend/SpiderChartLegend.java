@@ -24,7 +24,8 @@ import static com.amitinside.tooling.chart.gc.AbstractGraphicsSupplier.getFont;
 import static com.amitinside.tooling.chart.gc.Fonts.VERDANA;
 import static com.amitinside.tooling.chart.style.LineStyle.NORMAL_LINE;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 import com.amitinside.tooling.chart.SpiderChartComponent;
@@ -51,7 +52,7 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 	private AbstractChartFont font = getFont(VERDANA, PLAIN, 10);
 
 	/** */
-	private final Vector<Object> items = new Vector<>(10, 10);
+	private final List<Object> items = new ArrayList<>();
 
 	/** Legend Label */
 	private String legendLabel = "";
@@ -63,7 +64,7 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 	private int legendOffset = 250;
 
 	/** */
-	private final Vector<String> names = new Vector<>(10, 10);
+	private final List<String> names = new ArrayList<>();
 
 	/** Legend Title */
 	private String title = null;
@@ -80,8 +81,8 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 
 	/** */
 	public void addItem(final String name, final Object icon) {
-		this.items.addElement(icon);
-		this.names.addElement(name);
+		this.items.add(icon);
+		this.names.add(name);
 	}
 
 	/** */
@@ -178,13 +179,13 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 		int offset = 0;
 		for (int i = 1; i <= this.names.size(); i++) {
 			g.setColor(this.color);
-			g.drawText(this.names.elementAt(i - 1), toCenterX + offset + iconWidth + iconSeparator + this.x,
+			g.drawText(this.names.get(i - 1), toCenterX + offset + iconWidth + iconSeparator + this.x,
 					toCenterY + this.y + itemHeight);
 			offset = offset + iconWidth + iconSeparator + textWidth + textSeparator;
 		}
 		offset = 0;
 		for (int i = 1; i <= this.names.size(); i++) {
-			final Object icon = this.items.elementAt(i - 1);
+			final Object icon = this.items.get(i - 1);
 			if (icon instanceof AbstractChartImage) {
 				g.drawImage((AbstractChartImage) icon, toCenterX + this.x + offset, toCenterY + this.y);
 			}
@@ -264,11 +265,11 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 		}
 		for (int i = 1; i <= this.names.size(); i++) {
 			g.setColor(this.color);
-			g.drawText(this.names.elementAt(i - 1), toCenterX + iconWidth + this.x,
+			g.drawText(this.names.get(i - 1), toCenterX + iconWidth + this.x,
 					toCenterY + this.y + (i * itemHeight) + this.legendOffset);
 		}
 		for (int i = 1; i <= this.names.size(); i++) {
-			final Object icon = this.items.elementAt(i - 1);
+			final Object icon = this.items.get(i - 1);
 			if (icon instanceof LineStyle) {
 				final LineStyle l = (LineStyle) icon;
 				l.setWidth(10);
@@ -296,7 +297,7 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 		return this.font;
 	}
 
-	public Vector<Object> getItems() {
+	public List<Object> getItems() {
 		return this.items;
 	}
 
@@ -312,7 +313,7 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 		return this.legendOffset;
 	}
 
-	public Vector<String> getNames() {
+	public List<String> getNames() {
 		return this.names;
 	}
 
