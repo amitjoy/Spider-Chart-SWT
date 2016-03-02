@@ -691,5 +691,6 @@ public final class SpiderChartPlotter extends AbstractPlotter {
 		this.maxScaleFactors = configurer.maxScales();
 		this.minScaleFactors = configurer.minScales();
 		this.axesFactors = configurer.axesNames();
+		this.scalingLabelFormat = configurer.axesScalingLabelFormats();
 	}
 }
