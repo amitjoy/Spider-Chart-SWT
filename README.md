@@ -70,8 +70,6 @@ public final class Sample {
 			chart.data(firstData -> firstData.inject(iPhoneData)).data(secondData -> secondData.inject(nexusData));
 		});
 
-		viewer.getChart().getSpiderPlotter().setScalingLabelFormat("#.#", "#.#", "#.#", "#.#", "#.#");
-
 		// Updating the chart with new parameters
 		Display.getDefault().asyncExec(() -> {
 			// changing values in runtime
@@ -92,7 +90,6 @@ public final class Sample {
 			viewer.getChart().getSpiderPlotter().setSeq(1, nexusDataSequence);
 			viewer.getChart().getSpiderPlotter().use(configuration);
 			viewer.getChart().getSpiderPlotter().setMarkScalesOnEveryAxis(true);
-			viewer.getChart().getSpiderPlotter().setScalingLabelFormat("#.#", "#.#", "#.#", "#.#", "#.#", Brand.class);
 		});
 	}
 
