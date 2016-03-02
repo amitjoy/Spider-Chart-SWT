@@ -32,11 +32,15 @@ public final class AxesConfigurer {
 		/** */
 		private final List<String> scalesNames;
 
+		/** */
+		private final List<Object> scalingLabelFormats;
+
 		/** Constructor */
 		public Builder() {
 			this.maxScales = new ArrayList<>();
 			this.minScales = new ArrayList<>();
 			this.scalesNames = new ArrayList<>();
+			this.scalingLabelFormats = new ArrayList<>();
 		}
 
 		/** */
@@ -50,12 +54,23 @@ public final class AxesConfigurer {
 			this.maxScales.add(doubleValues[doubleValues.length - 1] + 1);
 			this.minScales.add(doubleValues[0]);
 			this.scalesNames.add(name);
+			this.scalingLabelFormats.add(value);
 			return this;
 		}
 
 		/** */
 		public Builder addAxis(final String name, final double maxScale, final double minScale) {
-			// TODO Automatically define the Scaling Label Format
+			this.maxScales.add(maxScale);
+			this.minScales.add(minScale);
+			this.scalesNames.add(name);
+			this.scalingLabelFormats.add("#.#");
+			return this;
+		}
+
+		/** */
+		public Builder addAxis(final String name, final double maxScale, final double minScale,
+				final Object scalingLabelFormat) {
+			this.scalingLabelFormats.add(scalingLabelFormat);
 			this.maxScales.add(maxScale);
 			this.minScales.add(minScale);
 			this.scalesNames.add(name);
@@ -64,7 +79,7 @@ public final class AxesConfigurer {
 
 		/** */
 		public AxesConfigurer build() {
-			return new AxesConfigurer(this.maxScales, this.minScales, this.scalesNames);
+			return new AxesConfigurer(this.maxScales, this.minScales, this.scalesNames, this.scalingLabelFormats);
 		}
 
 	}
@@ -73,22 +88,31 @@ public final class AxesConfigurer {
 	private final List<Double> maxScales;
 	/** */
 	private final List<Double> minScales;
-
 	/** */
 	private final List<String> scalesNames;
 
+	/** */
+	private final List<Object> scalingLabelFormats;
+
 	/** Constructor */
-	private AxesConfigurer(final List<Double> maxScales, final List<Double> minScales, final List<String> scalesNames) {
+	private AxesConfigurer(final List<Double> maxScales, final List<Double> minScales, final List<String> scalesNames,
+			final List<Object> scalingLabelFormats) {
 		super();
 		this.maxScales = maxScales;
 		this.minScales = minScales;
 		this.scalesNames = scalesNames;
+		this.scalingLabelFormats = scalingLabelFormats;
 	}
 
 	/** */
 	public String[] axesNames() {
 		final String[] axesNames = new String[this.scalesNames.size()];
 		return this.scalesNames.toArray(axesNames);
+	}
+
+	/** */
+	public Object[] axesScalingLabelFormats() {
+		return this.scalingLabelFormats.toArray();
 	}
 
 	/** */
