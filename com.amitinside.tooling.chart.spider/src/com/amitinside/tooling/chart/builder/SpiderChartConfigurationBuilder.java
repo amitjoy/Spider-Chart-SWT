@@ -35,6 +35,12 @@ import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.style.LineStyle;
 import com.amitinside.tooling.chart.title.SpiderChartTitle;
 
+/**
+ * Used to configure the Spider Chart Legend, Plotter and title
+ * 
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class SpiderChartConfigurationBuilder {
 
 	/** */

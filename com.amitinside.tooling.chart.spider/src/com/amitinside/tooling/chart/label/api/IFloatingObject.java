@@ -19,21 +19,21 @@ import com.amitinside.tooling.chart.gc.Polygon;
 
 public interface IFloatingObject {
 
-	/** */
+	/** Layer ID to be used to identify the component */
 	public static final String LAYER_ID = "";
 
-	/** */
+	/** Polygon Bounds */
 	public abstract Polygon getObjectBounds();
 
-	/** */
+	/** returns X-Coordinate of the component */
 	public abstract int getX();
 
-	/** */
+	/** returns Y-coordinate of the component */
 	public abstract int getY();
 
-	/** */
+	/** setter for X-Coordinate of the component */
 	public abstract void setX(int paramInt);
 
-	/** */
+	/** setter for Y-coordinate of the component */
 	public abstract void setY(int paramInt);
 }

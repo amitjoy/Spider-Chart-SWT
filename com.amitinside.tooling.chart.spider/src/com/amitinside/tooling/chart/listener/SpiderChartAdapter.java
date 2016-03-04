@@ -18,6 +18,12 @@ package com.amitinside.tooling.chart.listener;
 import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 
+/**
+ * Default Listener Implementation
+ * 
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public class SpiderChartAdapter implements ISpiderChartListener {
 
 	/** {@inheritDoc}} */

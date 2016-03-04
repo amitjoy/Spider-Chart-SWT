@@ -25,6 +25,12 @@ import com.amitinside.tooling.chart.sequence.LineDataSeq;
 import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.style.LineStyle;
 
+/**
+ * Axis Pojo
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class AxisData {
 
 	/** */

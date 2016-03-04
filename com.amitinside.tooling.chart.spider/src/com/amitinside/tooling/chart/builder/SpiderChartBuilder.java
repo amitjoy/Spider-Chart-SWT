@@ -31,6 +31,12 @@ import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.swt.SpiderChartViewer;
 
+/**
+ * Used to build the complete spider chart
+ * 
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class SpiderChartBuilder {
 
 	/** */

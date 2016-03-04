@@ -52,7 +52,7 @@ import com.amitinside.tooling.chart.style.LineStyle;
 import com.amitinside.tooling.chart.title.SpiderChartTitle;
 
 /**
- * Actual Spider Chart
+ * Actual Spider Chart Diagram
  *
  * @author AMIT KUMAR MONDAL
  *
@@ -61,17 +61,14 @@ public final class SpiderChart {
 
 	/**
 	 * Background Worker Thread to refresh chart
-	 *
-	 * @author AMIT KUMAR MONDAL
-	 *
 	 */
 	private final class SpiderChartWorker implements Runnable {
 
-		/** */
+		/** The Spider Chart Diagram to be updated */
 		@SuppressWarnings("unused")
 		private SpiderChart chart = null;
 
-		/** */
+		/** the flag */
 		private boolean stop = false;
 
 		/** Constructor */
@@ -94,18 +91,20 @@ public final class SpiderChart {
 		}
 	}
 
-	/** */
+	/** the localized string for numbers */
 	private static String numberLocale;
 
+	/** Getter for number locale */
 	public static String getNumberLocale() {
 		return numberLocale;
 	}
 
+	/** Setter for number locale */
 	public static void setNumberLocale(final String numberLocale) {
 		SpiderChart.numberLocale = numberLocale;
 	}
 
-	/** */
+	/** The flag to be used to enable selection of data points */
 	private boolean activateSelection = false;
 
 	/** Used to trigger thread automatically to build the Spider Chart */
@@ -114,22 +113,22 @@ public final class SpiderChart {
 	/** Auto Sizeable Property */
 	private boolean autoResize = true;
 
-	/** */
+	/** Axis Margin */
 	private double axisMargin = 0.0625D;
 
-	/** */
+	/** Background Canvas Color */
 	private String backgroundCanvasColor = AQUA;
 
 	/** Spider Chart Back Image */
 	private AbstractChartImage backImage;
 
-	/** */
+	/** Background Styling Theme */
 	private FillStyle backStyle = new FillStyle(getColor(AQUA));
 
-	/** */
+	/** Temporary Background Image */
 	private AbstractChartImage backTmpImage = null;
 
-	/**  */
+	/** Border Style */
 	private LineStyle border = null;
 
 	/** */
@@ -138,31 +137,31 @@ public final class SpiderChart {
 	/** Spider Chart Image */
 	private AbstractChartImage chartImage = null;
 
-	/** */
+	/** List of action listeners */
 	private final List<ISpiderChartListener> chartListeners = new CopyOnWriteArrayList<>();
 
-	/** */
+	/** Current X Coordinate of the cursor */
 	private int currentX;
 
-	/** */
+	/** Current Y Coordinate of the cursor */
 	private int currentY;
 
-	/** */
+	/** Previous X Coordinate of the cursor */
 	private int cursorLastX = 0;
 
-	/** */
+	/** Previous Y Coordinate of the cursor */
 	private int cursorLastY = 0;
 
 	/** */
 	private SpiderChartWorker deamon = null;
 
-	/** */
+	/** Needed to use buffering of values (WIP) */
 	private final boolean doubleBuffering = true;
 
-	/** */
+	/** the rendered spider chart image */
 	private AbstractChartImage finalImage = null;
 
-	/** */
+	/** Container for list of Spider Chart Elements such as Labels */
 	private final List<IFloatingObject> floatingObjects = new ArrayList<>();
 
 	/** */

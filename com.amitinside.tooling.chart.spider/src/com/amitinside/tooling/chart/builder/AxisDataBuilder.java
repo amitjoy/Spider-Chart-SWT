@@ -25,17 +25,25 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 import com.amitinside.tooling.chart.SpiderChart;
+import com.amitinside.tooling.chart.api.annotations.DataPoints;
+import com.amitinside.tooling.chart.api.annotations.SpiderChartPlot;
 import com.amitinside.tooling.chart.builder.model.AxisData;
 
+/**
+ * Used to provide the data to be used in the spider chart diagram
+ * 
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class AxisDataBuilder {
 
-	/** */
+	/** list of axis container */
 	private final List<AxisData> axesData = new ArrayList<>();
 
-	/** */
+	/** axis description */
 	private final AxisData axisData;
 
-	/** */
+	/** the spider chart diagram */
 	private final SpiderChart chart;
 
 	/** Constructor */
@@ -51,7 +59,13 @@ public final class AxisDataBuilder {
 		this.chart.addSeq(this.axisData.getData());
 	}
 
-	/** */
+	/**
+	 * Used to provide the class object to used as data points provider. The
+	 * class needs to be annotated with {@link SpiderChartPlot} and it must
+	 * contain a method annotated with {@link DataPoints}
+	 *
+	 * @param drawableData
+	 */
 	public void inject(final Supplier<Object> drawableData) {
 		requireNonNull(drawableData);
 		final Object data = drawableData.get();
