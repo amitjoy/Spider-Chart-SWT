@@ -26,12 +26,20 @@ import com.amitinside.tooling.chart.gc.AbstractChartColor;
 import com.amitinside.tooling.chart.gc.AbstractChartFont;
 import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 
+/**
+ * Used to represent Spider Chart Title
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class SpiderChartTitle extends SpiderChartComponent {
 
 	/** Title Color */
 	private AbstractChartColor color = getColor(BLUE);
+
 	/** Title Font */
 	private AbstractChartFont font = getFont(VERDANA, PLAIN, 14);
+
 	/** Title Text */
 	private String text;
 
@@ -39,7 +47,7 @@ public final class SpiderChartTitle extends SpiderChartComponent {
 	public SpiderChartTitle() {
 	}
 
-	/** */
+	/** Used to draw the title */
 	public void draw(final AbstractChartGraphics g) {
 		g.setColor(this.color);
 		g.setFont(this.font);
@@ -61,26 +69,32 @@ public final class SpiderChartTitle extends SpiderChartComponent {
 		}
 	}
 
+	/** Getter for color */
 	public AbstractChartColor getChartColor() {
 		return this.color;
 	}
 
+	/** Getter for chart font */
 	public AbstractChartFont getChartFont() {
 		return this.font;
 	}
 
+	/** Getter for chart text */
 	public String getText() {
 		return this.text;
 	}
 
+	/** Setter for color */
 	public void setColor(final AbstractChartColor color) {
 		this.color = color;
 	}
 
+	/** Setter for chart font */
 	public void setFont(final AbstractChartFont font) {
 		this.font = font;
 	}
 
+	/** Setter for chart text */
 	public void setText(final String text) {
 		this.text = text;
 	}
