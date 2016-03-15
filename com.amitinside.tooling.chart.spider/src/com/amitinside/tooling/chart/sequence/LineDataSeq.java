@@ -55,21 +55,28 @@ public final class LineDataSeq extends DataSeq {
 		return seq;
 	}
 
-	/** */
+	/** Draw Point Configuration */
 	private boolean drawPoint = false;
-	/** */
+
+	/** Fillstyle to be used */
 	private FillStyle fillStyle = null;
-	/** */
+
+	/** Icon to be used */
 	private AbstractChartImage icon = null;
-	/** */
+
+	/** Line Type */
 	private int lineType = 0;
-	/** */
+
+	/** Data Point Color */
 	private AbstractChartColor pointColor = getColor(BLACK);
-	/** */
+
+	/** Line Style */
 	private LineStyle style = null;
-	/** */
+
+	/** value Color */
 	private AbstractChartColor valueColor = getColor(BLACK);
-	/** */
+
+	/** value font */
 	private AbstractChartFont valueFont = null;
 
 	/** */
