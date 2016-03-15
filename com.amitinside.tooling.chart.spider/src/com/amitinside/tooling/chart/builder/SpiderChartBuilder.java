@@ -33,18 +33,19 @@ import com.amitinside.tooling.chart.swt.SpiderChartViewer;
 
 /**
  * Used to build the complete spider chart
- * 
+ *
  * @author AMIT KUMAR MONDAL
  *
  */
 public final class SpiderChartBuilder {
 
-	/** */
+	/** Spider Chart Configuration Builder Ref */
 	private static SpiderChartConfigurationBuilder chartConfiguration;
-	/** */
+
+	/** Chart Viewer Builder */
 	private static SpiderChartBuilder chartViewerBuilder;
 
-	/** */
+	/** Configuration for the Spider Chart */
 	public static SpiderChartBuilder config(final Composite parent,
 			final Consumer<SpiderChartConfigurationBuilder> settings) {
 		requireNonNull(parent);
@@ -55,9 +56,10 @@ public final class SpiderChartBuilder {
 		return chartViewerBuilder;
 	}
 
-	/** */
+	/** Actual Spider Chart to be used */
 	private SpiderChart chart;
-	/** */
+
+	/** Actual Spider Chart Viewer */
 	private final SpiderChartViewer chartViewer;
 
 	/** Constructor */
@@ -67,7 +69,7 @@ public final class SpiderChartBuilder {
 		this.prepareChartViewer(parent);
 	}
 
-	/** */
+	/** The datapoints provider */
 	public SpiderChartBuilder data(final Consumer<AxisDataBuilder> dataBuilderConsumer) {
 		requireNonNull(dataBuilderConsumer);
 		final AxisDataBuilder dataBuilder = new AxisDataBuilder(this.chart);
@@ -76,7 +78,7 @@ public final class SpiderChartBuilder {
 		return this;
 	}
 
-	/** */
+	/** Configuration for the spider chart */
 	private void prepareChartViewer(final Composite parent) {
 		this.chartViewer.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true, true));
 		this.chartViewer.setBounds(parent.getShell().getClientArea().x, parent.getShell().getClientArea().y,
@@ -94,7 +96,7 @@ public final class SpiderChartBuilder {
 		this.chart.setActivateSelection(true);
 	}
 
-	/** */
+	/** Builds the viewer */
 	public SpiderChartViewer viewer(final Consumer<SpiderChartBuilder> chartBuilderConsumer) {
 		requireNonNull(chartBuilderConsumer);
 		chartBuilderConsumer.accept(chartViewerBuilder);

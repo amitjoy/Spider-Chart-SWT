@@ -17,24 +17,31 @@ package com.amitinside.tooling.chart.scale;
 
 public final class SpiderChartScale {
 
-	/** */
+	/** Scaling Max Value (shown exactly as provided) */
 	private boolean exactMaxValue = false;
-	/** */
+
+	/** Scaling Min Value (shown exactly as provided) */
 	private boolean exactMinValue = false;
-	/** */
+
+	/** Max Value Default */
 	private double max = -99999.0D;
-	/** */
+
+	/** Min Value Default */
 	private double min = 99999.0D;
-	/** */
+
+	/** Preferred Max Values */
 	private double[] preferred_MaxMin_values = { -1000000.0D, -500000.0D, -100000.0D, -50000.0D, -10000.0D, -5000.0D,
 			-1000.0D, -500.0D, -250.0D, -100.0D, -50.0D, -35.0D, -5.0D, -1.0D, -0.5D, -0.1D, 0.0D, 0.1D, 0.5D, 1.0D,
 			5.0D, 10.0D, 25.0D, 50.0D, 100.0D, 250.0D, 500.0D, 1000.0D, 5000.0D, 10000.0D, 50000.0D, 100000.0D,
 			500000.0D, 1000000.0D };
-	/** */
+
+	/** Screen Max Size */
 	private int screenMax;
-	/** */
+
+	/** Screen Max Margin */
 	private int screenMaxMargin;
-	/** */
+
+	/** Screen Min Size */
 	private int screenMin;
 
 	/** Constructor */
