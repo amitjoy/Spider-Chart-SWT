@@ -34,7 +34,7 @@ import com.amitinside.tooling.chart.listener.ISpiderChartListener;
 
 public final class SpiderChartCanvas extends Canvas implements ISpiderChartListener {
 
-	/** */
+	/** Actual Spider Chart Ref */
 	private SpiderChart chart = null;
 
 	/** Constructor */
@@ -68,19 +68,19 @@ public final class SpiderChartCanvas extends Canvas implements ISpiderChartListe
 		});
 	}
 
-	/** */
+	/** Returns the spider chart */
 	public SpiderChart getChart() {
 		return this.chart;
 	}
 
-	/** */
+	/** Mouse Click event */
 	private void mouseClick() {
 		if (this.chart != null) {
 			this.chart.mouseClick();
 		}
 	}
 
-	/** */
+	/** Mouse Moved Event */
 	private void mouseMoved(final MouseEvent e) {
 		if (this.chart != null) {
 			this.chart.mouseMoved(e.x, e.y);
@@ -107,7 +107,7 @@ public final class SpiderChartCanvas extends Canvas implements ISpiderChartListe
 	public void onPaintUserExit(final SpiderChart c, final AbstractChartGraphics g) {
 	}
 
-	/** */
+	/** Draws the Spider Chart */
 	protected void paintChart(final PaintEvent e) {
 		try {
 			this.resizeChart();
@@ -119,13 +119,13 @@ public final class SpiderChartCanvas extends Canvas implements ISpiderChartListe
 		}
 	}
 
-	/** */
+	/** Resizes the spider chart */
 	protected void resizeChart() {
 		this.chart.setWidth(this.getSize().x + 1);
 		this.chart.setHeight(this.getSize().y + 1);
 	}
 
-	/** */
+	/** Setter for Spider Chart */
 	public void setChart(final SpiderChart c) {
 		if (this.chart != null) {
 			this.chart.removeChartListener(this);

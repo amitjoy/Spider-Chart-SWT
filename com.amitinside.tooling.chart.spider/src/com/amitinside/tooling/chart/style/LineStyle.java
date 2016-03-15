@@ -31,41 +31,41 @@ public final class LineStyle {
 	/** */
 	public static final int NORMAL_LINE = 1;
 
-	/** */
+	/** Factory method to create line */
 	public static LineStyle of(final float w, final AbstractChartColor c, final int t) {
 		return new LineStyle(w, c, t);
 	}
 
 	/** */
 	private float alphaValue = 1.0F;
-	/** */
+	/** color instance for the line */
 	private AbstractChartColor color;
 
-	/** */
+	/** type of the line */
 	private int lineType;
 
 	/** */
 	private float lineWidth;
 
-	/** */
+	/** Constructor */
 	public LineStyle(final float w, final AbstractChartColor c, final int t) {
 		this.lineType = t;
 		this.lineWidth = w;
 		this.color = c;
 	}
 
-	/** */
+	/** Constructor */
 	public LineStyle(final float w, final AbstractChartColor c, final int t, final float alpha) {
 		this(w, c, t);
 	}
 
-	/** */
+	/** Draws the line */
 	public void draw(final AbstractChartGraphics g, final int x1, final int y1, final int x2, final int y2) {
 		this.setGraphicsProperties(g);
 		g.drawLineWithStyle(x1, y1, x2, y2);
 	}
 
-	/** */
+	/** Draws arc */
 	public void drawArc(final AbstractChartGraphics g, final int x, final int y, final int w, final int h, final int a1,
 			final int a2) {
 		this.setGraphicsProperties(g);
@@ -73,14 +73,14 @@ public final class LineStyle {
 		g.drawArc(x, y, w, h, a1, a2);
 	}
 
-	/** */
+	/** Draws open ended polygon */
 	public void drawOpenPolygon(final AbstractChartGraphics g, final int[] x, final int[] y, final int c) {
 		for (int i = 1; i < c; i++) {
 			this.draw(g, x[i - 1], y[i - 1], x[i], y[i]);
 		}
 	}
 
-	/** */
+	/** Draws polygon */
 	public void drawPolygon(final AbstractChartGraphics g, final int[] x, final int[] y, final int c) {
 		for (int i = 1; i < c; i++) {
 			this.draw(g, x[i - 1], y[i - 1], x[i], y[i]);
@@ -88,7 +88,7 @@ public final class LineStyle {
 		this.draw(g, x[0], y[0], x[c - 1], y[c - 1]);
 	}
 
-	/** */
+	/** Draws Rectangle */
 	public void drawRect(final AbstractChartGraphics g, final int x1, final int y1, final int x2, final int y2) {
 		int iX = x1;
 		int iY = y1;
@@ -106,7 +106,7 @@ public final class LineStyle {
 		g.drawRect(iX, iY, w, h);
 	}
 
-	/** */
+	/** Draws Round Rectangle */
 	public void drawRoundRect(final AbstractChartGraphics g, final int x1, final int y1, final int x2, final int y2) {
 		int iX = x1;
 		int iY = y1;
@@ -131,7 +131,7 @@ public final class LineStyle {
 		return this.alphaValue;
 	}
 
-	/** */
+	/** Getter for line color instance */
 	public AbstractChartColor getColor() {
 		return this.color;
 	}
@@ -150,12 +150,12 @@ public final class LineStyle {
 		return this.lineWidth;
 	}
 
-	/** */
+	/** Getter for the type of the line */
 	public int getType() {
 		return this.lineType;
 	}
 
-	/** */
+	/** Getter for the width of the line */
 	public float getWidth() {
 		return this.lineWidth;
 	}
@@ -168,12 +168,12 @@ public final class LineStyle {
 		this.alphaValue = alphaValue;
 	}
 
-	/** */
+	/** Setter for the color instance */
 	public void setColor(final AbstractChartColor c) {
 		this.color = c;
 	}
 
-	/** */
+	/** Setter for the graphics properties */
 	protected void setGraphicsProperties(final AbstractChartGraphics g) {
 		g.setColor(this.color);
 		int tmp = (int) this.lineWidth;
@@ -206,12 +206,12 @@ public final class LineStyle {
 		this.lineWidth = lWidth;
 	}
 
-	/** */
+	/** Setter for the type of the line */
 	public void setType(final int t) {
 		this.lineType = t;
 	}
 
-	/** */
+	/** Setter for the width of the line */
 	public void setWidth(final float f) {
 		this.lineWidth = f;
 	}

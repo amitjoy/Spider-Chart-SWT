@@ -38,7 +38,7 @@ public final class ChartUtil {
 		return Arrays.asList(constants);
 	}
 
-	/** */
+	/** Returns the primitive double array from wrapper double array */
 	public static double[] toDoublePrimitiveArray(final Double[] wrappedArray) {
 		final double[] array = new double[wrappedArray.length];
 		for (int i = 0; i < wrappedArray.length; i++) {
