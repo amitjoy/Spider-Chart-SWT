@@ -21,18 +21,26 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Used to configure the axes for the spider chart diagram
+ * 
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class AxesConfigurer {
 
 	public static class Builder {
 
-		/** */
+		/** Maximum Scales */
 		private final List<Double> maxScales;
-		/** */
+
+		/** Minimum Scales */
 		private final List<Double> minScales;
-		/** */
+
+		/** Scaling Labels */
 		private final List<String> scalesNames;
 
-		/** */
+		/** Scaling Label Formats */
 		private final List<Object> scalingLabelFormats;
 
 		/** Constructor */
@@ -43,7 +51,16 @@ public final class AxesConfigurer {
 			this.scalingLabelFormats = new ArrayList<>();
 		}
 
-		/** */
+		/**
+		 * Adds a new Axis to the Spider Chart
+		 *
+		 * @param name
+		 *            Name of the axis
+		 * @param value
+		 *            Currently only Enum class object needs to be provided to
+		 *            use its constants as labels
+		 * @return the Builder object for method chaining
+		 */
 		public <E extends Enum<E>> Builder addAxis(final String name, final Class<E> value) {
 			final double[] doubleValues = new double[value.getEnumConstants().length];
 			int i = 0;
@@ -58,7 +75,17 @@ public final class AxesConfigurer {
 			return this;
 		}
 
-		/** */
+		/**
+		 * Adds a new Axis to the Spider Chart
+		 *
+		 * @param name
+		 *            name of the axis
+		 * @param maxScale
+		 *            maximum scale of axis
+		 * @param minScale
+		 *            minimum scale of axis
+		 * @return the Builder object for method chaining
+		 */
 		public Builder addAxis(final String name, final double maxScale, final double minScale) {
 			this.maxScales.add(maxScale);
 			this.minScales.add(minScale);
@@ -67,7 +94,19 @@ public final class AxesConfigurer {
 			return this;
 		}
 
-		/** */
+		/**
+		 * Adds a new Axis to the Spider Chart
+		 *
+		 * @param name
+		 *            name of the axis
+		 * @param maxScale
+		 *            maximum scale of axis
+		 * @param minScale
+		 *            minimum scale of axis
+		 * @param scalingLabelFormat
+		 *            the scaling label format
+		 * @return the Builder object for method chaining
+		 */
 		public Builder addAxis(final String name, final double maxScale, final double minScale,
 				final Object scalingLabelFormat) {
 			this.scalingLabelFormats.add(scalingLabelFormat);
@@ -77,7 +116,7 @@ public final class AxesConfigurer {
 			return this;
 		}
 
-		/** */
+		/** Builder */
 		public AxesConfigurer build() {
 			return new AxesConfigurer(this.maxScales, this.minScales, this.scalesNames, this.scalingLabelFormats);
 		}

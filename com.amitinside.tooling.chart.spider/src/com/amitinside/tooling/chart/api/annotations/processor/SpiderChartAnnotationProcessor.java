@@ -22,6 +22,12 @@ import java.util.Optional;
 import com.amitinside.tooling.chart.api.annotations.DataPoints;
 import com.amitinside.tooling.chart.api.annotations.SpiderChartPlot;
 
+/**
+ * Spider Chart Data Point Provider POJO Annotation Processor
+ * 
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class SpiderChartAnnotationProcessor {
 
 	/**

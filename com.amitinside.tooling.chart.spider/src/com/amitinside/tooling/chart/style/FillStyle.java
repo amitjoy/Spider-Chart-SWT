@@ -25,27 +25,37 @@ import com.amitinside.tooling.chart.gc.AbstractChartImage;
 
 public final class FillStyle {
 
-	/** */
+	/** Gradient Horizontal Setting */
 	public static final int GRADIENT_HORIZONTAL = 1;
-	/** */
+
+	/** Gradient Vertical Setting */
 	public static final int GRADIENT_VERTICAL = 2;
-	/** */
+
+	/** No Gradient Setting */
 	public static final int NO_GRADIENT = 0;
-	/** */
+
+	/** Needed for Gradient setting */
 	private float alphaValue = 1.0F;
-	/** */
+
+	/** Color instance to be used for the fill style */
 	private final AbstractChartColor color;
+
 	/** Spider Chart Canvas Background Color */
 	private AbstractChartColor colorFrom = getColor(AZURE);
-	/** */
+
+	/** Gradient Color for the shadow */
 	private final AbstractChartColor colorUntil = getColor(WHITE);
+
 	/** */
 	private Object composite = null;
+
 	/** */
 	private final boolean gradientCyclic = false;
+
 	/** */
 	private int gradientType = NO_GRADIENT;
-	/** */
+
+	/** Image if needed for the texture */
 	private AbstractChartImage textureImage = null;
 
 	/** Constructor */
@@ -65,7 +75,7 @@ public final class FillStyle {
 		this.color = getColor(WHITE);
 	}
 
-	/** */
+	/** Draws the style */
 	public void draw(final AbstractChartGraphics g, int x1, int y1, int x2, int y2) {
 		if (x1 > x2) {
 			final int xtmp = x2;
@@ -89,7 +99,7 @@ public final class FillStyle {
 		}
 	}
 
-	/** */
+	/** Draws the fill style */
 	public void draw(final AbstractChartGraphics g, final String backgroundCanvasColor, int x1, int y1, int x2,
 			int y2) {
 		if (x1 > x2) {
@@ -115,7 +125,7 @@ public final class FillStyle {
 		}
 	}
 
-	/** */
+	/** Draws arc */
 	public void drawArc(final AbstractChartGraphics g, final int x, final int y, final int w, final int h, final int a1,
 			final int a2) {
 		g.setTexture(this.textureImage);
@@ -125,7 +135,7 @@ public final class FillStyle {
 		this.resetAlpha(g);
 	}
 
-	/** */
+	/** Draws Polygon */
 	public void drawPolygon(final AbstractChartGraphics g, final int[] x1, final int[] y1, final int num) {
 		g.setTexture(this.textureImage);
 		g.setColor(this.color);
@@ -134,7 +144,7 @@ public final class FillStyle {
 		this.resetAlpha(g);
 	}
 
-	/** */
+	/** Draws Round Rectangle */
 	public void drawRoundRect(final AbstractChartGraphics g, final int x1, final int y1, final int x2, final int y2) {
 		g.setTexture(this.textureImage);
 		g.setColor(this.color);
@@ -150,7 +160,7 @@ public final class FillStyle {
 		return this.gradientType;
 	}
 
-	/** */
+	/** Resets alpha for the composite */
 	private void resetAlpha(final AbstractChartGraphics g) {
 		if (this.composite != null) {
 			g.setAlphaComposite(this.composite);
@@ -158,7 +168,7 @@ public final class FillStyle {
 		this.composite = null;
 	}
 
-	/** */
+	/** Setter for alpha value */
 	private void setAlpha(final AbstractChartGraphics g) {
 		if (this.alphaValue != 1.0F) {
 			this.composite = g.getAlphaComposite();

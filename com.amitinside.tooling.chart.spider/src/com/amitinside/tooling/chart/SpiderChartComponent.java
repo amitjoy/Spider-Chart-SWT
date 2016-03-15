@@ -15,17 +15,28 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart;
 
+/**
+ * Every Spider Chart Canvas must extend this class to adapt to the Spider Chart
+ * Component Description
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public abstract class SpiderChartComponent {
 
-	/** */
+	/** The Actual Spider Chart Diagram */
 	protected SpiderChart chart;
-	/** */
+
+	/** The height of the component */
 	protected int height;
-	/** */
+
+	/** the width of the component */
 	protected int width;
-	/** */
+
+	/** the screen x-axis value */
 	protected int x;
-	/** */
+
+	/** the screen y-axis value */
 	protected int y;
 
 }

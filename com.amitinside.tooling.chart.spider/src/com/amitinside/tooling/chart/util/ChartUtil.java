@@ -18,6 +18,12 @@ package com.amitinside.tooling.chart.util;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Utility methods for Spider Charts
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class ChartUtil {
 
 	/**
@@ -32,7 +38,7 @@ public final class ChartUtil {
 		return Arrays.asList(constants);
 	}
 
-	/** */
+	/** Returns the primitive double array from wrapper double array */
 	public static double[] toDoublePrimitiveArray(final Double[] wrappedArray) {
 		final double[] array = new double[wrappedArray.length];
 		for (int i = 0; i < wrappedArray.length; i++) {
@@ -41,7 +47,9 @@ public final class ChartUtil {
 		return array;
 	}
 
-	/** */
+	/**
+	 * Wraps a list of values and converts it to its corresponding double values
+	 */
 	public static double[] wrapValues(final Object[] values) {
 		final double[] wrappedValues = new double[values.length];
 

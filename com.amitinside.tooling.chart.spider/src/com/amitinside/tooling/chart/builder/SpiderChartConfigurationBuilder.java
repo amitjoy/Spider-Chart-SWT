@@ -35,31 +35,39 @@ import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.style.LineStyle;
 import com.amitinside.tooling.chart.title.SpiderChartTitle;
 
+/**
+ * Used to configure the Spider Chart Legend, Plotter and title
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class SpiderChartConfigurationBuilder {
 
-	/** */
+	/** The Legend */
 	private SpiderChartLegend legend;
-	/** */
+
+	/** The plotter */
 	private SpiderChartPlotter plotter;
-	/** */
+
+	/** The title */
 	private SpiderChartTitle title;
 
-	/** */
+	/** Returns the legend */
 	public SpiderChartLegend getLegend() {
 		return this.legend;
 	}
 
-	/** */
+	/** Returns the plotter */
 	public SpiderChartPlotter getPlotter() {
 		return this.plotter;
 	}
 
-	/** */
+	/** Returns the title */
 	public SpiderChartTitle getTitle() {
 		return this.title;
 	}
 
-	/** */
+	/** Prepares the legend */
 	public SpiderChartConfigurationBuilder legend(final Consumer<SpiderChartLegend> legendBuilder) {
 		this.legend = new SpiderChartLegend();
 		this.legend.setBackground(new FillStyle(getColor(WHITE)));
@@ -68,7 +76,7 @@ public final class SpiderChartConfigurationBuilder {
 		return this;
 	}
 
-	/** */
+	/** Prepares the plotter */
 	public SpiderChartConfigurationBuilder plotter(final Consumer<SpiderChartPlotter> plotter) {
 		requireNonNull(plotter);
 		this.plotter = new SpiderChartPlotter();
@@ -80,7 +88,7 @@ public final class SpiderChartConfigurationBuilder {
 		return this;
 	}
 
-	/** */
+	/** Prepares the chart title */
 	public SpiderChartConfigurationBuilder title(final Consumer<SpiderChartTitle> titleBuilder) {
 		requireNonNull(titleBuilder);
 		this.title = new SpiderChartTitle();
