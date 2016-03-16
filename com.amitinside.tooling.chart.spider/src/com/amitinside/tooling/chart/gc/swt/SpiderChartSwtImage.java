@@ -28,6 +28,12 @@ import com.amitinside.tooling.chart.gc.AbstractChartColor;
 import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 import com.amitinside.tooling.chart.gc.AbstractChartImage;
 
+/**
+ * Represents a chart image to be used in SWT
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class SpiderChartSwtImage extends AbstractChartImage {
 
 	/** */

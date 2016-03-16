@@ -33,15 +33,15 @@ import com.amitinside.tooling.chart.style.LineStyle;
  */
 public final class AxisData {
 
-	/** */
+	/** Line Sequence to be used for the axis */
 	private LineDataSeq data;
 
-	/** */
+	/** getter for the axis sequence */
 	public LineDataSeq getData() {
 		return this.data;
 	}
 
-	/** */
+	/** setter for axis sequence values and color */
 	public void setData(final double[] dataValues, final String color) {
 		this.data = new LineDataSeq(dataValues, new LineStyle(2, getColor(color), NORMAL_LINE));
 		this.data.setDrawPoint(true);

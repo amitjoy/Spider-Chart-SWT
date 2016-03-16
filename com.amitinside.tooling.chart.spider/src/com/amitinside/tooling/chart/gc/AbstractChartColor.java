@@ -15,6 +15,12 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.gc;
 
+/**
+ * Represents an abstract color
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public abstract class AbstractChartColor {
 
 	public static final String ALICEBLUE = "ALICEBLUE";
@@ -93,37 +99,37 @@ public abstract class AbstractChartColor {
 	public static final String YELLOW = "YELLOW";
 	public static final String YELLOWGREEN = "YELLOWGREEN";
 
-	/** */
+	/** Makes the color brighter */
 	public AbstractChartColor brighter() {
 		return null;
 	}
 
-	/** */
+	/** Makes the color darker */
 	public AbstractChartColor darker() {
 		return null;
 	}
 
-	/** */
+	/** Getter for the blue color in RGB */
 	public int getBlue() {
 		return 0;
 	}
 
-	/** */
+	/** Getter for the green color in RGB */
 	public int getGreen() {
 		return 0;
 	}
 
-	/** */
+	/** Getter for the red color in RGB */
 	public int getRed() {
 		return 0;
 	}
 
-	/** */
+	/** Getter for the RGB */
 	public int getRGB() {
 		return (this.getRed() * 256 * 256) + (this.getGreen() * 256) + this.getBlue();
 	}
 
-	/** */
+	/** Getter for the RGB in Hex */
 	public String getRGBString() {
 		return Integer.toHexString(this.getRGB());
 	}

@@ -25,23 +25,36 @@ import java.util.Locale;
 
 import com.amitinside.tooling.chart.SpiderChart;
 
-public class DataSeq {
+/**
+ * Class representing sequence of points to be used for plotting
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
+public abstract class DataSeq {
 
-	/** */
+	/** Data Point Labels */
 	private String[] dataLabels;
-	/** */
+
+	/** Areas to be used for finding the points in the chart */
 	private List<Object> hotAreas = new ArrayList<>();
-	/** */
+
+	/** Label Template */
 	private String labelTemplate = "";
-	/** */
+
+	/** Descriptive Name for the Data Sequence */
 	private String name = "";
-	/** */
+
+	/** Tips to be used on the Data Sequence */
 	private String[] tips = new String[0];
-	/** */
+
+	/** Values to be formatted for the Data Sequence */
 	private String valueFormat = "######.##";
-	/** */
+
+	/** x-axis data points */
 	private List<Double> xData = new ArrayList<>();
-	/** */
+
+	/** y-axis data points */
 	private List<Double> yData = new ArrayList<>();
 
 	/**
@@ -104,7 +117,7 @@ public class DataSeq {
 		this.yData.add((Double) y);
 	}
 
-	/** */
+	/** Converts double values to string conforming to the provided template */
 	public String doubleToString(final Double d) {
 		if (this.valueFormat.compareTo("") == 0) {
 			return d.toString();
@@ -122,81 +135,97 @@ public class DataSeq {
 		return df.format(d.doubleValue());
 	}
 
+	/** Returns the Data Point labels */
 	public String[] getDataLabels() {
 		return this.dataLabels;
 	}
 
-	/** */
+	/** Get element at X as provided */
 	public Object getElementX(final int i) {
 		return this.xData.get(i);
 	}
 
-	/** */
+	/** Get element at Y as provided */
 	public Object getElementY(final int i) {
 		return this.yData.get(i);
 	}
 
+	/** Getter for the hot areas */
 	public List<Object> getHotAreas() {
 		return this.hotAreas;
 	}
 
+	/** Getter for the Label Template */
 	public String getLabelTemplate() {
 		return this.labelTemplate;
 	}
 
+	/** Getter for the descriptive name */
 	public String getName() {
 		return this.name;
 	}
 
-	/** */
+	/** Getter for the size */
 	public int getSize() {
 		return this.xData.size();
 	}
 
+	/** Getter for the tips */
 	public String[] getTips() {
 		return this.tips;
 	}
 
+	/** Getter for the value label format */
 	public String getValueFormat() {
 		return this.valueFormat;
 	}
 
+	/** Getter for the x data */
 	public List<Double> getxData() {
 		return this.xData;
 	}
 
+	/** Getter for the y Data */
 	public List<Double> getyData() {
 		return this.yData;
 	}
 
+	/** Setter for data labels */
 	public void setDataLabels(final String[] dataLabels) {
 		this.dataLabels = dataLabels;
 	}
 
+	/** Setter for hot areas */
 	public void setHotAreas(final List<Object> hotAreas) {
 		this.hotAreas = hotAreas;
 	}
 
+	/** Setter for label template */
 	public void setLabelTemplate(final String labelTemplate) {
 		this.labelTemplate = labelTemplate;
 	}
 
+	/** Setter for the descriptive name */
 	public void setName(final String name) {
 		this.name = name;
 	}
 
+	/** Setter for the tips */
 	public void setTips(final String[] tips) {
 		this.tips = tips;
 	}
 
+	/** Setter for the value label format */
 	public void setValueFormat(final String valueFormat) {
 		this.valueFormat = valueFormat;
 	}
 
+	/** Setter for the x data */
 	public void setxData(final List<Double> xData) {
 		this.xData = xData;
 	}
 
+	/** Setter for the y Data */
 	public void setyData(final List<Double> yData) {
 		this.yData = yData;
 	}

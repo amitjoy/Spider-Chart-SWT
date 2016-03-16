@@ -37,6 +37,12 @@ import com.amitinside.tooling.chart.label.SpiderChartLabel;
 import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.style.LineStyle;
 
+/**
+ * Represents legend to be used on the spider chart
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class SpiderChartLegend extends SpiderChartComponent {
 
 	/** Legend Background Style */
@@ -92,7 +98,7 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 		this.addItem(getLegend(data), ls);
 	}
 
-	/** */
+	/** Draws the provided graphics */
 	public void draw(final AbstractChartGraphics g) {
 		if ((this.legendLabel != null) && (this.legendLabel.length() > 0)) {
 			final SpiderChartLabel cl = new SpiderChartLabel(this.legendLabel, "", false, true);
@@ -107,7 +113,7 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 		}
 	}
 
-	/** */
+	/** draws the graphics horizontally */
 	public void drawHorizontal(final AbstractChartGraphics g) {
 		g.setFont(this.font);
 
@@ -205,7 +211,7 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 		}
 	}
 
-	/** */
+	/** draws the graphics vertically */
 	public void drawVertical(final AbstractChartGraphics g) {
 		g.setFont(this.font);
 
@@ -281,82 +287,102 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 		}
 	}
 
+	/** */
 	public FillStyle getBackground() {
 		return this.background;
 	}
 
+	/** */
 	public LineStyle getBorder() {
 		return this.border;
 	}
 
+	/** */
 	public AbstractChartColor getChartColor() {
 		return this.color;
 	}
 
+	/** */
 	public AbstractChartFont getChartFont() {
 		return this.font;
 	}
 
+	/** */
 	public List<Object> getItems() {
 		return this.items;
 	}
 
+	/** */
 	public String getLegendLabel() {
 		return this.legendLabel;
 	}
 
+	/** */
 	public int getLegendMargin() {
 		return this.legendMargin;
 	}
 
+	/** */
 	public int getLegendOffset() {
 		return this.legendOffset;
 	}
 
+	/** */
 	public List<String> getNames() {
 		return this.names;
 	}
 
+	/** */
 	public String getTitle() {
 		return this.title;
 	}
 
+	/** */
 	public boolean isVerticalLayout() {
 		return this.verticalLayout;
 	}
 
+	/** */
 	public void setBackground(final FillStyle background) {
 		this.background = background;
 	}
 
+	/** */
 	public void setBorder(final LineStyle border) {
 		this.border = border;
 	}
 
+	/** */
 	public void setColor(final AbstractChartColor color) {
 		this.color = color;
 	}
 
+	/** */
 	public void setFont(final AbstractChartFont font) {
 		this.font = font;
 	}
 
+	/** */
 	public void setLegendLabel(final String legendLabel) {
 		this.legendLabel = legendLabel;
 	}
 
+	/** */
 	public void setLegendMargin(final int legendMargin) {
 		this.legendMargin = legendMargin;
 	}
 
+	/** */
 	public void setLegendOffset(final int legendOffset) {
 		this.legendOffset = legendOffset;
 	}
 
+	/** */
 	public void setTitle(final String title) {
 		this.title = title;
 	}
 
+	/** */
 	public void setVerticalLayout(final boolean verticalLayout) {
 		this.verticalLayout = verticalLayout;
 	}

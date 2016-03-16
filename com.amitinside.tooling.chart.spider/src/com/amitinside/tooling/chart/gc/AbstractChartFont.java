@@ -15,6 +15,12 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.gc;
 
+/**
+ * Represents an abstract font
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public abstract class AbstractChartFont {
 
 	public static int BOLD = 1;

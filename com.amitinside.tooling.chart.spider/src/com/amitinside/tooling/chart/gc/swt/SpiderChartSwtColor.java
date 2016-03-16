@@ -19,6 +19,12 @@ import org.eclipse.swt.graphics.Color;
 
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
 
+/**
+ * Represents a color to be used in SWT
+ * 
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class SpiderChartSwtColor extends AbstractChartColor {
 
 	/** */
@@ -285,14 +291,14 @@ public final class SpiderChartSwtColor extends AbstractChartColor {
 		}
 	}
 
-	/** */
+	/** setter for RGB */
 	private void setRGB(final int rgb) {
 		this.red = (rgb >> 16) & 0xFF;
 		this.green = (rgb >> 8) & 0xFF;
 		this.blue = rgb & 0xFF;
 	}
 
-	/** */
+	/** setter for RGB */
 	private void setRGB(final int iRed, final int iGreen, final int iBlue) {
 		this.red = iRed;
 		this.green = iGreen;

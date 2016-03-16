@@ -15,6 +15,12 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.scale;
 
+/**
+ * Represents chart scales
+ * 
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class SpiderChartScale {
 
 	/** Scaling Max Value (shown exactly as provided) */

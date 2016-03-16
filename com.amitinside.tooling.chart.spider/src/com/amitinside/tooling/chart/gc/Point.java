@@ -15,11 +15,18 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.gc;
 
+/**
+ * Represents a point with the given x and y-coordinate values
+ * 
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class Point {
 
-	/** */
+	/** X coordinate */
 	private final int x;
-	/** */
+
+	/** Y coordinate */
 	private final int y;
 
 	/** Constructor */
@@ -28,10 +35,12 @@ public final class Point {
 		this.y = y1;
 	}
 
+	/** */
 	public int getX() {
 		return this.x;
 	}
 
+	/** */
 	public int getY() {
 		return this.y;
 	}
