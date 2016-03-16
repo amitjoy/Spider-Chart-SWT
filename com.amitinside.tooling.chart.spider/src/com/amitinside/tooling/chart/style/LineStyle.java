@@ -22,6 +22,12 @@ import static com.amitinside.tooling.chart.gc.AbstractChartGraphics.STROKE_NORMA
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
 import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 
+/**
+ * Represents a line style to be used in SWT Chart Graphics
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class LineStyle {
 
 	/** */

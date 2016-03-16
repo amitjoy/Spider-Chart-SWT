@@ -25,7 +25,13 @@ import java.util.Locale;
 
 import com.amitinside.tooling.chart.SpiderChart;
 
-public class DataSeq {
+/**
+ * Class representing sequence of points to be used for plotting
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
+public abstract class DataSeq {
 
 	/** Data Point Labels */
 	private String[] dataLabels;

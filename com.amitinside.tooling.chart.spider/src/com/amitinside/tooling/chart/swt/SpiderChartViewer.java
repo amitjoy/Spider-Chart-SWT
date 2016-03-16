@@ -34,6 +34,12 @@ import org.eclipse.swt.widgets.Slider;
 import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.listener.SpiderChartAdapter;
 
+/**
+ * Represents a viewer on the canvas to display the chart
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class SpiderChartViewer extends Composite {
 
 	/** allows zoom functionality on the chart */

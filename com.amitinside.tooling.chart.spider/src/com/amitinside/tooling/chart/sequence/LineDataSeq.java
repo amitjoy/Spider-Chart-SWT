@@ -30,6 +30,12 @@ import com.amitinside.tooling.chart.gc.AbstractChartImage;
 import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.style.LineStyle;
 
+/**
+ * Represents spider chart data sequence of points for plotting
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class LineDataSeq extends DataSeq {
 
 	/** */

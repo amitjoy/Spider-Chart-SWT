@@ -23,6 +23,12 @@ import com.amitinside.tooling.chart.gc.AbstractChartColor;
 import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 import com.amitinside.tooling.chart.gc.AbstractChartImage;
 
+/**
+ * Represents a style to be used in SWT Chart Graphics
+ * 
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class FillStyle {
 
 	/** Gradient Horizontal Setting */

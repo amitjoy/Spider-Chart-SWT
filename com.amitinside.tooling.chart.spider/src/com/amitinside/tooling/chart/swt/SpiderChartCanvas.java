@@ -32,6 +32,12 @@ import com.amitinside.tooling.chart.SpiderChart;
 import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 import com.amitinside.tooling.chart.listener.ISpiderChartListener;
 
+/**
+ * Represents a canvas on which chart will be displayed
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class SpiderChartCanvas extends Canvas implements ISpiderChartListener {
 
 	/** Actual Spider Chart Ref */
