@@ -104,50 +104,62 @@ public final class SpiderChartLabel implements IFloatingObject {
 		this.sFormat = pformat;
 	}
 
+	/** */
 	public int getAlign() {
 		return this.align;
 	}
 
+	/** */
 	public int getAnchorX() {
 		return this.anchorX;
 	}
 
+	/** */
 	public int getAnchorY() {
 		return this.anchorY;
 	}
 
+	/** */
 	public FillStyle getBackground() {
 		return this.background;
 	}
 
+	/** */
 	public LineStyle getBorder() {
 		return this.border;
 	}
 
+	/** */
 	public int getBorderShape() {
 		return this.borderShape;
 	}
 
+	/** */
 	public SpiderChart getChart() {
 		return this.chart;
 	}
 
+	/** */
 	public Polygon getClickableArea() {
 		return this.clickableArea;
 	}
 
+	/** */
 	public LineStyle getLineToAnchor() {
 		return this.lineToAnchor;
 	}
 
+	/** */
 	public int[] getLineWidths() {
 		return this.lineWidths;
 	}
 
+	/** */
 	public int getMarginX() {
 		return this.marginX;
 	}
 
+	/** */
 	public int getMarginY() {
 		return this.marginY;
 	}
@@ -168,22 +180,27 @@ public final class SpiderChartLabel implements IFloatingObject {
 		return pol;
 	}
 
+	/** */
 	public int getPositionX() {
 		return this.positionX;
 	}
 
+	/** */
 	public int getPositionY() {
 		return this.positionY;
 	}
 
+	/** */
 	public int getRequiredHeight() {
 		return this.requiredHeight;
 	}
 
+	/** */
 	public int getRequiredWidth() {
 		return this.requiredWidth;
 	}
 
+	/** */
 	public String getsFormat() {
 		return this.sFormat;
 	}
@@ -210,6 +227,7 @@ public final class SpiderChartLabel implements IFloatingObject {
 		this.chart = c;
 	}
 
+	/** */
 	public boolean isIgnorePosition() {
 		return this.ignorePosition;
 	}
@@ -296,78 +314,97 @@ public final class SpiderChartLabel implements IFloatingObject {
 		this.clickableArea.addPoint((this.positionX + this.requiredWidth) - 1, this.positionY);
 	}
 
+	/** */
 	public void setAlign(final int align) {
 		this.align = align;
 	}
 
+	/** */
 	public void setAnchorX(final int anchorX) {
 		this.anchorX = anchorX;
 	}
 
+	/** */
 	public void setAnchorY(final int anchorY) {
 		this.anchorY = anchorY;
 	}
 
+	/** */
 	public void setBackground(final FillStyle background) {
 		this.background = background;
 	}
 
+	/** */
 	public void setBorder(final LineStyle border) {
 		this.border = border;
 	}
 
+	/** */
 	public void setBorderShape(final int borderShape) {
 		this.borderShape = borderShape;
 	}
 
+	/** */
 	public void setChart(final SpiderChart chart) {
 		this.chart = chart;
 	}
 
+	/** */
 	public void setClickableArea(final Polygon clickableArea) {
 		this.clickableArea = clickableArea;
 	}
 
+	/** */
 	public void setIgnorePosition(final boolean ignorePosition) {
 		this.ignorePosition = ignorePosition;
 	}
 
+	/** */
 	public void setLineToAnchor(final LineStyle lineToAnchor) {
 		this.lineToAnchor = lineToAnchor;
 	}
 
+	/** */
 	public void setMarginX(final int marginX) {
 		this.marginX = marginX;
 	}
 
+	/** */
 	public void setMarginY(final int marginY) {
 		this.marginY = marginY;
 	}
 
+	/** */
 	public void setName(final String name) {
 		this.name = name;
 	}
 
+	/** */
 	public void setPositionX(final int positionX) {
 		this.positionX = positionX;
 	}
 
+	/** */
 	public void setPositionY(final int positionY) {
 		this.positionY = positionY;
 	}
 
+	/** */
 	public void setRequiredHeight(final int requiredHeight) {
 		this.requiredHeight = requiredHeight;
 	}
 
+	/** */
 	public void setRequiredWidth(final int requiredWidth) {
 		this.requiredWidth = requiredWidth;
 	}
 
+	/** */
 	public void setsFormat(final String sFormat) {
 		this.sFormat = sFormat;
 	}
 
+	/** */
 	public void setTip(final String tip) {
 		this.tip = tip;
 	}

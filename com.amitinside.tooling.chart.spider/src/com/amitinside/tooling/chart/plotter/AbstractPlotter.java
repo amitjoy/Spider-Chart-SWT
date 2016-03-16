@@ -36,33 +36,33 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 	/** Spider Chart Background Image */
 	private AbstractChartImage backgroundImage;
 
-	/** */
+	/** background fill style */
 	private FillStyle backgroundStyle = null;
 
-	/** */
+	/** depth of the component */
 	private int depth = 0;
 
-	/** */
+	/** list of sequences to be used for plotting */
 	private List<DataSeq> seq = new ArrayList<>();
 
-	/** */
+	/** visible height on the canvas */
 	private int visibleHeight = 0;
 
-	/** */
+	/** visible width on the canvas */
 	private int visibleWidth = 0;
 
-	/** */
+	/** x-axis scaling */
 	private SpiderChartScale xScale;
 
-	/** */
+	/** y-axis scaling */
 	private SpiderChartScale yScale;
 
-	/** */
+	/** adds sequence to the plotter */
 	public void addSeq(final DataSeq s) {
 		this.replaceSeq(-1, s);
 	}
 
-	/** */
+	/** calculates the max values in the provided scale */
 	private void calculateMax(final SpiderChartScale s, final double m) {
 		if (!s.isExactMaxValue()) {
 			s.setMax(m);
@@ -80,7 +80,7 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 		}
 	}
 
-	/** */
+	/** calculates the min values in the provided scale */
 	private void calculateMin(final SpiderChartScale s, final double m) {
 		if (!s.isExactMinValue()) {
 			s.setMin(m);
@@ -98,13 +98,13 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 		}
 	}
 
-	/** */
+	/** returns the active x scaling */
 	protected SpiderChartScale getActiveXScale(final DataSeq s) {
 		final SpiderChartScale scale = this.xScale;
 		return scale;
 	}
 
-	/** */
+	/** returns the active y scaling */
 	protected SpiderChartScale getActiveYScale(final DataSeq s) {
 		final SpiderChartScale scale = this.yScale;
 		return scale;
@@ -176,7 +176,7 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 		return this.yScale;
 	}
 
-	/** */
+	/** plots the values */
 	public void plot(final AbstractChartGraphics g) {
 		for (int i = 0; i < this.seq.size(); i++) {
 			final DataSeq s = this.seq.get(i);
@@ -184,11 +184,11 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 		}
 	}
 
-	/** */
+	/** plots the values */
 	protected void plot(final AbstractChartGraphics g, final DataSeq s, final int serieSec) {
 	}
 
-	/** */
+	/** plots the background of the plotting canvas */
 	public void plotBackground(final AbstractChartGraphics g, final int bw, final int bh, final int offsetX,
 			final int offsetY) {
 		if (this.backgroundStyle != null) {
@@ -211,7 +211,7 @@ public abstract class AbstractPlotter extends SpiderChartComponent {
 		}
 	}
 
-	/** */
+	/** replaces a sequence with the provided one */
 	public void replaceSeq(final int p, final DataSeq s) {
 		final SpiderChartScale tmpScaleX = this.getActiveXScale(s);
 		this.getActiveYScale(s);

@@ -20,7 +20,7 @@ import java.util.List;
 
 public final class Polygon {
 
-	/** */
+	/** list of points to draw the polygon */
 	private final List<Point> points;
 
 	/**
@@ -30,12 +30,12 @@ public final class Polygon {
 		this.points = new ArrayList<>();
 	}
 
-	/** */
+	/** adds the point for the polygon to be drawn */
 	public void addPoint(final int x, final int y) {
 		this.points.add(new Point(x, y));
 	}
 
-	/** */
+	/** checks for the containment of a coordinate in the polygon */
 	public boolean contains(final int x, final int y) {
 		int i = 0;
 		int j = 0;
@@ -52,12 +52,12 @@ public final class Polygon {
 		return c;
 	}
 
-	/** */
+	/** getter for the x coordinate */
 	public int getX(final int i) {
 		return this.points.get(i).getX();
 	}
 
-	/** */
+	/** getter for the y coordinate */
 	public int getY(final int i) {
 		return this.points.get(i).getY();
 	}

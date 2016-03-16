@@ -285,14 +285,14 @@ public final class SpiderChartSwtColor extends AbstractChartColor {
 		}
 	}
 
-	/** */
+	/** setter for RGB */
 	private void setRGB(final int rgb) {
 		this.red = (rgb >> 16) & 0xFF;
 		this.green = (rgb >> 8) & 0xFF;
 		this.blue = rgb & 0xFF;
 	}
 
-	/** */
+	/** setter for RGB */
 	private void setRGB(final int iRed, final int iGreen, final int iBlue) {
 		this.red = iRed;
 		this.green = iGreen;

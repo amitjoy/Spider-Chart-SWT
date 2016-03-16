@@ -36,13 +36,16 @@ import com.amitinside.tooling.chart.listener.SpiderChartAdapter;
 
 public final class SpiderChartViewer extends Composite {
 
-	/** */
+	/** allows zoom functionality on the chart */
 	private boolean allowZoom = true;
-	/** */
+
+	/** the actual canvas to be used */
 	private SpiderChartCanvas canvas = null;
-	/** */
+
+	/** allows to change pointer on hovering data points */
 	private boolean changePointer = true;
-	/** */
+
+	/** Default Chart Listeners for hovering behaviours */
 	private final SpiderChartAdapter chartAdapter = new SpiderChartAdapter() {
 		/** {@inheritDoc} */
 		@Override
@@ -55,43 +58,59 @@ public final class SpiderChartViewer extends Composite {
 			}
 		}
 	};
-	/** */
+
+	/** Active Zoom Percentage */
 	private int currentZoom = 100;
-	/** */
+
+	/** Default cursor object */
 	private Cursor defaultCursor = null;
-	/** */
+
+	/** horizontal slider */
 	private Slider hSlider = null;
-	/** */
+
+	/** height of the canvas (used to restore from zoom) */
 	private int lastHeight = 0;
-	/** */
+
+	/** width of the canvas (used to restore from zoom) */
 	private int lastWidth = 0;
-	/** */
+
+	/** tracks last zoom percentage */
 	private int lastZoom = 0;
+
 	/** Maximum Zoom for Spider Chart */
 	private int maxZoom = 200;
+
 	/** Minimum Zoom for Spider Chart */
 	private int minZoom = 50;
-	/** */
+
+	/** Actual height of the canvas */
 	private int originalHeight = -1;
-	/** */
+
+	/** Actual width of the canvas */
 	private int originalWidth = -1;
-	/** */
+
+	/** Cursor object in use */
 	private Cursor pointCursor = null;
-	/** */
+
+	/** scrollbar width */
 	private final int scrollBarWidth = 18;
-	/** */
+
+	/** vertical slider */
 	private Slider vSlider = null;
-	/** */
+
+	/** zoom label */
 	private Label zoom;
-	/** */
+
+	/** zoom in button */
 	private Button zoomInButton;
-	/** */
+
+	/** zoom increment value */
 	private int zoomIncrement = 25;
 
-	/** */
+	/** zoom out button */
 	private Button zoomOutButton;
 
-	/** */
+	/** zoom panel composite */
 	private Composite zoomPanel;
 
 	/** Constructor */
@@ -206,92 +225,112 @@ public final class SpiderChartViewer extends Composite {
 		}
 	}
 
+	/** getter for the canvas in use */
 	public SpiderChartCanvas getCanvas() {
 		return this.canvas;
 	}
 
-	/** */
+	/** getter for the chart in use */
 	public SpiderChart getChart() {
 		return this.canvas.getChart();
 	}
 
+	/** getter for the chart listener in use */
 	public SpiderChartAdapter getChartAdapter() {
 		return this.chartAdapter;
 	}
 
+	/** getter for the current zoom percentage */
 	public int getCurrentZoom() {
 		return this.currentZoom;
 	}
 
+	/** getter for the default cursor */
 	public Cursor getDefaultCursor() {
 		return this.defaultCursor;
 	}
 
+	/** getter for horizontal slider */
 	public Slider gethSlider() {
 		return this.hSlider;
 	}
 
+	/** getter for height after zoom */
 	public int getLastHeight() {
 		return this.lastHeight;
 	}
 
+	/** getter for width after zoom */
 	public int getLastWidth() {
 		return this.lastWidth;
 	}
 
+	/** getter for last zoom percentage */
 	public int getLastZoom() {
 		return this.lastZoom;
 	}
 
+	/** getter for max zoom percentage */
 	public int getMaxZoom() {
 		return this.maxZoom;
 	}
 
+	/** getter for min zoom percentage */
 	public int getMinZoom() {
 		return this.minZoom;
 	}
 
+	/** getter for original canvas height */
 	public int getOriginalHeight() {
 		return this.originalHeight;
 	}
 
+	/** getter for original canvas width */
 	public int getOriginalWidth() {
 		return this.originalWidth;
 	}
 
+	/** getter for cursor in use */
 	public Cursor getPointCursor() {
 		return this.pointCursor;
 	}
 
+	/** getter for scrollbar width */
 	public int getScrollBarWidth() {
 		return this.scrollBarWidth;
 	}
 
+	/** getter for vertical slider */
 	public Slider getvSlider() {
 		return this.vSlider;
 	}
 
+	/** getter for zoom label */
 	public Label getZoom() {
 		return this.zoom;
 	}
 
+	/** getter for zoom in button */
 	public Button getZoomInButton() {
 		return this.zoomInButton;
 	}
 
+	/** getter for zoom increment value */
 	public int getZoomIncrement() {
 		return this.zoomIncrement;
 	}
 
+	/** getter for zoom out button */
 	public Button getZoomOutButton() {
 		return this.zoomOutButton;
 	}
 
+	/** getter for zoom panel composite */
 	public Composite getZoomPanel() {
 		return this.zoomPanel;
 	}
 
-	/** */
+	/** horizontal scrolling functionality */
 	private void hSliderScroll() {
 		// TODO Need to refactor horizontal scrolling
 		int newBase = 0;
@@ -308,15 +347,19 @@ public final class SpiderChartViewer extends Composite {
 		this.canvas.redraw();
 	}
 
+	/** getter for configuration of allowing zoom */
 	public boolean isAllowZoom() {
 		return this.allowZoom;
 	}
 
+	/**
+	 * getter for configuration of changing pointer on data point mouse hover
+	 */
 	public boolean isChangePointer() {
 		return this.changePointer;
 	}
 
-	/** */
+	/** Placing zoom controls on the canvas */
 	private void placeZoomControls() {
 		// TODO Need to refactor for ZOOM Controls
 		int hSliderHeight = 0;
@@ -361,31 +404,34 @@ public final class SpiderChartViewer extends Composite {
 		}
 	}
 
-	/** */
+	/** Redraws the chart */
 	public void redrawChart() {
 		this.canvas.redraw();
 	}
 
-	/** */
+	/** Resets the chart */
 	private void resetChart() {
 		this.lastWidth = 0;
 		this.lastHeight = 0;
 		this.lastZoom = 0;
 	}
 
+	/** setter for allowing zoom */
 	public void setAllowZoom(final boolean allowZoom) {
 		this.allowZoom = allowZoom;
 	}
 
+	/** setter for chart canvas */
 	public void setCanvas(final SpiderChartCanvas canvas) {
 		this.canvas = canvas;
 	}
 
+	/** setter for changing pointer */
 	public void setChangePointer(final boolean changePointer) {
 		this.changePointer = changePointer;
 	}
 
-	/** */
+	/** setter for chart instance */
 	public void setChart(final SpiderChart c) {
 		if (this.canvas.getChart() != null) {
 			this.canvas.getChart().removeChartListener(this.chartAdapter);
@@ -403,75 +449,92 @@ public final class SpiderChartViewer extends Composite {
 		}
 	}
 
+	/** setter for current zoom percentage */
 	public void setCurrentZoom(final int currentZoom) {
 		this.currentZoom = currentZoom;
 	}
 
+	/** setter for default cursor */
 	public void setDefaultCursor(final Cursor defaultCursor) {
 		this.defaultCursor = defaultCursor;
 	}
 
+	/** setter for horizontal slider */
 	public void sethSlider(final Slider hSlider) {
 		this.hSlider = hSlider;
 	}
 
+	/** setter for last height after zoom */
 	public void setLastHeight(final int lastHeight) {
 		this.lastHeight = lastHeight;
 	}
 
+	/** setter for last width after zoom */
 	public void setLastWidth(final int lastWidth) {
 		this.lastWidth = lastWidth;
 	}
 
+	/** setter for last zoom percentage */
 	public void setLastZoom(final int lastZoom) {
 		this.lastZoom = lastZoom;
 	}
 
+	/** setter for max zoom percentage */
 	public void setMaxZoom(final int maxZoom) {
 		this.maxZoom = maxZoom;
 	}
 
+	/** setter for min zoom percentage */
 	public void setMinZoom(final int minZoom) {
 		this.minZoom = minZoom;
 	}
 
+	/** setter for original height of the canvas */
 	public void setOriginalHeight(final int originalHeight) {
 		this.originalHeight = originalHeight;
 	}
 
+	/** setter for original width of the canvas */
 	public void setOriginalWidth(final int originalWidth) {
 		this.originalWidth = originalWidth;
 	}
 
+	/** setter for the cursor instance in use */
 	public void setPointCursor(final Cursor pointCursor) {
 		this.pointCursor = pointCursor;
 	}
 
+	/** setter for vertical slider */
 	public void setvSlider(final Slider vSlider) {
 		this.vSlider = vSlider;
 	}
 
+	/** setter for zoom label */
 	public void setZoom(final Label zoom) {
 		this.zoom = zoom;
 	}
 
+	/** setter for zoom in button */
 	public void setZoomInButton(final Button zoomInButton) {
 		this.zoomInButton = zoomInButton;
 	}
 
+	/** setter for zoom increment value */
 	public void setZoomIncrement(final int zoomIncrement) {
 		this.zoomIncrement = zoomIncrement;
 	}
 
+	/** setter for zoom out button */
 	public void setZoomOutButton(final Button zoomOutButton) {
 		this.zoomOutButton = zoomOutButton;
 	}
 
+	/** setter for zoom panel composite */
 	public void setZoomPanel(final Composite zoomPanel) {
 		this.zoomPanel = zoomPanel;
 	}
 
-	/** */
+	/** updates the canvas size based on scrolling and zoom */
 	private void updateSize() {
 		this.canvas.getChart().setRepaintAll(true);
 		if ((this.lastWidth != this.getSize().x) || (this.lastHeight != this.getSize().y)
@@ -508,7 +571,7 @@ public final class SpiderChartViewer extends Composite {
 		}
 	}
 
-	/** */
+	/** vertical sliding functionality */
 	private void vSliderScroll() {
 		// TODO Need to refactor vertical scrolling
 		int newBase = 0;
@@ -525,7 +588,7 @@ public final class SpiderChartViewer extends Composite {
 		this.canvas.redraw();
 	}
 
-	/** */
+	/** zooms in */
 	private void zoomIn() {
 		if ((this.currentZoom + this.zoomIncrement) < this.maxZoom) {
 			this.currentZoom += this.zoomIncrement;
@@ -535,7 +598,7 @@ public final class SpiderChartViewer extends Composite {
 		this.zoomUpdated();
 	}
 
-	/** */
+	/** zooms out */
 	private void zoomOut() {
 		if ((this.currentZoom - this.zoomIncrement) > this.minZoom) {
 			this.currentZoom -= this.zoomIncrement;
@@ -545,7 +608,7 @@ public final class SpiderChartViewer extends Composite {
 		this.zoomUpdated();
 	}
 
-	/** */
+	/** zoom updated */
 	private void zoomUpdated() {
 		this.zoom.setText("" + this.currentZoom + " %");
 		this.updateSize();

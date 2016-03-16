@@ -23,7 +23,7 @@ import java.util.List;
 
 /**
  * Used to configure the axes for the spider chart diagram
- * 
+ *
  * @author AMIT KUMAR MONDAL
  *
  */
@@ -143,24 +143,24 @@ public final class AxesConfigurer {
 		this.scalingLabelFormats = scalingLabelFormats;
 	}
 
-	/** */
+	/** getter for the axes names */
 	public String[] axesNames() {
 		final String[] axesNames = new String[this.scalesNames.size()];
 		return this.scalesNames.toArray(axesNames);
 	}
 
-	/** */
+	/** getter for the scaling label formats */
 	public Object[] axesScalingLabelFormats() {
 		return this.scalingLabelFormats.toArray();
 	}
 
-	/** */
+	/** getter for the max scales */
 	public double[] maxScales() {
 		final Double[] maxScales = new Double[this.maxScales.size()];
 		return toDoublePrimitiveArray(this.maxScales.toArray(maxScales));
 	}
 
-	/** */
+	/** getter for min scales */
 	public double[] minScales() {
 		final Double[] minScales = new Double[this.minScales.size()];
 		return toDoublePrimitiveArray(this.minScales.toArray(minScales));

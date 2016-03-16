@@ -20,10 +20,10 @@ import org.eclipse.swt.widgets.Display;
 
 public final class SwtGraphicsProvider {
 
-	/** */
+	/** SWT Device object */
 	private static Device display = null;
 
-	/** */
+	/** returns the display instance */
 	public synchronized static Device getDisplay() {
 		if (display == null) {
 			display = Display.getCurrent();
@@ -31,7 +31,7 @@ public final class SwtGraphicsProvider {
 		return display;
 	}
 
-	/** */
+	/** Starts the provided execution in UI thread */
 	public static void startUIThread(final Runnable r) {
 		((Display) getDisplay()).syncExec(r);
 	}

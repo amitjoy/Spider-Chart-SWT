@@ -17,21 +17,21 @@ package com.amitinside.tooling.chart.gc;
 
 public abstract class AbstractChartImage {
 
-	/** */
+	/** disposes the image */
 	public void dispose() {
 	}
 
-	/** */
+	/** getter for the graphics */
 	public AbstractChartGraphics getGraphics() {
 		return null;
 	}
 
-	/** */
+	/** getter for the height of the image */
 	public int getHeight() {
 		return 0;
 	}
 
-	/** */
+	/** getter for the width of the image */
 	public int getWidth() {
 		return 0;
 	}
