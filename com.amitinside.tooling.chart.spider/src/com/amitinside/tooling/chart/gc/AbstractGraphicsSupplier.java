@@ -22,6 +22,12 @@ import com.amitinside.tooling.chart.gc.swt.SpiderChartSwtFont;
 import com.amitinside.tooling.chart.gc.swt.SpiderChartSwtGraphics;
 import com.amitinside.tooling.chart.gc.swt.SpiderChartSwtImage;
 
+/**
+ * Represents an abstract factory for graphics to be used in the chart
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class AbstractGraphicsSupplier {
 
 	/** Creates an image */

@@ -15,6 +15,12 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.gc;
 
+/**
+ * Represents an abstract image to be used in the chart
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public abstract class AbstractChartImage {
 
 	/** disposes the image */

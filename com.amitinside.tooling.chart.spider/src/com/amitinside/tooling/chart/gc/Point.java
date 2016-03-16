@@ -15,6 +15,12 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.gc;
 
+/**
+ * Represents a point with the given x and y-coordinate values
+ * 
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class Point {
 
 	/** X coordinate */

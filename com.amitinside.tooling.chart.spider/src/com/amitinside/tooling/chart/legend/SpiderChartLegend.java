@@ -37,6 +37,12 @@ import com.amitinside.tooling.chart.label.SpiderChartLabel;
 import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.style.LineStyle;
 
+/**
+ * Represents legend to be used on the spider chart
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class SpiderChartLegend extends SpiderChartComponent {
 
 	/** Legend Background Style */

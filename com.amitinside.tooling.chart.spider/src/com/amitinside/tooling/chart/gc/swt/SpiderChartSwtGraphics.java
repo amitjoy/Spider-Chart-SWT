@@ -30,6 +30,12 @@ import com.amitinside.tooling.chart.gc.AbstractChartFont;
 import com.amitinside.tooling.chart.gc.AbstractChartGraphics;
 import com.amitinside.tooling.chart.gc.AbstractChartImage;
 
+/**
+ * Represents a chart graphics to be used in SWT
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class SpiderChartSwtGraphics extends AbstractChartGraphics {
 	/** */
 	private float alphaValue = 1.0F;

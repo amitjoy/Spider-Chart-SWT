@@ -19,6 +19,12 @@ import org.eclipse.swt.graphics.Font;
 
 import com.amitinside.tooling.chart.gc.AbstractChartFont;
 
+/**
+ * Represents a font to be used in SWT
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class SpiderChartSwtFont extends AbstractChartFont {
 
 	/** name of the font */

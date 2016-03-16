@@ -18,6 +18,12 @@ package com.amitinside.tooling.chart.gc.swt;
 import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.widgets.Display;
 
+/**
+ * Represents a factory for useful SWT operations
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class SwtGraphicsProvider {
 
 	/** SWT Device object */

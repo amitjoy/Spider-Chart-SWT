@@ -19,6 +19,12 @@ import org.eclipse.swt.graphics.Color;
 
 import com.amitinside.tooling.chart.gc.AbstractChartColor;
 
+/**
+ * Represents a color to be used in SWT
+ * 
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class SpiderChartSwtColor extends AbstractChartColor {
 
 	/** */

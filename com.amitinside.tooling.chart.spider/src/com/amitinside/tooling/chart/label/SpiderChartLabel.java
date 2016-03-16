@@ -23,6 +23,12 @@ import com.amitinside.tooling.chart.label.api.IFloatingObject;
 import com.amitinside.tooling.chart.style.FillStyle;
 import com.amitinside.tooling.chart.style.LineStyle;
 
+/**
+ * Represents a label to be used on the spider chart
+ * 
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class SpiderChartLabel implements IFloatingObject {
 
 	/** */

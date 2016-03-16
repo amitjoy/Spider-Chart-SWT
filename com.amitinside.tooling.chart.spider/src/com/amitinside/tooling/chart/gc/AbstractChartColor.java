@@ -15,6 +15,12 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.gc;
 
+/**
+ * Represents an abstract color
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public abstract class AbstractChartColor {
 
 	public static final String ALICEBLUE = "ALICEBLUE";

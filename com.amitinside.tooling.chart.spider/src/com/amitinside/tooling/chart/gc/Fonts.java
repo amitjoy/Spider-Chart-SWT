@@ -15,6 +15,12 @@
  *******************************************************************************/
 package com.amitinside.tooling.chart.gc;
 
+/**
+ * Enumeration of the fonts to be used in the chart
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public enum Fonts {
 	ARIAL("Arial"), SERIF("Serif"), VERDANA("Verdana");
 

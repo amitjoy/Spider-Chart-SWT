@@ -18,6 +18,12 @@ package com.amitinside.tooling.chart.gc;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a polygon with the given list of points
+ *
+ * @author AMIT KUMAR MONDAL
+ *
+ */
 public final class Polygon {
 
 	/** list of points to draw the polygon */
