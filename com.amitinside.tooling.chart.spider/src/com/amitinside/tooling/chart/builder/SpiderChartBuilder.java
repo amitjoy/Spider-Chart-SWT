@@ -96,6 +96,14 @@ public final class SpiderChartBuilder {
 		this.chart.setActivateSelection(true);
 	}
 
+	/**
+	 * Builds the viewer if values are already provided to the plotter using
+	 * line data sequence
+	 */
+	public SpiderChartViewer viewer() {
+		return chartViewerBuilder.chartViewer;
+	}
+
 	/** Builds the viewer */
 	public SpiderChartViewer viewer(final Consumer<SpiderChartBuilder> chartBuilderConsumer) {
 		requireNonNull(chartBuilderConsumer);
