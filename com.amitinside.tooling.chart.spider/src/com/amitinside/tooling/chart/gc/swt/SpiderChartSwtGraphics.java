@@ -329,7 +329,7 @@ public final class SpiderChartSwtGraphics extends AbstractChartGraphics {
 		} else {
 			this.transparent = new Color(SwtGraphicsProvider.getDisplay(), 255, 255, 255);
 		}
-		final RGB[] rgbs = new RGB['Ā'];
+		final RGB[] rgbs = new RGB[256];
 		rgbs[0] = this.transparent.getRGB();
 		for (int i = 1; i <= 255; i++) {
 			rgbs[i] = this.currentColor.getRGB();

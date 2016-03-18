@@ -92,6 +92,12 @@ public final class SpiderChartLegend extends SpiderChartComponent {
 	}
 
 	/** */
+	public void addItem(final String name, final String colorName) {
+		final LineStyle ls = LineStyle.of(1, getColor(colorName), NORMAL_LINE);
+		this.addItem(name, ls);
+	}
+
+	/** */
 	public void addItem(final Supplier<Object> pojo) {
 		final Object data = pojo.get();
 		final LineStyle ls = LineStyle.of(1, getColor(getAreaColor(data)), NORMAL_LINE);
