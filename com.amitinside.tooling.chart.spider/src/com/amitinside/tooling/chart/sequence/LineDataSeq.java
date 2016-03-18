@@ -50,6 +50,9 @@ public final class LineDataSeq extends DataSeq {
 
 	/**
 	 * Static Factory to create instance of {@link LineDataSeq}
+	 *
+	 * @param oldObjectToCopyData
+	 *            old bean instance to be used for copying the area color
 	 */
 	public static <E extends Enum<E>> LineDataSeq of(final Object oldObjectToCopyData, final Object... values) {
 		final double[] wrappedValues = wrapValues(values);
@@ -61,10 +64,25 @@ public final class LineDataSeq extends DataSeq {
 		return seq;
 	}
 
+	/**
+	 * Static Factory to create instance of {@link LineDataSeq}
+	 *
+	 * @param colorName
+	 *            the color to be used as area color
+	 */
+	public static <E extends Enum<E>> LineDataSeq of(final String colorName, final Object... values) {
+		final double[] wrappedValues = wrapValues(values);
+		final LineDataSeq seq = new LineDataSeq(wrappedValues, new LineStyle(2, getColor(colorName), NORMAL_LINE));
+		seq.valueFont = getFont(VERDANA, BOLD, 12);
+		seq.fillStyle = new FillStyle(getColor(colorName), 0.5f);
+		seq.drawPoint = true;
+		return seq;
+	}
+
 	/** Draw Point Configuration */
 	private boolean drawPoint = false;
 
-	/** Fillstyle to be used */
+	/** Fill style to be used */
 	private FillStyle fillStyle = null;
 
 	/** Icon to be used */
