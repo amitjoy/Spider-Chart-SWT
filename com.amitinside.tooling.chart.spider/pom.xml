@@ -18,10 +18,32 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.amitinside</groupId>
 	<artifactId>com.amitinside.tooling.chart.spider</artifactId>
-	<version>1.1.0-SNAPSHOT</version>
+	<version>1.1.0</version>
 	<name>Spider Chart in SWT</name>
 	<description>Easy to use Spider Chart in SWT</description>
 	<packaging>bundle</packaging>
+
+	<licenses>
+  		<license>
+		    <name>The Apache License, Version 2.0</name>
+		    <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+  		</license>
+	</licenses>
+
+	<developers>
+	    <developer>
+	      <name>Amit Kumar Mondal</name>
+	      <email>admin@amitinside.com</email>
+	      <organization>Technical University of Munich</organization>
+	      <organizationUrl>http://www.tum.de</organizationUrl>
+	    </developer>
+ 	 </developers>
+
+ 	 <scm>
+	  <connection>scm:git:git@github.com:amitjoy/Spider-Chart-SWT.git</connection>
+	  <developerConnection>scm:git:git@github.com:amitjoy/Spider-Chart-SWT.git</developerConnection>
+	  <url>git@github.com:amitjoy/Spider-Chart-SWT.git</url>
+	</scm>
 
 	<dependencies>
 		<dependency>
