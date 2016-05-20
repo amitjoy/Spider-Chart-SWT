@@ -15,4 +15,4 @@ env:
 before_install:
     - "cd com.amitinside.tooling.chart.spider"
   
-install: mvn install -DskipTests=true -e -X
+install: mvn install -DskipTests=true -Dgpg.skip -e -X
