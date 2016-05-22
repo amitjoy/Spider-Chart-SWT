@@ -120,3 +120,12 @@ public final class Sample {
 ### Sample Output
 
 <img src="http://s12.postimg.org/89clddb2l/Screen_Shot_2016_03_02_at_12_03_24_AM.png">
+
+### Maven Central
+```xml
+<dependency>
+    <groupId>com.amitinside</groupId>
+    <artifactId>com.amitinside.tooling.chart.spider</artifactId>
+    <version>1.1.0</version>
+</dependency>
+```
