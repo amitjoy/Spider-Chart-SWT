@@ -17,6 +17,7 @@ Build the library using maven and put the recently built jar to your application
 ### Sample Usage Snippet
 
 Check out the Sample Application in the project for detailed information.
+
 ``` java
 @SpiderChartPlot(name = "iPhone 6", areaColor = DARKORCHID)
 public final class IPhone {
@@ -117,6 +118,7 @@ public final class Sample {
 ```
 
 ### Maven Central
+
 ```xml
 <dependency>
     <groupId>com.amitinside</groupId>
