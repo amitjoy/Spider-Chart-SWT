@@ -16,7 +16,7 @@ Build the library using maven and put the recently built jar to your application
 
 ### Sample Usage Snippet
 
-Check out the Sample Application in the project for detailed information.
+Check out the sample application in the project for detailed information.
 
 ``` java
 @SpiderChartPlot(name = "iPhone 6", areaColor = DARKORCHID)
