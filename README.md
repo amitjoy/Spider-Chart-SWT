@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/amitjoy/Spider-Chart-SWT.svg?branch=master)](https://travis-ci.org/amitjoy/Spider-Chart-SWT)
 
-SWT utility library to generate Spider Chart Diagrams. The library uses all new Java 8 Fluent API to generate Spider Diagram.
+SWT utility library to generate Spider Chart Diagrams. The library uses all new Java 8 fluent API to generate Spider Diagram.
 
 ### How-To
 
