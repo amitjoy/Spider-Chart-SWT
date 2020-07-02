@@ -47,7 +47,7 @@ public final class Nexus {
 ``` java
 public final class Sample {
 
-	private enum Brand {
+	enum Brand {
 		COMMUNAL, INTERNATIONAL, LOCAL, OUT_OF_MARKET, STANDARD
 	}
 
