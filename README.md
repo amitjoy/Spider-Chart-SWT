@@ -4,7 +4,7 @@
 
 SWT utility library to generate Spider Chart Diagrams. The library uses all new Java 8 fluent API to generate Spider Diagram.
 
-### How-To
+### How To
 
 *In OSGi Environment (Eclipse RCP):*
 
